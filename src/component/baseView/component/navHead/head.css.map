@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": ";AAAA,YAAY;AAEZ,YAAY;AAEZ,aAAa;ACFb,WAAY;EACV,aAAa,EAAE,iBAAiB;EAChC,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI",
+"sources": ["../../../../config/CssConfig.scss","head.scss"],
+"names": [],
+"file": "head.css"
+}

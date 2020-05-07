@@ -1,0 +1,31 @@
+@charset "UTF-8";
+/**tab框高度**/
+/**logo高度**/
+/**菜单栏**/
+.app-sidebar {
+  /*  position: fixed;*/
+  overflow: auto;
+  z-index: 999;
+  height: calc(100vh - 57px);
+  background-color: #2A3135;
+  /*动画形式进行宽度变化*/
+  transition: width 100ms;
+  -moz-transition: width 100ms;
+  /* Firefox 4 */
+  -webkit-transition: width 100ms;
+  /* Safari and Chrome */
+  -o-transition: width 100ms;
+  /* Opera */
+  /*菜单样式修改,菜单背景色*/
+  /**隐藏滚动条并不影响滚动效果**/
+  /**缩放子菜单**/ }
+  .app-sidebar .rs-dropdown-menu .rs-dropdown-menu-collapse-in {
+    background-color: #2A3135 !important; }
+  .app-sidebar .app-sidebar::-webkit-scrollbar {
+    display: none; }
+  .app-sidebar .rs-dropdown-menu {
+    background-color: #2A3135; }
+    .app-sidebar .rs-dropdown-menu .rs-dropdown-item-content {
+      color: #ffffff; }
+
+/*# sourceMappingURL=menu.css.map */

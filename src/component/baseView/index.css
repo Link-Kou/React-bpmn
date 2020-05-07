@@ -1,0 +1,15 @@
+@charset "UTF-8";
+/**tab框高度**/
+/**logo高度**/
+.app-base {
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  overflow: hidden; }
+  .app-base .app-left {
+    border-right: 1px solid #f2f2f5; }
+  .app-base .app-right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden; }

@@ -1,0 +1,79 @@
+@import "../../index";
+
+.app-handle-img {
+  @include defaultBackgroundImage;
+}
+
+.app-handle-img-error {
+  @include defaultErrorBackgroundImage;
+}
+
+#app-handle-img {
+  width: 100%;
+  height: 100%;
+
+  > .app-img-canvas-handle {
+    position: relative;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    background-color: #eee;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    zoom: 1;
+
+    .app-img-canvas {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+        margin: 0 auto;
+        display: block;
+        cursor: pointer;
+        line-height: 0;
+        font-size: 0;
+      }
+    }
+
+    &:hover .app-button-group {
+      bottom: 0;
+    }
+
+    > .app-button-group {
+      width: 100%;
+      position: absolute;
+      bottom: -30px;
+      height: 30px;
+      background-color: rgba($color: #999, $alpha: 0.6);
+      line-height: 30px;
+      text-align: left;
+      transition: all 0.3s linear;
+      padding-left: 30px;
+      vertical-align: middle;
+      z-index: 999999;
+
+      .app-button {
+        color: honeydew;
+        font-size: 12px;
+        cursor: pointer;
+        float: left;
+        height: 20px;
+        margin: 4px 4px;
+        line-height: 18px;
+        width: 20px;
+        border: 2px solid honeydew;
+        border-radius: 50%;
+        text-align: center;
+      }
+    }
+  }
+
+
+}

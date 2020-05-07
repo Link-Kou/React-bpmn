@@ -1,0 +1,217 @@
+@charset "UTF-8";
+/**
+  上下布局
+ */
+.app-grid-from > .rs-row {
+  margin-bottom: 1rem; }
+  .app-grid-from > .rs-row .rs-col .rs-form-group {
+    margin-bottom: 15px; }
+    .app-grid-from > .rs-row .rs-col .rs-form-group .rs-form-control-wrapper {
+      display: block;
+      width: 100% !important; }
+      .app-grid-from > .rs-row .rs-col .rs-form-group .rs-form-control-wrapper > input {
+        width: 100% !important; }
+    .app-grid-from > .rs-row .rs-col .rs-form-group .rs-control-label {
+      margin-bottom: 5px; }
+      .app-grid-from > .rs-row .rs-col .rs-form-group .rs-control-label .rs-help-block-tooltip {
+        margin-top: 0; }
+
+/**
+  左右布局
+ */
+.app-grid-inline-from > .rs-row .rs-col .rs-form-group {
+  display: flex !important;
+  align-items: center;
+  margin: 1rem; }
+  .app-grid-inline-from > .rs-row .rs-col .rs-form-group .rs-form-control-wrapper {
+    display: block;
+    flex: 1; }
+    .app-grid-inline-from > .rs-row .rs-col .rs-form-group .rs-form-control-wrapper > input {
+      width: 100%; }
+    .app-grid-inline-from > .rs-row .rs-col .rs-form-group .rs-form-control-wrapper .rs-input-group > .rs-input-group-addon {
+      width: auto; }
+    .app-grid-inline-from > .rs-row .rs-col .rs-form-group .rs-form-control-wrapper > div {
+      width: 100%;
+      display: flex;
+      flex: 1; }
+
+#app-headPanel .app-grid-inline-from {
+  margin: 0; }
+  #app-headPanel .app-grid-inline-from > .rs-row .rs-col .rs-form-group {
+    margin: 0; }
+
+/*
+  于Grid配合作用于FormGroup
+  实现水平平分FormControl铺满效果
+*/
+.app-form-group-inline {
+  display: flex !important;
+  align-items: center;
+  margin: 10px; }
+  .app-form-group-inline .rs-form-control-wrapper {
+    flex: 1; }
+    .app-form-group-inline .rs-form-control-wrapper > input {
+      width: 100%; }
+    .app-form-group-inline .rs-form-control-wrapper > div {
+      width: 100%;
+      display: flex;
+      flex: 1; }
+
+/*
+  Table多表头的实现
+*/
+.rs-table {
+  /*
+    多表头上下结构样式
+   */
+  /*
+    多表头合并为一个样式
+   */ }
+  .rs-table .app-header-cell-group > .rs-table-cell > .rs-table-cell-content {
+    display: flex !important;
+    flex-direction: column;
+    padding: 0; }
+  .rs-table .app-header-cell-multiple-group-title {
+    text-align: center;
+    flex: 1;
+    padding: 10px;
+    border-bottom: 1px solid #f2f2f5; }
+  .rs-table .app-header-cell-multiple-group-subtitle {
+    display: flex;
+    flex: 1; }
+    .rs-table .app-header-cell-multiple-group-subtitle span {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      border-bottom: 1px solid #f2f2f5;
+      display: inline-block;
+      border-right: 1px solid #f2f2f5; }
+  .rs-table .app-header-cell-group-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; }
+
+/*
+  ButtonToolbar 控件透明化，实现Label按钮效果
+ */
+.app-button-tool-bar-label .rs-btn {
+  background: rgba(0, 0, 0, 0) !important; }
+  .app-button-tool-bar-label .rs-btn .rs-icon {
+    background: rgba(0, 0, 0, 0) !important; }
+
+.react-mosaic-example-app {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; }
+
+.mosaic.mosaic-blueprint-theme .mosaic-window .mosaic-window-toolbar.draggable:hover, .mosaic.mosaic-blueprint-theme .mosaic-preview .mosaic-window-toolbar.draggable:hover {
+  background: linear-gradient(to bottom, #ffffff, #f5f8fa); }
+
+.mosaic-window .mosaic-window-toolbar, .mosaic-preview .mosaic-window-toolbar {
+  height: 35px !important; }
+
+.mosaic-window-body {
+  background-color: #fff !important; }
+
+.mosaic.mosaic-blueprint-theme {
+  background-color: #fff !important; }
+
+.app-mosaic-select-red {
+  box-shadow: 0 0 0 1px rgba(255, 2, 2, 0.19), 0 0 0 rgba(16, 22, 26, 0), 0 0 0 rgba(16, 22, 26, 0) !important; }
+
+/**
+splitter 控件自定义的样式
+ */
+.splitter-layout {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+  .splitter-layout .layout-pane {
+    position: relative;
+    overflow: auto; }
+    .splitter-layout .layout-pane.layout-pane-primary {
+      flex: 1 1 auto; }
+  .splitter-layout > .layout-splitter {
+    flex: 0 0 auto;
+    width: 5px;
+    height: auto;
+    cursor: col-resize;
+    background: #f8f8f9;
+    flex-direction: column;
+    box-shadow: inset 1px 0 0 0 #d5d5d5, 1px 0 0 0 #d5d5d5;
+    z-index: 1;
+    justify-content: center;
+    display: flex;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*
+    * 鼠标移动到拖动条显示
+     */ }
+    .splitter-layout > .layout-splitter::before, .splitter-layout > .layout-splitter::after {
+      content: '';
+      display: block;
+      height: 3px;
+      width: 100%;
+      box-shadow: inset 0 1px 0 0 #d5d5d5, 0 1px 0 0 #d5d5d5; }
+    .splitter-layout > .layout-splitter::before {
+      margin-top: -1px; }
+    .splitter-layout > .layout-splitter::after {
+      margin-top: 3px; }
+    .splitter-layout > .layout-splitter:hover:not(.disable) {
+      transition: background-color .3s; }
+  .splitter-layout.layout-changing {
+    cursor: col-resize;
+    /**
+      无法拖动
+     */ }
+    .splitter-layout.layout-changing > .layout-splitter {
+      background-color: #DCDDDD; }
+  .splitter-layout.splitter-layout-vertical {
+    flex-direction: column; }
+    .splitter-layout.splitter-layout-vertical.layout-changing {
+      cursor: row-resize; }
+    .splitter-layout.splitter-layout-vertical > .layout-splitter {
+      width: 100%;
+      height: 4px;
+      cursor: row-resize; }
+
+/*
+   无法得知具体产生的原因，临时解决方案
+   InputPicker 在表格中错乱的问题
+*/
+.rs-picker-input:not(.rs-picker-disabled) .rs-picker-toggle {
+  left: 0; }
+
+/*
+控制表格的hover背景色
+*/
+/*
+.rs-table-hover .rs-table-row:not(.rs-table-row-header):hover,
+.rs-table-hover .rs-table-row:hover .rs-table-cell-group,
+.rs-table-hover .rs-table-row:hover .rs-table-cell {
+  .showow {
+    display: block;
+  }
+}
+*/
+/**
+通过hover控制公告元素的显示
+ */
+/*
+.showow {
+  display: none
+}
+
+.rs-table-hover .rs-table-row:not(.rs-table-row-header):hover,
+.rs-table-hover .rs-table-row:hover {
+  .showow {
+    display: block;
+  }
+}*/

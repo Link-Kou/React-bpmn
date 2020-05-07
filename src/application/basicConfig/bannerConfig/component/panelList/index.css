@@ -1,0 +1,20 @@
+@charset "UTF-8";
+.app-bannerConfig-plnel {
+  display: flex;
+  flex: 1;
+  flex-direction: column; }
+  .app-bannerConfig-plnel:hover > .rs-btn-toolbar {
+    opacity: 1;
+    visibility: visible; }
+  .app-bannerConfig-plnel > .rs-btn-toolbar {
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    justify-content: center;
+    /*动画形式进行宽度变化*/
+    transition: all 500ms;
+    -moz-transition: all 500ms;
+    /* Firefox 4 */
+    -webkit-transition: all 500ms;
+    /* Safari and Chrome */
+    -o-transition: all 500ms; }

@@ -1,0 +1,106 @@
+/**
+  上下布局
+ */
+.app-grid-from {
+  > .rs-row {
+    margin-bottom: 1rem;
+
+    .rs-col {
+      .rs-form-group {
+        margin-bottom: 15px;
+
+        .rs-form-control-wrapper {
+          display: block;
+          width: 100% !important;
+
+          > input {
+            width: 100% !important;
+          }
+        }
+
+        .rs-control-label {
+          margin-bottom: 5px;
+
+          .rs-help-block-tooltip {
+            margin-top: 0
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+  左右布局
+ */
+.app-grid-inline-from {
+  > .rs-row {
+    .rs-col {
+      .rs-form-group {
+        display: flex !important;
+        align-items: center;
+        margin: 1rem;
+
+        .rs-form-control-wrapper {
+          display: block;
+          flex: 1;
+
+          > input {
+            width: 100%;
+          }
+
+          .rs-input-group {
+            > .rs-input-group-addon {
+              width: auto;
+            }
+          }
+
+          > div {
+            width: 100%;
+            display: flex;
+            flex: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+#app-headPanel {
+  .app-grid-inline-from {
+    margin: 0;
+
+    > .rs-row {
+      .rs-col {
+        .rs-form-group {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+
+/*
+  于Grid配合作用于FormGroup
+  实现水平平分FormControl铺满效果
+*/
+.app-form-group-inline {
+  display: flex !important;
+  align-items: center;
+  margin: 10px;
+
+  .rs-form-control-wrapper {
+    flex: 1;
+
+    > input {
+      width: 100%;
+    }
+
+    > div {
+      width: 100%;
+      display: flex;
+      flex: 1;
+    }
+  }
+}

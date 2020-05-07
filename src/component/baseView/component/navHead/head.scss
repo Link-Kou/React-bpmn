@@ -1,0 +1,9 @@
+@import "../../../../config/CssConfig";
+
+.app-header {
+  border-bottom: 1px solid #f2f2f5;
+  display: flex;
+  z-index: 1020;
+  height: auto;
+  width: 100%;
+}

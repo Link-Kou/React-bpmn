@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trees properties="/src/main/java/com/httpurl.properties" code="Ops_.+\.Code$" codeval="1[0-9]{4}" msg="Ops_.+\.Msg$">
+    <model path="/src" title="">
+        <tree path="/application" subpath="" title="基础配置">
+            <tree path="/baseCorrugated" title="瓦楞管理"/>
+            <tree path="/basePaper" title="原纸管理"/>
+            <tree path="/basicConfig" title="基础配置">
+                <tree path="/bannerConfig" title="轮播图管理"/>
+                <tree path="/typeConfig" title="产品分类"/>
+            </tree>
+            <tree path="/product" title="产品管理">
+                <tree path="/productAdd" title="产品添加">
+                    <tree subpath="/component" path="" title="产品添加">
+                        <tree subpath="/component" path="/productInfoUnified" title="产品公共信息">
+
+                        </tree>
+                    </tree>
+                </tree>
+            </tree>
+            <tree path="/productAllSku" title="所有SKU类型产品"/>
+            <tree path="/productCardboard" title="纸板产品管理"/>
+            <tree path="/productCarton" title="纸箱产品管理"/>
+            <tree path="/productOnlineMarketing" title="产品营销方案管理"/>
+            <tree path="/productQuote" title="产品报价管理"/>
+        </tree>
+    </model>
+</trees>

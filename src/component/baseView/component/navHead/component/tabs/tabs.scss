@@ -1,0 +1,132 @@
+@import "../../../../../../config/CssConfig";
+
+.header-tabs {
+  margin-top: 10px;
+  margin-left: 5px;
+  overflow: hidden;
+  min-width: 500px;
+
+  .header-tabs-box {
+    position: relative;
+  }
+
+  .header-tabs-base {
+    background-color: #fff;
+    margin-right: $tabsheight + 8px;
+    overflow: auto;
+    /* 藏滚动条，当IE下溢出，仍然可以滚动*/
+    -ms-overflow-style: none;
+    /*火狐下隐藏滚动条*/
+    overflow: -moz-scrollbars-none;
+    scrollbar-width: none;
+  }
+
+  /**隐藏滚动条并不影响滚动效果**/
+  .header-tabs-base::-webkit-scrollbar {
+    display: none;
+  }
+
+  .app-close {
+    position: absolute;
+    z-index: 999;
+    right: -3px;
+    top: 0px;
+  }
+
+  .header-tabs-tabitem-select {
+    background-color: #f1f1f1 !important;
+    top: 5px !important;
+    position: relative;
+    height: 40px !important;
+
+    .app-close {
+      display: block !important;
+    }
+  }
+
+  .header-tabs-tabitem {
+    position: relative;
+    max-width: 100px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    height: $tabsheight;
+    padding: 5px;
+    margin: 0 5px 0 0;
+    border: 1px solid #e8e8e8;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    top: 0;
+
+    transition: top .3s;
+    -webkit-transition: top .3s;
+    -moz-transition: top .3s; /* Firefox 4 */
+    -o-transition: top .3s; /* Opera */
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently not supported by any browser */
+    outline: none;
+
+    .app-close {
+      display: none;
+    }
+
+    &:hover {
+      .app-close {
+        display: block !important;
+      }
+    }
+
+    .header-tabs-tabitem-content {
+      width: 100px;
+      text-align: center;
+      text-wrap: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; /*兼容IE*/
+      &:hover {
+        cursor: pointer;
+        color: #000;
+      }
+
+    }
+
+    i:hover {
+      cursor: default;
+      color: #000;
+      font-weight: 800;
+    }
+  }
+
+  .ant-tabs-bar {
+    border-bottom: none !important;
+  }
+
+  .TabsSpan {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .header-tabs-basetool {
+    position: absolute;
+    height: $tabsheight;
+    width: 50px;
+    border: 1px solid #e8e8e8;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    right: 0px;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+  }
+
+}

@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@imageManager/*": [
+        "./src/component/imageManager/*"
+      ],
+      "@http/*": [
+        "./src/redux/fetch/*"
+      ],
+      "@utils/*": [
+        "./src/component/utils/*"
+      ],
+      "@component/*": [
+        "./src/component/*"
+      ],
+      "@common/*": [
+        "./src/common/*"
+      ],
+      "@fetch/*": [
+        "./src/fetch/*"
+      ],
+      "react-code-view": [
+        "./@types/react-code-view"
+      ],
+      "bigdecimal": [
+        "./@types/bigdecimal"
+      ]
+    }
+  }
+}

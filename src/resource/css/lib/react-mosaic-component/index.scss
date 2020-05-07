@@ -1,0 +1,27 @@
+.react-mosaic-example-app {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.mosaic.mosaic-blueprint-theme .mosaic-window .mosaic-window-toolbar.draggable:hover, .mosaic.mosaic-blueprint-theme .mosaic-preview .mosaic-window-toolbar.draggable:hover {
+  background: linear-gradient(to bottom, #ffffff, #f5f8fa);
+}
+
+.mosaic-window .mosaic-window-toolbar, .mosaic-preview .mosaic-window-toolbar {
+  height: 35px !important;
+}
+
+.mosaic-window-body {
+  background-color: #fff !important;
+}
+
+.mosaic.mosaic-blueprint-theme {
+  background-color: #fff !important;
+}
+
+.app-mosaic-select-red {
+  box-shadow: 0 0 0 1px rgba(255, 2, 2, 0.19), 0 0 0 rgba(16, 22, 26, 0), 0 0 0 rgba(16, 22, 26, 0) !important;
+}
+

@@ -1,0 +1,12 @@
+.app-image-library-resources-group {
+  max-height: 550px;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  .app-image-library-picture-card-item {
+    margin-top: 5px;
+  }
+}
+

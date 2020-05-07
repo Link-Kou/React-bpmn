@@ -1,0 +1,28 @@
+.app-image-library-picture-card-group {
+  display: flex;
+  padding: 10px;
+  width: auto;
+  height: auto;
+  border-radius: 4px;
+  flex-wrap: wrap;
+  overflow-x: auto; }
+  .app-image-library-picture-card-group > .app-image-library-picture-card-item {
+    margin-left: 5px;
+    margin-top: 5px; }
+  .app-image-library-picture-card-group > .app-image-library-image {
+    margin: 7px; }
+    .app-image-library-picture-card-group > .app-image-library-image > div {
+      margin: 0 auto;
+      height: 80px;
+      width: 80px;
+      display: flex;
+      border-radius: 5px;
+      overflow: hidden;
+      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAA3CAYAAAC8TkynAAAAAXNSR0IArs4c6QAABERJREFUaAXtmU1IVFEUx53XWLYISpIIzJxFoxAZREGGhdgiRIKgj1W7NlGQbSoIC8K+yE1tir4WRZBkEVFI0KZyFVhRtNCVX6NDCO1c6KjT78gbeT7fe9437828+XpwuW/OPfec8//fr3PfhMoK7BkYGEimINXX14dS73a1ZtdQLPISAcUy0nY4SzPAjplikZdmQLGMtB3OhXMyFotVz87O3kGpOZlMbrZTDkoeiUQWz3PjOe9HPGEd/C+AV/phMN9saDLyxQpeBis0PDw8kZr2oVCorba2tjffRtEYr3GJKKXCKfBiJN/BG4lQfS8dg6pMFapeaQYU6siq4irNAFWmClUv7AewwcHB/RynF7C1W7fXT07RVVdX1+eH/UzaCA0NDS1+QzPm3KpOAX8Z3esQsJivS18ImKe6Agk35XeuPp72ABl5gHWawQtYZGK7U9cRUU4+ngiQaa8DtQQnbaJj2ZgjQq97QGrNO8FR0XHqXzY6Onpobm7uLMuqEUKT1P2apt2uqan5au7odkl7mgFm537/lqs6l7UPgP+I7cNg30hdRd2K7AttnV59eiWgXyEAFZ1lZgDXkkgkfgC2bVmjLqCtgxG/ZteuIvdEgBx1+m5v6UvaRMey0UE4MjJyDHAy6lUOagtN2O9A/+BKenbtngiQc54ArgpQswNdJsegq1wAMCcB3429crNNq9/oykb7mLLaqn0lmScCxHg0Gr1B1Ux5T4nrRd6b3eYATPtTAHlGWUV/5Qf9CBvlaeUOBkXPiZDBlqdXRv4EQLopSxIqF0b/8kGnBhKnU31UEjuvx2DKl6ca8E3z8/PPMZIuePG/CfBH3QbieQm4dWjWZxevZ9TfIV9jbnP7m33njNs+gRIQj8erCLoXAnz5JI+dprwhgGDD09PTr6gjboP2Uz+wGcCu3QX4Zj/BpGMrEALkrGfTO59OwH73yToBY2NjDYz8I7+BpGsvqwRMTk6u46+41xCwNt2A/e63Yh6gn9FPdMf3SDYeWqW+KoFNTU09RW+bim62dBxnAIlFC6P1iWDq9HIfQvomJia2ug2Qfuewddxtv0zr2xLAXTyK8zcEXWEMgt/7ZmZmfpLAHDHKnd7Z8few6bm+FTrZ9KvNkgDAVXAX7wHseitHyDcgf4veXd4db2FsepV8vOhB31HPyk82ZJYE8LnpFs4bFAJoZ5n0U3ZZ6UKOBvgXtLleMlb2MiFbRgDT9QCBt7twtgPdb6zxB+Pj41uM/ZBJstNqlOXa+5LrMDt8BaP5myBl/afzJDghvtPxD2U74BvTMeJXH9fXYcDLnxzpgpe4ywG9l1pKXjzmJXApL6L2MUgzAZ7v5D7GlhVTZgKy4jSXnJQIyKXRCCIWjWMrHoTjTPtUxSVL4HOmgwnIvhIuLRwOX4StfwEFmRG3gkdwqRjXqqurYyjvpNNL1WmjYjgIHYlfcAgewaUSw38SDL04/XLE4QAAAABJRU5ErkJggg==");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain; }
+    .app-image-library-picture-card-group > .app-image-library-image img {
+      width: auto;
+      height: 100%;
+      object-fit: cover; }

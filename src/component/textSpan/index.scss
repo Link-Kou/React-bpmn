@@ -1,0 +1,15 @@
+.app-textSpan {
+  display: flex;
+
+  .app-textSpan-text {
+    width: auto;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+    word-wrap : break-word;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+}

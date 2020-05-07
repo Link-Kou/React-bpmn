@@ -1,0 +1,11 @@
+.app-cardboardListTable-table {
+  width: 100%;
+  font-size: 14px; }
+  .app-cardboardListTable-table tr td:nth-child(odd) {
+    width: 30%;
+    text-align: justify;
+    text-align-last: justify;
+    font-weight: bold; }
+  .app-cardboardListTable-table tr td:nth-child(even) {
+    width: 20%;
+    text-align: center; }

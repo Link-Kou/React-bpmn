@@ -1,0 +1,12 @@
+/*
+  ButtonToolbar 控件透明化，实现Label按钮效果
+ */
+.app-button-tool-bar-label {
+  .rs-btn {
+    background: rgba(0, 0, 0, 0) !important;
+
+    .rs-icon {
+      background: rgba(0, 0, 0, 0) !important;
+    }
+  }
+}

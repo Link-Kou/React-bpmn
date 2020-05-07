@@ -1,0 +1,11 @@
+export * from './IAddConfigItem'
+export * from './IAddCorrugatedProduct'
+export * from './IDelConfigItem'
+export * from './IEditConfigItem'
+export * from './IEditCorrugatedProduct'
+export * from './ILoadConfigAll'
+export * from './ILoadConfigItem'
+export * from './ILoadCorrugatedProduct'
+export * from './ILoadCorrugatedProductList'
+export * from './ILoadCorrugatedProductPagesList'
+

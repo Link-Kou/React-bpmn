@@ -1,0 +1,35 @@
+@import "../../../../config/CssConfig";
+
+/**菜单栏**/
+.app-sidebar {
+  /*  position: fixed;*/
+  overflow: auto;
+  z-index: 999;
+  height: calc(100vh - #{$logoheight});
+  background-color: #2A3135;
+  /*动画形式进行宽度变化*/
+  transition: width 100ms;
+  -moz-transition: width 100ms; /* Firefox 4 */
+  -webkit-transition: width 100ms; /* Safari and Chrome */
+  -o-transition: width 100ms; /* Opera */
+  /*菜单样式修改,菜单背景色*/
+  .rs-dropdown-menu .rs-dropdown-menu-collapse-in {
+    background-color: #2A3135 !important;
+  }
+
+  /**隐藏滚动条并不影响滚动效果**/
+  .app-sidebar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /**缩放子菜单**/
+  .rs-dropdown-menu {
+    background-color: #2A3135;
+
+    .rs-dropdown-item-content {
+      color: #ffffff;
+    }
+  }
+
+}
+

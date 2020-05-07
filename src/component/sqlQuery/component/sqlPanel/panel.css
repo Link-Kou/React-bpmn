@@ -1,0 +1,60 @@
+.app-sql-group, .app-sql-panel {
+  height: auto;
+  position: relative;
+  margin-bottom: 10px;
+  background-color: #ffffff; }
+  .app-sql-group > .app-sql-group-item, .app-sql-panel > .app-sql-group-item {
+    display: block;
+    height: auto; }
+  .app-sql-group > .app-sql-group-togglesh, .app-sql-panel > .app-sql-group-togglesh {
+    position: absolute;
+    cursor: Pointer;
+    width: 10px;
+    height: 10px;
+    left: 5px;
+    top: 3px; }
+  .app-sql-group > .app-sql-group, .app-sql-panel > .app-sql-group, .app-sql-group > .app-sql-panel, .app-sql-panel > .app-sql-panel, .app-sql-group > div > .app-sql-group, .app-sql-panel > div > .app-sql-group, .app-sql-group > div > .app-sql-panel, .app-sql-panel > div > .app-sql-panel {
+    margin-left: 30px;
+    border: 1px solid #e8e8e8;
+    padding: 15px; }
+    .app-sql-group > .app-sql-group:before, .app-sql-panel > .app-sql-group:before, .app-sql-group > .app-sql-panel:before, .app-sql-panel > .app-sql-panel:before, .app-sql-group > div > .app-sql-group:before, .app-sql-panel > div > .app-sql-group:before, .app-sql-group > div > .app-sql-panel:before, .app-sql-panel > div > .app-sql-panel:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      border-width: 0 0 2px 2px;
+      left: -31px;
+      width: 31px;
+      height: 50%;
+      border-color: #08c;
+      border-style: solid; }
+    .app-sql-group > .app-sql-group:after, .app-sql-panel > .app-sql-group:after, .app-sql-group > .app-sql-panel:after, .app-sql-panel > .app-sql-panel:after, .app-sql-group > div > .app-sql-group:after, .app-sql-panel > div > .app-sql-group:after, .app-sql-group > div > .app-sql-panel:after, .app-sql-panel > div > .app-sql-panel:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      border-width: 0 0 0 2px;
+      left: -31px;
+      width: 31px;
+      height: calc(50% + 12px);
+      border-color: #08c;
+      border-style: solid; }
+  .app-sql-group:last-child:after, .app-sql-panel:last-child:after, .app-sql-group > div > .app-sql-group:last-child:after, .app-sql-panel > div > .app-sql-group:last-child:after, .app-sql-group > div > .app-sql-panel:last-child:after, .app-sql-panel > div > .app-sql-panel:last-child:after {
+    width: 0;
+    height: 0; }
+  .app-sql-group:hover, .app-sql-panel:hover {
+    background-color: rgba(37, 137, 245, 0.2); }
+
+.app-sql-panel {
+  position: relative;
+  margin-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #ffffff; }
+  .app-sql-panel:hover {
+    background-color: rgba(37, 137, 245, 0.2); }
+  .app-sql-panel > .app-sql-expression:only-child:before {
+    width: 0;
+    height: 0; }
+  .app-sql-panel > .app-sql-expression:first-child:before {
+    border-width: 0 0 2px 0; }
+
+/*# sourceMappingURL=panel.css.map */

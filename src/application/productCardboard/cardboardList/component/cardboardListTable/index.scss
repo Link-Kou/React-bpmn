@@ -1,0 +1,16 @@
+.app-cardboardListTable-table {
+  width: 100%;
+
+  tr {
+    td:nth-child(odd) {
+      width: 30%;
+      text-align: justify;
+      text-align-last: justify;
+    }
+
+    td:nth-child(even) {
+      width: 20%;
+      text-align: center;
+    }
+  }
+}

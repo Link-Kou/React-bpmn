@@ -1,0 +1,43 @@
+$primary-color: #d2d2d2;
+@import "node_modules/loaders.css/src/animations/ball-scale-multiple.scss";
+
+/**
+自定义加载进度条
+**/
+.app-handle-img-loader-box {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > .app-handle-img-loader {
+    width: 45px;
+    height: 45px;
+    display: inline-block;
+    padding: 0;
+    border-radius: 100%;
+    border: 5px solid rgba(246, 36, 89, 1);
+    border-right-color: rgba(0, 0, 0, 0.1);
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+    -webkit-animation: app-handle-img-loader 1s ease-in-out infinite;
+    animation: app-handle-img-loader 1s ease-in-out infinite;
+  }
+
+  @keyframes app-handle-img-loader {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes app-handle-img-loader {
+    from {
+      -webkit-transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+}

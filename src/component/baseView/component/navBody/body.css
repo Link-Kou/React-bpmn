@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/**tab框高度**/
+/**logo高度**/
+/**内容区**/
+.app-body {
+  flex: 1 !important;
+  overflow: auto;
+  background-color: #F0F2F5; }
+  .app-body .rs-panel-heading {
+    padding-bottom: 0px; }
+  .app-body .app-nav-Body {
+    flex-direction: column;
+    overflow: hidden;
+    padding: 6px;
+    /*  display: flex;*/
+    height: 100%;
+    transition: margin-left 200ms, margin-right 200ms;
+    -moz-transition: margin-left 200ms, margin-right 200ms;
+    /* Firefox 4 */
+    -webkit-transition: margin-left 200ms, margin-right 200ms;
+    /* Safari and Chrome */
+    -o-transition: margin-left 200ms, margin-right 200ms;
+    /* Opera */ }

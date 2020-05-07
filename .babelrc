@@ -1,0 +1,23 @@
+{
+  "presets": [
+    [
+      "rsuite",
+      {
+        "style": true,
+        "theme": "default"
+      }
+    ]
+  ],
+  "plugins": [
+    "syntax-dynamic-import",
+    [
+      "lodash",
+      {
+        "id": [
+          "lodash",
+          "recompose"
+        ]
+      }
+    ]
+  ]
+}

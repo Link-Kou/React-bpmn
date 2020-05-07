@@ -1,0 +1,20 @@
+@import "../../config/CssConfig";
+
+
+.app-base {
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  overflow: hidden;
+
+  .app-left {
+    border-right: 1px solid #f2f2f5;
+  }
+
+  .app-right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+  }
+}
