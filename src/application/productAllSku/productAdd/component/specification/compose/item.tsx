@@ -28,7 +28,7 @@ export default class ProductSpecificationItem extends React.Component<IProps> {
                     <span>名称</span>
                 </div>
             </HeaderCell>,
-            Cell: <CellAddReduce dataKey="id" addrow={this._addRow.bind(this)} delRow={this._delRow.bind(this)}/>,
+            Cell: <CellAddReduce dataKey="id" mainRowHideDel={true} addrow={this._addRow.bind(this)} delRow={this._delRow.bind(this)}/>,
             colSpan: 2,
             width: 85,
             fixed: false,

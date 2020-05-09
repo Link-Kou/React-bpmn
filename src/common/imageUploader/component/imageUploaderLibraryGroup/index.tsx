@@ -84,7 +84,7 @@ export default class ImageUploaderLibraryGroup extends React.Component<Iprops> {
     public _onDelete = async (fileurl: string, eventKey?: string | number) => {
         //const {fileUrl} = this.state
         const {onChange, fileUrl} = this.props
-        if (eventKey) {
+        if (utilsNumber.isNumber(eventKey) || eventKey) {
             fileUrl.splice(utilsNumber.toNumber(eventKey), 1);
         }
         onChange?.(fileUrl)
@@ -225,7 +225,7 @@ export default class ImageUploaderLibraryGroup extends React.Component<Iprops> {
      */
     public renderModalImageViewer() {
         const {show, fileUrlShow} = this.state
-        const close = () => {
+        const close = (e: any) => {
             this.setState({
                 show: false
             })
@@ -311,7 +311,7 @@ export default class ImageUploaderLibraryGroup extends React.Component<Iprops> {
      * @private
      */
     private _onDel = (fileurl: string, id?: string) => {
-        alert(123)
+
     }
 
     public render() {

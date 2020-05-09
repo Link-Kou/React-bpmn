@@ -98,7 +98,8 @@ export default class ImageCardViewUpdataDelete extends React.Component<Iprops> {
                 return (
                     <div className={'app-image-library-icon'}>
                         <svg viewBox="0 0 1024 1024" width="20" height="20"
-                             onClick={() => {
+                             onClick={(event) => {
+                                 event?.stopPropagation()
                                  onShow?.(utilsString.isEmptyGetDefault(fileUrl, ''), eventKey)
                              }}
                         >
@@ -111,7 +112,8 @@ export default class ImageCardViewUpdataDelete extends React.Component<Iprops> {
                                 fill="#000000" p-id="541"/>
                         </svg>
                         <svg viewBox="0 0 1024 1024" width="20" height="20"
-                             onClick={() => {
+                             onClick={(event) => {
+                                 event?.stopPropagation()
                                  this._onDel(utilsString.isEmptyGetDefault(fileUrl, ''), eventKey)
                              }}
                         >
@@ -129,6 +131,7 @@ export default class ImageCardViewUpdataDelete extends React.Component<Iprops> {
                     <div className={'app-image-library-icon'}>
                         <svg viewBox="0 0 1024 1024" width="20" height="20"
                              onClick={(e) => {
+                                 e?.stopPropagation();
                                  onUpdate?.(eventKey)
                              }}>
                             <path

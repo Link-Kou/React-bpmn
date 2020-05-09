@@ -1,11 +1,12 @@
 import * as React from 'react';
-import {Button, Grid, Table} from 'rsuite';
-import {HeaderCellMulti, CellAddReduce, CellSortUpDown} from '@component/table';
+import {Grid, Icon, IconButton, Table} from 'rsuite';
+import {HeaderCellMulti, CellAddReduce, CellSortUpDown, CellIndex} from '@component/table';
+import nanoid from 'nanoid';
+import {HookCellButtonToolbar} from './compone/hookCellButtonToolbar';
 import {HookCellInputPicker} from './compone/hookCellInputPicker';
 import {HookCellTagPicker} from './compone/hookCellTagPicker';
-import nanoid from 'nanoid';
 
-const {Column, HeaderCell, Cell} = Table;
+const {Column, HeaderCell} = Table;
 
 
 interface IProps {
@@ -17,8 +18,20 @@ interface IState {
     data: Array<{
         id: string
         name: string
-        value: Array<string>
-    }>
+        image: boolean,
+        value: Array<{
+            name: string,
+            image: string
+        }>
+    }>,
+    /**
+     * 显示方式
+     */
+    descartes?: 'asc' | 'desc'
+    /**
+     * 规格重复
+     */
+    specRepeat?: boolean
 }
 
 /**
@@ -32,9 +45,12 @@ export default class ProductSku extends React.Component<IProps> {
             {
                 id: nanoid(),
                 name: '',
-                value: []
+                value: [],
+                image: false
             }
-        ]
+        ],
+        descartes: 'asc',
+        specRepeat: true
     }
 
 
@@ -53,13 +69,14 @@ export default class ProductSku extends React.Component<IProps> {
             Cell: <CellAddReduce dataKey="id" addrow={this._onAddRow.bind(this)} delRow={this._onDelRow.bind(this)}/>,
             align: 'center',
             colSpan: 2,
-            width: 65,
+            width: 85,
             fixed: false,
             resizable: false
         },
         {
             HeaderCell: <HeaderCell/>,
-            Cell: <HookCellInputPicker datas={this.state.data}
+            Cell: <HookCellInputPicker onDatas={this._getDatas.bind(this)}
+                                       onSpecRepeat={this._getSpecRepeat.bind(this)}
                                        dataKey="name"
                                        valueKey={'name'}
                                        onSelectChange={(value) => {
@@ -71,9 +88,10 @@ export default class ProductSku extends React.Component<IProps> {
             resizable: false
         },
         {
-            HeaderCell: <HeaderCell style={{textAlign: 'center'}}>规格值 (可使用键盘"回车键”快速添加规格值）</HeaderCell>,
+            HeaderCell: <HeaderCell style={{textAlign: 'center'}}>规格值 (可使用键盘"回车键"快速添加规格值）</HeaderCell>,
             Cell: <HookCellTagPicker valueKey={'value'}
-                                     dataKey="value"
+                                     dataKey={'value'}
+                                     imageKey={'image'}
                                      onSelectChange={(value) => {
                                          this._onBuild()
                                      }}/>,
@@ -85,7 +103,7 @@ export default class ProductSku extends React.Component<IProps> {
         },
         {
             HeaderCell: <HeaderCell>设置图片(单选)</HeaderCell>,
-            Cell: <Cell dataKey="image"/>,
+            Cell: <CellIndex dataKey="image" onSelectChange={this._onImageSelectChange.bind(this)}/>,
             align: 'center',
             width: 75,
             fixed: false,
@@ -107,17 +125,41 @@ export default class ProductSku extends React.Component<IProps> {
         return this.state.data.length
     }
 
+    private _getDatas() {
+        return this.state.data
+    }
+
+    private _getSpecRepeat(): boolean {
+        return this.state.specRepeat ?? true
+    }
+
+    private _onImageSelectChange(rowIndex: number, checked: boolean) {
+        const {data} = this.state
+        const map = data.map((k, i, a) => {
+            if (i === rowIndex) {
+                k.image = checked
+            } else {
+                k.image = false
+            }
+            return k
+        });
+        this.setState({
+            data: map
+        }, () => {
+            this._onBuild()
+        })
+    }
+
     private _onAddRow(rowData: any, rowIndex: number) {
         const {data} = this.state
         data.splice(rowIndex + 1, 0, {
             id: nanoid(),
             name: '',
+            image: false,
             value: []
         })
         this.setState({
             data
-        }, () => {
-            this._onBuild()
         })
     }
 
@@ -148,9 +190,13 @@ export default class ProductSku extends React.Component<IProps> {
     }
 
     private _onBuild = () => {
-        const {data} = this.state
+        const {data, descartes} = this.state
         const {onChange} = this.props
-        const descartesListDesc = this._DescartesListDesc(data, 'name', 'value');
+        const _Descartes = {
+            asc: this._DescartesListAse(data, 'name', 'value'),
+            desc: this._DescartesListDesc(data, 'name', 'value')
+        }
+        const descartesListDesc = _Descartes[descartes ?? 'asc'];
         onChange?.(descartesListDesc);
     }
 
@@ -186,6 +232,7 @@ export default class ProductSku extends React.Component<IProps> {
                     const value: Array<string> = columns[ii][valuename]
                     const key: string = columns[ii][keyname]
                     const id: string = columns[ii].id
+                    const image: string = columns[ii].image
                     if (table[ii] >= value.length) {
                         table[ii] = 0
                         const getnexttable = (index: any) => {
@@ -202,7 +249,8 @@ export default class ProductSku extends React.Component<IProps> {
                     const add = {}
                     add[id] = {
                         name: key,
-                        val: value[table[ii]]
+                        image: image,
+                        value: value[table[ii]]
                     };
                     tableGroup[i] = {
                         ...tableGroup[i],
@@ -218,6 +266,7 @@ export default class ProductSku extends React.Component<IProps> {
          {'key':'val','key':'val'}
          ]
          */
+        console.log(JSON.stringify(tableGroup, null, 2))
         return tableGroup;
     }
 
@@ -252,6 +301,7 @@ export default class ProductSku extends React.Component<IProps> {
                     const value: Array<string> = columns[ii][valuename]
                     const key: string = columns[ii][keyname]
                     const id: string = columns[ii].id
+                    const image: string = columns[ii].image
                     if (table[ii] >= value.length) {
                         table[ii] = 0
                         const getnexttable = (index: any) => {
@@ -268,7 +318,8 @@ export default class ProductSku extends React.Component<IProps> {
                     const add = {}
                     add[id] = {
                         name: key,
-                        val: value[table[ii]]
+                        image: image,
+                        value: value[table[ii]]
                     };
                     tableGroup[i] = {
                         ...tableGroup[i],
@@ -285,17 +336,19 @@ export default class ProductSku extends React.Component<IProps> {
 
     public render() {
         const {data} = this.state
-        const {onChange} = this.props
         return (
             <Grid style={{padding: 10, paddingBottom: 0}} fluid={true}>
-                <Button onClick={() => {
-                    const descartesListDesc1 = this._DescartesListDesc(data, 'name', 'value');
-                    onChange?.(descartesListDesc1);
-                }}>构建1</Button>
-                <Button onClick={() => {
-                    const descartesListDesc2 = this._DescartesListAse(data, 'name', 'value');
-                    onChange?.(descartesListDesc2);
-                }}>构建2</Button>
+                <HookCellButtonToolbar
+                    onChangeSpecRepeat={(value) => {
+                        this.setState({
+                            specRepeat: value
+                        })
+                    }}
+                    onChangeDisplay={(value) => {
+                        this.setState({
+                            descartes: value
+                        }, () => this._onBuild())
+                    }}/>
                 <Table
                     loading={false}
                     wordWrap={true}
@@ -306,6 +359,12 @@ export default class ProductSku extends React.Component<IProps> {
                     bordered={true}
                     cellBordered={false}
                     data={data}
+                    renderEmpty={(info) => (
+                        <div className={'rs-table-body-info'}>
+                            <IconButton onClick={() => this._onAddRow(null, -1)} icon={<Icon icon="plus-square"/>}
+                                        size="xs" appearance={'link'}>新增列表</IconButton>
+                        </div>
+                    )}
                 >
                     {
                         this.Columns.map((k: any, i, a) => (

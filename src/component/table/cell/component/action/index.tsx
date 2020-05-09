@@ -14,11 +14,12 @@ interface IControllerAddReduce extends IProps {
 
     hide?: 'add' | 'del'
 
+    mainRowHideDel?: boolean
+
     delRow?(rowData: any, rowIndex: number): void
 
     addrow?(rowData: any, rowIndex: number): void
 }
-
 
 /**
  * 控制列-添加删除
@@ -26,7 +27,8 @@ interface IControllerAddReduce extends IProps {
  * @constructor
  */
 export const ControllerAddReduce = (props: IControllerAddReduce) => {
-    const {delRow, addrow, rowData, rowIndex, hide} = props;
+    const {delRow, addrow, rowData, rowIndex, hide, mainRowHideDel} = props;
+    const _mainRowHideDel = mainRowHideDel ? rowIndex === 0 : false
     return (
         <Cell {...props}>
             <Grid fluid={true}>
@@ -34,7 +36,7 @@ export const ControllerAddReduce = (props: IControllerAddReduce) => {
                     <Col xs={24} sm={24} md={24}>
                         <ButtonToolbar>
                             {
-                                hide === 'del' ? null : (
+                                hide === 'del' || _mainRowHideDel ? null : (
                                     <IconButton onClick={() => {
                                         delRow?.(rowData, rowIndex)
                                     }} icon={<Icon icon="minus-square"/>} size="xs" appearance={'link'} color={'red'}/>
@@ -56,7 +58,7 @@ export const ControllerAddReduce = (props: IControllerAddReduce) => {
 }
 
 interface IControllerSortUpDown extends IProps {
-    maxRow(): number
+    maxRow?(): number
 
     /**
      *

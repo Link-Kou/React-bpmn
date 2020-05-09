@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {Container, Content, Footer, Header} from 'rsuite';
-import SplitterLayout from 'react-splitter-layout';
 import OperationGroup from './component/operation'
-import Sort from './component/sort'
 import Table from '../productList/component/table'
+import BackColorPanel from '@component/backColorPanel';
+import {Prompt} from 'react-router';
 
 interface IProps {
 
@@ -18,18 +18,12 @@ export default class PoductList extends React.Component<IProps> {
 
     }
 
-    public routerWillLeave(nextLocation: any) {
-        return '确认要离开？';
-    }
-
     public render() {
 
         return (
             <>
-                <SplitterLayout customClassName={'dfdf'} percentage={true} primaryIndex={1} primaryMinSize={85}
-                                secondaryMinSize={10}
-                                secondaryInitialSize={15}>
-                    <Sort/>
+                <Prompt message="Are you sure you want to leave?"/>
+                <BackColorPanel tableBordered={true}>
                     <Container>
                         <Header>
                             <OperationGroup/>
@@ -39,7 +33,7 @@ export default class PoductList extends React.Component<IProps> {
                         </Content>
                         <Footer/>
                     </Container>
-                </SplitterLayout>
+                </BackColorPanel>
             </>
         )
     }

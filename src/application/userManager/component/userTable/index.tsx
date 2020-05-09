@@ -1,10 +1,9 @@
 import * as React from 'react';
 import {Button, Col, ControlLabel, Form, FormControl, FormGroup, Grid, Input, InputPicker, Row, Table} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
-import {CellIndex} from '@component/table/cell';
+import {CellIndex,HeaderCellSort} from '@component/table';
 import TextSpan from '@component/textSpan';
 import HeadPanel from '@component/headPanel';
-import {HeaderCellSort} from '@component/table/headerCell';
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
 

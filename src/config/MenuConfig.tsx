@@ -112,18 +112,38 @@ export const MenuConfig: Array<IMenuConfig> = [
         items: [
             {
                 key: '2-1',
-                type: 'DropdownItem',
-                content: '产品营销管理',
-                ico: 'order-form',
-                openTabs: {
-                    key: '2-1',
-                    title: '产品营销管理',
-                    route: '/index/productOnlineMarketing'
-                },
-                items: []
+                type: 'DropdownMenu',
+                ico: 'comments',
+                title: () => (<span className={'asdasda'}>营销管理</span>),
+                items: [
+                    {
+                        key: '2-1',
+                        type: 'DropdownItem',
+                        content: '纸箱纸板',
+                        ico: 'order-form',
+                        openTabs: {
+                            key: '2-1',
+                            title: '纸箱纸板',
+                            route: '/index/productOnlineMarketing'
+                        },
+                        items: []
+                    },
+                    {
+                        key: '2-1',
+                        type: 'DropdownItem',
+                        content: '辅料产品',
+                        ico: 'order-form',
+                        openTabs: {
+                            key: '2-1',
+                            title: '辅料产品',
+                            route: '/index/productOnlineMarketing'
+                        },
+                        items: []
+                    }
+                ]
             },
             {
-                key: '2-1',
+                key: '2-2',
                 type: 'DropdownItem',
                 content: '报价单管理',
                 ico: 'order-form',
@@ -193,7 +213,7 @@ export const MenuConfig: Array<IMenuConfig> = [
             {
                 key: '2-5',
                 type: 'DropdownItem',
-                content: '其他产品管理',
+                content: '辅料产品管理',
                 ico: 'order-form',
                 openTabs: {
                     key: '2-5',
@@ -821,4 +841,4 @@ export const MenuConfig: Array<IMenuConfig> = [
 /**
  * 默认打开
  */
-export const MenuOpenKeysConfig = ['2', '3', 'XX-3', '4', '4-2', '5', '5-2', '6', '7', '8', '9', 'X', '10']
+export const MenuOpenKeysConfig = ['2', '3', 'XX-3', 'XX-3xs', '4', '4-2', '5', '5-2', '6', '7', '8', '9', 'X', '10']

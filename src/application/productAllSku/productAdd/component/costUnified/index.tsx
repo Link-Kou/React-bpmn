@@ -9,8 +9,6 @@ import {
     FormGroup,
     Grid,
     HelpBlock,
-    Input,
-    InputGroup,
     InputNumber,
     Panel,
     Radio,
@@ -38,11 +36,11 @@ export default class ProductCostUnified extends React.PureComponent<IProps> {
                         <Row>
                             <Col xs={6} sm={6} md={6}>
                                 <FormGroup>
-                                    <ControlLabel>是否显示最低价</ControlLabel>
+                                    <ControlLabel>价格显示方式</ControlLabel>
                                     <FormControl name="relatedPrice"
                                                  accepter={RadioGroup}>
-                                        <Radio value={1}>是</Radio>
-                                        <Radio value={0}>否</Radio>
+                                        <Radio value={0}>最低价</Radio>
+                                        <Radio value={1}>对比价</Radio>
                                     </FormControl>
                                 </FormGroup>
                             </Col>
@@ -51,8 +49,8 @@ export default class ProductCostUnified extends React.PureComponent<IProps> {
                                     <ControlLabel>支持销售模式</ControlLabel>
                                     <FormControl name="relatedPrice"
                                                  accepter={CheckboxGroup}>
-                                        <Checkbox value={1}>零售</Checkbox>
-                                        <Checkbox value={0}>批发</Checkbox>
+                                        <Checkbox value={0}>零售</Checkbox>
+                                        <Checkbox value={1}>批发</Checkbox>
                                     </FormControl>
                                 </FormGroup>
                             </Col>
@@ -63,39 +61,23 @@ export default class ProductCostUnified extends React.PureComponent<IProps> {
                                     <ControlLabel><span style={{color: 'red'}}>*</span>市场价</ControlLabel>
                                     <FormControl name="marketPrice" autocomplete="off" type="number"
                                                  disabled={false}
-                                                 max={999}
+                                                 max={999999}
                                                  min={0}
-                                                 postfix={'元/cm²'}
+                                                 postfix={'元'}
                                                  accepter={InputNumber}/>
                                 </FormGroup>
                             </Col>
                             <Col xs={6} sm={6} md={6}>
                                 <FormGroup>
-                                    <ControlLabel><span style={{color: 'red'}}>*</span>成本价</ControlLabel>
+                                    <ControlLabel><span style={{color: 'red'}}>*</span>优惠价</ControlLabel>
                                     <FormControl name="costPrice" autocomplete="off" type="number"
-                                                 disabled={true}
-                                                 max={999}
+                                                 max={999999}
                                                  min={0}
-                                                 accepter={(props) => (
-                                                     <InputGroup>
-                                                         <Input {...props}/>
-                                                         <InputGroup.Addon>元/m²</InputGroup.Addon>
-                                                     </InputGroup>
-                                                 )}/>
-                                    <HelpBlock tooltip={true}>
-                                        由纸板每层基本价格相加得出
-                                    </HelpBlock>
-                                </FormGroup>
-                            </Col>
-                            <Col xs={6} sm={6} md={6}>
-                                <FormGroup>
-                                    <ControlLabel><span style={{color: 'red'}}>*</span>成本加价</ControlLabel>
-                                    <FormControl name="costPriceMarkup" autocomplete="off" type="number"
-                                                 disabled={false}
-                                                 max={999}
-                                                 min={0}
-                                                 postfix={'元/cm²'}
+                                                 postfix={'元'}
                                                  accepter={InputNumber}/>
+                                    <HelpBlock tooltip={true}>
+                                        价格展示显示
+                                    </HelpBlock>
                                 </FormGroup>
                             </Col>
                         </Row>

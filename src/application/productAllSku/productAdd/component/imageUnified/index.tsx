@@ -21,14 +21,14 @@ export default class ProductImageUnified extends React.Component<IProps> {
         const {onChange} = this.props
         return (
             <>
-                <Panel header={'商品主图'} bordered={false} bodyFill={false}>
+                <Panel header={'详情主图'} bordered={false} bodyFill={false}>
                     <ImageUploaderLibraryGroup maxSize={5}
                                                onChange={(fileUrl) => {
                                                    onChange?.('main', fileUrl)
                                                }}
                                                fileUrl={[]}/>
                 </Panel>
-                <Panel header={'商品详情'} bordered={false} bodyFill={false}>
+                <Panel header={'详情列表图'} bordered={false} bodyFill={false}>
                     <ImageUploaderLibraryGroup maxSize={10}
                                                onChange={(fileUrl) => {
                                                    onChange?.('details', fileUrl)

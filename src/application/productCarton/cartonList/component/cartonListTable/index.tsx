@@ -1,12 +1,11 @@
 import * as React from 'react';
 import {Button, Dropdown, Table} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
-import {CellExpandedIndex} from '@component/table/cell';
 import TextSpan from '@component/textSpan';
 import HeadPanel from '@component/headPanel';
 import {RouterHistory} from '../../../../../router/routerBase';
 import './index.scss'
-import {HeaderCellMulti} from '@component/table';
+import {HeaderCellMulti,CellExpandedIndex} from '@component/table';
 import {IEnum, IReturnCartonProduct} from '../../../index.types';
 import {HooKCarousel} from './compose/hookCarousel';
 import {HookPrinting} from './compose/hookPrinting';

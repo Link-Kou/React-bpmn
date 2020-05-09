@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
-  上下布局
+ *  Grid 控件  上下布局
  */
 .app-grid-from > .rs-row {
   margin-bottom: 1rem; }
@@ -17,7 +17,7 @@
         margin-top: 0; }
 
 /**
-  左右布局
+ * Grid 控件 左右布局
  */
 .app-grid-inline-from > .rs-row .rs-col .rs-form-group {
   display: flex !important;
@@ -35,11 +35,6 @@
       display: flex;
       flex: 1; }
 
-#app-headPanel .app-grid-inline-from {
-  margin: 0; }
-  #app-headPanel .app-grid-inline-from > .rs-row .rs-col .rs-form-group {
-    margin: 0; }
-
 /*
   于Grid配合作用于FormGroup
   实现水平平分FormControl铺满效果
@@ -56,6 +51,11 @@
       width: 100%;
       display: flex;
       flex: 1; }
+
+.app-form-group-vertical .rs-form-group {
+  margin-top: 20px; }
+  .app-form-group-vertical .rs-form-group .rs-control-label {
+    margin-bottom: 8px; }
 
 /*
   Table多表头的实现

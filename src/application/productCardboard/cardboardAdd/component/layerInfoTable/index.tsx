@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Panel, Table} from 'rsuite';
-import {CellAlash} from '@component/table/cell';
+import {CellAlash} from '@component/table';
 import {SelectLayerCell} from './compone/hookCell';
 import {IBaseCorrugated, IBasePaper, IFormValue} from '../../../index.types';
 import {RefPanle} from '@component/refPanel';

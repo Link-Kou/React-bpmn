@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Button, ButtonToolbar, Dropdown, Table} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
-import {CellIndex} from '@component/table/cell';
+import {CellIndex} from '@component/table';
 import TextSpan from '@component/textSpan';
 import HeadPanel from '@component/headPanel';
 import './index.scss'
@@ -134,7 +134,8 @@ export default class MarketingProductTable extends React.Component {
         }
     ]
 
-    public render() {
+
+    private renderSelect() {
         return (
             <>
                 <HeadPanel hideBorderBottom={true} title={'产品列表'}>
@@ -147,7 +148,7 @@ export default class MarketingProductTable extends React.Component {
                         </Dropdown>
                     </div>
                 </HeadPanel>
-                <FlexCalcBox subHeight={125} Body={(e) => (
+                <FlexCalcBox Body={(e) => (
                     <Table
                         loading={false}
                         height={e}
@@ -156,6 +157,7 @@ export default class MarketingProductTable extends React.Component {
                         autoHeight={false}
                         bordered={true}
                         cellBordered={true}
+                        renderEmpty={() => (<div>空</div>)}
                         data={[
                             {
                                 index: '1'
@@ -175,6 +177,31 @@ export default class MarketingProductTable extends React.Component {
                         }
                     </Table>
                 )}/>
+            </>
+        )
+    }
+
+    private renderNoSelect() {
+        return (
+            <>
+                <HeadPanel hideBorderBottom={true} title={'产品列表'}/>
+                <FlexCalcBox Body={(h, w) => (
+                    <div style={{height: h}}>请点击营销方法</div>
+                )}/>
+            </>
+        )
+    }
+
+    public render() {
+        const select = '1'
+        return (
+            <>
+                {
+                    select === '1' ?
+                        this.renderNoSelect()
+                        :
+                        this.renderSelect()
+                }
             </>
         )
     }

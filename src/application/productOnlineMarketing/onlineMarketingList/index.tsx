@@ -21,16 +21,16 @@ export default class Index extends OnlineMarketingList {
                         <QueueAnim type={['left', 'right']}
                                    ease={['easeInOutQuad', 'easeInBack']}>
                             <div key='a'>
-                                <Col xs={16} sm={16} md={16}>
-                                    <BackColorPanel tableBordered={true}>
-                                        <MarketingProductTable/>
+                                <Col xs={10} sm={8} md={8} smHidden={true}>
+                                    <BackColorPanel>
+                                        <MarketingProgramList/>
                                     </BackColorPanel>
                                 </Col>
                             </div>
                             <div key='b'>
-                                <Col xs={8} sm={8} md={8} smHidden={true}>
-                                    <BackColorPanel>
-                                        <MarketingProgramList/>
+                                <Col xs={14} sm={24} md={16}>
+                                    <BackColorPanel tableBordered={true}>
+                                        <MarketingProductTable/>
                                     </BackColorPanel>
                                 </Col>
                             </div>

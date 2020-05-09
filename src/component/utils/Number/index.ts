@@ -1,3 +1,4 @@
+import _ from 'lodash';
 
 export default class Numbers {
 
@@ -26,6 +27,27 @@ export default class Numbers {
             return dv
         }
         return Number(value)
+    }
+
+    /**
+     * 是否为Number
+     * @param value
+     */
+    public static isNumber(value?: any): value is number | boolean {
+        return _.isFinite(Number(value));
+    }
+
+    /**
+     * 取整数
+     * @param value
+     * @param included true 向上舍入 ; false:向下舍入
+     * @param precision 精度
+     */
+    public static toInteger(value: any, included: boolean = false, precision: number = 0): number {
+        if (included) {
+            return _.ceil(value, precision)
+        }
+        return _.floor(value, precision)
     }
 
     /**

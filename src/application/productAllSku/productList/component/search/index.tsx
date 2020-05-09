@@ -13,7 +13,7 @@ import {
 } from 'rsuite';
 
 interface IProps {
-
+    show?:boolean
 }
 
 export default class ProductListSearch extends React.Component<IProps> {
@@ -96,18 +96,8 @@ export default class ProductListSearch extends React.Component<IProps> {
 
 export class ProductListSearchDrawer extends React.Component<IProps> {
 
-    public state = {
-        show: false
-    }
-
-    public setOpend() {
-        this.setState({
-            show: true
-        })
-    }
-
     public render() {
-        const {show} = this.state
+        const {show} = this.props
         return (
             <Drawer backdrop={false} size={'xs'} show={show} onHide={() => {
                 this.setState({

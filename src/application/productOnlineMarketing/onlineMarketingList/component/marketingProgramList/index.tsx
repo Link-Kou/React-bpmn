@@ -1,10 +1,11 @@
 import * as React from 'react';
 import {Button, Dropdown, Table} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
-import {CellIndex} from '@component/table/cell';
+import {CellIndex} from '@component/table';
 import TextSpan from '@component/textSpan';
 import HeadPanel from '@component/headPanel';
 import './index.scss'
+import {MarketingLadderPrice, MarketingOnePrice} from './compone';
 
 const {Column, HeaderCell, Cell} = Table;
 
@@ -46,18 +47,27 @@ export default class MarketingProgramList extends React.Component {
         }
     ]
 
+    public state = {
+        selectKey: ''
+    }
+
+    private _OnSelectOpen = (eventKey: any) => {
+        this.setState({
+            selectKey: eventKey
+        })
+    }
+
     public render() {
+        const {selectKey} = this.state
         return (
             <>
+                <MarketingOnePrice show={selectKey === 'onePrice'}/>
+                <MarketingLadderPrice show={selectKey === 'ladderPrice'}/>
                 <HeadPanel hideBorderBottom={true} title={'营销类型列表'}>
                     <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
-                        <Dropdown title={'产品管理'} trigger="click">
-                            <Dropdown.Item onSelect={() => {
-
-                            }}>新增一口价方案</Dropdown.Item>
-                            <Dropdown.Item onSelect={() => {
-
-                            }}>新增阶梯价方案</Dropdown.Item>
+                        <Dropdown title={'产品管理'} trigger="click" onSelect={this._OnSelectOpen}>
+                            <Dropdown.Item eventKey={'onePrice'}>新增一口价方案</Dropdown.Item>
+                            <Dropdown.Item eventKey={'ladderPrice'}>新增阶梯价方案</Dropdown.Item>
                             <Dropdown.Item>分类排序</Dropdown.Item>
                         </Dropdown>
                     </div>

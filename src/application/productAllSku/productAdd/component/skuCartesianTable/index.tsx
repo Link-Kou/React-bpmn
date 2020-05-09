@@ -2,11 +2,25 @@ import * as React from 'react';
 import {Grid, Panel, Table} from 'rsuite';
 import {CellAddReduce, CellIndex} from '@component/table';
 import {ImageUploaderLibraryGroup} from '@common/imageUploader';
+import {HookCellInputNumber} from './compone/hookCellInputNumber';
+import {utilsCrypto, utilsNumber} from '@utils/index';
 
 const {Column, HeaderCell, Cell} = Table;
 
 interface IProps {
-    data: Array<{ [x: string]: { name: string, val: string } }>
+    cellData: Array<{ [x: string]: { name: string, image?: boolean, value: { name: string, image: string | undefined } } }>
+}
+
+interface IState {
+    dataTable: Array<{
+        id?: string
+        disable?: boolean | string,
+        mainImage?: string,
+        numberStarts?: number | string,
+        numberStock?: number | string,
+        marketPrice?: number | string,
+        costPrice?: number | string
+    }>
 }
 
 /**
@@ -22,14 +36,14 @@ export default class ProductSkuParts extends React.Component<IProps> {
             HeaderCell: <HeaderCell>编辑</HeaderCell>,
             Cell: <CellAddReduce dataKey="disable" hide={'add'} delRow={this._onDelRow.bind(this)}/>,
             width: 65,
-            fixed: false,
+            fixed: 'left',
             resizable: false
         },
         {
             HeaderCell: <HeaderCell>禁用</HeaderCell>,
             Cell: <CellIndex dataKey="disable"/>,
             width: 95,
-            fixed: false,
+            fixed: 'left',
             resizable: false
         },
         {
@@ -38,60 +52,57 @@ export default class ProductSkuParts extends React.Component<IProps> {
                 {(rowData: any) => (
                     <ImageUploaderLibraryGroup maxSize={1}
                                                isDragDisabled={true}
-                                               fileUrl={['https://www.isofts.org/wp-content/uploads/001-1099.jpg']}/>
+                                               fileUrl={rowData.mainImage ? [rowData.mainImage] : []}/>
                 )}
             </Cell>,
             width: 150,
-            fixed: false,
-            resizable: false
-        },
-        {
-            HeaderCell: <HeaderCell>规格编码</HeaderCell>,
-            Cell: <Cell dataKey="specCode"/>,
-            width: 120,
-            fixed: false,
+            fixed: 'left',
             resizable: false
         },
         {
             HeaderCell: <HeaderCell>起卖数量</HeaderCell>,
-            Cell: <Cell dataKey="numberStarts"/>,
+            Cell: <HookCellInputNumber dataKey="numberStarts" max={999999999} min={0} isInt={true}
+                                       onSelectChange={this._onSelectChange.bind(this)}/>,
             width: 120,
             fixed: false,
             resizable: false
         },
         {
             HeaderCell: <HeaderCell>库存量</HeaderCell>,
-            Cell: <Cell dataKey="numberStarts"/>,
+            Cell: <HookCellInputNumber dataKey="numberStock" max={999999999} min={0} isInt={true}
+                                       onSelectChange={this._onSelectChange.bind(this)}/>,
             width: 120,
             fixed: false,
             resizable: false
         },
         {
             HeaderCell: <HeaderCell>市场价</HeaderCell>,
-            Cell: <Cell dataKey="marketPrice"/>,
+            Cell: <HookCellInputNumber dataKey="marketPrice" max={999999999} min={0} step={0.5} isInt={true}
+                                       onSelectChange={this._onSelectChange.bind(this)}/>,
             width: 120,
             fixed: false,
             resizable: false
         },
         {
-            HeaderCell: <HeaderCell>参考成本价</HeaderCell>,
-            Cell: <Cell dataKey="costPrice"/>,
+            HeaderCell: <HeaderCell>成本价</HeaderCell>,
+            Cell: <HookCellInputNumber dataKey="costPrice" max={999999999} min={0} step={0.5} isInt={true}
+                                       onSelectChange={this._onSelectChange.bind(this)}/>,
             width: 120,
             fixed: false,
             resizable: false
         }
     ]
 
-    public state = {
+    public state: IState = {
         dataTable: [
-            {
-                disable: '',
-                mainImage: '',
-                specCode: '123',
-                numberStarts: '',
-                marketPrice: '',
-                costPrice: ''
-            }
+            /* {
+                 disable: '',
+                 mainImage: '',
+                 numberStarts: '',
+                 numberStock: '',
+                 marketPrice: '',
+                 costPrice: ''
+             }*/
         ]
     }
 
@@ -99,6 +110,15 @@ export default class ProductSkuParts extends React.Component<IProps> {
 
     }
 
+    public _onSelectChange(rowIndex?: number, rowData?: any) {
+        const {dataTable} = this.state
+        if (utilsNumber.isNumber(rowIndex)) {
+            dataTable[rowIndex as number] = rowData
+        }
+        this.setState({
+            dataTable
+        })
+    }
 
     private _onDelRow(rowData: any, rowIndex: number) {
         const {dataTable} = this.state
@@ -113,58 +133,92 @@ export default class ProductSkuParts extends React.Component<IProps> {
      * @private
      */
     private _buildColumns() {
-        const {data} = this.props
-        if (Array.isArray(data)) {
-            const keys: Array<string> = Object.keys(data[0] ?? {});
+        const {cellData} = this.props
+        if (Array.isArray(cellData)) {
+            const keys: Array<string> = Object.keys(cellData[0] ?? {});
             const map: any = keys?.map((k, i, a) => {
                 return (
                     {
-                        HeaderCell: <HeaderCell>{data[0]?.[k]?.name}</HeaderCell>,
+                        HeaderCell: <HeaderCell>{cellData[0]?.[k]?.name}</HeaderCell>,
                         Cell: <Cell dataKey={k}/>,
                         width: 120,
                         fixed: false,
-                        resizable: true
+                        resizable: false
                     }
                 )
             });
             const newColumns = [...this.Columns]
-            newColumns.splice(2, 0, ...map);
+            newColumns.splice(3, 0, ...map);
             return newColumns;
         }
         return []
     }
 
-
+    /**
+     * 构建行数据
+     * @private
+     */
     private _buildRow() {
-        const {data} = this.props
+        const {cellData} = this.props
         const {dataTable} = this.state
         const rowdata: Array<any> = []
-        if (Array.isArray(data)) {
-            data.forEach((k, i, a) => {
+        if (Array.isArray(cellData)) {
+            cellData.forEach((k, i, a) => {
                 const keys: Array<string> = Object.keys(k);
                 const newdata = {}
+                const newdata2 = {
+                    mainImage: '',
+                    id: ''
+                }
+                const id: Array<string> = []
+                //kk 是列id
                 keys.forEach((kk, ki, ka) => {
-                    newdata[kk] = k[kk].val
+                    const name = k[kk].value.name;
+                    newdata[kk] = name
+                    id.push(name)
+                    if (k[kk].image) {
+                        newdata2.mainImage = k[kk].value.image ?? ''
+                    }
                 });
+                newdata2.id = utilsCrypto.MD5(id.sort().join(''))
                 const medata = {
+                    id: '',
                     disable: '',
                     mainImage: '',
-                    specCode: '',
                     numberStarts: '',
+                    numberStock: '',
                     marketPrice: '',
                     costPrice: '',
-                    ...newdata
+                    ...newdata,
+                    ...newdata2
                 }
                 rowdata.push(medata)
             });
         }
-        dataTable.map((k, i, a) => {
+        const newTableMap = rowdata?.map((k, i, a) => {
+            const index = dataTable.findIndex((dk, di, da) => k.id === dk?.id);
+            if (index > -1) {
+                const dataTableElement = dataTable[index];
+                if (dataTableElement) {
+                    return (
+                        {
+                            ...k,
+                            ...dataTableElement
+                        }
+                    )
+                }
+            } else {
+                return k
+            }
+        }) ?? [];
+        //合并行
+        /*dataTable.map((k, i, a) => {
             rowdata[i] = {
                 ...rowdata[i],
                 ...k
             }
-        })
-        return rowdata
+        })*/
+        return newTableMap
     }
 
     public render() {

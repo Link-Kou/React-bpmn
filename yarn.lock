@@ -1937,6 +1937,10 @@
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/@types/color-name/download/@types/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
 
+"@types/crypto-js@^3.1.45":
+  version "3.1.45"
+  resolved "https://registry.npm.taobao.org/@types/crypto-js/download/@types/crypto-js-3.1.45.tgz#d2ccd23ae926ff05e3a99b11945e0435185cc1f1"
+
 "@types/dom4@^2.0.1":
   version "2.0.1"
   resolved "https://registry.npm.taobao.org/@types/dom4/download/@types/dom4-2.0.1.tgz#506d5781b9bcab81bd9a878b198aec7dee2a6033"
@@ -4033,6 +4037,10 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
+
+crypto-js@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npm.taobao.org/crypto-js/download/crypto-js-4.0.0.tgz#2904ab2677a9d042856a2ea2ef80de92e4a36dcc"
 
 crypto-random-string@^1.0.0:
   version "1.0.0"
@@ -11258,9 +11266,9 @@ rsuite-table@^3.12.1:
     element-resize-event "^3.0.2"
     lodash "^4.17.5"
 
-rsuite@4.4.1:
-  version "4.4.1"
-  resolved "https://registry.npm.taobao.org/rsuite/download/rsuite-4.4.1.tgz#837f695f8288326d2d253752abf2e2eda5139a3a"
+rsuite@4.5.0:
+  version "4.5.0"
+  resolved "https://registry.npm.taobao.org/rsuite/download/rsuite-4.5.0.tgz#1a9556660c6b94cf339fc50166bf4762f30fcc4d"
   dependencies:
     "@babel/runtime" "^7.8.4"
     classnames ">=2.0.0"

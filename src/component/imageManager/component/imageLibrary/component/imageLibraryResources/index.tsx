@@ -85,12 +85,13 @@ export default class ImageLibraryResources extends React.Component<Iprops> {
             } else {
                 selectFileurl.push(fileurl)
             }
+        } else if (selectFileurl.length <= maxSize) {
+            selectFileurl.push(fileurl)
         } else if (maxSize <= 1) {
             this.setState({
                 selectFileurl: [fileurl]
             })
-        } else if (selectFileurl.length <= maxSize) {
-            selectFileurl.push(fileurl)
+            return;
         }
         this.setState({
             selectFileurl
@@ -159,7 +160,8 @@ export default class ImageLibraryResources extends React.Component<Iprops> {
                         lengthMenu={[{value: 10, label: 10}, {value: 20, label: 20}]}
                     />
                     <div style={{width: 140}}>
-                        <Button className={'app-rs-btn'} appearance={'primary'} onClick={() => {
+                        <Button className={'app-rs-btn'} appearance={'primary'} onClick={(event) => {
+                            event?.stopPropagation()
                             onSelect?.(selectFileurl)
                         }}>
                             使用选择图片

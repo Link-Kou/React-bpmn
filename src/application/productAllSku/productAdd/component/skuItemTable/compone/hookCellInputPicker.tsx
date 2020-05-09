@@ -1,28 +1,33 @@
 import * as React from 'react';
-import {InputPicker, Table} from 'rsuite';
-import {utilsObject, utilsString} from '@utils/index';
+import {InputPicker, Table, Alert} from 'rsuite';
+import {utilsNumber, utilsObject, utilsString} from '@utils/index';
 import _ from 'lodash';
+import {TableCellProps} from 'rsuite/lib/Table/TableCell';
 
 const {Cell} = Table;
 
-export interface ISpecifica {
+export interface ISpecifica extends TableCellProps {
 
-    datas: Array<any>
+    onDatas?(): Array<any>
 
     valueKey: string
 
+    /**
+     * 规格重复
+     */
+    onSpecRepeat?(): boolean
+
     onSelectChange?(value: any): void
 
-    [x: string]: any
 }
 
 
 export const HookCellInputPicker = (props: ISpecifica) => {
-    const {datas, onSelectChange, rowData, rowIndex, valueKey} = props
+    const {onDatas, onSelectChange, rowData, rowIndex, valueKey, onSpecRepeat} = props
     const [select, setSelect] = React.useState();
     //所有可以选择的列表
     const seen = new Set();
-    const newdatas: Array<any> = datas?.map((k: any, i: any, a: any) => {
+    const newdatas: Array<any> | undefined = onDatas?.()?.map((k: any, i: any, a: any) => {
         const key = utilsObject.getKey({
             key: 'label',
             vlKey: valueKey
@@ -34,7 +39,7 @@ export const HookCellInputPicker = (props: ISpecifica) => {
             }
         }
         return null;
-    }).filter((k, i, a) => {
+    })?.filter((k, i, a) => {
         if (k) {
             if (seen.has(k.value)) {
                 return false;
@@ -46,9 +51,13 @@ export const HookCellInputPicker = (props: ISpecifica) => {
     });
     React.useEffect(() => {
         if (utilsString.isBlank(select)) {
-            const rowDatum = datas[rowIndex];
-            rowDatum[valueKey] = select
-            onSelectChange?.(rowDatum)
+            if (utilsNumber.isNumber(rowIndex)) {
+                const rowDatum = onDatas?.()?.[rowIndex];
+                if (rowDatum) {
+                    rowDatum[valueKey] = select
+                    onSelectChange?.(rowDatum)
+                }
+            }
         }
     }, [select])
     return (
@@ -62,13 +71,23 @@ export const HookCellInputPicker = (props: ISpecifica) => {
                 //container={container}
                 //defaultValue={rowData[dataKey][valueKey]}
                 maxHeight={150}
-                value={rowData[valueKey]}
-                data={newdatas}
+                value={rowData?.[valueKey]}
+                data={newdatas ?? []}
                 onClean={() => {
                     setSelect('')
                 }}
                 onSelect={(value) => {
-                    setSelect(value)
+                    const b = onSpecRepeat?.() ?? true;
+                    if (b) {
+                        setSelect(value)
+                    } else {
+                        const number = onDatas?.()?.findIndex((k, i, a) => k.name === value);
+                        if (number === -1) {
+                            setSelect(value)
+                        } else {
+                            Alert.warning('规格名称重复')
+                        }
+                    }
                     //onSelect?.(value)
                 }}/>
         </Cell>

@@ -56,24 +56,33 @@ export function ControllerAlashCell(props: IControllerAlashnCell) {
     return suDiv();
 }
 
+interface IControllerIndexCell extends IProps {
+    onSelectChange?: (rowIndex: number, checked: boolean) => void
+    disPlayNumber?: boolean
+}
 
 /**
  * 编号列
  * @param props
  * @constructor
  */
-export function ControllerIndexCell(props: IProps) {
-    const {rowIndex} = props;
+export function ControllerIndexCell(props: IControllerIndexCell) {
+    const {rowIndex, onSelectChange, disPlayNumber, rowData, dataKey} = props;
+    let checked = false
+    if (dataKey) {
+        checked = rowData[dataKey] ?? false
+    }
     return (
         <Cell {...props}>
             <Checkbox
                 style={{marginLeft: 0}}
                 inline={true}
-                checked={false}
-                onChange={() => {
+                checked={checked}
+                onChange={(value, checke) => {
+                    onSelectChange?.(rowIndex ?? -1, checke)
                 }}
             >
-                {rowIndex ?? rowIndex}
+                {disPlayNumber ? rowIndex ?? '' : ''}
             </Checkbox>
         </Cell>
     )

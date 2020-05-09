@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Col, Grid, Row} from 'rsuite';
 import TextSpan from '@component/textSpan';
+import './index.scss'
 
 interface IProps {
     title?: any

@@ -1,17 +1,14 @@
 import * as React from 'react';
-import {Button, ButtonToolbar, Dropdown, Table} from 'rsuite';
+import {Button, ButtonToolbar, Table} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
-import {CellExpandedIndex} from '@component/table/cell';
+import {CellExpandedIndex, HeaderCellMulti} from '@component/table';
 import TextSpan from '@component/textSpan';
-import HeadPanel from '@component/headPanel';
 import {RouterHistory} from '../../../../../router/routerBase';
 import './index.scss'
 import {IReturnCardboardProduct} from '../../../index.types';
-import {HeaderCellMulti} from '@component/table';
 import {HooKRowExpanded} from './compose/hookRowExpanded';
 import {HooKCarousel} from './compose/hookCarousel';
 import {HookCarousel} from './compose/hookListTable';
-import {RouterPath} from '../../../../../router/routerPath';
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
 
@@ -218,14 +215,6 @@ export default class CardboardListTable extends React.Component<IProps> {
         const {data, pages, total, expandedRowKeys, loading} = this.state
         return (
             <>
-                <HeadPanel hideBorderBottom={true} title={'纸板产品列表'}>
-                    <Dropdown title={'产品管理'} trigger="click" onSelect={(e) => {
-                        RouterHistory.push( RouterPath.CardboardAdd)
-                    }}>
-                        <Dropdown.Item>新增产品</Dropdown.Item>
-                        <Dropdown.Item>分类排序</Dropdown.Item>
-                    </Dropdown>
-                </HeadPanel>
                 <FlexCalcBox Body={(h, w) => (
                     <>
                         <Table

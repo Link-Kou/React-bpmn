@@ -15,8 +15,7 @@ export const RouterHistory: IHistory = createHashHistory({
     //离开页面提示
     getUserConfirmation: function (message: string, callback: (result: boolean) => void) {
         //需要配合Prompt使用
-        // eslint-disable-next-line no-restricted-globals
-        if (confirm(message)) {
+        if (window.confirm(message)) {
             callback(true);
         } else {
             callback(false);

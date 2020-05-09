@@ -63,7 +63,8 @@ export default class ImageLibrary extends React.Component<Iprops> {
         itemsPerPage: 10
     };
 
-    public _close = () => {
+    public _close = (e?: any) => {
+        e?.stopPropagation();
         this.setState({
             navActiveKey: 'library',
             files: [],
@@ -153,8 +154,11 @@ export default class ImageLibrary extends React.Component<Iprops> {
                    onHide={this._close}
             >
                 <Modal.Header>
-                    <Modal.Title>
-                        <Nav appearance={'subtle'} activeKey={navActiveKey} onSelect={(ek, ev) => {
+                    <Modal.Title onClick={(event: any) => {
+                        event?.stopPropagation()
+                    }}>
+                        <Nav appearance={'subtle'} activeKey={navActiveKey} onSelect={(ek, event) => {
+                            event?.stopPropagation()
                             this.setState({
                                 navActiveKey: ek
                             })
@@ -164,7 +168,9 @@ export default class ImageLibrary extends React.Component<Iprops> {
                         </Nav>
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body onClick={(event: any) => {
+                    event?.stopPropagation()
+                }} style={{marginTop: 0, paddingTop: 30}}>
                     <div style={{display: navActiveKey === 'uploader' ? 'block' : 'none'}}>
                         <ImageLibraryUploader action={action}/>
                     </div>

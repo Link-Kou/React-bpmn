@@ -350,7 +350,7 @@
     // error; disallow redundant return statements
     "no-useless-return": 2,
     // 禁用 Alert
-    "no-alert": "warn",
+    "no-alert": "off",
     // 禁用 Script URL
     "no-script-url": 2,
     // error; 对数字使用 parseInt 并且总是带上类型转换的基数
@@ -378,7 +378,7 @@
     // error; 禁止变量声明与外层作用域的变量同名
     "no-shadow": "error",
     // error; 禁用特定的全局变量
-    "no-restricted-globals": "warn",
+    "no-restricted-globals": "error",
     // error; js关键字和保留字不能作为函数名或者变量名
     "no-shadow-restricted-names": "error",
     // error; 禁止label名称和var相同

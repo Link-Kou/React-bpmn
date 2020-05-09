@@ -1,5 +1,5 @@
 /**
-  上下布局
+ *  Grid 控件  上下布局
  */
 .app-grid-from {
   > .rs-row {
@@ -31,7 +31,7 @@
 }
 
 /**
-  左右布局
+ * Grid 控件 左右布局
  */
 .app-grid-inline-from {
   > .rs-row {
@@ -66,20 +66,6 @@
   }
 }
 
-#app-headPanel {
-  .app-grid-inline-from {
-    margin: 0;
-
-    > .rs-row {
-      .rs-col {
-        .rs-form-group {
-          margin: 0;
-        }
-      }
-    }
-  }
-}
-
 
 /*
   于Grid配合作用于FormGroup
@@ -101,6 +87,17 @@
       width: 100%;
       display: flex;
       flex: 1;
+    }
+  }
+}
+
+
+.app-form-group-vertical {
+  & .rs-form-group {
+    margin-top: 20px;
+
+    & .rs-control-label {
+      margin-bottom: 8px;
     }
   }
 }

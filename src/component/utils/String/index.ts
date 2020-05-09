@@ -23,7 +23,7 @@ export default class Strings {
      * @param value
      * @return 如果 value 非字符串，那么返回 true，否则返回 false
      */
-    public static isBlank(value: any): boolean {
+    public static isBlank(value?: any): value is string | boolean {
         return _.isString(value)
     }
 

@@ -22,53 +22,15 @@ interface IState {
             order: number
         }>
     }>
+    height: number
 }
+
 
 /**
  * 商品规格
  */
 export default class ProductSpecificationGroup extends React.Component<IProps> {
 
-
-    public state: IState = {
-        tabledata: [
-            {
-                id: '1',
-                key: '1',
-                value: [{
-                    id: '',
-                    key: '',
-                    value: '',
-                    order: 0
-                }, {
-                    id: '',
-                    key: '',
-                    value: '',
-                    order: 0
-                }, {
-                    id: '',
-                    key: '',
-                    value: '',
-                    order: 0
-                }, {
-                    id: '',
-                    key: '',
-                    value: '',
-                    order: 0
-                }]
-            },
-            {
-                id: '2',
-                key: '2',
-                value: [{
-                    id: '',
-                    key: '',
-                    value: '',
-                    order: 0
-                }]
-            }
-        ]
-    }
 
     public Columns = [
         {
@@ -113,20 +75,6 @@ export default class ProductSpecificationGroup extends React.Component<IProps> {
             fixed: false,
             resizable: false
         },
-        /*{
-            HeaderCell: <HeaderCell>规格值</HeaderCell>,
-            Cell: <Cell dataKey="valuess" style={{backgroundColor: 'rgba(251,251,251,0.83)'}}>
-                {(rowData: any, rowIndex: number) => (
-                    <div style={{height: 400, backgroundColor: 'red'}}>
-
-                    </div>
-                )}
-            </Cell>,
-            flexGrow: 1,
-            width: 350,
-            fixed: false,
-            resizable: false
-        },*/
         {
             HeaderCell: <HeaderCell>顺序</HeaderCell>,
             Cell: <CellSortUpDown dataKey="id" maxRow={() => 10}
@@ -137,6 +85,48 @@ export default class ProductSpecificationGroup extends React.Component<IProps> {
         }
     ]
 
+    public state: IState = {
+        tabledata: [
+            {
+                id: '1',
+                key: '1',
+                value: [{
+                    id: '',
+                    key: '',
+                    value: '',
+                    order: 0
+                }, {
+                    id: '',
+                    key: '',
+                    value: '',
+                    order: 0
+                }, {
+                    id: '',
+                    key: '',
+                    value: '',
+                    order: 0
+                }, {
+                    id: '',
+                    key: '',
+                    value: '',
+                    order: 0
+                }]
+            },
+            {
+                id: '2',
+                key: '2',
+                value: [{
+                    id: '',
+                    key: '',
+                    value: '',
+                    order: 0
+                }]
+            }
+        ],
+        height: 0
+    }
+
+    private _Height = 0
 
     private _onProductSpecifiChange(rowindexs: number, value: Array<{ id: string, key: string, value: string, order: number }>) {
         const {tabledata} = this.state
@@ -146,42 +136,55 @@ export default class ProductSpecificationGroup extends React.Component<IProps> {
         })
     }
 
+
     componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<{}>, snapshot?: any) {
-        //TODO Table row 有计算BUG
+        if (this.state.height !== this._Height) {
+            this.setState({
+                height: this._Height
+            }, () => {
+                this._Height = 0
+            })
+        }
     }
 
     public render() {
+        const {height} = this.state
         return (
             <Panel header={'规格与包装'} bordered={false} bodyFill={false}>
                 <Grid style={{padding: 10}} fluid={true}>
-                    <Table
-                        loading={false}
-                        headerHeight={65}
-                        wordWrap={false}
-                        //height={650}
-                        autoHeight={true}
-                        hover={false}
-                        bordered={true}
-                        cellBordered={false}
-                        data={this.state.tabledata}
-                        rowHeight={(rowData: any) => {
-                            if (utilsObject.isNotEmpty(rowData)) {
-                                const length = rowData?.value?.length ?? 0
-                                return 155 + length * 65
+                    <div style={{height: height, overflow: 'hidden'}}>
+                        <Table
+                            loading={false}
+                            headerHeight={65}
+                            wordWrap={false}
+                            //height={650}
+                            autoHeight={true}
+                            hover={false}
+                            bordered={true}
+                            cellBordered={false}
+                            data={this.state.tabledata}
+                            rowHeight={(rowData: any) => {
+                                if (utilsObject.isNotEmpty(rowData)) {
+                                    const length = rowData?.value?.length ?? 0
+                                    const heightitem = 65 + 65 + length * 85 + 20
+                                    this._Height += heightitem
+                                    return heightitem
+                                }
+                                this._Height += 75
+                                return 75
+                            }}
+                        >
+                            {
+                                this.Columns.map((k: any, i, a) => (
+                                    <Column width={k.width} align="center" flexGrow={k.flexGrow} colSpan={k.colSpan}
+                                            verticalAlign={'middle'} fixed={k.fixed} resizable={k.resizable}>
+                                        {k.HeaderCell}
+                                        {k.Cell}
+                                    </Column>
+                                ))
                             }
-                            return 75
-                        }}
-                    >
-                        {
-                            this.Columns.map((k: any, i, a) => (
-                                <Column width={k.width} align="center" flexGrow={k.flexGrow} colSpan={k.colSpan}
-                                        verticalAlign={'middle'} fixed={k.fixed} resizable={k.resizable}>
-                                    {k.HeaderCell}
-                                    {k.Cell}
-                                </Column>
-                            ))
-                        }
-                    </Table>
+                        </Table>
+                    </div>
                 </Grid>
             </Panel>
         )

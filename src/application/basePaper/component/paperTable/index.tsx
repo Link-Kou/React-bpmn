@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Button, Dropdown, Panel, Table, Tag} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
-import {CellIndex, CellTextSpan} from '@component/table/cell';
+import {CellIndex, CellTextSpan} from '@component/table';
 import HeadPanel from '@component/headPanel';
 import {PaperAddEditModel} from '../index';
 import {IArrayDatas, IFormValue} from '../../index.types';

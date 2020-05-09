@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Button, Table} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
-import {CellIndex} from '@component/table/cell';
+import {CellIndex} from '@component/table';
 import TextSpan from '@component/textSpan';
 
 const {Column, HeaderCell, Cell} = Table;

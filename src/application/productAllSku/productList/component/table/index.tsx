@@ -99,11 +99,11 @@ export default class Index extends React.Component {
 
     public render() {
         return (
-            <FlexCalcBox subHeight={120} Body={(e: number) => (
+            <FlexCalcBox Body={(e: number) => (
                 <>
                     <Table
                         loading={this.state.loading}
-                        height={e - 50}
+                        height={e - 65}
                         rowHeight={55}
                         autoHeight={false}
                         bordered={true}

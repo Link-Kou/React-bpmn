@@ -2,18 +2,21 @@ import * as React from 'react';
 import QueueAnim from 'rc-queue-anim';
 
 interface IProps {
-    padding?: number,
-    style?: React.CSSProperties;
+    padding?: number
+
+    subHeight?: number
+
+    style?: React.CSSProperties
 }
 
 export default class LongPanel extends React.Component<IProps> {
 
     public render() {
-        const {padding, style} = this.props
+        const {padding, style, subHeight} = this.props
         return (
             <div id={'app-longPanel'}
                  style={{
-                     height: '100%',
+                     height: `calc(100% - ${subHeight ?? 0}px)`,
                      //flex: 1,
                      //flexDirection: 'column',
                      overflow: 'auto',

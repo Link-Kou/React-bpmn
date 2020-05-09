@@ -1,13 +1,9 @@
 import * as React from 'react';
-import {Button, ButtonToolbar, Col, Dropdown, Grid, Row} from 'rsuite';
-//import {createHashHistory} from 'history';
+import {Dropdown, Icon} from 'rsuite';
 import {ProductListSearchDrawer} from '../search';
 import {RouterHistory} from '../../../../../router/routerBase';
-import {Prompt} from 'react-router';
-import {RouterPath} from "../../../../../router/routerPath";
-
-//创建路由方式
-//const history = createHashHistory()
+import {RouterPath} from '../../../../../router/routerPath';
+import HeadPanel from '@component/headPanel';
 
 
 interface IProps {
@@ -16,66 +12,36 @@ interface IProps {
 
 export default class RedenvelopeTableList extends React.Component<IProps> {
 
-    public _ProductListSearchDrawer: ProductListSearchDrawer | undefined
-
     public state = {
-        data: [],
-        loading: false,
-        show: false,
-        userId: '',
-        formValue: {
-            productType: [
-                {
-                    value: '123',
-                    label: '123',
-                    children: [
-                        {
-                            value: '456',
-                            label: '456',
-                            children: []
-                        }
-                    ]
-                }
-            ],
-            productStatus: [
-                {
-                    value: '1231',
-                    label: '123123'
-                }
-            ]
+        eventKey: ''
+    }
+
+    private _onSelect = (eventKey: string) => {
+        switch (eventKey) {
+            case 'new':
+                RouterHistory.push(RouterPath.ProductAllSkuAdd)
+                break
+            default:
+                this.setState({
+                    eventKey
+                })
         }
     }
 
 
     public render() {
-
+        const {eventKey} = this.state
         return (
-            <div style={{padding: '5px 0px'}}>
-                <Prompt message="Are you sure you want to leave?"/>
-                <Grid fluid={true}>
-                    <Row>
-                        <Col xs={6} sm={6} md={6}>
-                            <Dropdown title="排序方式">
-                                <Dropdown.Item>时间</Dropdown.Item>
-                            </Dropdown>
-                        </Col>
-                        <Col xs={18} sm={18} md={18} xsHidden={true} smHidden={true}>
-                            <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
-                                <ButtonToolbar>
-                                    <Button onClick={() => {
-                                        this._ProductListSearchDrawer?.setOpend()
-                                    }}>搜索</Button>
-                                    <Button>上架</Button>
-                                    <Button>下架</Button>
-                                    <Button appearance="primary"
-                                            onClick={() => RouterHistory.push(RouterPath.ProductAllSkuAdd)}>新增产品</Button>
-                                </ButtonToolbar>
-                            </div>
-                        </Col>
-                    </Row>
-                </Grid>
-                <ProductListSearchDrawer ref={(ref: any) => this._ProductListSearchDrawer = ref}/>
-            </div>
+            <HeadPanel hideBorderBottom={true} title={'辅料产品列表'}>
+                <Dropdown title={<div>排序：<b>时间升序</b></div>} noCaret={true}>
+                    <Dropdown.Item icon={<Icon icon="angle-up"/>}>时间升序</Dropdown.Item>
+                </Dropdown>
+                <Dropdown title={'产品管理'} trigger="click" onSelect={this._onSelect}>
+                    <Dropdown.Item eventKey={'new'}>新增产品</Dropdown.Item>
+                    <Dropdown.Item eventKey={'search'}>产品搜索</Dropdown.Item>
+                </Dropdown>
+                <ProductListSearchDrawer show={eventKey === 'search'}/>
+            </HeadPanel>
         )
     }
 

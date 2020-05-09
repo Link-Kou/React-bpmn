@@ -16,7 +16,7 @@ import ProductSpecification from './component/specification';
 export default class Index extends ProductAllSku {
 
     public state = {
-        data: []
+        cellData: []
     }
 
     componentDidMount(): void {
@@ -41,7 +41,7 @@ export default class Index extends ProductAllSku {
                         </div>
                     </HeadPanel>
                     <LoadPanel hideLoader={true} outrender={true} queueAnim={false}>
-                        <LongPanel>
+                        <LongPanel subHeight={65}>
                             <Container>
                                 <Header/>
                                 <Content style={{overflow: 'auto', padding: '0 20px'}}>
@@ -49,10 +49,10 @@ export default class Index extends ProductAllSku {
                                     <ProductImageUnified/>
                                     <ProductSku onChange={(data) => {
                                         this.setState({
-                                            data
+                                            cellData:data
                                         })
                                     }}/>
-                                    <ProductSkuParts data={this.state.data}/>
+                                    <ProductSkuParts cellData={this.state.cellData}/>
                                     <ProductCostUnified/>
                                     <ProductSpecification/>
                                 </Content>

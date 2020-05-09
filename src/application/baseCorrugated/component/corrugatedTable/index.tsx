@@ -1,12 +1,11 @@
 import * as React from 'react';
 import {Button, Dropdown, Panel, Table, Tag} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
-import {CellIndex, CellTextSpan} from '@component/table/cell';
+import {CellIndex, CellTextSpan,HeaderCellMulti} from '@component/table';
 import TextSpan from '@component/textSpan';
 import HeadPanel from '@component/headPanel';
 import BaseCorrugatedAddEdit from '../corrugatedAddEdit';
 import {IFormValue, IArrayDatas, EnumsMakeMode} from '../../index.types';
-import {HeaderCellMulti} from '@component/table';
 
 
 const {Column, HeaderCell, Cell, Pagination} = Table;

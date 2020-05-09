@@ -1,8 +1,11 @@
 import * as React from 'react';
-import {Col, Grid, Row} from 'rsuite';
+import {Container, Content, Dropdown, Footer, Header} from 'rsuite';
 import CardboardListTable from './component/cardboardListTable';
 import BackColorPanel from '@component/backColorPanel';
 import CardboardList from './cardboardList';
+import HeadPanel from '@component/headPanel';
+import {RouterHistory} from '../../../router/routerBase';
+import {RouterPath} from '../../../router/routerPath';
 
 
 export default class Index extends CardboardList {
@@ -11,15 +14,23 @@ export default class Index extends CardboardList {
     public render() {
         return (
             <>
-                <Grid fluid={true}>
-                    <Row>
-                        <Col xs={24} sm={24} md={24}>
-                            <BackColorPanel tableBordered={true}>
-                                <CardboardListTable onLoadTableData={this.handlersLoadCardboardProductPage}/>
-                            </BackColorPanel>
-                        </Col>
-                    </Row>
-                </Grid>
+                <BackColorPanel tableBordered={true}>
+                    <Container>
+                        <Header>
+                            <HeadPanel hideBorderBottom={true} title={'纸板产品列表'}>
+                                <Dropdown title={'产品管理'} trigger="click" onSelect={(e) => {
+                                    RouterHistory.push(RouterPath.CardboardAdd)
+                                }}>
+                                    <Dropdown.Item>新增产品</Dropdown.Item>
+                                </Dropdown>
+                            </HeadPanel>
+                        </Header>
+                        <Content>
+                            <CardboardListTable onLoadTableData={this.handlersLoadCardboardProductPage}/>
+                        </Content>
+                        <Footer/>
+                    </Container>
+                </BackColorPanel>
             </>
         )
     }
