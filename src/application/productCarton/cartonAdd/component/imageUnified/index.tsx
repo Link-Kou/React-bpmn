@@ -7,12 +7,7 @@ interface IProps {
 
     formValue: IFormValue
 
-    /**
-     * 文件改变
-     * @param type
-     * @param fileUrl
-     */
-    onChange?(type: 'main' | 'details', fileUrl: Array<string>): void
+    onChange?(data: IFormValue): void
 }
 
 export default class CartonAddImageUnified extends React.Component<IProps> {
@@ -26,14 +21,16 @@ export default class CartonAddImageUnified extends React.Component<IProps> {
                 <Panel header={'商品主图'} bordered={false} bodyFill={false}>
                     <ImageUploaderLibraryGroup maxSize={5}
                                                onChange={(fileUrl) => {
-                                                   onChange?.('main', fileUrl)
+                                                   formValue.images.main = fileUrl
+                                                   onChange?.(formValue)
                                                }}
                                                fileUrl={formValue?.images?.main ?? []}/>
                 </Panel>
                 <Panel header={'商品详情'} bordered={false} bodyFill={false}>
                     <ImageUploaderLibraryGroup maxSize={10}
                                                onChange={(fileUrl) => {
-                                                   onChange?.('details', fileUrl)
+                                                   formValue.images.details = fileUrl
+                                                   onChange?.(formValue)
                                                }}
                                                fileUrl={formValue?.images?.details ?? []}/>
                 </Panel>

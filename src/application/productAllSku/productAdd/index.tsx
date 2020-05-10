@@ -11,12 +11,14 @@ import ProductInfoUnified from './component/infoUnified';
 import ProductImageUnified from './component/imageUnified';
 import ProductCostUnified from './component/costUnified';
 import ProductSpecification from './component/specification';
+import {IStateFormValue, IFormValue} from '../index.types';
 
 
 export default class Index extends ProductAllSku {
 
     public state = {
-        cellData: []
+        cellData: [],
+        formValue: {...IStateFormValue}
     }
 
     componentDidMount(): void {
@@ -24,7 +26,20 @@ export default class Index extends ProductAllSku {
 
     }
 
+
+    /**
+     * 参数改变
+     * @param formValue
+     * @private
+     */
+    private _onChange = async (formValue: IFormValue) => {
+        this.setState({
+            formValue
+        })
+    }
+
     public render() {
+        const {formValue} = this.state
         return (
             <>
                 <BackColorPanel style={{height: '100%'}}>
@@ -45,11 +60,13 @@ export default class Index extends ProductAllSku {
                             <Container>
                                 <Header/>
                                 <Content style={{overflow: 'auto', padding: '0 20px'}}>
-                                    <ProductInfoUnified/>
-                                    <ProductImageUnified/>
+                                    <ProductInfoUnified formValue={formValue}
+                                                        onChange={this._onChange}/>
+                                    <ProductImageUnified formValue={formValue}
+                                                         onChange={this._onChange}/>
                                     <ProductSku onChange={(data) => {
                                         this.setState({
-                                            cellData:data
+                                            cellData: data
                                         })
                                     }}/>
                                     <ProductSkuParts cellData={this.state.cellData}/>

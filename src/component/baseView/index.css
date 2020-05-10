@@ -1,6 +1,7 @@
 @charset "UTF-8";
 /**tab框高度**/
 /**logo高度**/
+/**菜单背景颜色*/
 .app-base {
   display: flex;
   height: 100%;

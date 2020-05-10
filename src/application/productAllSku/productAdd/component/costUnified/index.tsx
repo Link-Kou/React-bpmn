@@ -15,8 +15,12 @@ import {
     RadioGroup,
     Row
 } from 'rsuite'
+import {IFormValue} from '../../../index.types';
+import TextRequired from '@component/textRequired';
 
 interface IProps {
+    formValue?: IFormValue
+
     onChangeFormValue?(data: any): void
 }
 
@@ -25,10 +29,11 @@ export default class ProductCostUnified extends React.PureComponent<IProps> {
     public state = {}
 
     public render() {
+        const {formValue: _formValue} = this.props
         return (
             <Panel header={'成本信息'}>
                 <Form fluid={true}
-                      formValue={{}}
+                      formValue={_formValue}
                       layout="inline"
                       onChange={() => {
                       }}>
@@ -37,9 +42,9 @@ export default class ProductCostUnified extends React.PureComponent<IProps> {
                             <Col xs={6} sm={6} md={6}>
                                 <FormGroup>
                                     <ControlLabel>价格显示方式</ControlLabel>
-                                    <FormControl name="relatedPrice"
+                                    <FormControl name="priceMode"
                                                  accepter={RadioGroup}>
-                                        <Radio value={0}>最低价</Radio>
+                                        <Radio value={0}>优惠价</Radio>
                                         <Radio value={1}>对比价</Radio>
                                     </FormControl>
                                 </FormGroup>
@@ -47,7 +52,7 @@ export default class ProductCostUnified extends React.PureComponent<IProps> {
                             <Col xs={6} sm={6} md={6}>
                                 <FormGroup>
                                     <ControlLabel>支持销售模式</ControlLabel>
-                                    <FormControl name="relatedPrice"
+                                    <FormControl name="salesModel"
                                                  accepter={CheckboxGroup}>
                                         <Checkbox value={0}>零售</Checkbox>
                                         <Checkbox value={1}>批发</Checkbox>
@@ -58,8 +63,8 @@ export default class ProductCostUnified extends React.PureComponent<IProps> {
                         <Row>
                             <Col xs={6} sm={6} md={6}>
                                 <FormGroup>
-                                    <ControlLabel><span style={{color: 'red'}}>*</span>市场价</ControlLabel>
-                                    <FormControl name="marketPrice" autocomplete="off" type="number"
+                                    <TextRequired accepter={ControlLabel}>市场价</TextRequired>
+                                    <FormControl name="marketPrice"
                                                  disabled={false}
                                                  max={999999}
                                                  min={0}
@@ -69,8 +74,8 @@ export default class ProductCostUnified extends React.PureComponent<IProps> {
                             </Col>
                             <Col xs={6} sm={6} md={6}>
                                 <FormGroup>
-                                    <ControlLabel><span style={{color: 'red'}}>*</span>优惠价</ControlLabel>
-                                    <FormControl name="costPrice" autocomplete="off" type="number"
+                                    <TextRequired accepter={ControlLabel}>优惠价</TextRequired>
+                                    <FormControl name="preferentialPrice"
                                                  max={999999}
                                                  min={0}
                                                  postfix={'元'}

@@ -8,11 +8,11 @@ const {Column, HeaderCell, Cell} = Table;
 
 interface IProps {
 
-    rowdatas: Array<{ id: string, key: string, value: string, order: number }>,
+    rowdatas?: Array<{ id: string, key: string, value: string, order: number }>,
 
-    rowindexs: number
+    rowindexs?: number
 
-    onChange?(rowindexs: number, value: Array<{ id: string, key: string, value: string, order: number }>): void
+    onChange?(rowindexs?: number, value?: Array<{ id: string, key: string, value: string, order: number }>): void
 
 }
 
@@ -28,7 +28,8 @@ export default class ProductSpecificationItem extends React.Component<IProps> {
                     <span>名称</span>
                 </div>
             </HeaderCell>,
-            Cell: <CellAddReduce dataKey="id" mainRowHideDel={true} addrow={this._addRow.bind(this)} delRow={this._delRow.bind(this)}/>,
+            Cell: <CellAddReduce dataKey="id" mainRowHideDel={true} addrow={this._addRow.bind(this)}
+                                 delRow={this._delRow.bind(this)}/>,
             colSpan: 2,
             width: 85,
             fixed: false,
@@ -41,6 +42,8 @@ export default class ProductSpecificationItem extends React.Component<IProps> {
                     <Input defaultValue={rowData.key}
                            style={{width: '100%'}}
                            onChange={(e) => {
+                               rowData.key = e
+                               this._buildData()
                            }}/>
                 )}
             </Cell>,
@@ -55,6 +58,8 @@ export default class ProductSpecificationItem extends React.Component<IProps> {
                     <Input defaultValue={rowData.key}
                            style={{width: '100%'}}
                            onChange={(e) => {
+                               rowData.value = e
+                               this._buildData()
                            }}/>
                 )}
             </Cell>,
@@ -65,9 +70,12 @@ export default class ProductSpecificationItem extends React.Component<IProps> {
         },
         {
             HeaderCell: <HeaderCell>主体显示</HeaderCell>,
-            Cell: <Cell dataKey="value">
+            Cell: <Cell dataKey="main">
                 {(rowData: any) => (
-                    <Checkbox/>
+                    <Checkbox checked={rowData.main} onChange={(value, checked, event) => {
+                        rowData.main = checked
+                        this._buildData()
+                    }}/>
                 )}
             </Cell>,
             width: 55,
@@ -76,16 +84,21 @@ export default class ProductSpecificationItem extends React.Component<IProps> {
         },
         {
             HeaderCell: <HeaderCell>顺序</HeaderCell>,
-            Cell: <CellSortUpDown dataKey="id" maxRow={this._getMax.bind(this)} sortRow={this._sortRow.bind(this)}/>,
-            width: 65,
+            Cell: <CellSortUpDown dataKey="order" maxRow={this._getMax.bind(this)} sortRow={this._sortRow.bind(this)}/>,
+            width: 75,
             fixed: false,
             resizable: false
         }
     ]
 
 
+    private _buildData() {
+        const {rowdatas, rowindexs, onChange} = this.props
+        onChange?.(rowindexs, rowdatas)
+    }
+
     private _getMax() {
-        return this.props.rowdatas.length
+        return this.props?.rowdatas?.length ?? 0
     }
 
     /**
@@ -109,7 +122,7 @@ export default class ProductSpecificationItem extends React.Component<IProps> {
      */
     public _delRow(rowData: any, rowIndex: number) {
         const {rowdatas, rowindexs, onChange} = this.props
-        rowdatas.splice(rowIndex, 1)
+        rowdatas?.splice(rowIndex, 1)
         onChange?.(rowindexs, rowdatas)
     }
 
@@ -119,14 +132,16 @@ export default class ProductSpecificationItem extends React.Component<IProps> {
      */
     public _sortRow(rowIndex: number, upOrDown: number) {
         const {rowdatas, rowindexs, onChange} = this.props
-        const datum1 = rowdatas[rowIndex];
-        const datum2 = rowdatas[rowIndex + upOrDown];
-        if (upOrDown < 0) {
-            rowdatas.splice(rowIndex - 1, 2, datum1, datum2)
-        } else {
-            rowdatas.splice(rowIndex, 2, datum2, datum1)
+        const datum1 = rowdatas?.[rowIndex];
+        const datum2 = rowdatas?.[rowIndex + upOrDown];
+        if (datum1 && datum2) {
+            if (upOrDown < 0) {
+                rowdatas?.splice(rowIndex - 1, 2, datum1, datum2)
+            } else {
+                rowdatas?.splice(rowIndex, 2, datum2, datum1)
+            }
+            onChange?.(rowindexs, rowdatas)
         }
-        onChange?.(rowindexs, rowdatas)
     }
 
 

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import ProductSpecificationGroup from './compose/group';
 
+
 /**
  *
  * @author lk
@@ -8,9 +9,32 @@ import ProductSpecificationGroup from './compose/group';
  * @version 1.0
  */
 export default class ProductSpecification extends React.Component {
+
+    public state = {
+        tabledata: [
+            {
+                id: '',
+                key: '',
+                value: [{
+                    id: '',
+                    key: '',
+                    main: true,
+                    value: '',
+                    order: 0
+                }],
+                order: 0
+            }
+        ]
+    }
+
+    private _onChange = (value: any) => {
+        this.setState({tabledata: value})
+    }
+
     public render() {
+        const {tabledata} = this.state
         return (
-            <ProductSpecificationGroup/>
+            <ProductSpecificationGroup rowdatas={tabledata} onChange={this._onChange}/>
         );
     }
 }

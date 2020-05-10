@@ -3,25 +3,42 @@ import {Grid, Input, Panel, Table} from 'rsuite';
 import ProductSpecificationItem from './item';
 import {CellAddReduce, CellSortUpDown} from '@component/table';
 import {utilsObject} from '@utils/index';
+import nanoid from 'nanoid';
 
 const {Column, HeaderCell, Cell} = Table;
 
 
 interface IProps {
-    dataKeyList?: Array<any>
-}
 
-interface IState {
-    tabledata: Array<{
+    rowdatas?: Array<{
         id: string
         key: string
         value: Array<{
             id: string,
-            key: string,
-            value: string,
-            order: number
+            key?: string,
+            main?: boolean,
+            value?: string,
+            order?: number
         }>
-    }>
+        order: number
+    }>,
+
+    onChange?(value?: Array<{
+        id: string
+        key: string
+        value: Array<{
+            id: string,
+            key?: string,
+            main?: boolean,
+            value?: string,
+            order?: number
+        }>
+        order: number
+    }>): void
+
+}
+
+interface IState {
     height: number
 }
 
@@ -39,7 +56,8 @@ export default class ProductSpecificationGroup extends React.Component<IProps> {
                     <span>规格名称</span>
                 </div>
             </HeaderCell>,
-            Cell: <CellAddReduce dataKey="id" style={{backgroundColor: 'rgba(251,251,251,0.83)'}}/>,
+            Cell: <CellAddReduce dataKey="id" style={{backgroundColor: 'rgba(251,251,251,0.83)'}}
+                                 addrow={this._addRow.bind(this)} delRow={this._delRow.bind(this)}/>,
             colSpan: 2,
             width: 65,
             fixed: false,
@@ -49,9 +67,11 @@ export default class ProductSpecificationGroup extends React.Component<IProps> {
             HeaderCell: <HeaderCell/>,
             Cell: <Cell dataKey="key" style={{backgroundColor: 'rgba(251,251,251,0.83)'}}>
                 {(rowData: any) => (
-                    <Input defaultValue={rowData.key}
+                    <Input value={rowData.key}
                            style={{width: '100%'}}
                            onChange={(e) => {
+                               rowData.key = e
+                               this._buildData()
                            }}/>
                 )}
             </Cell>,
@@ -77,64 +97,18 @@ export default class ProductSpecificationGroup extends React.Component<IProps> {
         },
         {
             HeaderCell: <HeaderCell>顺序</HeaderCell>,
-            Cell: <CellSortUpDown dataKey="id" maxRow={() => 10}
-                                  style={{padding: 0, backgroundColor: 'rgba(251,251,251,0.83)'}}/>,
-            width: 65,
+            Cell: <CellSortUpDown dataKey="order" maxRow={this._getMax.bind(this)} sortRow={this._sortRow.bind(this)}/>,
+            width: 75,
             fixed: false,
             resizable: false
         }
     ]
 
     public state: IState = {
-        tabledata: [
-            {
-                id: '1',
-                key: '1',
-                value: [{
-                    id: '',
-                    key: '',
-                    value: '',
-                    order: 0
-                }, {
-                    id: '',
-                    key: '',
-                    value: '',
-                    order: 0
-                }, {
-                    id: '',
-                    key: '',
-                    value: '',
-                    order: 0
-                }, {
-                    id: '',
-                    key: '',
-                    value: '',
-                    order: 0
-                }]
-            },
-            {
-                id: '2',
-                key: '2',
-                value: [{
-                    id: '',
-                    key: '',
-                    value: '',
-                    order: 0
-                }]
-            }
-        ],
         height: 0
     }
 
     private _Height = 0
-
-    private _onProductSpecifiChange(rowindexs: number, value: Array<{ id: string, key: string, value: string, order: number }>) {
-        const {tabledata} = this.state
-        tabledata[rowindexs].value = value
-        this.setState({
-            tabledata
-        })
-    }
 
 
     componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<{}>, snapshot?: any) {
@@ -147,8 +121,71 @@ export default class ProductSpecificationGroup extends React.Component<IProps> {
         }
     }
 
+    private _buildData() {
+        const {rowdatas, onChange} = this.props
+        onChange?.(rowdatas)
+    }
+
+    private _onProductSpecifiChange(rowindexs: number, value: Array<{ id: string, key: string, value: string, order: number }>) {
+        const {rowdatas, onChange} = this.props
+        if (rowdatas) {
+            rowdatas[rowindexs].value = value
+            onChange?.(rowdatas)
+        }
+    }
+
+    private _getMax() {
+        return this.props?.rowdatas?.length ?? 0
+    }
+
+    /**
+     * 添加行
+     * @private
+     */
+    public _addRow(rowData: any, rowIndex: number) {
+        const {rowdatas, onChange} = this.props
+        rowdatas?.splice(rowIndex + 1, 0, {
+            id: nanoid(),
+            key: '',
+            value: [{
+                id: nanoid()
+            }],
+            order: rowIndex + 1
+        })
+        onChange?.(rowdatas)
+    }
+
+    /**
+     * 删除行
+     * @private
+     */
+    public _delRow(rowData: any, rowIndex: number) {
+        const {rowdatas, onChange} = this.props
+        rowdatas?.splice(rowIndex, 1)
+        onChange?.(rowdatas)
+    }
+
+    /**
+     * 排序
+     * @private
+     */
+    public _sortRow(rowIndex: number, upOrDown: number) {
+        const {rowdatas, onChange} = this.props
+        const datum1 = rowdatas?.[rowIndex];
+        const datum2 = rowdatas?.[rowIndex + upOrDown];
+        if (datum1 && datum2) {
+            if (upOrDown < 0) {
+                rowdatas?.splice(rowIndex - 1, 2, datum1, datum2)
+            } else {
+                rowdatas?.splice(rowIndex, 2, datum2, datum1)
+            }
+            onChange?.(rowdatas)
+        }
+    }
+
     public render() {
         const {height} = this.state
+        const {rowdatas} = this.props
         return (
             <Panel header={'规格与包装'} bordered={false} bodyFill={false}>
                 <Grid style={{padding: 10}} fluid={true}>
@@ -162,7 +199,7 @@ export default class ProductSpecificationGroup extends React.Component<IProps> {
                             hover={false}
                             bordered={true}
                             cellBordered={false}
-                            data={this.state.tabledata}
+                            data={rowdatas}
                             rowHeight={(rowData: any) => {
                                 if (utilsObject.isNotEmpty(rowData)) {
                                     const length = rowData?.value?.length ?? 0

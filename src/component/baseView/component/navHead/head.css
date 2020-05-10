@@ -1,10 +1,10 @@
 @charset "UTF-8";
 /**tab框高度**/
-/**用户信息高度**/
-/**头部用户栏宽度**/
+/**logo高度**/
+/**菜单背景颜色*/
 .app-header {
   border-bottom: 1px solid #f2f2f5;
+  display: flex;
   z-index: 1020;
+  height: auto;
   width: 100%; }
-
-/*# sourceMappingURL=head.css.map */

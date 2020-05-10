@@ -20,7 +20,8 @@ interface IState {
         name: string
         image: boolean,
         value: Array<{
-            name: string,
+            id: string
+            name: string
             image: string
         }>
     }>,

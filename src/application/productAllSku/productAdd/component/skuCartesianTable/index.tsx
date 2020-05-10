@@ -8,7 +8,7 @@ import {utilsCrypto, utilsNumber} from '@utils/index';
 const {Column, HeaderCell, Cell} = Table;
 
 interface IProps {
-    cellData: Array<{ [x: string]: { name: string, image?: boolean, value: { name: string, image: string | undefined } } }>
+    cellData: Array<{ [x: string]: { name: string, image?: boolean, value: { id: string, name: string, image: string | undefined } } }>
 }
 
 interface IState {
@@ -143,7 +143,7 @@ export default class ProductSkuParts extends React.Component<IProps> {
                         Cell: <Cell dataKey={k}/>,
                         width: 120,
                         fixed: false,
-                        resizable: false
+                        resizable: true
                     }
                 )
             });
@@ -173,9 +173,8 @@ export default class ProductSkuParts extends React.Component<IProps> {
                 const id: Array<string> = []
                 //kk 是列id
                 keys.forEach((kk, ki, ka) => {
-                    const name = k[kk].value.name;
-                    newdata[kk] = name
-                    id.push(name)
+                    newdata[kk] = k[kk].value.name;
+                    id.push(k[kk].value.id)
                     if (k[kk].image) {
                         newdata2.mainImage = k[kk].value.image ?? ''
                     }

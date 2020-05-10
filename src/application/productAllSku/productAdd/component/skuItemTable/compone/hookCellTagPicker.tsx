@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Table, TagPicker} from 'rsuite';
 import {ImageUploaderLibraryGroup} from '@common/imageUploader';
+import nanoid from 'nanoid';
 
 const {Cell} = Table;
 
@@ -27,7 +28,7 @@ export const HookCellTagPicker = (props: ISpecifica) => {
         image: string
     }> = rowData[valueKey]?.map((k: any, i: any, a: any) => {
         return {
-            value: k.name,
+            value: k.id,
             label: k.name,
             image: k.image
         }
@@ -54,7 +55,8 @@ export const HookCellTagPicker = (props: ISpecifica) => {
             const map = select.map((k: any, i: any, a: any) => {
                 const filter = datas.filter((ki: any, ii, ai) => ki.value === k);
                 return {
-                    name: filter[0] ? filter[0].value : k,
+                    id: filter[0] ? filter[0].value : nanoid(),
+                    name: filter[0] ? filter[0].label : k,
                     image: filter[0] ? filter[0].image : undefined
                 }
             });
@@ -72,7 +74,7 @@ export const HookCellTagPicker = (props: ISpecifica) => {
                 placement={'bottom'}
                 //container={container}
                 //defaultValue={rowData[dataKey][valueKey]}
-                renderValue={(value, item, selectedElement) => {
+                renderValue={(value, item: any, selectedElement) => {
                     const fileUrls = () => {
                         const filter = datas.filter((ki: any, ii, ai) => ki.value === value);
                         if (filter[0]) {
@@ -96,13 +98,13 @@ export const HookCellTagPicker = (props: ISpecifica) => {
                                 ) : undefined
                             }
                             <div style={{textAlign: 'center', fontSize: 14}}>
-                                {value}
+                                {item.label}
                             </div>
                         </>
                     )
                 }}
                 maxHeight={150}
-                value={rowData[valueKey]['name']}
+                value={rowData[valueKey].map((k: any, i: any, a: any) => k.id)}
                 data={datas}
                 onClean={() => {
                     setSelect([])

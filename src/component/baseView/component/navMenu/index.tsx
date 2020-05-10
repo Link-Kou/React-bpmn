@@ -132,7 +132,7 @@ export default class Index extends React.Component {
                      } : {overflow: this.state.collapsedOverflow, width: 56}
                  }
             >
-                <Sidenav style={{display: 'flex', flexDirection: 'column', backgroundColor: '#2A3135'}}
+                <Sidenav className={'app-Sidenav'}
                          defaultOpenKeys={this.state.selectOpenKeys}
                          activeKey={this.state.selectMenuKey}
                          appearance="inverse"

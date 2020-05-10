@@ -4,7 +4,7 @@
 .app-body {
   flex: 1 !important;
   overflow: auto;
-  background-color: #F0F2F5;
+  background-color: #F1F4F6;
 
   .rs-panel-heading {
     padding-bottom: 0px;
@@ -13,7 +13,7 @@
   .app-nav-Body {
     flex-direction: column;
     overflow: hidden;
-    padding: 6px;
+    padding: 15px;
     /*  display: flex;*/
     height: 100%;
     transition: margin-left 200ms, margin-right 200ms;

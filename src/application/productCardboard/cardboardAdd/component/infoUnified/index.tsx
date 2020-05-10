@@ -22,7 +22,7 @@ interface IProps {
     formValue: IFormValue
 
 
-    onChangeFormValue?(data: IFormValue): void
+    onChange?(data: IFormValue): void
 }
 
 export default class CardboardAddInfoUnified extends React.PureComponent<IProps> {
@@ -43,20 +43,20 @@ export default class CardboardAddInfoUnified extends React.PureComponent<IProps>
     }
 
     private _onFormValueChange = (formValue: any) => {
-        const {onChangeFormValue} = this.props
-        onChangeFormValue?.(formValue)
+        const {onChange} = this.props
+        onChange?.(formValue)
     }
 
     public render() {
         const {formValue} = this.props
-        const {formError: formErrorState} = this.state
+        const {formError: _formError} = this.state
         return (
             <>
                 <Form fluid={true}
                       formValue={formValue}
-                      model={this.model}
                       layout="inline"
-                      formError={formErrorState}
+                      model={this.model}
+                      formError={_formError}
                       onCheck={(formError) => {
                           this.setState({
                               formError

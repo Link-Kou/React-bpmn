@@ -128,13 +128,7 @@ export default class Index extends CartonAdd {
                                                                       data={costUnifiedData}
                                                                       onChange={this._onChange}/>
                                                 <CartonAddImageUnified formValue={formValue}
-                                                                       onChange={(type: 'main' | 'details', fileUrl: Array<string>) => {
-                                                                           const formValue1: IFormValue = formValue;
-                                                                           formValue1.images[type] = fileUrl
-                                                                           this.setState({
-                                                                               formValue: formValue1
-                                                                           })
-                                                                       }}/>
+                                                                       onChange={this._onChange}/>
                                                 <hr/>
                                             </Content>
                                             <Footer/>

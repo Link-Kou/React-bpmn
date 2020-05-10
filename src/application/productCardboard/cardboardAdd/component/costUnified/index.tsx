@@ -20,7 +20,7 @@ import {IFormValue} from '../../../index.types';
 interface IProps {
     formValue: IFormValue
 
-    onChangeFormValue?(data: IFormValue): void
+    onChange?(data: IFormValue): void
 }
 
 export default class CardboardAddCostUnified extends React.PureComponent<IProps> {
@@ -28,8 +28,8 @@ export default class CardboardAddCostUnified extends React.PureComponent<IProps>
     public state = {}
 
     private _onFormValueChange = (formValue: any) => {
-        const {onChangeFormValue} = this.props
-        onChangeFormValue?.(formValue)
+        const {onChange} = this.props
+        onChange?.(formValue)
     }
 
 

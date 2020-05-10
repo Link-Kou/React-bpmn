@@ -139,17 +139,11 @@ export default class Index extends CardboardAdd {
                                 <Content style={{overflow: 'auto'}}>
                                     <CardboardAddInfoUnified
                                         formValue={formValue}
-                                        onChangeFormValue={this._onChange}
+                                        onChange={this._onChange}
                                     />
                                     <CardboardAddImageUnified
                                         formValue={formValue}
-                                        onChange={(type: 'main' | 'details', fileUrl: Array<string>) => {
-                                            const formValue1: IFormValue = formValue;
-                                            formValue1.images[type] = fileUrl
-                                            this.setState({
-                                                formValue: formValue1
-                                            })
-                                        }}/>
+                                        onChange={this._onChange}/>
                                     <CardboardLayerInfoTable
                                         formValue={formValue}
                                         basePaper={basePaper}
@@ -158,7 +152,7 @@ export default class Index extends CardboardAdd {
                                     />
                                     <CardboardAddCostUnified
                                         formValue={formValue}
-                                        onChangeFormValue={this._onChange}
+                                        onChange={this._onChange}
                                     />
                                 </Content>
                                 <Footer/>

@@ -7,7 +7,8 @@ module.exports = override(
         modifyVars: {
             '@icon-font-path': './fonts',
             '@input-color-disabled': '#404040',
-            '@table-head-font-color': '#5c5c5c'
+            '@table-head-font-color': '#5c5c5c',
+            '@base-color': '#2962A5'
         }
     }),
     addWebpackModuleRule({
