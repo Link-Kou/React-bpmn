@@ -1,0 +1,16 @@
+/**
+ * {@link}
+ */
+#app-headPanel {
+  .app-grid-inline-from {
+    margin: 0;
+
+    > .rs-row {
+      .rs-col {
+        .rs-form-group {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
