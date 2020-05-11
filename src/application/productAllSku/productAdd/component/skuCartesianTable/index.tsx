@@ -1,27 +1,21 @@
 import * as React from 'react';
 import {Grid, Panel, Table} from 'rsuite';
-import {CellAddReduce, CellIndex} from '@component/table';
+import {CellIndex} from '@component/table';
 import {ImageUploaderLibraryGroup} from '@common/imageUploader';
 import {HookCellInputNumber} from './compone/hookCellInputNumber';
 import {utilsCrypto, utilsNumber} from '@utils/index';
+import {IFormValue, ISkuTable} from '../../../index.types';
 
 const {Column, HeaderCell, Cell} = Table;
 
 interface IProps {
-    cellData: Array<{ [x: string]: { name: string, image?: boolean, value: { id: string, name: string, image: string | undefined } } }>
+    formValue: IFormValue
+
+    cellData?: Array<{ [x: string]: { name: string, image?: boolean, value: { id: string, name: string, image: string | undefined } } }>
+
+    onChange?(data: IFormValue): void
 }
 
-interface IState {
-    dataTable: Array<{
-        id?: string
-        disable?: boolean | string,
-        mainImage?: string,
-        numberStarts?: number | string,
-        numberStock?: number | string,
-        marketPrice?: number | string,
-        costPrice?: number | string
-    }>
-}
 
 /**
  * 规格列表名称
@@ -33,15 +27,8 @@ export default class ProductSkuParts extends React.Component<IProps> {
 
     public Columns = [
         {
-            HeaderCell: <HeaderCell>编辑</HeaderCell>,
-            Cell: <CellAddReduce dataKey="disable" hide={'add'} delRow={this._onDelRow.bind(this)}/>,
-            width: 65,
-            fixed: 'left',
-            resizable: false
-        },
-        {
             HeaderCell: <HeaderCell>禁用</HeaderCell>,
-            Cell: <CellIndex dataKey="disable"/>,
+            Cell: <CellIndex dataKey="disable" onSelectChange={this._onSelectChange.bind(this)}/>,
             width: 95,
             fixed: 'left',
             resizable: false
@@ -93,39 +80,35 @@ export default class ProductSkuParts extends React.Component<IProps> {
         }
     ]
 
-    public state: IState = {
-        dataTable: [
-            /* {
-                 disable: '',
-                 mainImage: '',
-                 numberStarts: '',
-                 numberStock: '',
-                 marketPrice: '',
-                 costPrice: ''
-             }*/
-        ]
-    }
+    public DataTable: Array<ISkuTable> = [
+        /* {
+             disable: '',
+             mainImage: '',
+             numberStarts: '',
+             numberStock: '',
+             marketPrice: '',
+             costPrice: ''
+         }*/
+    ]
 
     public componentDidMount(): void {
 
     }
 
+    /**
+     * 列数据改变
+     * @param rowIndex
+     * @param rowData
+     * @private
+     */
     public _onSelectChange(rowIndex?: number, rowData?: any) {
-        const {dataTable} = this.state
+        const {onChange, formValue} = this.props
+        const dataTable = this.DataTable
         if (utilsNumber.isNumber(rowIndex)) {
-            dataTable[rowIndex as number] = rowData
+            formValue[rowIndex as number] = rowData
         }
-        this.setState({
-            dataTable
-        })
-    }
-
-    private _onDelRow(rowData: any, rowIndex: number) {
-        const {dataTable} = this.state
-        dataTable.splice(rowIndex, 1)
-        this.setState({
-            dataTable
-        })
+        formValue.skuTable = dataTable
+        onChange?.(formValue);
     }
 
     /**
@@ -148,7 +131,7 @@ export default class ProductSkuParts extends React.Component<IProps> {
                 )
             });
             const newColumns = [...this.Columns]
-            newColumns.splice(3, 0, ...map);
+            newColumns.splice(2, 0, ...map);
             return newColumns;
         }
         return []
@@ -159,8 +142,11 @@ export default class ProductSkuParts extends React.Component<IProps> {
      * @private
      */
     private _buildRow() {
-        const {cellData} = this.props
-        const {dataTable} = this.state
+        const {cellData, formValue} = this.props
+        const dataTable = formValue?.skuTable
+        if (!dataTable) {
+            return []
+        }
         const rowdata: Array<any> = []
         if (Array.isArray(cellData)) {
             cellData.forEach((k, i, a) => {
@@ -179,25 +165,28 @@ export default class ProductSkuParts extends React.Component<IProps> {
                         newdata2.mainImage = k[kk].value.image ?? ''
                     }
                 });
+                //特别重要：通过默认排序方式来进行MD5计算获取到ID,这样子就可以进行SKU的快速定位
                 newdata2.id = utilsCrypto.MD5(id.sort().join(''))
                 const medata = {
                     id: '',
-                    disable: '',
+                    disable: false,
                     mainImage: '',
                     numberStarts: '',
                     numberStock: '',
                     marketPrice: '',
                     costPrice: '',
+                    tableColumn: newdata,
                     ...newdata,
                     ...newdata2
                 }
                 rowdata.push(medata)
             });
         }
+        //合并数据
         const newTableMap = rowdata?.map((k, i, a) => {
-            const index = dataTable.findIndex((dk, di, da) => k.id === dk?.id);
+            const index = dataTable?.findIndex((dk, di, da) => k.id === dk?.id);
             if (index > -1) {
-                const dataTableElement = dataTable[index];
+                const dataTableElement = dataTable?.[index];
                 if (dataTableElement) {
                     return (
                         {
@@ -210,13 +199,10 @@ export default class ProductSkuParts extends React.Component<IProps> {
                 return k
             }
         }) ?? [];
-        //合并行
-        /*dataTable.map((k, i, a) => {
-            rowdata[i] = {
-                ...rowdata[i],
-                ...k
-            }
-        })*/
+        //实时同步数据但是不触发通知
+        formValue.skuTable = newTableMap
+        //用于组件内处理方便
+        this.DataTable = newTableMap
         return newTableMap
     }
 

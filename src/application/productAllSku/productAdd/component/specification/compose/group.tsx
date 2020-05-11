@@ -4,37 +4,16 @@ import ProductSpecificationItem from './item';
 import {CellAddReduce, CellSortUpDown} from '@component/table';
 import {utilsObject} from '@utils/index';
 import nanoid from 'nanoid';
+import {IProductSpecification} from '../../../../index.types';
 
 const {Column, HeaderCell, Cell} = Table;
 
 
 interface IProps {
 
-    rowdatas?: Array<{
-        id: string
-        key: string
-        value: Array<{
-            id: string,
-            key?: string,
-            main?: boolean,
-            value?: string,
-            order?: number
-        }>
-        order: number
-    }>,
+    rowdatas?: Array<IProductSpecification>,
 
-    onChange?(value?: Array<{
-        id: string
-        key: string
-        value: Array<{
-            id: string,
-            key?: string,
-            main?: boolean,
-            value?: string,
-            order?: number
-        }>
-        order: number
-    }>): void
+    onChange?(value?: Array<IProductSpecification>): void
 
 }
 

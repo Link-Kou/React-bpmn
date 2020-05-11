@@ -13,15 +13,18 @@ export interface ISpecifica {
 
     onSelectChange?(value: any): void
 
+    /**
+     * 规格重复
+     */
+    onSpecRepeat?(): boolean
+
     [x: string]: any
 }
 
 
 export const HookCellTagPicker = (props: ISpecifica) => {
-    const {onSelectChange, rowData, valueKey, imageKey} = props
+    const {onSelectChange, rowData, valueKey, imageKey, onSpecRepeat} = props
     const [select, setSelect] = React.useState();
-    //所有可以选择的列表
-    const seen = new Set();
     const datas: Array<{
         value: string,
         label: string,
@@ -32,14 +35,7 @@ export const HookCellTagPicker = (props: ISpecifica) => {
             label: k.name,
             image: k.image
         }
-    }).filter((k: any, i: any, a: any) => {
-        if (seen.has(k)) {
-            return false;
-        }
-        seen.add(k);
-        return true;
     })
-
     const selectImage = (value: any, fileUrl: Array<string>) => {
         const rowDatum: Array<any> = rowData[valueKey];
         rowDatum?.forEach((k, i, a) => {
@@ -52,6 +48,8 @@ export const HookCellTagPicker = (props: ISpecifica) => {
 
     React.useEffect(() => {
         if (select) {
+            const seen = new Set();
+            //所有可以选择的列表
             const map = select.map((k: any, i: any, a: any) => {
                 const filter = datas.filter((ki: any, ii, ai) => ki.value === k);
                 return {
@@ -59,6 +57,19 @@ export const HookCellTagPicker = (props: ISpecifica) => {
                     name: filter[0] ? filter[0].label : k,
                     image: filter[0] ? filter[0].image : undefined
                 }
+            })?.filter((k: any, i: any, a: any) => {
+                const b = onSpecRepeat?.() ?? true;
+                if (b) {
+                    return true
+                }
+                if (k) {
+                    if (seen.has(k.name)) {
+                        return false;
+                    }
+                    seen.add(k.name);
+                    return true;
+                }
+                return false
             });
             rowData[valueKey] = map
             onSelectChange?.(rowData)

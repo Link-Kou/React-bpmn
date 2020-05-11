@@ -5,26 +5,21 @@ import nanoid from 'nanoid';
 import {HookCellButtonToolbar} from './compone/hookCellButtonToolbar';
 import {HookCellInputPicker} from './compone/hookCellInputPicker';
 import {HookCellTagPicker} from './compone/hookCellTagPicker';
+import {IFormValue, ISku} from '../../../index.types';
 
 const {Column, HeaderCell} = Table;
 
 
 interface IProps {
-    onChange?(data: Array<{ [x: string]: any }>): void
+
+    formValue: IFormValue
+
+    onChange?(data: Array<ISku>, skuData: Array<{ [x: string]: any }>): void
 }
 
 
 interface IState {
-    data: Array<{
-        id: string
-        name: string
-        image: boolean,
-        value: Array<{
-            id: string
-            name: string
-            image: string
-        }>
-    }>,
+    data: Array<ISku>,
     /**
      * 显示方式
      */
@@ -42,14 +37,7 @@ export default class ProductSku extends React.Component<IProps> {
 
 
     public state: IState = {
-        data: [
-            {
-                id: nanoid(),
-                name: '',
-                value: [],
-                image: false
-            }
-        ],
+        data: [...this.props.formValue.sku],
         descartes: 'asc',
         specRepeat: true
     }
@@ -93,6 +81,7 @@ export default class ProductSku extends React.Component<IProps> {
             Cell: <HookCellTagPicker valueKey={'value'}
                                      dataKey={'value'}
                                      imageKey={'image'}
+                                     onSpecRepeat={this._getSpecRepeat.bind(this)}
                                      onSelectChange={(value) => {
                                          this._onBuild()
                                      }}/>,
@@ -198,7 +187,7 @@ export default class ProductSku extends React.Component<IProps> {
             desc: this._DescartesListDesc(data, 'name', 'value')
         }
         const descartesListDesc = _Descartes[descartes ?? 'asc'];
-        onChange?.(descartesListDesc);
+        onChange?.(data, descartesListDesc);
     }
 
     /**

@@ -22,10 +22,7 @@ export default class Index extends ProductAllSku {
     }
 
     componentDidMount(): void {
-
-
     }
-
 
     /**
      * 参数改变
@@ -38,15 +35,19 @@ export default class Index extends ProductAllSku {
         })
     }
 
+    private _onSave = async () => {
+        console.log(JSON.stringify(this.state.formValue, null, 1))
+    }
+
     public render() {
-        const {formValue} = this.state
+        const {formValue, cellData} = this.state
         return (
             <>
                 <BackColorPanel style={{height: '100%'}}>
                     <HeadPanel title={'其他产品新增编辑页'}>
                         <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
                             <ButtonToolbar>
-                                <Button color="blue">
+                                <Button color="blue" onClick={this._onSave}>
                                     发布产品
                                 </Button>
                                 <Button color="red">
@@ -64,14 +65,20 @@ export default class Index extends ProductAllSku {
                                                         onChange={this._onChange}/>
                                     <ProductImageUnified formValue={formValue}
                                                          onChange={this._onChange}/>
-                                    <ProductSku onChange={(data) => {
+                                    <ProductSku formValue={formValue} onChange={(data, skuData) => {
+                                        formValue.sku = data
                                         this.setState({
-                                            cellData: data
+                                            cellData: skuData,
+                                            formValue
                                         })
                                     }}/>
-                                    <ProductSkuParts cellData={this.state.cellData}/>
-                                    <ProductCostUnified/>
-                                    <ProductSpecification/>
+                                    <ProductSkuParts formValue={formValue}
+                                                     cellData={cellData}
+                                                     onChange={this._onChange}/>
+                                    <ProductCostUnified formValue={formValue}
+                                                        onChange={this._onChange}/>
+                                    <ProductSpecification formValue={formValue}
+                                                          onChange={this._onChange}/>
                                 </Content>
                                 <Footer/>
                             </Container>

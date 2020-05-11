@@ -1,3 +1,5 @@
+import nanoid from 'nanoid';
+
 export interface IFormValue {
     id?: string
     /**
@@ -67,6 +69,18 @@ export interface IFormValue {
      * 图片
      */
     images: IImages,
+    /**
+     * sku 键值对
+     */
+    sku: Array<ISku>,
+    /**
+     * sku 笛卡尔积
+     */
+    skuTable: Array<ISkuTable>,
+    /**
+     * 包装与规格
+     */
+    specification: Array<IProductSpecification>
 }
 
 export const IStateFormValue: IFormValue = {
@@ -123,7 +137,7 @@ export const IStateFormValue: IFormValue = {
      * 销售模式
      * 1:零售;2:批发3:都支持;
      */
-    salesModel: 0,
+    salesModel: 1,
     /**
      * 市场价
      */
@@ -141,7 +155,33 @@ export const IStateFormValue: IFormValue = {
         logo: '',
         detailsMain: [],
         detailsList: []
-    }
+    },
+
+    sku: [
+        {
+            id: nanoid(),
+            name: '',
+            value: [],
+            image: false
+        }
+    ],
+
+    skuTable: [],
+
+    specification: [
+        {
+            id: '',
+            key: '',
+            value: [{
+                id: '',
+                key: '',
+                main: false,
+                value: '',
+                order: 0
+            }],
+            order: 0
+        }
+    ]
 }
 
 export interface IImages {
@@ -149,4 +189,41 @@ export interface IImages {
     logo: string
     detailsMain: Array<string>
     detailsList: Array<string>
+}
+
+export interface ISku {
+    id: string
+    name: string
+    image: boolean,
+    value: Array<{
+        id: string
+        name: string
+        image: string
+    }>
+}
+
+export interface ISkuTable {
+    id: string
+    disable?: boolean,
+    mainImage?: string,
+    numberStarts?: number | string,
+    numberStock?: number | string,
+    marketPrice?: number | string,
+    costPrice?: number | string
+    tableColumn?: string
+
+    [x: string]: any
+}
+
+export interface IProductSpecification {
+    id?: string,
+    key: string,
+    value: Array<{
+        id: string,
+        key?: string,
+        main?: boolean,
+        value?: string,
+        order?: number
+    }>,
+    order?: number
 }

@@ -23,11 +23,13 @@ export interface IHookCellInputNumber extends TableCellProps {
 
 //numeral(v1.costPrice.toString()).format('0.00')
 export const HookCellInputNumber = (props: IHookCellInputNumber) => {
-    const {dataKey, rowData, rowIndex, onSelectChange, isInt, step} = props
+    const {dataKey, rowData, rowIndex, onSelectChange, isInt, step, max, min} = props
     return (
         <Cell {...props}>
             <InputNumber
                 step={step}
+                max={max}
+                min={min}
                 value={rowData?.[dataKey ?? ''] ?? ''}
                 onChange={(value, event) => {
                     if (rowData) {

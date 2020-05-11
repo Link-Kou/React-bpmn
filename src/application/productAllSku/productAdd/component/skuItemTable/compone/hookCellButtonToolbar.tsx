@@ -47,16 +47,6 @@ export const HookCellButtonToolbar = (props: IHookCellButtonToolbar) => {
             </RadioGroup>
             <ButtonGroup>
                 <div style={{marginLeft: 10}}>
-                    锁定行
-                    <Toggle
-                        defaultChecked={true}
-                        checkedChildren={<Icon icon="check"/>}
-                        unCheckedChildren={<Icon icon="close"/>}
-                    />
-                </div>
-            </ButtonGroup>
-            <ButtonGroup>
-                <div style={{marginLeft: 10}}>
                     规格重复
                     <Toggle
                         defaultChecked={specRepeat}
