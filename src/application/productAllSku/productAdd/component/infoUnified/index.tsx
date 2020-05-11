@@ -61,7 +61,7 @@ export default class ProductInfoUnified extends React.Component<IProps> {
                                     <TextRequired accepter={ControlLabel}>商品描述</TextRequired>
                                     <FormControl name="subname"
                                                  autocomplete={'off'}
-                                                 placeholder="限30字，非必填"
+                                                 placeholder="限60字，非必填"
                                                  accepter={Input}/>
                                 </FormGroup>
                             </Col>

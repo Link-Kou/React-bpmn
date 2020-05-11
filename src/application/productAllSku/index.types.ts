@@ -37,15 +37,15 @@ export interface IFormValue {
     /**
      * 商品重量
      */
-    productWeight: number | string
+    productWeight: string
     /**
      * 商品长度
      */
-    productLength: number | string
+    productLength: string
     /**
      * 商品体积
      */
-    productVolume: number | string
+    productVolume: string
     /**
      * 价格显示模式
      * 1:优惠价 2:对比价

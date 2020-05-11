@@ -1,5 +1,6 @@
 {
   "presets": [
+    "react",
     [
       "rsuite",
       {
@@ -9,6 +10,7 @@
     ]
   ],
   "plugins": [
+    "react-loadable/babel",
     "syntax-dynamic-import",
     [
       "lodash",

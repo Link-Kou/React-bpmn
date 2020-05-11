@@ -57,7 +57,7 @@ export function ControllerAlashCell(props: IControllerAlashnCell) {
 }
 
 interface IControllerIndexCell extends IProps {
-    onSelectChange?: (rowIndex: number, checked: boolean) => void
+    onSelectChange?: (rowIndex: number, rowData: any) => void
     disPlayNumber?: boolean
 }
 
@@ -78,8 +78,11 @@ export function ControllerIndexCell(props: IControllerIndexCell) {
                 style={{marginLeft: 0}}
                 inline={true}
                 checked={checked}
-                onChange={(value, checke) => {
-                    onSelectChange?.(rowIndex ?? -1, checke)
+                onChange={(value, c) => {
+                    if (rowData && dataKey) {
+                        rowData[dataKey] = c
+                        onSelectChange?.(rowIndex ?? -1, rowData)
+                    }
                 }}
             >
                 {disPlayNumber ? rowIndex ?? '' : ''}
