@@ -21,6 +21,11 @@ interface IHookCellButtonToolbar {
      * @param value
      */
     onChangeSpecRepeat?: (value: boolean) => void
+    /**
+     * 规格多图
+     * @param value
+     */
+    onChangeSpecImage?: (value: boolean) => void
 }
 
 /**
@@ -30,11 +35,15 @@ interface IHookCellButtonToolbar {
  * @version 1.0
  */
 export const HookCellButtonToolbar = (props: IHookCellButtonToolbar) => {
-    const [specRepeat, setSpecRepeat] = React.useState(true);
-    const {onChangeDisplay, onChangeSpecRepeat} = props
+    const [specRepeat, setSpecRepeat] = React.useState(false);
+    const [specImage, setSpecImage] = React.useState(true);
+    const {onChangeDisplay, onChangeSpecRepeat,onChangeSpecImage} = props
     React.useEffect(() => {
         onChangeSpecRepeat?.(specRepeat)
     }, [specRepeat])
+    React.useEffect(() => {
+        onChangeSpecImage?.(specImage)
+    }, [specImage])
     return (
         <ButtonToolbar style={{marginBottom: 10}}>
             <RadioGroup name="radioList" inline={true} appearance="picker" defaultValue={1} onChange={(value: any) => {
@@ -49,9 +58,22 @@ export const HookCellButtonToolbar = (props: IHookCellButtonToolbar) => {
                 <div style={{marginLeft: 10}}>
                     规格重复
                     <Toggle
-                        defaultChecked={specRepeat}
+                        checked={specRepeat}
                         onChange={(checked) => {
                             setSpecRepeat(checked)
+                        }}
+                        checkedChildren={<Icon icon="check"/>}
+                        unCheckedChildren={<Icon icon="close"/>}
+                    />
+                </div>
+            </ButtonGroup>
+            <ButtonGroup>
+                <div style={{marginLeft: 10}}>
+                    规格多图
+                    <Toggle
+                        checked={specImage}
+                        onChange={(checked) => {
+                            setSpecImage(checked)
                         }}
                         checkedChildren={<Icon icon="check"/>}
                         unCheckedChildren={<Icon icon="close"/>}

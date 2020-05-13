@@ -127,7 +127,11 @@ export default class ProductSpecificationGroup extends React.Component<IProps> {
             id: nanoid(),
             key: '',
             value: [{
-                id: nanoid()
+                id: nanoid(),
+                key: '',
+                value: '',
+                main: false,
+                order: 0
             }],
             order: rowIndex + 1
         })

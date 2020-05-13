@@ -96,7 +96,7 @@ export default class ProductInfoUnified extends React.Component<IProps> {
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={3}>
+                            <Col xs={3} sm={6} md={3} lg={3}>
                                 <FormGroup>
                                     <ControlLabel>商品主图</ControlLabel>
                                     <FormControl name="images"
@@ -110,7 +110,7 @@ export default class ProductInfoUnified extends React.Component<IProps> {
                                                  accepter={FormImageUploader}/>
                                 </FormGroup>
                             </Col>
-                            <Col xs={4}>
+                            <Col xs={4} sm={6} md={4} lg={4}>
                                 <FormGroup>
                                     <ControlLabel>品牌LOGO</ControlLabel>
                                     <FormControl name="images"
@@ -124,9 +124,9 @@ export default class ProductInfoUnified extends React.Component<IProps> {
                                                  accepter={FormImageUploader}/>
                                 </FormGroup>
                             </Col>
-                            <Col xs={7}>
+                            <Col xs={7} sm={24} md={7}>
                                 <Row>
-                                    <Col xs={24}>
+                                    <Col xs={24} sm={8} md={24}>
                                         <FormGroup>
                                             <ControlLabel>商品产地</ControlLabel>
                                             <FormControl name="productOrigin"
@@ -137,7 +137,7 @@ export default class ProductInfoUnified extends React.Component<IProps> {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xs={24}>
+                                    <Col xs={24} sm={8} md={24}>
                                         <FormGroup>
                                             <ControlLabel>商品型号</ControlLabel>
                                             <FormControl name="productModel"
@@ -148,7 +148,7 @@ export default class ProductInfoUnified extends React.Component<IProps> {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col xs={24}>
+                                    <Col xs={24} sm={8} md={24}>
                                         <FormGroup>
                                             <ControlLabel>商品类型</ControlLabel>
                                             <FormControl name="productType"

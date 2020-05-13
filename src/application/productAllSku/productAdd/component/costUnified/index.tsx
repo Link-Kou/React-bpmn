@@ -58,7 +58,7 @@ export default class ProductCostUnified extends React.PureComponent<IProps> {
                       onChange={this._onFormValueChange}>
                     <Grid style={{padding: 10}} fluid={true} className={'app-grid-inline-from'}>
                         <Row>
-                            <Col xs={6} sm={6} md={6}>
+                            <Col xs={6} sm={12} md={12} lg={6}>
                                 <FormGroup>
                                     <ControlLabel>价格显示方式</ControlLabel>
                                     <FormControl name="priceMode"
@@ -68,7 +68,7 @@ export default class ProductCostUnified extends React.PureComponent<IProps> {
                                     </FormControl>
                                 </FormGroup>
                             </Col>
-                            <Col xs={7} sm={7} md={7}>
+                            <Col xs={7} sm={12} md={12} lg={6}>
                                 <FormGroup>
                                     <ControlLabel>支持销售模式</ControlLabel>
                                     <FormControl name="salesModel"

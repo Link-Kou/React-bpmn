@@ -126,7 +126,7 @@ export default class ImageCardViewUpdataDelete extends React.Component<Iprops> {
                         </svg>
                     </div>
                 )
-            } else if (fileUrl === undefined) {
+            } else if (utilsString.isEmpty(fileUrl)) {
                 return (
                     <div className={'app-image-library-icon'}>
                         <svg viewBox="0 0 1024 1024" width="20" height="20"

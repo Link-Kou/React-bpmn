@@ -8,7 +8,7 @@ const {Column, HeaderCell, Cell} = Table;
 
 interface IProps {
 
-    rowdatas?: Array<{ id: string, key: string, value: string, order: number }>,
+    rowdatas?: Array<{ id: string, key: string, value: string, main:boolean,order: number }>,
 
     rowindexs?: number
 
@@ -111,6 +111,7 @@ export default class ProductSpecificationItem extends React.Component<IProps> {
             id: nanoid(),
             key: '',
             value: '',
+            main: false,
             order: rowIndex + 1
         })
         onChange?.(rowindexs, rowdatas)

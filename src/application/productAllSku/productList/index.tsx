@@ -4,12 +4,10 @@ import OperationGroup from './component/operation'
 import Table from '../productList/component/table'
 import BackColorPanel from '@component/backColorPanel';
 import {Prompt} from 'react-router';
+import ProductList from './productList';
 
-interface IProps {
 
-}
-
-export default class PoductList extends React.Component<IProps> {
+export default class PoductList extends ProductList {
 
     public state = {}
 
@@ -29,7 +27,7 @@ export default class PoductList extends React.Component<IProps> {
                             <OperationGroup/>
                         </Header>
                         <Content>
-                            <Table/>
+                            <Table onLoadTableData={this.handlersLoadProductPage}/>
                         </Content>
                         <Footer/>
                     </Container>

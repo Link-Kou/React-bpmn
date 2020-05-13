@@ -93,6 +93,10 @@ enum UrlType {
      * 文件
      */
     file = '/file',
+    /**
+     * 辅料
+     */
+    material = '/material',
 }
 
 /**
@@ -150,6 +154,13 @@ export class Url {
      */
     public static getFile(url: String): string {
         return this.getUrl() + UrlType.file + url
+    }
+
+    /**
+     * 辅料
+     */
+    public static getMaterial(url: String): string {
+        return this.getUrl() + UrlType.material + url
     }
 }
 

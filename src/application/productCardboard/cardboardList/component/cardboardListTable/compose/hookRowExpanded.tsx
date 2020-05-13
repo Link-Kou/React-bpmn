@@ -12,7 +12,7 @@ export const HooKRowExpanded = (props: { w: number, rowData: IReturnCardboardPro
                     {
                         rowData?.layers?.map((k, i, a) => (
                             <Steps.Item status={'process'}
-                                        title={`${k?.paperName}(${k?.paperType})`}
+                                        title={k?.paperName}
                                         description={
                                             <ul style={{listStyle: 'none', padding: 0}}>
                                                 <li>

@@ -115,7 +115,7 @@ export default class CardboardListTable extends React.Component<IProps> {
         },
         {
             HeaderCell: <HeaderCell>管理</HeaderCell>,
-            Cell: <Cell dataKey="url" style={{height: rowHeight}}>
+            Cell: <Cell dataKey="control" style={{height: rowHeight}}>
                 {(rowData: any) => (
                     <>
                         <ButtonToolbar>

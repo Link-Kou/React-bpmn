@@ -15,11 +15,16 @@ interface IProps {
     formValue: IFormValue
 
     onChange?(data: Array<ISku>, skuData: Array<{ [x: string]: any }>): void
+
+    /**
+     * 规格多图
+     * @param value
+     */
+    onChangeSpecImage?(value: boolean): void
 }
 
 
 interface IState {
-    data: Array<ISku>,
     /**
      * 显示方式
      */
@@ -34,19 +39,6 @@ interface IState {
  * 商品规格
  */
 export default class ProductSku extends React.Component<IProps> {
-
-
-    public state: IState = {
-        data: [...this.props.formValue.sku],
-        descartes: 'asc',
-        specRepeat: true
-    }
-
-
-    public componentDidMount(): void {
-        this._onBuild()
-    }
-
 
     public Columns = [
         {
@@ -111,60 +103,65 @@ export default class ProductSku extends React.Component<IProps> {
         }
     ]
 
+    public state: IState = {
+        descartes: 'asc',
+        specRepeat: false
+    }
+
+    public componentDidMount(): void {
+        this._onBuild()
+    }
+
+
     private _getMax() {
-        return this.state.data.length
+        const {formValue} = this.props
+        return formValue.sku.length
     }
 
     private _getDatas() {
-        return this.state.data
+        const {formValue} = this.props
+        return formValue.sku
     }
 
     private _getSpecRepeat(): boolean {
-        return this.state.specRepeat ?? true
+        return this.state.specRepeat ?? false
     }
 
-    private _onImageSelectChange(rowIndex: number, checked: boolean) {
-        const {data} = this.state
-        const map = data.map((k, i, a) => {
+    private _onImageSelectChange(rowIndex: number, rowData: any) {
+        const {formValue} = this.props
+        const data = formValue.sku
+        data.forEach((k, i, a) => {
             if (i === rowIndex) {
-                k.image = checked
+                k.image = rowData.image
             } else {
                 k.image = false
             }
             return k
         });
-        this.setState({
-            data: map
-        }, () => {
-            this._onBuild()
-        })
+        this._onBuild()
     }
 
     private _onAddRow(rowData: any, rowIndex: number) {
-        const {data} = this.state
+        const {formValue} = this.props
+        const data = formValue.sku
         data.splice(rowIndex + 1, 0, {
             id: nanoid(),
             name: '',
             image: false,
             value: []
         })
-        this.setState({
-            data
-        })
     }
 
     private _onDelRow(rowData: any, rowIndex: number) {
-        const {data} = this.state
+        const {formValue} = this.props
+        const data = formValue.sku
         data.splice(rowIndex, 1)
-        this.setState({
-            data
-        }, () => {
-            this._onBuild()
-        })
+        this._onBuild()
     }
 
     private _onSortRow(rowIndex: number, upOrDown: number) {
-        const {data} = this.state
+        const {formValue} = this.props
+        const data = formValue.sku
         const datum1 = data[rowIndex];
         const datum2 = data[rowIndex + upOrDown];
         if (upOrDown < 0) {
@@ -172,16 +169,13 @@ export default class ProductSku extends React.Component<IProps> {
         } else {
             data.splice(rowIndex, 2, datum2, datum1)
         }
-        this.setState({
-            data
-        }, () => {
-            this._onBuild()
-        })
+        this._onBuild()
     }
 
     private _onBuild = () => {
-        const {data, descartes} = this.state
-        const {onChange} = this.props
+        const {descartes} = this.state
+        const {formValue, onChange} = this.props
+        const data = formValue.sku
         const _Descartes = {
             asc: this._DescartesListAse(data, 'name', 'value'),
             desc: this._DescartesListDesc(data, 'name', 'value')
@@ -256,7 +250,6 @@ export default class ProductSku extends React.Component<IProps> {
          {'key':'val','key':'val'}
          ]
          */
-        console.log(JSON.stringify(tableGroup, null, 2))
         return tableGroup;
     }
 
@@ -325,7 +318,8 @@ export default class ProductSku extends React.Component<IProps> {
 
 
     public render() {
-        const {data} = this.state
+        const {onChangeSpecImage, formValue} = this.props
+        const data = formValue.sku
         return (
             <Grid style={{padding: 10, paddingBottom: 0}} fluid={true}>
                 <HookCellButtonToolbar
@@ -333,6 +327,9 @@ export default class ProductSku extends React.Component<IProps> {
                         this.setState({
                             specRepeat: value
                         })
+                    }}
+                    onChangeSpecImage={(value) => {
+                        onChangeSpecImage?.(value)
                     }}
                     onChangeDisplay={(value) => {
                         this.setState({

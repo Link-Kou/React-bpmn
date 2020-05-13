@@ -39,7 +39,7 @@ export const HookCellTagPicker = (props: ISpecifica) => {
     const selectImage = (value: any, fileUrl: Array<string>) => {
         const rowDatum: Array<any> = rowData[valueKey];
         rowDatum?.forEach((k, i, a) => {
-            if (value === k.name) {
+            if (value === k.id) {
                 k.image = fileUrl[0]
             }
         })

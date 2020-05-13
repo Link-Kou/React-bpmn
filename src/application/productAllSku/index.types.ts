@@ -1,4 +1,5 @@
 import nanoid from 'nanoid';
+import {IReturnMaterialProduct as ReturnMaterialProduct} from '@fetch/api/material/index.types';
 
 export interface IFormValue {
     id?: string
@@ -170,10 +171,10 @@ export const IStateFormValue: IFormValue = {
 
     specification: [
         {
-            id: '',
+            id: nanoid(),
             key: '',
             value: [{
-                id: '',
+                id: nanoid(),
                 key: '',
                 main: false,
                 value: '',
@@ -226,4 +227,11 @@ export interface IProductSpecification {
         order?: number
     }>,
     order?: number
+}
+
+/**
+ * 列表参数
+ */
+export interface IReturnMaterialProductList extends ReturnMaterialProduct {
+
 }

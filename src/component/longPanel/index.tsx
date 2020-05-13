@@ -7,6 +7,7 @@ interface IProps {
     subHeight?: number
 
     style?: React.CSSProperties
+
 }
 
 export default class LongPanel extends React.Component<IProps> {
@@ -21,7 +22,7 @@ export default class LongPanel extends React.Component<IProps> {
                      //flexDirection: 'column',
                      overflow: 'auto',
                      position: 'relative',
-                     minWidth: 850,
+                     minWidth: 500,
                      padding: padding ? padding : 10,
                      ...style
                  }}>

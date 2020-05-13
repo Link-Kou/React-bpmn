@@ -11,6 +11,8 @@ export interface ITextSpanProps {
      * 其他参数
      */
     props?: { [X: string]: any }
+
+    [x: string]: any
 }
 
 export default class TextSpan extends React.Component<ITextSpanProps> {
@@ -26,12 +28,13 @@ export default class TextSpan extends React.Component<ITextSpanProps> {
     }
 
     private renderTextSpan = (props: ITextSpanProps) => {
-        const {lineClamp, width, title} = props
+        const {lineClamp, width, title, children} = props
         return (
             <div className={'app-textSpan'}>
                 <div className={'app-textSpan-text'}
-                     style={{WebkitLineClamp: lineClamp ? lineClamp : 3, width: width ? width : 'auto'}} title={title}>
-                    {this.props.children}
+                     style={{WebkitLineClamp: lineClamp ? lineClamp : 3, width: width ? width : 'auto'}}
+                     title={title ?? typeof children === 'string' ? children : ''}>
+                    {children}
                 </div>
             </div>
         )

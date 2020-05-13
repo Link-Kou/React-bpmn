@@ -17,7 +17,7 @@ export interface ISpecifica extends TableCellProps {
      */
     onSpecRepeat?(): boolean
 
-    onSelectChange?(value: any): void
+    onSelectChange?(rowData: any): void
 
 }
 

@@ -5,6 +5,7 @@ import {ImageUploaderLibraryGroup} from '@common/imageUploader';
 import {HookCellInputNumber} from './compone/hookCellInputNumber';
 import {utilsCrypto, utilsNumber} from '@utils/index';
 import {IFormValue, ISkuTable} from '../../../index.types';
+import {ImageCardView} from '@component/imageManager';
 
 const {Column, HeaderCell, Cell} = Table;
 
@@ -14,6 +15,11 @@ interface IProps {
     cellData?: Array<{ [x: string]: { name: string, image?: boolean, value: { id: string, name: string, image: string | undefined } } }>
 
     onChange?(data: IFormValue): void
+
+    /**
+     * 规格多图
+     */
+    specImage?: boolean
 }
 
 
@@ -36,10 +42,20 @@ export default class ProductSkuParts extends React.Component<IProps> {
         {
             HeaderCell: <HeaderCell>主图</HeaderCell>,
             Cell: <Cell dataKey="mainImage">
-                {(rowData: any) => (
-                    <ImageUploaderLibraryGroup maxSize={1}
-                                               isDragDisabled={true}
-                                               fileUrl={rowData.mainImage ? [rowData.mainImage] : []}/>
+                {(rowData: any, rowIndex: any) => (
+                    this._getSpecImage() ?
+                        (
+                            <ImageUploaderLibraryGroup maxSize={1}
+                                                       isDragDisabled={true}
+                                                       onChange={(fileUrl) => {
+                                                           rowData.mainImage = fileUrl[0]
+                                                           this._onSelectChange(rowIndex, rowData)
+                                                       }}
+                                                       fileUrl={[rowData.mainImage]}/>
+                        ) :
+                        (
+                            <ImageCardView fileUrl={rowData.mainImage}/>
+                        )
                 )}
             </Cell>,
             width: 150,
@@ -64,7 +80,7 @@ export default class ProductSkuParts extends React.Component<IProps> {
         },
         {
             HeaderCell: <HeaderCell>市场价</HeaderCell>,
-            Cell: <HookCellInputNumber dataKey="marketPrice" max={999999999} min={0} step={0.5} isInt={true}
+            Cell: <HookCellInputNumber dataKey="marketPrice" max={999999999} min={0} step={0.5}
                                        onSelectChange={this._onSelectChange.bind(this)}/>,
             width: 120,
             fixed: false,
@@ -72,7 +88,7 @@ export default class ProductSkuParts extends React.Component<IProps> {
         },
         {
             HeaderCell: <HeaderCell>成本价</HeaderCell>,
-            Cell: <HookCellInputNumber dataKey="costPrice" max={999999999} min={0} step={0.5} isInt={true}
+            Cell: <HookCellInputNumber dataKey="costPrice" max={999999999} min={0} step={0.5}
                                        onSelectChange={this._onSelectChange.bind(this)}/>,
             width: 120,
             fixed: false,
@@ -95,6 +111,10 @@ export default class ProductSkuParts extends React.Component<IProps> {
 
     }
 
+    public _getSpecImage(): boolean | undefined {
+        return this.props.specImage
+    }
+
     /**
      * 列数据改变
      * @param rowIndex
@@ -105,7 +125,7 @@ export default class ProductSkuParts extends React.Component<IProps> {
         const {onChange, formValue} = this.props
         const dataTable = this.DataTable
         if (utilsNumber.isNumber(rowIndex)) {
-            formValue[rowIndex as number] = rowData
+            dataTable[rowIndex as number] = rowData
         }
         formValue.skuTable = dataTable
         onChange?.(formValue);
@@ -142,7 +162,7 @@ export default class ProductSkuParts extends React.Component<IProps> {
      * @private
      */
     private _buildRow() {
-        const {cellData, formValue} = this.props
+        const {cellData, formValue, specImage} = this.props
         const dataTable = formValue?.skuTable
         if (!dataTable) {
             return []
@@ -188,19 +208,22 @@ export default class ProductSkuParts extends React.Component<IProps> {
             if (index > -1) {
                 const dataTableElement = dataTable?.[index];
                 if (dataTableElement) {
-                    return (
-                        {
-                            ...k,
-                            ...dataTableElement
-                        }
-                    )
+                    const merge = {
+                        ...k,
+                        ...dataTableElement
+                    }
+                    //规格可以有多图,默认如果规格非多图。采用mainImage图
+                    if (!specImage) {
+                        merge.mainImage = k.mainImage
+                    }
+                    return merge
                 }
             } else {
                 return k
             }
         }) ?? [];
         //实时同步数据但是不触发通知
-        formValue.skuTable = newTableMap
+        //formValue.skuTable = newTableMap
         //用于组件内处理方便
         this.DataTable = newTableMap
         return newTableMap
