@@ -9,11 +9,11 @@ import LongPanel from '../application/longPanel'
 import Mosaic from '../application/mosaic'
 import TreeDnd from '../application/treeDnd'
 import TypeConfig from '../application/basicConfig/typeConfig'
-import BaseCorrugated from '../application/baseCorrugated'
 import {ProductAllSkuAdd, PoductList} from '../application/productAllSku'
 import {CardboardList, CardboardAdd} from '../application/productCardboard'
 import {CartonList, CartonAdd} from '../application/productCarton'
 import {OnlineMarketingList} from '../application/productOnlineMarketing'
+import ProductCorrugated from '../application/productCorrugated'
 import ProductQuote from '../application/productQuote'
 import UserManager from '../application/userManager'
 import OrderCardboard from '../application/orderCardboard'
@@ -99,17 +99,17 @@ export const routes: Array<IRoute> = [
     {
         key: 'BasePaper',
         exact: false,
-        path: '/index/basePaper',
+        path: '/index/productBasePaper',
         screen: Loadable({
-            loader: () => RouterLoadableDelay(import('../application/basePaper')),
+            loader: () => RouterLoadableDelay(import('../application/productBasePaper')),
             ...RouterLoadableConfigBase
         })
     },
     {
         key: 'BaseCorrugated',
         exact: false,
-        path: '/index/baseCorrugated',
-        screen: BaseCorrugated
+        path: '/index/productCorrugated',
+        screen: ProductCorrugated
     },
     {
         key: 'CardboardList',

@@ -1,4 +1,4 @@
-import {IFormValue as BasePaper} from '../basePaper/index.types'
+import {IFormValue as BasePaper} from '../productBasePaper/index.types'
 
 export interface IFormValue {
     id?: string

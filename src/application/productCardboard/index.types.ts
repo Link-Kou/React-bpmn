@@ -1,5 +1,5 @@
-import {IFormValue as BaseCorrugated} from '../baseCorrugated/index.types'
-import {IFormValue as BasePaper} from '../basePaper/index.types'
+import {IFormValue as BaseCorrugated} from '../productCorrugated/index.types'
+import {IFormValue as BasePaper} from '../productBasePaper/index.types'
 import {IReturnCardboardProduct as IReqCardboardProduct} from '@fetch/api/cardboard/index.types'
 
 export interface IFormValue {

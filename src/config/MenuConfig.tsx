@@ -170,7 +170,7 @@ export const MenuConfig: Array<IMenuConfig> = [
                 openTabs: {
                     key: '2-1',
                     title: '原纸管理',
-                    route: '/index/basePaper'
+                    route: '/index/productBasePaper'
                 },
                 items: []
             },
@@ -182,7 +182,7 @@ export const MenuConfig: Array<IMenuConfig> = [
                 openTabs: {
                     key: '2-2',
                     title: '瓦楞管理',
-                    route: '/index/baseCorrugated'
+                    route: '/index/productCorrugated'
                 },
                 items: []
             },
@@ -841,4 +841,4 @@ export const MenuConfig: Array<IMenuConfig> = [
 /**
  * 默认打开
  */
-export const MenuOpenKeysConfig = ['2', '3', 'XX-3', 'XX-3xs', '4', '4-2', '5', '5-2', '6', '7', '8', '9', 'X', '10']
+export const MenuOpenKeysConfig = ['2', '3', 'XX-3', 'xxx-jcbz2', 'XX-3xs', '4', '4-2', '5', '5-2', '6', '7', '8', '9', 'X', '10']
