@@ -1,9 +1,8 @@
 import * as React from 'react';
 import {Container, Content, Dropdown, Footer, Header} from 'rsuite';
 import CardboardListTable from './component/cardboardListTable';
-import BackColorPanel from '@component/backColorPanel';
+import {BackColorPanel, HeadPanel} from '@component/panel';
 import CardboardList from './cardboardList';
-import HeadPanel from '@component/headPanel';
 import {RouterHistory} from '../../../router/routerBase';
 import {RouterPath} from '../../../router/routerPath';
 

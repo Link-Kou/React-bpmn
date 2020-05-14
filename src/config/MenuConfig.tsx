@@ -322,10 +322,8 @@ export const MenuConfig: Array<IMenuConfig> = [
         content: 'LongPanel',
         openTabs: {
             key: 'XX',
-            title:
-                'LongPanel',
-            route:
-                '/index/longPanel'
+            title: 'LongPanel',
+            route: '/index/longPanel'
         },
         items: []
     },

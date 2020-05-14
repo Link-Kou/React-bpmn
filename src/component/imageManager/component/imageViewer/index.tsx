@@ -3,7 +3,7 @@ import * as React from 'react';
 import './font/iconfont.css'
 import './image.scss'
 import classNames from 'classnames';
-import {Loader} from '@component/loadPanel';
+import {LoaderIcons} from '@component/panel';
 
 interface Iprops {
     ImageUrl?: string
@@ -238,7 +238,7 @@ export default class ImageViewer extends React.Component<Iprops> {
         }
         return (
             <>
-                {load === 'loading' ? <Loader/> : undefined}
+                {load === 'loading' ? <LoaderIcons/> : undefined}
                 <div className="app-img-canvas-handle"
                      style={{opacity: load === 'success' ? 1 : 0}}
                      onMouseMove={(e: any) => {

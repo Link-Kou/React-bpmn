@@ -1,21 +1,17 @@
 import * as React from 'react';
 import {Alert, Button, ButtonToolbar, Container, Content, Footer, Header} from 'rsuite';
-import LongPanel from '@component/longPanel';
 import CartonAddInfoUnified from './component/infoUnified';
 import CartonAddnPrintingUnified from './component/printingUnified';
 import CartonAddCostUnified from './component/costUnified';
 import CartonAddImageUnified from './component/imageUnified';
-import HeadPanel from '@component/headPanel';
-import BackColorPanel from '@component/backColorPanel';
+import {BackColorPanel, LoadPanel, RefPanel, LongPanel, HeadPanel} from '@component/panel';
 import CartonAdd from './cartonAdd';
 import {ICardboardProductCost, IFormValue, IStateFormValue} from '../index.types';
-import {RefPanle} from '@component/refPanel';
 import {utilsString, utilsUrl} from '@utils/index';
-import {LoadPanel} from '@component/loadPanel';
 import {RouterHistory} from '../../../router/routerBase';
 import {RouterPath} from '../../../router/routerPath';
-import Dialog from "@component/dialog";
-import {IntlApi} from "@component/textIntl";
+import Dialog from '@component/dialog';
+import {IntlApi} from '@component/textIntl';
 
 
 export default class Index extends CartonAdd {
@@ -113,7 +109,7 @@ export default class Index extends CartonAdd {
                     </HeadPanel>
                     <LoadPanel hideLoader={hideLoader} outrender={true} queueAnim={false}>
                         <LongPanel>
-                            <RefPanle>
+                            <RefPanel>
                                 {
                                     (ref: any) => (
                                         <Container>
@@ -135,7 +131,7 @@ export default class Index extends CartonAdd {
                                         </Container>
                                     )
                                 }
-                            </RefPanle>
+                            </RefPanel>
                         </LongPanel>
                     </LoadPanel>
                 </BackColorPanel>

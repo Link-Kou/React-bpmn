@@ -1,9 +1,8 @@
 import * as React from 'react';
 import {Dropdown} from 'rsuite';
-import HeadPanel from '@component/headPanel';
 import './index.scss'
 import {TypeConfigAddModel, TypeConfigEditModel} from '../index';
-import {LoadPanel} from '@component/loadPanel';
+import {LoadPanel, HeadPanel} from '@component/panel';
 import _delButton from './compose/_delButton';
 import _buildPanelLists from './compose/_panelLists';
 import {IConstant, IData} from '../../index.types';

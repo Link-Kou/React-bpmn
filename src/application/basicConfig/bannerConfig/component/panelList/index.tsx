@@ -12,10 +12,10 @@ import {
     Tag,
     TagGroup
 } from 'rsuite';
-import HeadPanel from '@component/headPanel';
 import './index.scss'
 import Dialog from '@component/dialog';
 import FlexCalcBox from '@component/flexCalcBox';
+import { HeadPanel } from '@component/panel';
 
 const {Paragraph} = Placeholder;
 

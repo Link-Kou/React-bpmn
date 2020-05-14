@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames'
-import {Loader} from '@component/loadPanel';
+import {LoaderIcons} from '@component/panel';
 import {Modal} from 'rsuite';
 import {ImageViewer} from '@imageManager/index';
 
@@ -71,7 +71,7 @@ export default class ImageCardView extends React.Component<Iprops> {
             return (
                 <>
                     {
-                        load === 'loading' ? <Loader/> : undefined
+                        load === 'loading' ? <LoaderIcons/> : undefined
                     }
                     {
                         fileUrl ? (

@@ -1,7 +1,7 @@
 import * as Loadable from 'react-loadable';
 import * as NProgress from 'nprogress';
 import * as React from 'react';
-import {Loader} from '@component/loadPanel';
+import {LoaderIcons} from '@component/panel';
 
 export const component = (text: string) => {
     return (
@@ -18,7 +18,7 @@ export const component = (text: string) => {
                 height: '65px'
 
             }}>
-                <Loader/>
+                <LoaderIcons/>
                 <p style={{color: '#ababab'}}>
                     {text}
                 </p>

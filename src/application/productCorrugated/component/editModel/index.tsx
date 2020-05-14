@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Alert, Button, Modal} from 'rsuite';
 import './index.scss'
-import {LoadPanel} from '@component/loadPanel';
+import {LoadPanel} from '@component/panel';
 import HookSortLists from './compose/_HookSortLists';
 import {IArrayDatas} from '../../index.types';
 

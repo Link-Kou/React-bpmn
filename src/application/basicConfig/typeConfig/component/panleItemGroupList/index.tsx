@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {Dropdown} from 'rsuite';
-import HeadPanel from '@component/headPanel';
 import {TypeConfigAddModel, TypeConfigEditModel, TypeConfigPanelList} from '../index';
-import {LoadPanel} from '@component/loadPanel';
+import {LoadPanel, HeadPanel} from '@component/panel';
 import {utilsNumber, utilsObject} from '@utils/index';
 import QueueAnim from 'rc-queue-anim';
 import {IConstant, IData} from '../../index.types';

@@ -1,16 +1,13 @@
 import * as React from 'react';
 import {Alert, Button, ButtonToolbar, Container, Content, Footer, Header} from 'rsuite';
-import LongPanel from '@component/longPanel';
 import CardboardAddInfoUnified from './component/infoUnified';
 import CardboardLayerInfoTable from './component/layerInfoTable';
 import CardboardAddCostUnified from './component/costUnified';
 import CardboardAddImageUnified from './component/imageUnified';
-import HeadPanel from '@component/headPanel';
 import {IBaseCorrugated, IBasePaper, IFormValue, IStateFormValue} from '../index.types';
 import CardboardAdd from './CardboardAdd';
-import BackColorPanel from '@component/backColorPanel';
+import {BackColorPanel, LoadPanel, LongPanel, HeadPanel} from '@component/panel';
 import {utilsString, utilsUrl} from '@utils/index';
-import {LoadPanel} from '@component/loadPanel';
 import {RouterHistory} from 'src/router/routerBase';
 import Dialog from '@component/dialog';
 import {IntlApi} from '@component/textIntl';

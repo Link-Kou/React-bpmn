@@ -1,5 +1,5 @@
 import * as NProgress from 'nprogress';
-import {LoadLoable} from '@component/loadPanel';
+import { LoadLoable } from '@component/panel';
 
 const ConfigBaseThen = (e: any) => {
     NProgress.done()

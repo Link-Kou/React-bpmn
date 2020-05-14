@@ -3,7 +3,7 @@ import {Button, Col, ControlLabel, Form, FormControl, FormGroup, Grid, Input, In
 import FlexCalcBox from '@component/flexCalcBox';
 import {CellIndex,HeaderCellSort} from '@component/table';
 import TextSpan from '@component/textSpan';
-import HeadPanel from '@component/headPanel';
+import { HeadPanel } from '@component/panel';
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
 

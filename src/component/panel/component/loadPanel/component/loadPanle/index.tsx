@@ -1,10 +1,9 @@
 import * as React from 'react';
-import {Loader} from '@component/loadPanel';
 import FlexCalcBox from '@component/flexCalcBox';
-import compose from 'recompose/compose';
 import _ from 'lodash';
 import {utilsObject} from '@utils/index';
 import QueueAnim from 'rc-queue-anim';
+import {LoaderIcons} from '@component/panel';
 
 interface IProps {
     /**
@@ -35,12 +34,12 @@ interface IProps {
     queueAnim?: boolean
 }
 
-class LoadComponent extends React.Component<IProps> {
+export default class Index extends React.Component<IProps> {
 
     private _Loader(title: string, hideLoaderComponent: boolean = false) {
         return (
             <div style={{position: 'relative', textAlign: 'center', top: '50%'}}>
-                {hideLoaderComponent ? undefined : <Loader/>}
+                {hideLoaderComponent ? undefined : <LoaderIcons/>}
                 <p style={{marginTop: hideLoaderComponent ? 0 : 30, color: '#d6d6d6'}}>
                     {title}
                 </p>
@@ -102,6 +101,4 @@ class LoadComponent extends React.Component<IProps> {
         </>
     }
 }
-
-export default compose<any, IProps>()(LoadComponent);
 

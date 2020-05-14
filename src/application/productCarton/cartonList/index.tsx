@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Col, Grid, Row} from 'rsuite';
 import CartonListTable from './component/cartonListTable';
-import BackColorPanel from '@component/backColorPanel';
+import {BackColorPanel} from '@component/panel';
 import CartonList from './cartonList';
 
 export default class Index extends CartonList {

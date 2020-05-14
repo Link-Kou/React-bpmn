@@ -15,7 +15,7 @@ import {
     Schema
 } from 'rsuite';
 import {BigDecimal, RoundingMode} from 'bigdecimal'
-import {LoadPanel} from '@component/loadPanel';
+import {LoadPanel} from '@component/panel';
 import _HookDataConfigList from './compose/_DataConfigList';
 import TextRequired from '@component/textRequired';
 import {IArrayDatas, IFormValue, IStateFormValue} from '../../index.types';

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {Alert, Button, Modal} from 'rsuite';
 import './index.scss'
-import {LoadPanel} from '@component/loadPanel';
 import HookSortLists from './compose/_HookSortLists';
+import {LoadPanel} from '@component/panel';
 
 interface IProps {
     id?: string

@@ -4,7 +4,7 @@ import {DatePicker, Input, InputPicker} from 'rsuite';
 import SqlQuery from '../../component/sqlQuery'
 
 import Moment from 'moment';
-import LongPanel from '../../component/longPanel';
+import {LongPanel} from '@component/panel';
 import QueueAnim from 'rc-queue-anim';
 
 

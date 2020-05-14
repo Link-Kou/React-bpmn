@@ -2,7 +2,7 @@ import * as React from 'react';
 import {ButtonGroup, ButtonToolbar, Icon, IconButton, Panel, PanelGroup, Tag, TagGroup} from 'rsuite';
 import {CorrugatedConfigAddModel, CorrugatedConfigEditModel} from '../../index';
 import {utilsArray, utilsObject} from '@utils/index';
-import {LoadPanel} from '@component/loadPanel';
+import {LoadPanel} from '@component/panel';
 import {IArrayDatas} from '../../../index.types';
 
 

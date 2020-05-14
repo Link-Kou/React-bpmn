@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import {Button, Modal, Progress} from 'rsuite';
-import LoadPanelLoader from '@component/loadPanel/component/loader';
+import {LoaderIcons} from '@component/panel';
 
 const {Line} = Progress;
 
@@ -62,7 +62,7 @@ export default class Dialog {
                         <Modal.Header closeButton={false}/>
                         <Modal.Body>
                             <div style={{textAlign: 'center', marginBottom: 15}}>{title}</div>
-                            <LoadPanelLoader/>
+                            <LoaderIcons/>
                         </Modal.Body>
                         <Modal.Footer/>
                     </Modal>

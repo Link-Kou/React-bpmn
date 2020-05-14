@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Col, Grid, Row} from 'rsuite';
 import BaseCorrugatedPanelList from './component/corrugatedList';
 import BaseCorrugatedTable from './component/corrugatedTable';
-import BackColorPanel from '@component/backColorPanel';
+import {BackColorPanel} from '@component/panel';
 import BaseCorrugated from './baseCorrugated';
 
 export default class index extends BaseCorrugated {

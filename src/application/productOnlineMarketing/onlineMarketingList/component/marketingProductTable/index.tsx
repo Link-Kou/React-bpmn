@@ -3,8 +3,8 @@ import {Button, ButtonToolbar, Dropdown, Table} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
 import {CellIndex} from '@component/table';
 import TextSpan from '@component/textSpan';
-import HeadPanel from '@component/headPanel';
 import './index.scss'
+import { HeadPanel } from '@component/panel';
 
 const {Column, HeaderCell, Cell} = Table;
 

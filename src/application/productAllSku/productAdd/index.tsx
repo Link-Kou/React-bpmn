@@ -1,9 +1,7 @@
 import * as React from 'react';
 import {Button, ButtonToolbar, Container, Content, Footer, Header} from 'rsuite';
-import LongPanel from '@component/longPanel';
-import HeadPanel from '@component/headPanel';
-import BackColorPanel from '@component/backColorPanel';
-import {LoadPanel} from '@component/loadPanel';
+import {LongPanel} from '@component/panel';
+import {LoadPanel, BackColorPanel, HeadPanel} from '@component/panel';
 import ProductAllSku from './productAllSku';
 import ProductSkuParts from './component/skuCartesianTable';
 import ProductSku from './component/skuItemTable';

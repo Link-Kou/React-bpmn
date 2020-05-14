@@ -1,10 +1,10 @@
 import * as React from 'react';
-import HeadPanel from '@component/headPanel';
 import './index.scss'
 import FlexCalcBox from '@component/flexCalcBox';
 import {utilsObject} from '@utils/index';
 import HookBuildPanelLists from './compose/HookPanelLists';
 import {IArrayDatas} from '../../index.types';
+import { HeadPanel } from '@component/panel';
 
 
 interface IProps {

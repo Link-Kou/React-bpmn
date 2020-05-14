@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames'
 import {utilsString} from '@utils/index';
-import {Loader} from '@component/loadPanel';
+import {LoaderIcons} from '@component/panel';
 
 interface Iprops {
 
@@ -71,7 +71,7 @@ export default class ImageCardViewUpdataDelete extends React.Component<Iprops> {
             return (
                 <>
                     {
-                        load === 'loading' ? <Loader/> : undefined
+                        load === 'loading' ? <LoaderIcons/> : undefined
                     }
                     {
                         fileUrl ? (

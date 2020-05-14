@@ -2,10 +2,10 @@ import * as React from 'react';
 import {Button, Dropdown, Panel, Table, Tag} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
 import {CellIndex, CellTextSpan} from '@component/table';
-import HeadPanel from '@component/headPanel';
 import {PaperAddEditModel} from '../index';
 import {IArrayDatas, IFormValue} from '../../index.types';
 import TextSpan from '@component/textSpan';
+import { HeadPanel } from '@component/panel';
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
 

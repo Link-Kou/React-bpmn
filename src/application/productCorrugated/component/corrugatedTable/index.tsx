@@ -3,9 +3,9 @@ import {Button, Dropdown, Panel, Table, Tag} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
 import {CellIndex, CellTextSpan,HeaderCellMulti} from '@component/table';
 import TextSpan from '@component/textSpan';
-import HeadPanel from '@component/headPanel';
 import BaseCorrugatedAddEdit from '../corrugatedAddEdit';
 import {IFormValue, IArrayDatas, EnumsMakeMode} from '../../index.types';
+import { HeadPanel } from '@component/panel';
 
 
 const {Column, HeaderCell, Cell, Pagination} = Table;

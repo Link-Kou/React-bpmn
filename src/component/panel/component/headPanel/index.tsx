@@ -12,7 +12,7 @@ interface IProps {
     rightStyle?: React.CSSProperties;
 }
 
-export default class HeadPanel extends React.Component<IProps> {
+export default class Index extends React.Component<IProps> {
 
 
     private _hideTitle(children: any, rightStyle?: React.CSSProperties) {

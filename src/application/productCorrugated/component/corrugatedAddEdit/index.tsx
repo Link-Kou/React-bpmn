@@ -20,7 +20,7 @@ import {
 import {HookRenderMakeModeForm} from './compose/hookBuiltInOutGroup';
 import {HookDataConfigList} from './compose/hookDataConfigList';
 import {IArrayDatas, IBasePaper, IFormValue, IStateFormValue} from '../../index.types';
-import {LoadPanel} from '@component/loadPanel';
+import {LoadPanel} from '@component/panel';
 import TextRequired from '@component/textRequired';
 import {BigDecimal} from 'bigdecimal';
 import numeral from 'numeral'

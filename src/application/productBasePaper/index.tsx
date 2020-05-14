@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Col, Grid, Row} from 'rsuite';
 import BasePaperConfigPanelList from './component/panelConfigList';
 import BasePaperTable from './component/paperTable';
-import BackColorPanel from '@component/backColorPanel';
+import {BackColorPanel} from '@component/panel';
 import BasePaper from './BasePaper';
 import QueueAnim from 'rc-queue-anim';
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Container, Content, Footer, Header} from 'rsuite';
 import OperationGroup from './component/operation'
 import Table from '../productList/component/table'
-import BackColorPanel from '@component/backColorPanel';
+import {BackColorPanel} from '@component/panel';
 import {Prompt} from 'react-router';
 import ProductList from './productList';
 import ProductSkuModal from '../productSkuModal';

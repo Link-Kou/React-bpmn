@@ -2,7 +2,6 @@ import * as React from 'react';
 import {Button, Dropdown, Table} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
 import TextSpan from '@component/textSpan';
-import HeadPanel from '@component/headPanel';
 import {RouterHistory} from '../../../../../router/routerBase';
 import './index.scss'
 import {HeaderCellMulti,CellExpandedIndex} from '@component/table';
@@ -11,6 +10,7 @@ import {HooKCarousel} from './compose/hookCarousel';
 import {HookPrinting} from './compose/hookPrinting';
 import {RouterPath} from '../../../../../router/routerPath';
 import {HooKRowExpanded} from './compose/hookRowExpanded';
+import { HeadPanel } from '@component/panel';
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
 

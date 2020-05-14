@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Container, Content, Footer, Header} from 'rsuite';
-import LongPanel from '../../component/longPanel';
+import {LongPanel} from '@component/panel';
 
 export default class Index extends React.Component {
     public render() {

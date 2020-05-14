@@ -3,7 +3,7 @@ import {Panel, Table} from 'rsuite';
 import {CellAlash} from '@component/table';
 import {SelectLayerCell} from './compone/hookCell';
 import {IBaseCorrugated, IBasePaper, IFormValue} from '../../../index.types';
-import {RefPanle} from '@component/refPanel';
+import {RefPanel} from '@component/panel';
 
 const {Column, HeaderCell} = Table;
 
@@ -296,7 +296,7 @@ export default class CardboardLayerInfoTable extends React.Component<IProps> {
             <>
                 <Panel header={'纸板层'}>
                     <div style={{padding: 10}}>
-                        <RefPanle>
+                        <RefPanel>
                             {
                                 (ref: any) => (
                                     <Table
@@ -326,7 +326,7 @@ export default class CardboardLayerInfoTable extends React.Component<IProps> {
                                     </Table>
                                 )
                             }
-                        </RefPanle>
+                        </RefPanel>
 
                     </div>
                 </Panel>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Col, Grid, Row} from 'rsuite';
 import QueueAnim from 'rc-queue-anim';
-import BackColorPanel from '@component/backColorPanel';
+import {BackColorPanel} from '@component/panel';
 import OnlineMarketingList from './onlineMarketingList';
 import MarketingProductTable from './component/marketingProductTable';
 import MarketingProgramList from './component/marketingProgramList';

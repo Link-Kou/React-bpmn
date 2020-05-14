@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Alert, Button, Icon, IconButton, Uploader} from 'rsuite';
 
 import './imageLibraryUploader.scss'
-import {Loader} from '@component/loadPanel';
+import { LoaderIcons } from '@component/panel';
 
 
 interface Iprops {
@@ -57,7 +57,7 @@ export default class ImageLibraryUploader extends React.Component<Iprops> {
         return fileType.map((k, i, a) => (
             <div>
                 {
-                    k.fileType.status === 'uploading' ? <Loader/> : null
+                    k.fileType.status === 'uploading' ? <LoaderIcons/> : null
                 }
                 {
                     k.fileType.status === 'finished' ?

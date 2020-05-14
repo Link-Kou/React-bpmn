@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {Col, Grid, Row} from 'rsuite';
 import {TypeConfigPanelItemGroupList, TypeConfigPanelList} from './component';
-import BackColorPanel from '@component/backColorPanel';
 import typeConfig from './typeConfig';
+import {BackColorPanel} from '@component/panel';
 
 export default class TypeConfig extends typeConfig {
 

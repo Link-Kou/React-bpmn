@@ -8,12 +8,12 @@ interface IProps {
 }
 
 /**
- *
+ * 背景颜色面板
  * @author lk
- * @date 2020/4/10 10:28
+ * @date 2021/01/01 10:28
  * @version 1.0
  */
-export default class BackColorPanel extends React.Component<IProps> {
+export default class Index extends React.Component<IProps> {
 
     public render() {
         const {style, tableBordered} = this.props

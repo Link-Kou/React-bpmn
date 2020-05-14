@@ -3,7 +3,7 @@ import {Dropdown, Icon} from 'rsuite';
 import {ProductListSearchDrawer} from '../search';
 import {RouterHistory} from '../../../../../router/routerBase';
 import {RouterPath} from '../../../../../router/routerPath';
-import HeadPanel from '@component/headPanel';
+import { HeadPanel } from '@component/panel';
 
 
 interface IProps {

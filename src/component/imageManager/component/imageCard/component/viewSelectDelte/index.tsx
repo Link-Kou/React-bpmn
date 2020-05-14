@@ -1,7 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames'
-import {Loader} from '@component/loadPanel';
-
+import {LoaderIcons} from '@component/panel';
 interface Iprops {
 
     /**
@@ -173,7 +172,7 @@ export default class ImageCardViewSelectDelte extends React.Component<Iprops> {
         const viewImage = () => {
             return (
                 <>
-                    {load === 'loading' ? <Loader/> : undefined}
+                    {load === 'loading' ? <LoaderIcons/> : undefined}
                     <img style={{opacity: load === 'success' ? 1 : 0}} alt={''} src={fileUrl}
                          onError={() => {
                              this.setState({

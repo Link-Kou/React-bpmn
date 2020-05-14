@@ -2,7 +2,7 @@ import * as React from 'react';
 import {ButtonGroup, ButtonToolbar, Icon, IconButton, Panel, PanelGroup, Tag, TagGroup} from 'rsuite';
 import {PaperConfigAddModel, PaperConfigEditModel} from '../../index';
 import {utilsArray, utilsObject} from '@utils/index';
-import {LoadPanel} from '@component/loadPanel';
+import {LoadPanel} from '@component/panel';
 
 
 interface IPanelList {

@@ -6,7 +6,7 @@ interface IProps {
     classPrefix?: string
 }
 
-export default class LoadPanelLoader extends React.Component<IProps> {
+export default class index extends React.Component<IProps> {
     public state = {
         show: true
     }

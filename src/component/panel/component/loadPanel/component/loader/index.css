@@ -1,0 +1,63 @@
+@charset "UTF-8";
+@keyframes ball-scale-multiple {
+  0% {
+    transform: scale(0);
+    opacity: 0; }
+  5% {
+    opacity: 1; }
+  100% {
+    transform: scale(1);
+    opacity: 0; } }
+.ball-scale-multiple {
+  position: relative;
+  transform: translateY(-30px); }
+  .ball-scale-multiple > div:nth-child(2) {
+    animation-delay: -0.4s; }
+  .ball-scale-multiple > div:nth-child(3) {
+    animation-delay: -0.2s; }
+  .ball-scale-multiple > div {
+    background-color: #d2d2d2;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    margin: 2px;
+    animation-fill-mode: both;
+    position: absolute;
+    left: -30px;
+    top: 0px;
+    opacity: 0;
+    margin: 0;
+    width: 60px;
+    height: 60px;
+    animation: ball-scale-multiple 1s 0s linear infinite; }
+
+/**
+自定义加载进度条
+**/
+.app-handle-img-loader-box {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .app-handle-img-loader-box > .app-handle-img-loader {
+    width: 45px;
+    height: 45px;
+    display: inline-block;
+    padding: 0;
+    border-radius: 100%;
+    border: 5px solid #f62459;
+    border-right-color: rgba(0, 0, 0, 0.1);
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+    -webkit-animation: app-handle-img-loader 1s ease-in-out infinite;
+    animation: app-handle-img-loader 1s ease-in-out infinite; }
+@keyframes app-handle-img-loader {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+@-webkit-keyframes app-handle-img-loader {
+  from {
+    -webkit-transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg); } }

@@ -6,9 +6,9 @@ import {
     ImageCardViewUploader,
     ImageViewer
 } from '@imageManager/index';
-import {LoadPanel} from '@component/loadPanel';
-import LongPanel from '@component/longPanel';
+import {LoadPanel} from '@component/panel';
 import {ImageUploaderLibraryGroup, ImageUploaderCard} from '@common/imageUploader';
+import {LongPanel} from '@component/panel';
 
 
 export default class Index extends React.Component {

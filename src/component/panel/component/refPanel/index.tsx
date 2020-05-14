@@ -5,7 +5,7 @@ import * as React from 'react';
  * @param children
  * @constructor
  */
-export const RefPanle = ({children}: { children: React.ReactChildren | any }) => {
+export const IndexRefPanel = ({children}: { children: React.ReactChildren | any }) => {
     const containerRef: any = React.createRef<HTMLDivElement>();
     return (
         <div ref={containerRef} style={{position: 'relative'}}>

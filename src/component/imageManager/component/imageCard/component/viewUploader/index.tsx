@@ -2,7 +2,7 @@ import * as React from 'react';
 import classNames from 'classnames'
 import {Uploader} from 'rsuite';
 import './viewUploader.scss'
-import {Loader} from '@component/loadPanel';
+import {LoaderIcons} from '@component/panel';
 import {utilsNumber} from '@utils/index';
 import {FileType} from 'rsuite/lib/Uploader';
 
@@ -191,11 +191,11 @@ export default class ImageCardViewUploaderDelete extends React.Component<Iprops>
         const viewState = () => {
             if (load === 'loading' || load === 'uploadLoading') {
                 return (
-                    <Loader/>
+                    <LoaderIcons/>
                 )
             } else if (load === 'error') {
                 return (
-                    <Loader classPrefix={'app-handle-img-error'}/>
+                    <LoaderIcons classPrefix={'app-handle-img-error'}/>
                 )
             }
             return undefined

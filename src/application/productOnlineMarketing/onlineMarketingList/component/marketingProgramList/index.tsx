@@ -3,9 +3,9 @@ import {Button, Dropdown, Table} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
 import {CellIndex} from '@component/table';
 import TextSpan from '@component/textSpan';
-import HeadPanel from '@component/headPanel';
 import './index.scss'
 import {MarketingLadderPrice, MarketingOnePrice} from './compone';
+import { HeadPanel } from '@component/panel';
 
 const {Column, HeaderCell, Cell} = Table;
 

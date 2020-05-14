@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Tree} from 'rsuite';
-import LongPanel from '../../component/longPanel';
+import {LongPanel} from '@component/panel';
 import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
 
 export default class Index extends React.Component {
