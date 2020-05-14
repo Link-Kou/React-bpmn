@@ -12,6 +12,8 @@ interface IProps {
         activePage: number,
         displayLength: number
     }, callback: (data: Array<IReturnMaterialProductList>, total: number) => void): void
+
+    onShowSku?(id?: string): void
 }
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
@@ -36,7 +38,12 @@ export default class Index extends React.Component<IProps> {
                 {(rowData: any) => (
                     <>
                         <ButtonToolbar>
-                            <IconButton icon={<Icon icon="braille"/>} color="blue" circle={true}/>
+                            <IconButton icon={<Icon icon="braille"/>} color="blue"
+                                        circle={true}
+                                        onClick={() => {
+                                            const {onShowSku} = this.props
+                                            onShowSku?.(rowData.id)
+                                        }}/>
                         </ButtonToolbar>
                     </>
                 )}
@@ -159,10 +166,7 @@ export default class Index extends React.Component<IProps> {
 
     public state = {
         loading: true,
-        data: [{
-            id: 'xxx',
-            url: 'sdad'
-        }],
+        data: [],
         expandedRowKeys: []
     }
 

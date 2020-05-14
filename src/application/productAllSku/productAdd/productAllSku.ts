@@ -50,6 +50,7 @@ export default class ProductAllSku extends React.Component<any, any> {
             if (req.success) {
                 //根据后端返回的数据进行重新构建
                 const data = req.data
+                //从新构建数据
                 const newFormValue: IFormValue = {
                     //region 基础数据
                     /**
@@ -132,9 +133,7 @@ export default class ProductAllSku extends React.Component<any, any> {
                             image: false
                         }
                     ],
-
                     skuTable: [],
-
                     specification: [
                         {
                             id: '',

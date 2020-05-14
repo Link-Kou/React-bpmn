@@ -5,11 +5,15 @@ import Table from '../productList/component/table'
 import BackColorPanel from '@component/backColorPanel';
 import {Prompt} from 'react-router';
 import ProductList from './productList';
+import ProductSkuModal from '../productSkuModal';
 
 
-export default class PoductList extends ProductList {
+export default class index extends ProductList {
 
-    public state = {}
+    public state = {
+        skuModal: false,
+        id: undefined
+    }
 
 
     public componentDidMount(): void {
@@ -17,7 +21,7 @@ export default class PoductList extends ProductList {
     }
 
     public render() {
-
+        const {skuModal, id: fid} = this.state
         return (
             <>
                 <Prompt message="Are you sure you want to leave?"/>
@@ -27,7 +31,21 @@ export default class PoductList extends ProductList {
                             <OperationGroup/>
                         </Header>
                         <Content>
-                            <Table onLoadTableData={this.handlersLoadProductPage}/>
+                            <ProductSkuModal show={skuModal}
+                                             id={fid}
+                                             onHide={() => {
+                                                 this.setState({
+                                                     skuModal: false
+                                                 })
+                                             }}/>
+                            <Table
+                                onShowSku={(id) => {
+                                    this.setState({
+                                        skuModal: true,
+                                        id
+                                    })
+                                }}
+                                onLoadTableData={this.handlersLoadProductPage}/>
                         </Content>
                         <Footer/>
                     </Container>
