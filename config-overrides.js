@@ -29,6 +29,7 @@ module.exports = override(
         '@component': 'src/component',
         '@common': 'src/common',
         '@router': 'src/router',
+        '@listener': 'src/listener',
         '@fetch': 'src/fetch'
     })
 );

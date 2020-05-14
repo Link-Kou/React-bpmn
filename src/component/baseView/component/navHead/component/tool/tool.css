@@ -1,8 +1,8 @@
 .app-head-tool-icotool {
   display: flex;
-  flex: 1;
   margin-top: 10px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
+  margin-right: 38px;
   align-content: flex-end;
   justify-content: flex-end; }
 
@@ -10,5 +10,3 @@
   margin-left: 10px;
   width: 40px;
   float: left; }
-
-/*# sourceMappingURL=tool.css.map */

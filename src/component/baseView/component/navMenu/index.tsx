@@ -2,9 +2,9 @@ import * as React from 'react';
 import {Dropdown, Icon, Nav, Sidenav} from 'rsuite';
 import {MenuConfig, IMenuConfig, MenuOpenKeysConfig} from '../../../../config/MenuConfig'
 import * as MenuLayoutConfig from '../../../../config/MenuLayoutConfig'
-import {Listener} from '../../../../listener';
 import './menu.scss'
 import {RouterHistory} from '@router';
+import Listener from '@listener';
 
 
 /**

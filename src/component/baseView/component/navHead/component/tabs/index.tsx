@@ -1,12 +1,26 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import {Icon, Popover, Whisper, Dropdown, IconButton} from 'rsuite';
-
-import {Listener} from '../../../../../../listener';
+import {RouterHistory, Routes} from '@router';
+import Listener from '@listener';
 import './tabs.scss'
+import {utilsStorage} from '@utils/index';
 
-class HeadTabs extends React.Component {
+interface IState {
+    activeKey: string
+    collapsed: boolean
+    /**
+     * 选择的Tab
+     */
+    selectItems: string
+    items: Array<{
+        id: string
+        path: string
+        content?: string
+    }>
+}
+
+export default class HeadTabs extends React.Component<any> {
 
     public _deviceEventEmitter: any
 
@@ -14,97 +28,78 @@ class HeadTabs extends React.Component {
 
     public wrapperheader: any;
 
-    public state = {
+    public state: IState = {
         activeKey: 'asd',
         collapsed: false,
-        /**
-         * 打开的Tab
-         */
-        panes: [
-            {
-                title: 'demo',
-                key: 'asd'
-            }, {
-                title: 'demo2',
-                key: 'asd2'
-            }
-        ],
         selectItems: '',
-        items: [
-            {
-                id: '1',
-                content: '1'
-            },
-            {
-                id: '2',
-                content: '2222222222222222222'
-            },
-            {
-                id: '3',
-                content: '333333333333333333333333333333333'
-            },
-            {
-                id: '4',
-                content: '4'
-            },
-            {
-                id: '5',
-                content: '5'
-            },
-            {
-                id: '6',
-                content: '6'
-            },
-            {
-                id: '7',
-                content: '77777777777777777777777777'
-            },
-            {
-                id: '8',
-                content: '888888888'
-            },
-            {
-                id: '9',
-                content: '99999999'
-            },
-            {
-                id: '10',
-                content: '10101010'
-            },
-            {
-                id: '11',
-                content: '111111111111111111'
-            },
-            {
-                id: '12',
-                content: '111111111111111111'
-            },
-            {
-                id: '13',
-                content: '1313131313131313131313131313'
-            },
-            {
-                id: '14',
-                content: '1414141414141414'
-            },
-            {
-                id: '15',
-                content: '15151515151515151515'
-            },
-            {
-                id: '16',
-                content: '16161616'
+        items: []
+    }
+
+    private _listen = () => {
+        const routerHistory = RouterHistory;
+        routerHistory.listen((listener) => {
+            const {items} = this.state
+            const route = items.find((k, i, a) => k.path === listener.pathname);
+            if (route) {
+                this.onWheel(`header-tabs-tabitem${route.id}`, route.id)
+            } else {
+                Routes.every((k, i, a) => {
+                    if (listener.pathname === k.path) {
+                        items.push({
+                            id: k.key,
+                            path: listener.pathname,
+                            content: k.title
+                        })
+                        this.setState({items, selectItems: k.key}, () => {
+                            utilsStorage.setItem('tabs', JSON.stringify(items))
+                        })
+                        return false;
+                    }
+                    return true;
+                })
             }
-        ]
+        })
     }
 
-    public componentDidMount(): void {
+    private _initialization = () => {
+        const routerHistory = RouterHistory;
         this._deviceEventEmitter = PubSub.subscribe(Listener.NavMenuSidenav, this._OnCollapsed.bind(this));
+        const item = utilsStorage.getItem('tabs');
+        const location = routerHistory.location;
+        const parse: Array<any> = JSON.parse(item ?? '[]');
+        let route = parse.find((k, i, a) => k.path === location.pathname);
+        if (!route) {
+            const find: any = Routes.find((k, i, a) => k.path === location.pathname);
+            if (find) {
+                const newroute = {
+                    id: find.key,
+                    path: find.path,
+                    content: find.title
+                }
+                parse.push(newroute)
+                route = newroute
+            }
+        }
+        this.setState({
+            items: parse
+        }, () => {
+            if (route) {
+                this.onWheel(`header-tabs-tabitem${route.id}`, route.id)
+            } else {
+
+            }
+        })
     }
 
-    public componentWillMount(): void {
+    componentDidMount(): void {
+        this._initialization();
+        this._listen();
+    }
+
+    componentWillMount(): void {
         PubSub.unsubscribe(this._deviceEventEmitter);
     }
+
 
     /**
      * 打开关闭
@@ -115,6 +110,7 @@ class HeadTabs extends React.Component {
             collapsed: !this.state.collapsed
         })
     }
+
 
     /**
      * 拖动
@@ -178,11 +174,13 @@ class HeadTabs extends React.Component {
      * @param classname
      * @param id
      */
-    public onWheel(classname: string, id: string) {
+    public onWheel(classname: string, id: string, callbackWheelEnd?: () => void) {
         const anchorElement: any = document.getElementsByClassName(classname)[0];
         anchorElement.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'});
         this.setState({
             selectItems: id
+        }, () => {
+            callbackWheelEnd?.()
         })
     }
 
@@ -193,8 +191,8 @@ class HeadTabs extends React.Component {
         const {selectItems, items} = this.state
         let index: number = -1;
         const tablength: number = items.length
-        items.some((k, i, a) => {
-            if (k.id === selectItems) {
+        items?.some((k, i, a) => {
+            if (k?.id === selectItems) {
                 switch (type) {
                     case 'next':
                         if (i + 1 >= tablength) {
@@ -225,6 +223,7 @@ class HeadTabs extends React.Component {
     }
 
     public render() {
+        const {selectItems, items} = this.state
         return (
             <div className='header-tabs' ref={ref => {
                 this.wrapper = ref;
@@ -233,9 +232,10 @@ class HeadTabs extends React.Component {
                 return false
             }}>
                 <div className={'header-tabs-box'} style={{display: 'flex'}}>
-                    <IconButton appearance="subtle" icon={<Icon icon="arrow-left"/>} placement="left" onClick={() => {
-                        this.onNextPrev('prev')
-                    }}/>
+                    <IconButton style={{top: 5}} appearance="subtle" icon={<Icon icon="arrow-left"/>} placement="left"
+                                onClick={() => {
+                                    this.onNextPrev('prev')
+                                }}/>
                     <DragDropContext onDragEnd={this.onDragEnd.bind(this)}>
                         <Droppable droppableId="droppable" direction="horizontal">
                             {(provided, snapshot) => (
@@ -248,11 +248,11 @@ class HeadTabs extends React.Component {
                                     style={this.getListStyle(snapshot.isDraggingOver)}
                                     {...provided.droppableProps}
                                 >
-                                    {this.state.items.map((item, index) => (
+                                    {items.map((item, index) => (
                                         <Draggable key={item.id} draggableId={item.id} index={index}>
                                             {(provideds, snapshots) => (
                                                 <div
-                                                    className={`header-tabs-tabitem header-tabs-tabitem${item.id} ${this.state.selectItems === item.id ? 'header-tabs-tabitem-select' : ''}`}
+                                                    className={`header-tabs-tabitem header-tabs-tabitem${item.id} ${selectItems === item.id ? 'header-tabs-tabitem-select' : ''}`}
                                                     role="button"
                                                     ref={provideds.innerRef}
                                                     {...provideds.draggableProps}
@@ -265,7 +265,9 @@ class HeadTabs extends React.Component {
                                                     <div
                                                         className={`header-tabs-tabitem-content header-tabs-tabitem-content${item.id}`}
                                                         onClick={() => {
-                                                            this.onWheel(`header-tabs-tabitem${item.id}`, item.id)
+                                                            this.onWheel(`header-tabs-tabitem${item.id}`, item.id, () => {
+                                                                RouterHistory.push(item.path)
+                                                            })
                                                         }}>{item.content}</div>
                                                     <Icon className={'app-close'} icon={'warning'}/>
                                                 </div>
@@ -277,51 +279,52 @@ class HeadTabs extends React.Component {
                             )}
                         </Droppable>
                     </DragDropContext>
-                    <IconButton appearance="subtle" icon={<Icon icon="arrow-right"/>} placement="right"
-                                style={{left: -48}} onClick={() => {
-                        this.onNextPrev('next')
-                    }}/>
-                    <Whisper
-                        trigger="hover"
-                        placement='bottom'
-                        speaker={
-                            <Popover title="">
-                                <Dropdown.Menu
-                                    style={{
-                                        width: 200
-                                    }}
-                                >
-                                    <Dropdown.Item panel={true} style={{padding: 10, width: 160}}>
-                                        <p>Signed in as</p>
-                                        <strong>foobar</strong>
-                                    </Dropdown.Item>
-                                    <Dropdown.Item divider={true}/>
-                                    <Dropdown.Item>Your profile</Dropdown.Item>
-                                    <Dropdown.Item>Your stars</Dropdown.Item>
-                                    <Dropdown.Item>Your Gists</Dropdown.Item>
-                                    <Dropdown.Item divider={true}/>
-                                    <Dropdown.Item>Help</Dropdown.Item>
-                                    <Dropdown.Item>Settings</Dropdown.Item>
-                                    <Dropdown.Item>Sign out</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Popover>
-                        }
-                    >
-                        <div className={'header-tabs-basetool'}>
-                            <div>
-                                <Icon icon={'gear-circle'}/>
+                    <div>
+                        <IconButton appearance="subtle" icon={<Icon icon="arrow-right"/>}
+                                    placement="right"
+                                    style={{top: 5, left: -48}}
+                                    onClick={() => {
+                                        this.onNextPrev('next')
+                                    }}/>
+                        <Whisper
+                            trigger="hover"
+                            placement='bottom'
+                            speaker={
+                                <Popover title="">
+                                    <Dropdown.Menu
+                                        style={{
+                                            width: 200
+                                        }}
+                                    >
+                                        <Dropdown.Item panel={true} style={{padding: 10, width: 160}}>
+                                            <p>Signed in as</p>
+                                            <strong>foobar</strong>
+                                        </Dropdown.Item>
+                                        {
+                                            items.map((k, i, a) => (
+                                                <>
+                                                    {i === 0 ? <Dropdown.Item divider={true}/> : undefined}
+                                                    <Dropdown.Item>{k.content}</Dropdown.Item>
+                                                </>
+                                            ))
+                                        }
+                                        <Dropdown.Item divider={true}/>
+                                        <Dropdown.Item>Help</Dropdown.Item>
+                                        <Dropdown.Item>Settings</Dropdown.Item>
+                                        <Dropdown.Item>Sign out</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Popover>
+                            }
+                        >
+                            <div className={'header-tabs-basetool'}>
+                                <div>
+                                    <Icon icon={'gear-circle'}/>
+                                </div>
                             </div>
-                        </div>
-                    </Whisper>
+                        </Whisper>
+                    </div>
                 </div>
             </div>
         )
     }
 }
-
-export default connect(
-    (state: any) => ({
-        param: state
-    }),
-    (dispatch: any) => ({})
-)(HeadTabs)

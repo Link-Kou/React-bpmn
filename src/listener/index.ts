@@ -1,6 +1,6 @@
 import * as PubSub from 'pubsub-js'
 
-export class Listener {
+export default class Listener {
 
     /**
      * 打开全局刷新

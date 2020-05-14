@@ -2,9 +2,9 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Button} from 'rsuite';
 
-import {Listener} from '../../../../listener';
 
 import './logo.scss'
+import Listener from '@listener';
 
 class HeadUser extends React.Component {
 

@@ -3,6 +3,7 @@
 /**logo高度**/
 /**菜单背景颜色*/
 .header-tabs {
+  flex: 1;
   margin-top: 10px;
   margin-left: 5px;
   overflow: hidden;
@@ -11,6 +12,7 @@
   .header-tabs .header-tabs-box {
     position: relative; }
   .header-tabs .header-tabs-base {
+    flex: 1;
     background-color: #fff;
     margin-right: 53px;
     overflow: auto;

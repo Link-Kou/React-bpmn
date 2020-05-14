@@ -276,7 +276,7 @@ export default class CartonListTable extends React.Component<IProps> {
                 <HeadPanel hideBorderBottom={true} title={'纸箱产品列表'}>
                     <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
                         <Dropdown title={'产品管理'} trigger="click" onSelect={(e) => {
-                            RouterHistorys.push(RouterPath.CartonAdd)
+                            RouterHistory.push(RouterPath.CartonAdd)
                         }}>
                             <Dropdown.Item>新增产品</Dropdown.Item>
                             <Dropdown.Item>分类排序</Dropdown.Item>

@@ -1,11 +1,8 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
-
-import RouterBaseViewBodyItem from '../../../../router/routerBaseItemPathIndex'
-
 import './body.scss'
+import {RouterBaseItemPath} from '@router';
 
-class Index extends React.Component {
+export default class Index extends React.Component {
 
     public state = {}
 
@@ -13,17 +10,10 @@ class Index extends React.Component {
         return (
             <div className='app-body'>
                 <div className='app-nav-Body'>
-                    <RouterBaseViewBodyItem/>
+                    <RouterBaseItemPath/>
                 </div>
             </div>
 
         )
     }
 }
-
-export default connect(
-    (state: any) => ({
-        param: state
-    }),
-    (dispatch: any) => ({})
-)(Index)

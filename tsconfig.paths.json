@@ -19,6 +19,9 @@
       "@router": [
         "./src/router"
       ],
+      "@listener": [
+        "./src/listener"
+      ],
       "@fetch/*": [
         "./src/fetch/*"
       ],

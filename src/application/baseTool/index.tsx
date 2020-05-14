@@ -37,11 +37,6 @@ export default class HeadTool extends React.Component {
                         </Badge>
                     </div>
                 </Whisper>
-                <Button type="dashed" style={{right: '0px'}} onClick={() => {
-
-                }}>
-                  隐藏/显示
-                </Button>
             </>
         )
     }

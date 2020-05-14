@@ -1,6 +1,7 @@
 @import "../../../../../../config/CssConfig";
 
 .header-tabs {
+  flex: 1;
   margin-top: 10px;
   margin-left: 5px;
   overflow: hidden;
@@ -11,6 +12,7 @@
   }
 
   .header-tabs-base {
+    flex: 1;
     background-color: #fff;
     margin-right: $tabsheight + 8px;
     overflow: auto;
