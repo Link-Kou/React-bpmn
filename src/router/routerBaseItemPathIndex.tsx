@@ -20,7 +20,7 @@ import OrderCardboard from '../application/orderCardboard'
 import CodeView from '../application/codeView'
 import {RouterLoadableDelay, RouterLoadableConfigBase} from './routerLoadableDelay';
 import QueueAnim from 'rc-queue-anim';
-import {RouterPath} from './routerPath';
+import {RouterPaths} from './routerPath';
 
 export interface IRoute {
     key: string,
@@ -46,7 +46,7 @@ export const routes: Array<IRoute> = [
     {
         key: 'ProductAllSkuAdd',
         exact: false,
-        path: RouterPath.ProductAllSkuAdd,
+        path: RouterPaths.ProductAllSkuAdd,
         screen: ProductAllSkuAdd
     },
     {
@@ -114,25 +114,25 @@ export const routes: Array<IRoute> = [
     {
         key: 'CardboardList',
         exact: false,
-        path: RouterPath.CardboardList,
+        path: RouterPaths.CardboardList,
         screen: CardboardList
     },
     {
         key: 'CardboardAdd',
         exact: false,
-        path: RouterPath.CardboardAdd,
+        path: RouterPaths.CardboardAdd,
         screen: CardboardAdd
     },
     {
         key: 'CartonList',
         exact: false,
-        path: RouterPath.CartonList,
+        path: RouterPaths.CartonList,
         screen: CartonList
     },
     {
         key: 'CartonAdd',
         exact: false,
-        path: RouterPath.CartonAdd,
+        path: RouterPaths.CartonAdd,
         screen: CartonAdd
     },
     {

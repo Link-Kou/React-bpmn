@@ -1,4 +1,4 @@
-export const RouterPath = {
+export const RouterPaths = {
     /**
      * 主页
      */

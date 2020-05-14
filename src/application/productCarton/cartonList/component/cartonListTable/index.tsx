@@ -2,15 +2,14 @@ import * as React from 'react';
 import {Button, Dropdown, Table} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
 import TextSpan from '@component/textSpan';
-import {RouterHistory} from '../../../../../router/routerBase';
 import './index.scss'
 import {HeaderCellMulti,CellExpandedIndex} from '@component/table';
 import {IEnum, IReturnCartonProduct} from '../../../index.types';
 import {HooKCarousel} from './compose/hookCarousel';
 import {HookPrinting} from './compose/hookPrinting';
-import {RouterPath} from '../../../../../router/routerPath';
 import {HooKRowExpanded} from './compose/hookRowExpanded';
 import { HeadPanel } from '@component/panel';
+import {RouterHistory, RouterPath} from '@router';
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
 
@@ -176,7 +175,7 @@ export default class CartonListTable extends React.Component<IProps> {
             Cell: <Cell dataKey="url" style={{height: rowHeight}}>
                 {(rowData: any) => (
                     <Button appearance="ghost" onClick={() => RouterHistory.push({
-                        pathname: '/index/cartonAdd',
+                        pathname: RouterPath.CartonAdd,
                         search: `id=${rowData?.id}`,
                         state: {
                             id: rowData?.id
@@ -277,7 +276,7 @@ export default class CartonListTable extends React.Component<IProps> {
                 <HeadPanel hideBorderBottom={true} title={'纸箱产品列表'}>
                     <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
                         <Dropdown title={'产品管理'} trigger="click" onSelect={(e) => {
-                            RouterHistory.push(RouterPath.CartonAdd)
+                            RouterHistorys.push(RouterPath.CartonAdd)
                         }}>
                             <Dropdown.Item>新增产品</Dropdown.Item>
                             <Dropdown.Item>分类排序</Dropdown.Item>

@@ -8,10 +8,9 @@ import {BackColorPanel, LoadPanel, RefPanel, LongPanel, HeadPanel} from '@compon
 import CartonAdd from './cartonAdd';
 import {ICardboardProductCost, IFormValue, IStateFormValue} from '../index.types';
 import {utilsString, utilsUrl} from '@utils/index';
-import {RouterHistory} from '../../../router/routerBase';
-import {RouterPath} from '../../../router/routerPath';
 import Dialog from '@component/dialog';
 import {IntlApi} from '@component/textIntl';
+import {RouterHistory, RouterPath} from '@router';
 
 
 export default class Index extends CartonAdd {

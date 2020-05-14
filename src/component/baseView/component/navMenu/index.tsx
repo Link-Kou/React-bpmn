@@ -1,16 +1,11 @@
 import * as React from 'react';
 import {Dropdown, Icon, Nav, Sidenav} from 'rsuite';
-//import {createHashHistory} from 'history';
-
 import {MenuConfig, IMenuConfig, MenuOpenKeysConfig} from '../../../../config/MenuConfig'
 import * as MenuLayoutConfig from '../../../../config/MenuLayoutConfig'
 import {Listener} from '../../../../listener';
-
 import './menu.scss'
-import {RouterHistory} from '../../../../router/routerBase';
+import {RouterHistory} from '@router';
 
-//创建路由方式
-//const history = createHashHistory()
 
 /**
  * 菜单栏目

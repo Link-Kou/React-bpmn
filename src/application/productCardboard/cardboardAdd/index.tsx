@@ -8,10 +8,9 @@ import {IBaseCorrugated, IBasePaper, IFormValue, IStateFormValue} from '../index
 import CardboardAdd from './CardboardAdd';
 import {BackColorPanel, LoadPanel, LongPanel, HeadPanel} from '@component/panel';
 import {utilsString, utilsUrl} from '@utils/index';
-import {RouterHistory} from 'src/router/routerBase';
 import Dialog from '@component/dialog';
 import {IntlApi} from '@component/textIntl';
-import {RouterPath} from 'src/router/routerPath';
+import {RouterHistory, RouterPath} from '@router';
 
 export default class Index extends CardboardAdd {
 

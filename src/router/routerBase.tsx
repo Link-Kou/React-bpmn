@@ -11,7 +11,7 @@ import BaseView from '../component/baseView';
 //import LoadableScreen from './routerLoadable';
 
 //创建路由方式
-export const RouterHistory: IHistory = createHashHistory({
+export const RouterHistorys: IHistory = createHashHistory({
     //离开页面提示
     getUserConfirmation: function (message: string, callback: (result: boolean) => void) {
         //需要配合Prompt使用
@@ -26,9 +26,9 @@ export const RouterHistory: IHistory = createHashHistory({
 
 const store = createStore(
     combineReducers({
-        router: connectRouter(RouterHistory)
+        router: connectRouter(RouterHistorys)
     }),
-    applyMiddleware(thunk, routerMiddleware(RouterHistory))
+    applyMiddleware(thunk, routerMiddleware(RouterHistorys))
 );
 
 interface IRoute {
@@ -92,7 +92,7 @@ export default class RootBase extends React.Component {
     public render() {
         return (
             <Provider store={store}>
-                <ConnectedRouter history={RouterHistory}>
+                <ConnectedRouter history={RouterHistorys}>
                     <div style={{height: '100%'}}>
                         <Switch>
                             {

@@ -5,7 +5,8 @@ import {CellExpandedIndex} from '@component/table';
 import {HooKRowExpanded} from './compose/hookRowExpanded';
 import {IReturnMaterialProductList} from '../../../index.types';
 import {ImageCardView} from '@component/imageManager';
-import {RouterHistory} from '../../../../../router/routerBase';
+import {RouterHistory, RouterPath} from '@router';
+
 
 interface IProps {
     onLoadTableData(props: {
@@ -145,7 +146,7 @@ export default class Index extends React.Component<IProps> {
                             <Whisper placement="top" trigger="hover" speaker={<Tooltip>编辑</Tooltip>}>
                                 <IconButton icon={<Icon icon="edit"/>} color="cyan" circle={true}
                                             onClick={() => RouterHistory.push({
-                                                pathname: '/index/productAllSkuAdd',
+                                                pathname: RouterPath.ProductAllSkuAdd,//'/index/productAllSkuAdd'
                                                 search: `id=${rowData?.id}`,
                                                 state: {
                                                     id: rowData?.id

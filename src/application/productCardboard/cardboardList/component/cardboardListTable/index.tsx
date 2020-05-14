@@ -3,12 +3,12 @@ import {Button, ButtonToolbar, Table} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
 import {CellExpandedIndex, HeaderCellMulti} from '@component/table';
 import TextSpan from '@component/textSpan';
-import {RouterHistory} from '../../../../../router/routerBase';
 import './index.scss'
 import {IReturnCardboardProduct} from '../../../index.types';
 import {HooKRowExpanded} from './compose/hookRowExpanded';
 import {HooKCarousel} from './compose/hookCarousel';
 import {HookCarousel} from './compose/hookListTable';
+import {RouterPath, RouterHistory} from '@router';
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
 
@@ -120,7 +120,7 @@ export default class CardboardListTable extends React.Component<IProps> {
                     <>
                         <ButtonToolbar>
                             <Button appearance="ghost" onClick={() => RouterHistory.push({
-                                pathname: '/index/cardboardAdd',
+                                pathname: RouterPath.CardboardAdd,
                                 search: `id=${rowData?.id}`,
                                 state: {
                                     id: rowData?.id

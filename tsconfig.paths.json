@@ -16,6 +16,9 @@
       "@common/*": [
         "./src/common/*"
       ],
+      "@router": [
+        "./src/router"
+      ],
       "@fetch/*": [
         "./src/fetch/*"
       ],

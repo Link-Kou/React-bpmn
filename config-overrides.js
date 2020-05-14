@@ -28,6 +28,7 @@ module.exports = override(
         '@utils': 'src/component/utils',
         '@component': 'src/component',
         '@common': 'src/common',
+        '@router': 'src/router',
         '@fetch': 'src/fetch'
     })
 );

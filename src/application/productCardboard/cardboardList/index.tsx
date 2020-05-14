@@ -3,8 +3,7 @@ import {Container, Content, Dropdown, Footer, Header} from 'rsuite';
 import CardboardListTable from './component/cardboardListTable';
 import {BackColorPanel, HeadPanel} from '@component/panel';
 import CardboardList from './cardboardList';
-import {RouterHistory} from '../../../router/routerBase';
-import {RouterPath} from '../../../router/routerPath';
+import {RouterHistory, RouterPath} from '@router';
 
 
 export default class Index extends CardboardList {
