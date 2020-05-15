@@ -42,7 +42,14 @@
     height: 40px !important;
 
     .app-close {
-      display: block !important;
+      display: none !important;
+      cursor: pointer;
+    }
+
+    &:hover {
+      .app-close {
+        display: none !important;
+      }
     }
   }
 
@@ -79,7 +86,7 @@
 
     &:hover {
       .app-close {
-        display: block !important;
+        display: block;
       }
     }
 

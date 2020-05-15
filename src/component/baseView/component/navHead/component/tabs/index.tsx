@@ -91,6 +91,16 @@ export default class HeadTabs extends React.Component<any> {
         })
     }
 
+    private _close = (id: string) => {
+        const {items} = this.state
+        const _items = items.filter((k, i, a) => k.id !== id);
+        this.setState({
+            items: _items
+        }, () => {
+            utilsStorage.setItem('tabs', JSON.stringify(_items))
+        })
+    }
+
     componentDidMount(): void {
         this._initialization();
         this._listen();
@@ -175,6 +185,7 @@ export default class HeadTabs extends React.Component<any> {
      * @param id
      */
     public onWheel(classname: string, id: string, callbackWheelEnd?: () => void) {
+
         const anchorElement: any = document.getElementsByClassName(classname)[0];
         anchorElement.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'});
         this.setState({
@@ -265,11 +276,10 @@ export default class HeadTabs extends React.Component<any> {
                                                     <div
                                                         className={`header-tabs-tabitem-content header-tabs-tabitem-content${item.id}`}
                                                         onClick={() => {
-                                                            this.onWheel(`header-tabs-tabitem${item.id}`, item.id, () => {
-                                                                RouterHistory.push(item.path)
-                                                            })
+                                                            RouterHistory.push(item.path)
                                                         }}>{item.content}</div>
-                                                    <Icon className={'app-close'} icon={'warning'}/>
+                                                    <Icon className={'app-close'} icon={'warning'}
+                                                          onClick={() => this._close(item.id)}/>
                                                 </div>
                                             )}
                                         </Draggable>

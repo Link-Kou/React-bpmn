@@ -34,7 +34,10 @@
     position: relative;
     height: 40px !important; }
     .header-tabs .header-tabs-tabitem-select .app-close {
-      display: block !important; }
+      display: none !important;
+      cursor: pointer; }
+    .header-tabs .header-tabs-tabitem-select:hover .app-close {
+      display: none !important; }
   .header-tabs .header-tabs-tabitem {
     position: relative;
     max-width: 100px;
@@ -69,7 +72,7 @@
     .header-tabs .header-tabs-tabitem .app-close {
       display: none; }
     .header-tabs .header-tabs-tabitem:hover .app-close {
-      display: block !important; }
+      display: block; }
     .header-tabs .header-tabs-tabitem .header-tabs-tabitem-content {
       width: 100px;
       text-align: center;

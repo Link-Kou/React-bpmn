@@ -58,9 +58,9 @@ export default class Index extends React.Component<IProps> {
                     </div>
                 </QueueAnim>
             )
-        } else {
-            return this.props.children
         }
+        return this.props.children
+
     }
 
     private outrender({...props}) {

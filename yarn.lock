@@ -11256,9 +11256,9 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-rsuite-table@^3.12.1:
-  version "3.12.1"
-  resolved "https://registry.npm.taobao.org/rsuite-table/download/rsuite-table-3.12.1.tgz#a1b2773087fa187bed900fd1298ff52e5089b18e"
+rsuite-table@^3.13.0:
+  version "3.13.0"
+  resolved "https://registry.npm.taobao.org/rsuite-table/download/rsuite-table-3.13.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frsuite-table%2Fdownload%2Frsuite-table-3.13.0.tgz#0181c71f574ff21f42b3dd8e3ca08f18bc9350dc"
   dependencies:
     "@babel/runtime" "^7.8.4"
     classnames "^2.2.5"
@@ -11266,9 +11266,9 @@ rsuite-table@^3.12.1:
     element-resize-event "^3.0.2"
     lodash "^4.17.5"
 
-rsuite@4.5.0:
-  version "4.5.0"
-  resolved "https://registry.npm.taobao.org/rsuite/download/rsuite-4.5.0.tgz#1a9556660c6b94cf339fc50166bf4762f30fcc4d"
+rsuite@4.6.0:
+  version "4.6.0"
+  resolved "https://registry.npm.taobao.org/rsuite/download/rsuite-4.6.0.tgz#e4f64e70356d6d4fe0f2d698afa4e0a35614d4c0"
   dependencies:
     "@babel/runtime" "^7.8.4"
     classnames ">=2.0.0"
@@ -11280,7 +11280,7 @@ rsuite@4.5.0:
     react-lifecycles-compat "^3.0.4"
     react-virtualized "^9.21.0"
     recompose "^0.30.0"
-    rsuite-table "^3.12.1"
+    rsuite-table "^3.13.0"
     schema-typed "^1.5.1"
 
 rsvp@^4.8.4:
