@@ -55,7 +55,7 @@ export default class PaperConfigAddModel extends React.Component<IProps> {
 
     private _onSave = (id: string = '', name: string = '', check: boolean = false) => {
         const {onSave} = this.props
-        if (utilsBoolean.toBoolean(check, false)) {
+        if (utilsBoolean.toBooleanGetDefault(check, false)) {
             this.setState({
                 loading: true
             }, () => {

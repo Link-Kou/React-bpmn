@@ -90,7 +90,7 @@ export default class Index extends ProductSkuModal {
                         </HeadPanel>
                     </Modal.Header>
                     <Modal.Body>
-                        <LoadPanel height={350} hideLoader={loader} outrender={true} queueAnim={false}>
+                        <LoadPanel height={350} loadering={loader} outrender={true} queueAnim={false}>
                             <LongPanel style={{height: 650, minHeight: 650}}>
                                 <Container>
                                     <Header/>

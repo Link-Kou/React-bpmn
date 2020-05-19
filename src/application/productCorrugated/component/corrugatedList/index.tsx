@@ -4,7 +4,7 @@ import FlexCalcBox from '@component/flexCalcBox';
 import {utilsObject} from '@utils/index';
 import HookBuildPanelLists from './compose/HookPanelLists';
 import {IArrayDatas} from '../../index.types';
-import { HeadPanel } from '@component/panel';
+import {HeadPanel} from '@component/panel';
 
 
 interface IProps {
@@ -27,12 +27,14 @@ interface IProps {
 
 interface IState {
     data: Array<any>
+    loading: boolean
 }
 
 export default class BaseCorrugatedPanelList extends React.Component<IProps> {
 
     public state: IState = {
-        data: []
+        data: [],
+        loading: true
     }
 
     public componentDidMount(): void {
@@ -41,16 +43,19 @@ export default class BaseCorrugatedPanelList extends React.Component<IProps> {
 
     /**
      * 初始化加载
+     * {@link handlersLoadConfigAll}
      * @private
      */
     private _onLoad = () => {
         const {onLoad} = this.props
         this.setState({
-            data: []
+            data: [],
+            loading: true
         }, () => {
             onLoad?.((data: IArrayDatas) => {
                 this.setState({
-                    data
+                    data,
+                    loading: false
                 })
             });
         })
@@ -136,12 +141,14 @@ export default class BaseCorrugatedPanelList extends React.Component<IProps> {
 
     public render() {
         const data = this._ArrayMerge()
+        const {loading} = this.state
         return (
             <>
                 <HeadPanel title={'分类管理'} tooltip={'分类管理'}/>
                 <FlexCalcBox overflow={'auto'} Body={() => (
                     <HookBuildPanelLists
                         {...this.props}
+                        loading={loading}
                         data={data}
                         onAddItem={this._onAddItem}
                         onDelItem={this._onDelItem}

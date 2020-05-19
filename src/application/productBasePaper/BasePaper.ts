@@ -5,18 +5,9 @@ import Dialog from '@component/dialog';
 import {IntlApi} from '@component/textIntl';
 import {IArrayDatas, IStateFormValue, IFormValue} from './index.types'
 
-interface IState {
-    httpDataPaperConfigList?: Array<ApiPaper.IResLoadPaperConfigListData>
-}
 
 export default class BasePaper extends React.Component<any> {
 
-    public state: IState = {
-        /**
-         * 配置列表
-         */
-        httpDataPaperConfigList: undefined
-    }
 
     /**
      * 添加原纸配置列表
@@ -91,6 +82,7 @@ export default class BasePaper extends React.Component<any> {
                 if (req.success) {
                     callback(req.data)
                 } else {
+                    callback([])
                     Alert.warning(req.msg)
                 }
             })
@@ -106,10 +98,11 @@ export default class BasePaper extends React.Component<any> {
         }, (req) => {
             if (req.success) {
                 callback?.(req.data)
+            } else {
+                callback?.([])
             }
         })
     }
-
 
 
     /**
@@ -125,6 +118,7 @@ export default class BasePaper extends React.Component<any> {
                 callbackdata?.(req.data.list, req.data.total)
             } else {
                 Alert.warning(req.msg)
+                callbackdata?.([], 0)
             }
         })
     }
@@ -175,7 +169,6 @@ export default class BasePaper extends React.Component<any> {
      * @param callbackData
      */
     protected handlersShowPaperAddEdit = async (id?: string | number, callbackData?: (data: IFormValue, dataConfigList: Array<IArrayDatas>) => void) => {
-
         const fetch1 = new Promise((resolve, reject) => {
             if (id) {
                 ApiPaper.LoadPaperProduct({id}, (req) => {
@@ -189,7 +182,6 @@ export default class BasePaper extends React.Component<any> {
                 resolve(IStateFormValue)
             }
         })
-
         const fetch2 = new Promise((resolve, reject) => {
             ApiPaper.LoadPaperConfigList((req) => {
                 if (req.success) {
@@ -199,14 +191,9 @@ export default class BasePaper extends React.Component<any> {
                 }
             })
         })
-
         await Promise.all([fetch1, fetch2])
             .then((result) => {
-                this.setState({
-                    //httpDataPaperConfigList: result[1]
-                }, () => {
-                    callbackData?.(result[0] as IFormValue, result[1] as Array<IArrayDatas>)
-                })
+                callbackData?.(result[0] as IFormValue, result[1] as Array<IArrayDatas>)
             }).catch((error) => {
                 Alert.warning(IntlApi.HttpError)
             })

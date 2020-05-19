@@ -2,9 +2,9 @@ import * as React from 'react';
 import './index.scss'
 import FlexCalcBox from '@component/flexCalcBox';
 import {utilsObject} from '@utils/index';
-import _HookBuildPanelLists from './compose/_HookPanelLists';
+import HookBuildPanelLists from './compose/hookPanelLists';
 import {IArrayDatas} from '../../index.types';
-import { HeadPanel } from '@component/panel';
+import {HeadPanel} from '@component/panel';
 
 interface IProps {
     valueKey?: string
@@ -31,12 +31,14 @@ interface IProps {
 
 interface IState {
     data: Array<IArrayDatas>
+    loadering: boolean
 }
 
 export default class BasePaperConfigPanelList extends React.Component<IProps> {
 
     public state: IState = {
-        data: []
+        data: [],
+        loadering: true
     }
 
     public componentDidMount(): void {
@@ -49,11 +51,16 @@ export default class BasePaperConfigPanelList extends React.Component<IProps> {
      */
     private _onLoad = () => {
         const {onLoad} = this.props
-        onLoad?.((data: Array<IArrayDatas>) => {
-            this.setState({
-                data
-            })
-        });
+        this.setState({
+            loadering: true
+        }, () => {
+            onLoad?.((data: Array<IArrayDatas>) => {
+                this.setState({
+                    data,
+                    loadering: false
+                })
+            });
+        })
     }
 
     private _onAddItem = (label: string, value: string, callbackCloseLoading: () => void) => {
@@ -138,13 +145,15 @@ export default class BasePaperConfigPanelList extends React.Component<IProps> {
 
     public render() {
         const data = this._ArrayMerge()
+        const {loadering} = this.state
         return (
             <div>
                 <HeadPanel title={'分类管理'} tooltip={'分类管理'}/>
                 <FlexCalcBox overflow={'auto'} Body={() => (
-                    <_HookBuildPanelLists
+                    <HookBuildPanelLists
                         {...this.props}
                         data={data}
+                        loadering={loadering}
                         onAddItem={this._onAddItem}
                         onDelItem={this._onDelItem}
                         onEditSave={this._onEditSave}/>

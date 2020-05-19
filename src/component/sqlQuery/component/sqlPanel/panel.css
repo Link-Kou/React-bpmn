@@ -6,6 +6,8 @@
   .app-sql-group > .app-sql-group-item, .app-sql-panel > .app-sql-group-item {
     display: block;
     height: auto; }
+    .app-sql-group > .app-sql-group-item > .app-sql-group-toggle-first:before, .app-sql-panel > .app-sql-group-item > .app-sql-group-toggle-first:before {
+      border-width: 0 0 2px 0 !important; }
   .app-sql-group > .app-sql-group-togglesh, .app-sql-panel > .app-sql-group-togglesh {
     position: absolute;
     cursor: Pointer;
@@ -46,8 +48,7 @@
 .app-sql-panel {
   position: relative;
   margin-bottom: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
   background-color: #ffffff; }
   .app-sql-panel:hover {
     background-color: rgba(37, 137, 245, 0.2); }
@@ -56,5 +57,3 @@
     height: 0; }
   .app-sql-panel > .app-sql-expression:first-child:before {
     border-width: 0 0 2px 0; }
-
-/*# sourceMappingURL=panel.css.map */

@@ -9,7 +9,10 @@ import {IArrayDatas} from '../../../index.types';
 interface IPanelList {
     valueKey?: string
     labelKey?: string
+
     data: Array<datas>
+
+    loading?: boolean
 
     onDelItem?(label: string, value: string): void
 
@@ -30,7 +33,7 @@ interface datas {
 }
 
 const HookBuildPanelLists = (props: IPanelList) => {
-    const {data, onLoadEditList, onEditSave} = props
+    const {data, onLoadEditList, onEditSave, loading} = props
     const [showModel, setShowModel] = React.useState('');
     const [parentId, setParentId] = React.useState('');
 
@@ -67,12 +70,23 @@ const HookBuildPanelLists = (props: IPanelList) => {
                                       onSave={handlersOnAddSave}/>
             {dataArray.map((k, i, a) => {
                 const {_valueKey} = utilsObject.getLabeValuelKey(props, k)
+                const arrayLength = utilsArray.getArrayLength(k?.children)
                 return (
                     <Panel header={k.label} defaultExpanded={true}>
                         <div className={'app-typeConfig-plnel'}>
-                            <LoadPanel hideLoader={utilsArray.getArrayLength(k?.children) > 0}
-                                       hideLoaderComponent={!(k?.children === undefined)}
-                                       title={k?.children?.length === 0 ? '暂无数据' : '数据加载中...'}
+                            <LoadPanel loadering={loading}
+                                       onLoader={(l, v) => {
+                                           if (!l) {
+                                               if (arrayLength <= 0) {
+                                                   return {
+                                                       title: '暂无数据....',
+                                                       hide: true,
+                                                       hideLoaderIcons: true
+                                                   }
+                                               }
+                                           }
+                                           return v
+                                       }}
                                        outrender={true}
                                        height={120}>
                                 <_HookBuildTagList {...props} data={k?.children}/>

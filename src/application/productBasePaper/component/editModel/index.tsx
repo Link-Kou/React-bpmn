@@ -3,6 +3,7 @@ import {Alert, Button, Modal} from 'rsuite';
 import './index.scss'
 import {LoadPanel} from '@component/panel';
 import HookSortLists from './compose/_HookSortLists';
+import {utilsArray} from '@utils/index';
 
 interface IProps {
     id?: string
@@ -16,14 +17,12 @@ interface IProps {
 
     onClose?(): void
 
-    onLoad?(id?: string,callback?: (v: Array<{
-        id: string
-        title: string
-    }>) => void): void
+    onLoad?(id?: string, callback?: (v: Array<{ id: string, title: string }>) => void): void
 }
 
 interface IState {
-    loading: boolean
+    buttonLoading: boolean
+    panleLoading: boolean
     data?: Array<{
         id: string
         title: string
@@ -33,23 +32,24 @@ interface IState {
 export default class PaperConfigEditModel extends React.Component<IProps, IState> {
 
     public state: IState = {
-        loading: false,
-        data: undefined
+        buttonLoading: false,
+        panleLoading: true,
+        data: []
     }
 
     private _onClose = () => {
-        const {loading} = this.state
+        const {buttonLoading} = this.state
         const {onClose} = this.props
-        if (!loading) {
+        if (!buttonLoading) {
             onClose?.()
-            setTimeout(() => {
-                this.setState({
-                    data: undefined
-                })
-            }, 500)
         }
     }
 
+    /**
+     * 加载排序列表
+     * {@link handlersLoadPaperConfigItemLis}
+     * @private
+     */
     private _onLoad = () => {
         const {onLoad, id} = this.props
         const callback = (data: Array<{
@@ -63,26 +63,30 @@ export default class PaperConfigEditModel extends React.Component<IProps, IState
                 this._onClose()
             }
         }
-        onLoad?.(id, callback);
+        this.setState({
+            panleLoading: true,
+            buttonLoading: false,
+            data: []
+        }, () => {
+            onLoad?.(id, callback);
+        })
     }
 
-    private _onChange = (data: Array<{
-        id: string
-        title: string
-    }>) => {
+    private _onChange = (data: Array<{ id: string, title: string }>) => {
         this.setState({
-            data
+            data,
+            panleLoading: false
         })
     }
 
     private _onSave = () => {
         const {onSave} = this.props
         this.setState({
-            loading: true
+            buttonLoading: true
         }, () => {
             const callbackCloseLoading = (): void => {
                 this.setState({
-                    loading: false
+                    buttonLoading: false
                 }, () => {
                     this._onClose()
                 })
@@ -95,7 +99,8 @@ export default class PaperConfigEditModel extends React.Component<IProps, IState
 
     public render() {
         const {show} = this.props
-        const {loading, data} = this.state
+        const {buttonLoading, panleLoading, data} = this.state
+        const arrayLength = utilsArray.getArrayLength(data);
         return (
             <Modal show={show}
                    size={'xs'}
@@ -106,16 +111,26 @@ export default class PaperConfigEditModel extends React.Component<IProps, IState
                     <Modal.Title>管理分类</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <LoadPanel hideLoader={data ? data?.length > 0 : false}
-                               hideLoaderComponent={!(data === undefined)}
-                               title={data?.length === 0 ? '暂无数据' : '数据加载中...'}
+                    <LoadPanel loadering={panleLoading}
+                               onLoader={(l, v) => {
+                                   if (!l) {
+                                       if (arrayLength <= 0) {
+                                           return {
+                                               title: '暂无数据....',
+                                               hide: true,
+                                               hideLoaderIcons: true
+                                           }
+                                       }
+                                   }
+                                   return v
+                               }}
                                outrender={true}
                                height={350}>
                         <HookSortLists data={data} onChange={this._onChange}/>
                     </LoadPanel>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button appearance="primary" loading={loading} onClick={this._onSave}>
+                    <Button appearance="primary" disabled={panleLoading} loading={buttonLoading} onClick={this._onSave}>
                         保存
                     </Button>
                     <Button appearance="subtle" onClick={this._onClose}>

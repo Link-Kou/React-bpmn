@@ -3,6 +3,7 @@ import {Alert, Button, Modal} from 'rsuite';
 import './index.scss'
 import HookSortLists from './compose/_HookSortLists';
 import {LoadPanel} from '@component/panel';
+import {utilsArray} from "@utils/index";
 
 interface IProps {
     id?: string
@@ -40,7 +41,7 @@ interface IState {
 export default class TypeConfigEditModel extends React.Component<IProps, IState> {
 
     public state: IState = {
-        loading: false,
+        loading: true,
         data: undefined
     }
 
@@ -105,6 +106,7 @@ export default class TypeConfigEditModel extends React.Component<IProps, IState>
     public render() {
         const {show} = this.props
         const {loading, data} = this.state
+        const arrayLength = utilsArray.getArrayLength(data);
         return (
             <Modal show={show}
                    size={'xs'}
@@ -115,9 +117,19 @@ export default class TypeConfigEditModel extends React.Component<IProps, IState>
                     <Modal.Title>管理分类</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <LoadPanel hideLoader={data ? data?.length > 0 : false}
-                               hideLoaderComponent={!(data === undefined)}
-                               title={data?.length === 0 ? '暂无数据' : '数据加载中...'}
+                    <LoadPanel loadering={loading}
+                               onLoader={(l, v) => {
+                                   if (!l) {
+                                       if (arrayLength <= 0) {
+                                           return {
+                                               title: '暂无数据....',
+                                               hide: true,
+                                               hideLoaderIcons: true
+                                           }
+                                       }
+                                   }
+                                   return v
+                               }}
                                outrender={true}
                                height={350}>
                         <HookSortLists data={data} onChange={this._onChange}/>

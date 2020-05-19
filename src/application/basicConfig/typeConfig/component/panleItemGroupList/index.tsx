@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Dropdown} from 'rsuite';
 import {TypeConfigAddModel, TypeConfigEditModel, TypeConfigPanelList} from '../index';
 import {LoadPanel, HeadPanel} from '@component/panel';
-import {utilsNumber, utilsObject} from '@utils/index';
+import {utilsArray, utilsNumber, utilsObject} from '@utils/index';
 import QueueAnim from 'rc-queue-anim';
 import {IConstant, IData} from '../../index.types';
 
@@ -152,6 +152,7 @@ export default class TypeConfigPanelItemGroupList extends React.Component<IProps
             onAddOtherGroup, onAddOtherItem, onDelOtherTitle, labelKey, valueKey
         } = this.props
         const {showModel, data, loading} = this.state
+        const arrayLength = utilsArray.getArrayLength(data);
         return (
             <>
                 <TypeConfigEditModel show={showModel === 'sort'}
@@ -173,9 +174,19 @@ export default class TypeConfigPanelItemGroupList extends React.Component<IProps
                     </HeadPanel>
                 </div>
                 <div style={{overflow: 'auto'}}>
-                    <LoadPanel hideLoader={loading}
-                               hideLoaderComponent={loading}
-                               title={loading && data?.length === 0 ? '暂无数据' : '数据加载中...'}
+                    <LoadPanel loadering={loading}
+                               onLoader={(l, v) => {
+                                   if (!l) {
+                                       if (arrayLength <= 0) {
+                                           return {
+                                               title: '暂无数据....',
+                                               hide: true,
+                                               hideLoaderIcons: true
+                                           }
+                                       }
+                                   }
+                                   return v
+                               }}
                                subHeight={65 + 57}>
                         <div style={{display: 'flex', width: 350 * utilsNumber.toNumberDefault(data?.length, 0)}}>
                             {

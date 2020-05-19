@@ -72,7 +72,7 @@ export default class MarketingProgramList extends React.Component {
                         </Dropdown>
                     </div>
                 </HeadPanel>
-                <FlexCalcBox subHeight={125} Body={(e) => (
+                <FlexCalcBox Body={(e) => (
                     <Table
                         loading={false}
                         height={e}

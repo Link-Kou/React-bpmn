@@ -6,18 +6,29 @@ import SqlExpression from './component/sqlExpression'
 import SqlToggle from './component/sqlToggle';
 import {utilsGuid} from '@utils/index';
 
+interface IQuery {
+    id: string
+    type?: 'expression' | 'group' | any
+    link?: 'OR' | 'AND' | any
+    children?: Array<IQuery>
+    extend?: {
+        field: string
+        symbol: string
+        value: any
+    }
+}
 
 interface IProps {
     /**
-     * 表达控件
+     * 表达查询条件
      */
-    query: Array<any>
+    query: Array<IQuery>
 
     /**
      * expression 表达式控件
      * @param props
      */
-    expression(props: { data: any, node: any, id: any, onExtend: (id: string, extendNode: any) => void }): JSX.Element
+    expression(props: { data: any, node: any, id: any, onExtend: (id: string, extendNode: (id: string, value: any) => void) => void }): JSX.Element
 
     /**
      * 数据改变
@@ -26,81 +37,10 @@ interface IProps {
      */
     onChange?(query: any, expression: string): void
 
-    /**
-     * 构建单一表达式
-     * @param extend
-     */
-    onCallbackExp(extend: any): string
 }
 
 export default class SqlQuery extends React.Component<IProps> {
 
-    public state = {
-        query: [
-            {
-                id: utilsGuid.randomGUID(),
-                type: 'expression',
-                link: undefined,
-                children: [],
-                extend: {}
-            }
-        ]
-    }
-
-    public componentWillMount(): void {
-        if (this.props.query !== undefined && this.props.query !== null && this.props.query.length > 0) {
-            this.setState({
-                query: this.props.query
-            })
-        }
-    }
-
-
-    /**
-     * 构建表达式窗口
-     * @private
-     */
-    public _onBuild() {
-        const {query} = this.state
-        const {expression} = this.props
-        /**
-         * 解析query构建界面
-         * @param node
-         * @param iindex
-         */
-        const getCompont = (node: { id: string, type: string, link: 'AND' | 'OR', children: Array<any> }, iindex: any): any => {
-            const com = {
-                'expression': (nodeitem: any, index: any) => <> <SqlExpression expression={expression}
-                                                                               node={nodeitem}
-                                                                               id={nodeitem.id}
-                                                                               index={index}/>
-                    {nodeitem.link ? <SqlToggle id={nodeitem.id} link={nodeitem.link}/> : null}
-                </>,
-                'group': (item: any) => item
-            }
-            if (node.type === 'group' && node.children.length > 0) {
-                return (
-                    <SqlGroup id={node.id} link={node.link}>
-                        {
-                            node.children.map((k, i, a) => (com[node.type](getCompont(k, i))))
-                        }
-                    </SqlGroup>
-                )
-            } else if (node.type === 'expression') {
-                return com[node.type](node, iindex)
-            }
-            return null;
-        }
-        const anies = query.map((k: any, i, a) => (
-            getCompont(k, i)
-        ));
-        return (
-            <SqlPanel data={query} onAdd={this._onAdd.bind(this)} onDelete={this._onDelete.bind(this)}
-                      onToggleLink={this._onToggleLink.bind(this)} onExtend={this._onExtend.bind(this)}>
-                {anies}
-            </SqlPanel>
-        )
-    }
 
     /**
      * 添加表达式
@@ -109,11 +49,11 @@ export default class SqlQuery extends React.Component<IProps> {
      * @param addtochildren 是否添加子级
      * @private
      */
-    public _onAdd(id: string, type: 'group' | 'expression', addtochildren: boolean) {
-        const {query}: { query: Array<any> } = this.state
+    private _onAdd(id: string, type: 'group' | 'expression', addtochildren: boolean) {
+        const {query} = this.props
         let splice: boolean = false;
         const add = (item: Array<any>) => {
-            item.forEach((k, i, a) => {
+            item?.forEach((k, i, a) => {
                 if (k.id === id) {
                     const children = type === 'group' ? [{
                         id: utilsGuid.randomGUID(),
@@ -159,9 +99,7 @@ export default class SqlQuery extends React.Component<IProps> {
             });
         }
         add(query)
-        this.setState({
-            query
-        })
+        this._onChange()
     }
 
     /**
@@ -170,8 +108,7 @@ export default class SqlQuery extends React.Component<IProps> {
      * @private
      */
     public _onDelete(id: string) {
-        let {query}: { query: Array<any> } = this.state
-        query = JSON.parse(JSON.stringify(query))
+        const {query} = this.props
         const del = (item: Array<any>) => {
             item.forEach((k, i, a) => {
                 if (k.id === id) {
@@ -202,9 +139,7 @@ export default class SqlQuery extends React.Component<IProps> {
             });
         }
         del(query);
-        this.setState({
-            query
-        })
+        this._onChange();
     }
 
     /**
@@ -213,7 +148,7 @@ export default class SqlQuery extends React.Component<IProps> {
      * @private
      */
     public _onToggleLink(id: string) {
-        const {query}: { query: Array<any> } = this.state
+        const {query} = this.props
         const link = (item: Array<any>) => {
             item.forEach((k, i, a) => {
                 if (k.id === id) {
@@ -223,6 +158,7 @@ export default class SqlQuery extends React.Component<IProps> {
             });
         }
         link(query)
+        this._onChange()
     }
 
     /**
@@ -232,7 +168,7 @@ export default class SqlQuery extends React.Component<IProps> {
      * @private
      */
     public _onExtend(id: string, extendNode: any) {
-        const {query}: { query: Array<any> } = this.state
+        const {query} = this.props
         const extend = (item: Array<any>) => {
             item.forEach((k, i, a) => {
                 if (k.id === id) {
@@ -254,30 +190,87 @@ export default class SqlQuery extends React.Component<IProps> {
      * @param extendNode 扩展数据
      * @private
      */
-    public _onChange() {
-        const {query}: { query: Array<any> } = this.state
-        const {onCallbackExp} = this.props
-        const expression = (item: Array<any>): any => {
-            return item.map((k, i, a) => {
+    private _onChange() {
+        const {query, onChange} = this.props
+        const expression1 = this.Expression(query).join('');
+        onChange?.(query, expression1)
+    }
+
+    /**
+     * 构建表达式
+     * @param query
+     * @constructor
+     */
+    private Expression(query: Array<IQuery>): Array<any> {
+        const expression = (item?: Array<IQuery>): any => {
+            return item?.map((k, i, a) => {
                 if (k.type === 'expression') {
-                    return onCallbackExp(k) + ` ${k.link === undefined ? '' : k.link} `;
+                    return `${i === 0 ? '' : (k.link ?? 'AND')} ${k.extend?.field} ${k.extend?.symbol} ${k.extend?.value} `;
                 }
                 if (k.type === 'group') {
-                    return ` ${k.link} (${expression(k.children).join('')})`
+                    return `${k.link ?? 'AND'} (${expression(k.children).join('')}) `
                 }
                 return ''
             });
         }
-        const expression1 = expression(query).join('');
-        this.props.onChange && this.props.onChange(this.state.query, expression1)
+        return expression(query) ?? []
     }
 
+    /**
+     * 构建表达式窗口
+     * @private
+     */
+    public renderControls() {
+        const {expression, query} = this.props
+        /**
+         * 解析query构建界面
+         * @param node
+         * @param index
+         */
+        const getCompont = (node: { id: string, type: string, link: 'AND' | 'OR', children: Array<any> }, index: any, maxIndex: any): any => {
+            const com = {
+                'expression': (nodeitem: any, nodeIndex: any) => <>
+                    {
+                        nodeIndex > 0 ? <SqlToggle id={nodeitem.id} link={nodeitem.link}/> : null
+                    }
+                    <SqlExpression expression={expression}
+                                   node={nodeitem}
+                                   id={nodeitem.id}
+                                   index={nodeIndex}/>
+                </>,
+                'group': (item: any) => item
+            }
+            //面板类型遍历
+            if (node.type === 'group' && node.children.length > 0) {
+                return (
+                    <>
+                        <SqlGroup id={node.id} link={node.link}>
+                            {
+                                node?.children?.map((k, i, a) => (com[node.type](getCompont(k, i, node.children.length))))
+                            }
+                        </SqlGroup>
+                    </>
+                )
+            } else if (node.type === 'expression') {
+                return com[node.type](node, index)
+            }
+            return null;
+        }
+        return query?.map((k: any, i, a) => (
+            getCompont(k, i, query.length)
+        ));
+    }
+
+
     public render() {
+        const {query} = this.props
         return (
             <>
-                {this._onBuild()}
+                <SqlPanel data={query} onAdd={this._onAdd.bind(this)} onDelete={this._onDelete.bind(this)}
+                          onToggleLink={this._onToggleLink.bind(this)} onExtend={this._onExtend.bind(this)}>
+                    {this.renderControls()}
+                </SqlPanel>
             </>
-
         )
     }
 }

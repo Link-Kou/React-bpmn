@@ -1,23 +1,27 @@
 import * as React from 'react';
 import FlexCalcBox from '@component/flexCalcBox';
 import _ from 'lodash';
-import {utilsObject} from '@utils/index';
+import {utilsBoolean} from '@utils/index';
 import QueueAnim from 'rc-queue-anim';
 import {LoaderIcons} from '@component/panel';
 
 interface IProps {
+
     /**
      * 是否加载中
-     * true 不显示
-     * false 显示
+     * true 显示
+     * false 不显示
      */
-    hideLoader: boolean | undefined
+    loadering?: boolean
 
-    title?: string,
     /**
-     * 隐藏 Loader 组件
+     * 加载Loding
      */
-    hideLoaderComponent?: boolean,
+    onLoader?(loadering: boolean, value: {
+        title: string, hideLoaderIcons: boolean, hide: boolean
+    }): { title: string, hideLoaderIcons: boolean, hide: boolean }
+
+
 
     subHeight?: number
 
@@ -32,6 +36,18 @@ interface IProps {
      * 是否进行动画关闭
      */
     queueAnim?: boolean
+}
+
+
+interface IPriProps extends IProps {
+
+    title?: string,
+
+    /**
+     * 隐藏 Loader 组件
+     */
+    hideLoaderComponent?: boolean
+
 }
 
 export default class Index extends React.Component<IProps> {
@@ -60,15 +76,15 @@ export default class Index extends React.Component<IProps> {
             )
         }
         return this.props.children
-
     }
 
-    private outrender({...props}) {
-        const {hideLoader, title, subHeight, hideLoaderComponent, height, queueAnim} = props
+
+    private outrender(props: IPriProps) {
+        const {loadering, title, subHeight, height, queueAnim, hideLoaderComponent} = props
         const _subHeight = _.isNumber(subHeight) ? subHeight : 58
         const _title = _.isString(title) ? title : '页面初始化中,请稍后....'
         return (
-            !hideLoader || utilsObject.isUndefined(hideLoader) ?
+            loadering ?
                 <FlexCalcBox height={height} subHeight={_subHeight} overflow={'auto'} Body={(e) => (
                     <>
                         {this._Loader(_title, hideLoaderComponent)}
@@ -79,13 +95,13 @@ export default class Index extends React.Component<IProps> {
         )
     }
 
-    private inrender({...props}) {
-        const {hideLoader, title, subHeight, hideLoaderComponent, height, queueAnim} = props
+    private inrender(props: IPriProps) {
+        const {loadering, title, subHeight, height, queueAnim, hideLoaderComponent} = props
         const _subHeight = _.isNumber(subHeight) ? subHeight : 58
         const _title = _.isString(title) ? title : '页面初始化中,请稍后....'
         return (
             <FlexCalcBox height={height} subHeight={_subHeight} overflow={'auto'} Body={(e) => (
-                !hideLoader || utilsObject.isUndefined(hideLoader) ?
+                loadering ?
                     <>
                         {this._Loader(_title, hideLoaderComponent)}
                     </>
@@ -95,10 +111,29 @@ export default class Index extends React.Component<IProps> {
         )
     }
 
+
     public render() {
-        return <>
-            {this.props.outrender ? this.outrender(this.props) : this.inrender(this.props)}
-        </>
+        const {onLoader, loadering, outrender} = this.props
+        const _loadering = utilsBoolean.toBooleanGetDefault(loadering, true);
+        if (onLoader) {
+            const {title, hideLoaderIcons, hide} = onLoader(_loadering, {
+                title: '页面初始化中,请稍后....', hideLoaderIcons: false, hide: _loadering
+            });
+            const newProps = {
+                ...this.props,
+                loadering: hide,
+                title: title,
+                hideLoaderComponent: hideLoaderIcons
+            }
+            return outrender ? this.outrender(newProps) : this.inrender(newProps)
+        }
+        const newProps = {
+            ...this.props,
+            loadering: _loadering,
+            title: '页面初始化中,请稍后....'
+        }
+        return outrender ? this.outrender(newProps) : this.inrender(newProps)
+
     }
 }
 

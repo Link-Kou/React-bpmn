@@ -119,7 +119,7 @@ export default class Index extends ProductAllSku {
                             </ButtonToolbar>
                         </div>
                     </HeadPanel>
-                    <LoadPanel hideLoader={loader} outrender={true} queueAnim={false}>
+                    <LoadPanel loadering={loader} outrender={true} queueAnim={false}>
                         <LongPanel subHeight={65}>
                             <Container>
                                 <Header/>

@@ -18,6 +18,7 @@ export default class BaseCorrugated extends React.Component<any> {
                 callback?.(req.data)
             } else {
                 Alert.warning(req.msg)
+                callback?.([])
             }
         })
     }

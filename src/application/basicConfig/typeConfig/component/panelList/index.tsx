@@ -6,6 +6,7 @@ import {LoadPanel, HeadPanel} from '@component/panel';
 import _delButton from './compose/_delButton';
 import _buildPanelLists from './compose/_panelLists';
 import {IConstant, IData} from '../../index.types';
+import {utilsArray} from '@utils/index';
 
 interface IProps {
     id: string
@@ -21,6 +22,7 @@ interface IProps {
     subHeight?: number
 
     valueKey?: string
+
     labelKey?: string
 
     onMountLoad?(callbackdata: (data: Array<IData>) => void): void
@@ -70,7 +72,7 @@ export default class TypeConfigPanelAllList extends React.Component<IProps> {
     public state: IState = {
         showModel: '',
         data: [],
-        loading: false
+        loading: true
     }
 
     componentDidMount(): void {
@@ -81,12 +83,12 @@ export default class TypeConfigPanelAllList extends React.Component<IProps> {
         const {onMountLoad} = this.props
         this.setState({
             data: [],
-            loading: false
+            loading: true
         }, () => {
             onMountLoad?.((data) => {
                 this.setState({
                     data,
-                    loading: true
+                    loading: false
                 })
             });
         })
@@ -153,6 +155,7 @@ export default class TypeConfigPanelAllList extends React.Component<IProps> {
             title, id, type, boxStyle, onLoadSortableList, subHeight
         } = this.props
         const {showModel, data, loading} = this.state
+        const arrayLength = utilsArray.getArrayLength(data);
         return (
             <>
                 <TypeConfigEditModel show={showModel === 'sort'}
@@ -176,9 +179,19 @@ export default class TypeConfigPanelAllList extends React.Component<IProps> {
                             <_delButton {...this.props} onDel={this._onDel}/>
                         </div>
                     </HeadPanel>
-                    <LoadPanel hideLoader={data?.length > 0 && loading}
-                               hideLoaderComponent={loading}
-                               title={(data?.length === 0 || !data) && loading ? '暂无数据' : '数据加载中...'}
+                    <LoadPanel loadering={loading}
+                               onLoader={(l, v) => {
+                                   if (!l) {
+                                       if (arrayLength <= 0) {
+                                           return {
+                                               title: '暂无数据....',
+                                               hide: true,
+                                               hideLoaderIcons: true
+                                           }
+                                       }
+                                   }
+                                   return v
+                               }}
                                subHeight={subHeight ? subHeight : 65 + 57}>
                         <_buildPanelLists {...this.props}
                                           data={data}

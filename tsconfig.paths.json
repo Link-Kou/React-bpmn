@@ -27,9 +27,6 @@
       ],
       "react-code-view": [
         "./@types/react-code-view"
-      ],
-      "bigdecimal": [
-        "./@types/bigdecimal"
       ]
     }
   }

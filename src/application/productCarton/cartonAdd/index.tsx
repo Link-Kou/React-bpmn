@@ -106,7 +106,7 @@ export default class Index extends CartonAdd {
                             </ButtonToolbar>
                         </div>
                     </HeadPanel>
-                    <LoadPanel hideLoader={hideLoader} outrender={true} queueAnim={false}>
+                    <LoadPanel loadering={hideLoader} outrender={true} queueAnim={false}>
                         <LongPanel>
                             <RefPanel>
                                 {

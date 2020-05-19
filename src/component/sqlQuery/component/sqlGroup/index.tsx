@@ -52,7 +52,7 @@ export default class SqlGroup extends React.Component<IProps> {
                             <div className={'app-sql-group-item'}
                                  style={{display: toggleShow ? 'block' : 'none'}}>
                                 <SqlTool type={'group'} id={this.props.id}/>
-                                <SqlToggle id={id}/>
+                                <SqlToggle id={id} classname={'app-sql-group-toggle-first'}/>
                                 {this.props.children}
                             </div>
                         </div>

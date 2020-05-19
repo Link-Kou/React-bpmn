@@ -5,7 +5,11 @@ import {SqlQueryData} from '../sqlPanel';
 import './toggle.scss'
 
 interface IProps {
+
+    classname?: string
+
     id: string,
+
     link?: 'AND' | 'OR'
 }
 
@@ -17,12 +21,12 @@ export default class SqlToggle extends React.Component<IProps> {
 
     public render() {
         const {link} = this.state
-        const {id} = this.props
+        const {id, classname} = this.props
         return (
             <SqlQueryData.Consumer>
                 {
                     (context: any) => (
-                        <div className='app-sql-group-toggle'>
+                        <div className={`app-sql-group-toggle ${classname ?? ''}`}>
                             <div className='app-sql-group-toggle-button'>
                                 <div
                                     className={`app-sql-group-toggle-buttonItem left ${link === 'AND' ? 'select' : ''}`}

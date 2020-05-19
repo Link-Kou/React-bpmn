@@ -9,6 +9,7 @@ import {
 import {LoadPanel} from '@component/panel';
 import {ImageUploaderLibraryGroup, ImageUploaderCard} from '@common/imageUploader';
 import {LongPanel} from '@component/panel';
+import {FormInputPagesPicker} from '@component/formControl';
 
 
 export default class Index extends React.Component {
@@ -37,8 +38,18 @@ export default class Index extends React.Component {
 
     public render() {
         return (
-            <LoadPanel hideLoader={this.state.loader}>
+            <LoadPanel loadering={this.state.loader}>
                 <LongPanel>
+
+                    <FormInputPagesPicker
+                        onSearch={(value, activePage, displayLength, callbackClose) => {
+                            setTimeout(() => {
+                               console.log(value)
+                                callbackClose(10)
+                            }, 1500)
+                        }}/>
+
+
                     <span>查看器-加载显示图片</span>
                     <div style={{height: 380, width: 380}}>
                         <ImageViewer ImageUrl={'https://www.isofts.org/wp-content/uploads/001-1099.jpg'}/>

@@ -105,6 +105,38 @@ export const MenuConfig: Array<IMenuConfig> = [
         ]
     },
     {
+        key: '2-112',
+        type: 'Dropdown',
+        ico: 'order-form',
+        title: () => (<span>定单管理</span>),
+        items: [
+            {
+                key: '2-1',
+                type: 'DropdownItem',
+                content: '纸板订单管理',
+                ico: 'order-form',
+                openTabs: {
+                    key: '2-1',
+                    title: '纸板订单管理',
+                    route: '/index/orderCardboard'
+                },
+                items: []
+            },
+            {
+                key: '2-2',
+                type: 'DropdownItem',
+                content: '纸箱订单管理',
+                ico: 'order-form',
+                openTabs: {
+                    key: '2-2',
+                    title: '纸箱订单管理',
+                    route: '/index/orderdistribute'
+                },
+                items: []
+            }
+        ]
+    },
+    {
         key: 'XX-3xs',
         type: 'Dropdown',
         ico: 'cube',
@@ -114,16 +146,16 @@ export const MenuConfig: Array<IMenuConfig> = [
                 key: '2-1',
                 type: 'DropdownMenu',
                 ico: 'comments',
-                title: () => (<span className={'asdasda'}>营销管理</span>),
+                title: () => (<span className={'asdasda'}>纸箱纸板营销</span>),
                 items: [
                     {
                         key: '2-1',
                         type: 'DropdownItem',
-                        content: '纸箱纸板',
+                        content: '价格方案',
                         ico: 'order-form',
                         openTabs: {
                             key: '2-1',
-                            title: '纸箱纸板',
+                            title: '价格方案',
                             route: '/index/productOnlineMarketing'
                         },
                         items: []
@@ -131,16 +163,40 @@ export const MenuConfig: Array<IMenuConfig> = [
                     {
                         key: '2-1',
                         type: 'DropdownItem',
-                        content: '辅料产品',
+                        content: '限时方案',
                         ico: 'order-form',
                         openTabs: {
                             key: '2-1',
-                            title: '辅料产品',
+                            title: '限时方案',
+                            route: '/index/productOnlineMarketing'
+                        },
+                        items: []
+                    },
+                    {
+                        key: '2-1',
+                        type: 'DropdownItem',
+                        content: '限量方案',
+                        ico: 'order-form',
+                        openTabs: {
+                            key: '2-1',
+                            title: '限量方案',
                             route: '/index/productOnlineMarketing'
                         },
                         items: []
                     }
                 ]
+            },
+            {
+                key: '2-2',
+                type: 'DropdownItem',
+                content: '价格营销方案',
+                ico: 'order-form',
+                openTabs: {
+                    key: '2-1',
+                    title: '价格营销方案',
+                    route: '/index/productQuote'
+                },
+                items: []
             },
             {
                 key: '2-2',

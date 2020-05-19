@@ -37,15 +37,6 @@ export default class SqlExpression extends React.Component<IProps> {
                 {
                     (context: any) => (
                         <div key={utilsGuid.randomGUID()} className='app-sql-expression' data-index={index}>
-                            {/* <div>
-                                <Input placeholder="Default Input"/>
-                            </div>
-                            <div>
-                                <Input placeholder="Default Input"/>
-                            </div>
-                            <div>
-                                <Input placeholder="Default Input"/>
-                            </div>*/}
                             {expression && expression({data: context.data, node, id, onExtend: context.onExtend})}
                             <div className={'app-sql-expression-tool app-sql-expression-tool-hide'}>
                                 <SqlTool type={'expression'} id={this.props.id} vertical={true}

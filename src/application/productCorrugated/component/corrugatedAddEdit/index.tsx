@@ -22,8 +22,8 @@ import {HookDataConfigList} from './compose/hookDataConfigList';
 import {IArrayDatas, IBasePaper, IFormValue, IStateFormValue} from '../../index.types';
 import {LoadPanel} from '@component/panel';
 import TextRequired from '@component/textRequired';
-import {BigDecimal} from 'bigdecimal';
 import numeral from 'numeral'
+import BigNumber from 'bignumber.js';
 
 interface IProps {
 
@@ -165,18 +165,17 @@ export default class BaseCorrugatedAddEdit extends React.Component<IProps> {
             //（buyPrice/1000）×（weight/1000）=1.68（元/m2）
             try {
                 const v = {
-                    squarePrice: new BigDecimal(String(squarePrice)),
-                    costPriceMarkup: new BigDecimal(String(costPriceMarkup))
+                    squarePrice: new BigNumber(squarePrice),
+                    costPriceMarkup: new BigNumber(costPriceMarkup)
                 }
                 const v1 = {
-                    costPrice: v.squarePrice.add(v.costPriceMarkup)
+                    costPrice: v.squarePrice.plus(v.costPriceMarkup)
                 }
                 return numeral(v1.costPrice.toString()).format('0.00')
             } catch (e) {
                 return 0
             }
         }
-
         const _ReastMakeMode = () => {
             const MakeModes = {
                 //内制
@@ -231,7 +230,7 @@ export default class BaseCorrugatedAddEdit extends React.Component<IProps> {
                     <Modal.Title>楞型管理窗口</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <LoadPanel height={350} hideLoader={hideLoader} outrender={true}>
+                    <LoadPanel height={350} loadering={hideLoader} outrender={true}>
                         <Form ref={(ref: any) => this._Forms = ref}
                               formValue={formValue}
                               formError={formError}

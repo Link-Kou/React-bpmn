@@ -2,10 +2,9 @@ import * as React from 'react';
 import {DatePicker, Input, InputPicker} from 'rsuite';
 
 import SqlQuery from '../../component/sqlQuery'
-
-import Moment from 'moment';
 import {LongPanel} from '@component/panel';
 import QueueAnim from 'rc-queue-anim';
+import dayjs from 'dayjs';
 
 
 export default class SqlQueryGrid extends React.Component {
@@ -22,9 +21,9 @@ export default class SqlQueryGrid extends React.Component {
                 link: 'OR',
                 children: [],
                 extend: {
-                    'field': 'name',
-                    'symbol': '=',
-                    'value': 'ss'
+                    field: 'name',
+                    symbol: '=',
+                    value: 'ss'
                 }
             },
             {
@@ -33,9 +32,9 @@ export default class SqlQueryGrid extends React.Component {
                 link: undefined,
                 children: [],
                 extend: {
-                    'field': 'time',
-                    'symbol': '=',
-                    'value': '2019-03-04'
+                    field: 'time',
+                    symbol: '=',
+                    value: '2019-03-04'
                 }
             }
         ],
@@ -65,7 +64,7 @@ export default class SqlQueryGrid extends React.Component {
                     }
                 ],
                 control: (value: any) => <DatePicker style={{width: '100%'}}
-                                                     defaultValue={Moment(value).toDate()}/>
+                                                     defaultValue={dayjs(value).toDate()}/>
             }
         ]
     }
@@ -85,16 +84,13 @@ export default class SqlQueryGrid extends React.Component {
                         <div style={{minWidth: 650, maxWidth: 750}}>
                             <SqlQuery
                                 query={this.state.query}
-                                onCallbackExp={(node: any) => (
-                                    `'asdasd' = 'asda'`
-                                )}
                                 onChange={(query: any, expression: string) => {
                                     this.setState({
                                         query,
                                         expression
                                     })
                                 }}
-                                expression={(props: { data: any, node: any, id: any, onExtend: (id: string, extendNode: any) => void }) => {
+                                expression={(props: { data: any, node: any, id: any, onExtend: (id: string, extendNode: (id: string, value: any) => void) => void }) => {
                                     return (
                                         <SqllExpression {...props}/>
                                     )
@@ -129,7 +125,11 @@ export class SqllExpression extends React.Component<IProps> {
                         value: '='
                     }
                 ],
-                control: (value: any) => <Input placeholder="请输入名称" defaultValue={value}/>
+                control: (value: any, id: string, extendNode: (id: string, value: any) => void) => <Input
+                    placeholder="请输入名称" defaultValue={value}
+                    onChange={(v, event) => {
+                        extendNode?.(id, {value: v})
+                    }}/>
             },
             {
                 label: '时间',
@@ -144,8 +144,12 @@ export class SqllExpression extends React.Component<IProps> {
                         value: '!='
                     }
                 ],
-                control: (value: any) => <DatePicker style={{width: '100%'}}
-                                                     defaultValue={Moment(value).toDate()}/>
+                control: (value: any, id: string, extendNode: (id: string, value: any) => void) => <DatePicker
+                    style={{width: '100%'}}
+                    onChange={(v, event) => {
+                        extendNode?.(id, {value: dayjs(v).format('YYYY-MM-DD')})
+                    }}
+                    defaultValue={dayjs(value).toDate()}/>
             }
         ]
     }
@@ -156,6 +160,13 @@ export class SqllExpression extends React.Component<IProps> {
         const symbolList: Array<any> = this.state.field.filter((k, i, a) => {
             return k.value === node.extend.field
         })
+        let Control: any = undefined
+        /*const ControlProps: any = {
+
+        }*/
+        if (symbolList?.length > 0) {
+            Control = symbolList[0].control
+        }
         return (
             <>
                 <div>
@@ -178,9 +189,8 @@ export class SqllExpression extends React.Component<IProps> {
                 </div>
                 <div>
                     {
-                        symbolList.length > 0 ?
-                            symbolList[0].control(node.extend.value)
-                            : null
+                        Control ? <Control/> : null
+                        //symbolList[0].control(node.extend.value, id, onExtend)
                     }
                 </div>
             </>

@@ -5,7 +5,7 @@ import {CellIndex, CellTextSpan} from '@component/table';
 import {PaperAddEditModel} from '../index';
 import {IArrayDatas, IFormValue} from '../../index.types';
 import TextSpan from '@component/textSpan';
-import { HeadPanel } from '@component/panel';
+import {HeadPanel} from '@component/panel';
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
 

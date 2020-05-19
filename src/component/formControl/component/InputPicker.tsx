@@ -10,12 +10,12 @@ interface IPropsInputPicker {
 
 
 /**
- * 自定义的Number输入
+ * 自定义输入选择器
  * @author lk
  * @date 2020/4/20 15:55
  * @version 1.0
  */
-const _HookInputPicker = (props: IPropsInputPicker | any): any => {
+const HookInputPicker = (props: IPropsInputPicker | any): any => {
     const {onChange, data, callbackChange}: { onChange: (v: any) => void, data: Array<any>, callbackChange: (value: any, data: any, callbackForm: () => void) => void } = props
     return <InputPicker {...props}
                         onChange={(value, event) => {
@@ -29,4 +29,4 @@ const _HookInputPicker = (props: IPropsInputPicker | any): any => {
                         }}/>
 }
 
-export default _HookInputPicker
+export default HookInputPicker

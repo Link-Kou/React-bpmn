@@ -128,7 +128,7 @@ export default class Index extends CardboardAdd {
                             </ButtonToolbar>
                         </div>
                     </HeadPanel>
-                    <LoadPanel hideLoader={hideLoader} outrender={true} queueAnim={false}>
+                    <LoadPanel loadering={hideLoader} outrender={true} queueAnim={false}>
                         <LongPanel style={{backgroundColor: '#fff'}}>
                             <Container>
                                 <Header/>

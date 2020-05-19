@@ -7,6 +7,12 @@
   > .app-sql-group-item {
     display: block;
     height: auto;
+
+    > .app-sql-group-toggle-first {
+      &:before {
+        border-width: 0 0 2px 0 !important;
+      }
+    }
   }
 
   > .app-sql-group-togglesh {

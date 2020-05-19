@@ -1,16 +1,18 @@
+$Borderradius: 3px;
+
 .app-sql-group-toggle {
-  height: 38px;
-  width: 120px;
+  height: 22px;
+  width: 75px;
   position: relative;
   background-color: #0088cc;
   margin-bottom: 10px;
   margin-left: 10px;
   padding: 2px;
-  border-radius: 5px;
+  border-radius: $Borderradius;
 
   > .app-sql-group-toggle-button {
     display: flex;
-    border-radius: 5px;
+    border-radius: $Borderradius;
     height: 100%;
     width: 100%;
 
@@ -19,7 +21,8 @@
       //background-color: red;
       color: #ffffff;
       text-align: center;
-      line-height: 34px;
+      line-height: 20px;
+      font-size: 12px;
 
       &.select {
         background-color: #ffffff;
@@ -32,11 +35,11 @@
       }
 
       &.left {
-        border-radius: 5px 0 0 5px;
+        border-radius: $Borderradius 0 0 $Borderradius;
       }
 
       &.right {
-        border-radius: 0 5px 5px 0;
+        border-radius: 0 $Borderradius $Borderradius 0;
       }
 
 
@@ -48,7 +51,7 @@
     content: "";
     position: absolute;
     top: 0;
-    border-width: 0 0 2px 0;
+    border-width: 0 0 2px 2px;
     left: -10px;
     width: 12px;
     height: 50%;

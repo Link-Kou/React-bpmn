@@ -14,11 +14,11 @@ import {
     Row,
     Schema
 } from 'rsuite';
-import {BigDecimal, RoundingMode} from 'bigdecimal'
 import {LoadPanel} from '@component/panel';
 import _HookDataConfigList from './compose/_DataConfigList';
 import TextRequired from '@component/textRequired';
 import {IArrayDatas, IFormValue, IStateFormValue} from '../../index.types';
+import BigNumber from 'bignumber.js';
 
 
 interface IProps {
@@ -62,17 +62,17 @@ interface IProps {
 }
 
 interface IState {
-    loading: boolean
-    hideLoader: boolean
-    formValue: IFormValue
-    formError: { [x: string]: any },
+    buttonLoading: boolean
+    panleLoader: boolean
+    formValue: IFormValue | undefined | {}
+    formError: { [x: string]: any }
     /**
      * 配置信息
      */
     dataConfigList?: Array<IArrayDatas>
 }
 
-export default class PaperAddEditModel extends React.Component<IProps> {
+export default class PaperAddEditModel extends React.Component<IProps, IState> {
 
     private _Forms: any;
 
@@ -96,45 +96,48 @@ export default class PaperAddEditModel extends React.Component<IProps> {
     });
 
     public state: IState = {
-        loading: false,
-        hideLoader: false,
+        buttonLoading: false,
+        panleLoader: true,
         formValue: IStateFormValue,
         formError: {},
         dataConfigList: []
     }
 
-    private _reset = () => {
-        this.setState({
-            loading: false,
-            hideLoader: false,
-            formValue: {},
-            formError: {}
-        })
-    }
 
+    /**
+     * 显示加载
+     * {@link handlersShowPaperAddEdit}
+     * @private
+     */
     private _onShow = () => {
         const {onShow, id} = this.props
-        onShow?.(id, (formValue: IFormValue, dataConfigList: Array<IArrayDatas>) => {
-            setTimeout(() => {
+        this.setState({
+            buttonLoading: false,
+            panleLoader: true,
+            formValue: {},
+            formError: {}
+        }, () => {
+            onShow?.(id, (formValue: IFormValue, dataConfigList: Array<IArrayDatas>) => {
                 this.setState({
                     formValue,
                     dataConfigList,
-                    hideLoader: true
+                    panleLoader: false
                 })
-            }, 500)
+            })
         })
     }
 
 
-    private _onHide = () => {
-        const {loading} = this.state;
+    private _onClose = () => {
+        const {buttonLoading} = this.state;
         const {onClose} = this.props;
-        if (!loading) {
+        if (!buttonLoading) {
             onClose?.()
         }
     }
 
     /**
+     * 保存或添加
      * {@link handlerPaperAddSave}
      * @private
      */
@@ -143,21 +146,21 @@ export default class PaperAddEditModel extends React.Component<IProps> {
         const {formValue} = this.state;
         const hide = () => {
             this.setState({
-                loading: false
+                buttonLoading: false
             }, () => {
-                this._onHide()
+                this._onClose()
             })
         }
         if (this._Forms?.check()) {
             this.setState({
-                loading: true
+                buttonLoading: true
             }, () => {
                 if (id) {
-                    onEdit?.(id, formValue, () => {
+                    onEdit?.(id, formValue as IFormValue, () => {
                         hide()
                     })
                 } else {
-                    onAdd?.(formValue, () => {
+                    onAdd?.(formValue as IFormValue, () => {
                         hide()
                     })
                 }
@@ -179,15 +182,15 @@ export default class PaperAddEditModel extends React.Component<IProps> {
             //（buyPrice/1000）×（weight/1000）=1.68（元/m2）
             try {
                 const v = {
-                    buyPrice: new BigDecimal(String(buyPrice)),
-                    weight: new BigDecimal(String(weight)),
-                    diff: new BigDecimal('1000')
+                    buyPrice: new BigNumber(buyPrice),
+                    weight: new BigNumber(weight),
+                    diff: new BigNumber('1000')
                 }
                 const v1 = {
-                    buyPrice: v.buyPrice.divide(v.diff, 2, RoundingMode.DOWN()),
-                    weight: v.weight.divide(v.diff, 2, RoundingMode.DOWN())
+                    buyPrice: v.buyPrice.div(v.diff).dp(2, BigNumber.ROUND_DOWN),
+                    weight: v.weight.div(v.diff).dp(2, BigNumber.ROUND_DOWN)
                 }
-                return v1.weight.multiply(v1.buyPrice).setScale(2, BigDecimal.ROUND_HALF_UP).toString()
+                return v1.weight.multipliedBy(v1.buyPrice).dp(2, BigNumber.ROUND_HALF_UP).toString()
             } catch (e) {
                 return 0
             }
@@ -198,7 +201,7 @@ export default class PaperAddEditModel extends React.Component<IProps> {
     }
 
     public render() {
-        const {loading, formValue, formError, dataConfigList, hideLoader} = this.state
+        const {buttonLoading, formValue, formError, dataConfigList, panleLoader} = this.state
         const {show} = this.props
         return (
             <Modal
@@ -206,14 +209,13 @@ export default class PaperAddEditModel extends React.Component<IProps> {
                 size={'sm'}
                 onShow={this._onShow}
                 show={show}
-                onHide={this._onHide}
-                onExited={this._reset}
+                onHide={this._onClose}
             >
                 <Modal.Header>
                     <Modal.Title>原纸管理窗口</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <LoadPanel height={350} hideLoader={hideLoader} outrender={true}>
+                    <LoadPanel height={350} loadering={panleLoader} outrender={true}>
                         <Form
                             ref={(ref: any) => this._Forms = ref}
                             formValue={formValue}
@@ -344,9 +346,9 @@ export default class PaperAddEditModel extends React.Component<IProps> {
                     </LoadPanel>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button appearance="primary" disabled={!hideLoader} loading={loading}
+                    <Button appearance="primary" disabled={panleLoader} loading={buttonLoading}
                             onClick={this._onSave}>保存产品</Button>
-                    <Button appearance="subtle" onClick={this._onHide}>关闭窗口</Button>
+                    <Button appearance="subtle" onClick={this._onClose}>关闭窗口</Button>
                 </Modal.Footer>
             </Modal>
         )

@@ -36,7 +36,7 @@ export default class PaperConfigAddModel extends React.Component<IProps> {
         formError: {}
     }
 
-    private _reset = () => {
+    private _onLoad = () => {
         this.setState({
             formValue: {
                 name: ''
@@ -45,7 +45,7 @@ export default class PaperConfigAddModel extends React.Component<IProps> {
         })
     }
 
-    private _onHide = () => {
+    private _onClose = () => {
         const {loading} = this.state;
         const {onClose} = this.props;
         if (!loading) {
@@ -55,7 +55,7 @@ export default class PaperConfigAddModel extends React.Component<IProps> {
 
     private _onSave = (id: string = '', name: string = '', check: boolean = false) => {
         const {onSave} = this.props
-        if (utilsBoolean.toBoolean(check, false)) {
+        if (utilsBoolean.toBooleanGetDefault(check, false)) {
             this.setState({
                 loading: true
             }, () => {
@@ -77,8 +77,8 @@ export default class PaperConfigAddModel extends React.Component<IProps> {
             <Modal show={show}
                    size={'xs'}
                    backdrop={'static'}
-                   onShow={this._reset}
-                   onHide={this._onHide}>
+                   onShow={this._onLoad}
+                   onHide={this._onClose}>
                 <Modal.Header>
                     <Modal.Title>新建分类</Modal.Title>
                 </Modal.Header>
@@ -108,7 +108,7 @@ export default class PaperConfigAddModel extends React.Component<IProps> {
                             onClick={() => this._onSave(id, formValue.name, this._Forms?.check())}>
                         保存
                     </Button>
-                    <Button appearance="subtle" disabled={loading} onClick={this._onHide}>
+                    <Button appearance="subtle" disabled={loading} onClick={this._onClose}>
                         取消
                     </Button>
                 </Modal.Footer>
