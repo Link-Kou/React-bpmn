@@ -49,13 +49,18 @@ export default class TextRequired extends React.PureComponent<IProps> {
     private renderAccepter() {
         const {accepter, required, mark} = this.props
         const Component = accepter as any
+
         const _View = () => (
-            <Whisper placement="top" trigger="hover" speaker={tooltip}>
-                <span title={'必填'}>
-                    {this.renderRequired(mark, required)}
-                    {this.props.children}
-                </span>
-            </Whisper>
+            <>
+                <div style={{marginBottom: 5, display: 'block'}}>
+                    <Whisper placement="top" trigger="hover" speaker={tooltip}>
+                        <span title={'必填'}>
+                            {this.renderRequired(mark, required)}
+                            {this.props.children}
+                        </span>
+                    </Whisper>
+                </div>
+            </>
         )
         if (Component) {
             return (

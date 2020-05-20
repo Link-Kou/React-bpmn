@@ -71,9 +71,9 @@ export const IStateFormValue: IFormValue = {
 
     name: '',
 
-    costPrice: '',
+    costPrice: '0',
 
-    costPriceMarkup: '',
+    costPriceMarkup: '0',
 
     coefficient: '',
 
@@ -93,7 +93,7 @@ export const IStateFormValue: IFormValue = {
 
     basePaperName: '',
 
-    squarePrice: ''
+    squarePrice: '0'
 }
 
 export interface IArrayDatas {

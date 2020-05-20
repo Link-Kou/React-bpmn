@@ -15,7 +15,7 @@ export default class index extends BaseCorrugated {
                         <Col xs={19} sm={24} md={19}>
                             <BackColorPanel tableBordered={true}>
                                 <BaseCorrugatedTable
-                                    onShowCorrugatedAddEdit={this.onShowCorrugatedAddEdit}
+                                    onShowAddEdit={this.handlersShowCorrugatedAddEdit}
                                     onLoadTableData={this.handlersLoadTableData}
                                     onCorrugatedAddSave={this.handlersCorrugatedAddSave}
                                     onCorrugatedEditSave={this.HandlersCorrugatedEditSave}

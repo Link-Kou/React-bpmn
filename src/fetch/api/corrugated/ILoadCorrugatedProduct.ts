@@ -17,5 +17,5 @@ export interface IResLoadCorrugatedProduct extends IUrlError {
  * @constructor
  */
 export function LoadCorrugatedProduct(model: IReqLoadCorrugatedProduct, callback: (e: IResLoadCorrugatedProduct) => void) {
-    PromiseFetch(callback, Fetch(Url.getCorrugated('/product/edit/get.do'), model))
+    PromiseFetch(callback, Fetch(Url.getCorrugated(`/product/get/${model.id}.do`), model))
 }

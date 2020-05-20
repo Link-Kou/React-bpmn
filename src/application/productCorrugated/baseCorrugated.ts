@@ -129,7 +129,7 @@ export default class BaseCorrugated extends React.Component<any> {
     /**
      * 显示添加编辑的窗口
      */
-    protected onShowCorrugatedAddEdit = async (id?: string, callbackData?: (data: IFormValue, dataConfigList: Array<IArrayDatas>, paperProductList: Array<IArrayDatas>) => void) => {
+    protected handlersShowCorrugatedAddEdit = async (id?: string, callbackData?: (data: IFormValue, dataConfigList: Array<IArrayDatas>, paperProductList: Array<IArrayDatas>) => void) => {
 
         const fetch1 = new Promise((resolve, reject) => {
             if (id) {

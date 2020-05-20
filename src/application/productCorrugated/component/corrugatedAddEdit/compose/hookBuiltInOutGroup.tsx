@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Col, ControlLabel, FormControl, FormGroup, InputNumber, InputPicker} from 'rsuite';
+import {Col, ControlLabel, FormControl, FormGroup, InputPicker} from 'rsuite';
 import {IArrayDatas, IFormValue} from '../../../index.types';
 import {utilsObject} from '@utils/index';
 import {FormInputPicker} from '@component/formControl';
@@ -59,12 +59,6 @@ const BuiltIn = (props: IProps) => {
                     />
                 </FormGroup>
             </Col>
-            <Col xs={12} sm={12} md={12}>
-                <FormGroup>
-                    <ControlLabel>平方价</ControlLabel>
-                    <FormControl name="squarePrice" disabled={true} postfix={'元/m²'} accepter={InputNumber}/>
-                </FormGroup>
-            </Col>
         </>
     )
 }
@@ -103,12 +97,6 @@ const Outsourcing = (props: IProps) => {
                         accepter={InputPicker}
                         data={find?.children ?? []}
                     />
-                </FormGroup>
-            </Col>
-            <Col xs={12} sm={12} md={12}>
-                <FormGroup>
-                    <ControlLabel>平方价</ControlLabel>
-                    <FormControl name="squarePrice" postfix={'元/m²'} accepter={InputNumber}/>
                 </FormGroup>
             </Col>
         </>

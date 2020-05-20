@@ -31,7 +31,7 @@ export default class BasePaperTable extends React.Component<IPorps> {
     public Columns = [
         {
             HeaderCell: <HeaderCell>编号</HeaderCell>,
-            Cell: <CellIndex dataKey="index"/>,
+            Cell: <CellIndex dataKey="index" disPlayNumber={true} onSelectChange={this._onSelectIndex.bind(this)}/>,
             width: 65,
             fixed: 'left',
             resizable: false
@@ -159,7 +159,6 @@ export default class BasePaperTable extends React.Component<IPorps> {
         }
     ]
 
-
     public state = {
         showModel: '',
         loading: true,
@@ -179,11 +178,29 @@ export default class BasePaperTable extends React.Component<IPorps> {
         this._onLoadTableData()
     }
 
-
+    /**
+     * 模态窗
+     * @param eventKey
+     * @private
+     */
     private _onModel = (eventKey: string = '') => {
         this.setState({
             showModel: eventKey,
             id: undefined
+        })
+    }
+
+    /**
+     * index 选择
+     * @param rowIndex
+     * @param rowData
+     * @private
+     */
+    private _onSelectIndex(rowIndex: number, rowData: any) {
+        const {data}: { data: Array<any> } = this.state
+        data[rowIndex] = rowData;
+        this.setState({
+            data
         })
     }
 

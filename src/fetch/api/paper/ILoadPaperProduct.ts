@@ -23,5 +23,5 @@ export interface IResLoadPaperProduct extends IUrlError {
  * @constructor
  */
 export function LoadPaperProduct(model: IReqLoadPaperProduct, callback: (e: IResLoadPaperProduct) => void) {
-    PromiseFetch(callback, Fetch(Url.getPaper('/product/edit/get.do'), model))
+    PromiseFetch(callback, Fetch(Url.getPaper(`/product/get/${model.id}.do`), model))
 }

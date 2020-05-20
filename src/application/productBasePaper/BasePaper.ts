@@ -142,7 +142,7 @@ export default class BasePaper extends React.Component<any> {
     }
 
     /**
-     * 保存原纸产品
+     * 保存编辑的原纸产品
      * @param id
      * @param data
      * @param callbackCloseLoading

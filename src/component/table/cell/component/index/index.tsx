@@ -56,6 +56,9 @@ export function ControllerAlashCell(props: IControllerAlashnCell) {
     return suDiv();
 }
 
+
+
+
 interface IControllerIndexCell extends IProps {
     onSelectChange?: (rowIndex: number, rowData: any) => void
     disPlayNumber?: boolean
@@ -132,11 +135,10 @@ export function ControllerExpandedIndexCell(props: IControllerExpandedIndexCell)
 }
 
 
+
 interface IControllerTextSpanCell extends IProps {
 
 }
-
-
 /**
  * 常规 文本列表
  * @param props

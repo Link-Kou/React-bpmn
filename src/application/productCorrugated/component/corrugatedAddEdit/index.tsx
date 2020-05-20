@@ -24,6 +24,7 @@ import {LoadPanel} from '@component/panel';
 import TextRequired from '@component/textRequired';
 import numeral from 'numeral'
 import BigNumber from 'bignumber.js';
+import {FormInputDecimalNumber} from '@component/formControl';
 
 interface IProps {
 
@@ -61,15 +62,14 @@ interface IProps {
 
 interface IState {
     loading: boolean
-    disabled: boolean
-    hideLoader: boolean
+    panelLoader: boolean
     formValue: IFormValue
     dataConfigList: Array<IArrayDatas>
     paperProductList: Array<IArrayDatas>
     formError?: {}
 }
 
-export default class BaseCorrugatedAddEdit extends React.Component<IProps> {
+export default class BaseCorrugatedAddEdit extends React.Component<IProps, IState> {
 
     private _Forms: any;
 
@@ -77,22 +77,10 @@ export default class BaseCorrugatedAddEdit extends React.Component<IProps> {
 
     public state: IState = {
         loading: false,
-        hideLoader: false,
-        disabled: true,
+        panelLoader: true,
         dataConfigList: [],
         paperProductList: [],
         formValue: IStateFormValue
-    }
-
-
-    private _reset = () => {
-        this.setState({
-            loading: false,
-            hideLoader: false,
-            disabled: true,
-            formValue: {},
-            formError: {}
-        })
     }
 
     private _onHide = () => {
@@ -100,7 +88,6 @@ export default class BaseCorrugatedAddEdit extends React.Component<IProps> {
         const {onClose} = this.props;
         if (!loading) {
             onClose?.()
-            this._reset()
         }
     }
 
@@ -124,11 +111,11 @@ export default class BaseCorrugatedAddEdit extends React.Component<IProps> {
                     loading: true
                 }, () => {
                     if (id) {
-                        onEdit?.(id, formValue, () => {
+                        onEdit?.(id, formValue as IFormValue, () => {
                             hide()
                         })
                     } else {
-                        onAdd?.(formValue, () => {
+                        onAdd?.(formValue as IFormValue, () => {
                             hide()
                         })
                     }
@@ -139,21 +126,35 @@ export default class BaseCorrugatedAddEdit extends React.Component<IProps> {
 
     /**
      * 窗口显示加载
+     * {@link handlersShowCorrugatedAddEdit}
      * @private
      */
     public _onShow = () => {
         const {onShow, id} = this.props;
-        onShow?.(id, (data, dataConfigList, paperProductList) => {
-            this.setState({
-                disabled: false,
-                hideLoader: true,
-                formValue: data,
-                dataConfigList,
-                paperProductList
+        this.setState({
+            loading: false,
+            panelLoader: true,
+            formValue: IStateFormValue,
+            formError: {}
+        }, () => {
+            onShow?.(id, (data, dataConfigList, paperProductList) => {
+                this.setState({
+                    panelLoader: false,
+                    formValue: data,
+                    dataConfigList,
+                    paperProductList
+                })
             })
         })
+
     }
 
+    /**
+     * 表单数据更新
+     * @param formValue
+     * @param event
+     * @private
+     */
     private _onChangeFormValues = (formValue: any, event: any) => {
         const {makeMode, squarePrice, costPriceMarkup} = formValue as IFormValue
         /**
@@ -171,6 +172,7 @@ export default class BaseCorrugatedAddEdit extends React.Component<IProps> {
                 const v1 = {
                     costPrice: v.squarePrice.plus(v.costPriceMarkup)
                 }
+                //保留两位小数
                 return numeral(v1.costPrice.toString()).format('0.00')
             } catch (e) {
                 return 0
@@ -203,20 +205,22 @@ export default class BaseCorrugatedAddEdit extends React.Component<IProps> {
         const {formValue} = this.state
         const newdata = data as Array<IBasePaper>
         const find: IBasePaper | undefined = newdata.find(x => x.id === value);
-        this.setState({
-            formValue: {
-                ...formValue,
-                basePaperName: find?.paperName,
-                squarePrice: find?.squarePrice
-            }
-        }, () => {
-            callbackForm()
-        })
+        if (find) {
+            this.setState({
+                formValue: {
+                    ...formValue,
+                    basePaperName: find?.paperName,
+                    squarePrice: find?.squarePrice
+                }
+            }, () => {
+                callbackForm()
+            })
+        }
     }
 
     public render() {
         const {show} = this.props
-        const {formValue, formError, disabled, loading, dataConfigList, paperProductList, hideLoader} = this.state
+        const {formValue, formError, loading, dataConfigList, paperProductList, panelLoader} = this.state
         return (
             <Modal
                 size={'sm'}
@@ -224,13 +228,12 @@ export default class BaseCorrugatedAddEdit extends React.Component<IProps> {
                 show={show}
                 onShow={this._onShow}
                 onHide={this._onHide}
-                onExited={this._reset}
             >
                 <Modal.Header>
                     <Modal.Title>楞型管理窗口</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <LoadPanel height={350} loadering={hideLoader} outrender={true}>
+                    <LoadPanel height={350} loadering={panelLoader} outrender={true}>
                         <Form ref={(ref: any) => this._Forms = ref}
                               formValue={formValue}
                               formError={formError}
@@ -283,12 +286,16 @@ export default class BaseCorrugatedAddEdit extends React.Component<IProps> {
                                     <Col xs={8} sm={8} md={8}>
                                         <FormGroup>
                                             <TextRequired>成本价加价</TextRequired>
-                                            <InputGroup>
-                                                <FormControl name="costPriceMarkup"
-                                                             style={{width: '100%', height: '100%'}}
-                                                             postfix={'元/m²'}
-                                                             accepter={InputNumber}/>
-                                            </InputGroup>
+                                            <FormControl name="costPriceMarkup"
+                                                         postfix={'元/m²'}
+                                                         decimalPlaces={2}
+                                                         /*callbackChange={(v: any, d: any) => {
+                                                             const bigNumber = new BigNumber(v);
+                                                             return bigNumber.dp(2, BigNumber.ROUND_DOWN).toString()
+                                                         }}*/
+                                                         min={0}
+                                                         max={999999.99}
+                                                         accepter={FormInputDecimalNumber}/>
                                         </FormGroup>
                                     </Col>
                                 </Row>
@@ -317,7 +324,18 @@ export default class BaseCorrugatedAddEdit extends React.Component<IProps> {
                                         dataConfigList={dataConfigList}
                                         paperProductList={paperProductList}
                                         callbackBasePaperChange={this._onBasePaperChange}
-                                        formValue={formValue}/>
+                                        formValue={formValue as IFormValue}/>
+                                    <Col xs={12} sm={12} md={12}>
+                                        <FormGroup>
+                                            <ControlLabel>平方价</ControlLabel>
+                                            <FormControl name="squarePrice"
+                                                         min={0}
+                                                         max={999999.99}
+                                                         disabled={formValue.makeMode === 1}
+                                                         postfix={'元/m²'}
+                                                         accepter={InputNumber}/>
+                                        </FormGroup>
+                                    </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={8} sm={8} md={8}>
@@ -358,7 +376,7 @@ export default class BaseCorrugatedAddEdit extends React.Component<IProps> {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button appearance="primary"
-                            disabled={disabled}
+                            disabled={panelLoader}
                             loading={loading}
                             onClick={this._onSave}>保存产品</Button>
                     <Button appearance="subtle" onClick={this._onHide}>关闭窗口</Button>

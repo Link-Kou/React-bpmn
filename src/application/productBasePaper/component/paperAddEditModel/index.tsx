@@ -64,7 +64,7 @@ interface IProps {
 interface IState {
     buttonLoading: boolean
     panleLoader: boolean
-    formValue: IFormValue | undefined | {}
+    formValue: IFormValue
     formError: { [x: string]: any }
     /**
      * 配置信息
@@ -114,7 +114,7 @@ export default class PaperAddEditModel extends React.Component<IProps, IState> {
         this.setState({
             buttonLoading: false,
             panleLoader: true,
-            formValue: {},
+            formValue: IStateFormValue,
             formError: {}
         }, () => {
             onShow?.(id, (formValue: IFormValue, dataConfigList: Array<IArrayDatas>) => {

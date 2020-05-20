@@ -12,7 +12,7 @@ const {Column, HeaderCell, Cell, Pagination} = Table;
 
 interface IProps {
 
-    onShowCorrugatedAddEdit?(id?: string, callbackData?: (data: IFormValue, dataConfigList: Array<IArrayDatas>, paperProductList: Array<IArrayDatas>) => void): void
+    onShowAddEdit?(id?: string, callbackData?: (data: IFormValue, dataConfigList: Array<IArrayDatas>, paperProductList: Array<IArrayDatas>) => void): void
 
     onCorrugatedAddSave?(data: IFormValue, callbackCloseLoading: () => void, reload: () => void): void
 
@@ -246,8 +246,8 @@ export default class BaseCorrugatedTable extends React.Component<IProps> {
     }
 
     private _onShow = (id?: string, callbackData?: (data: IFormValue, dataConfigList: Array<IArrayDatas>, paperProductList: Array<IArrayDatas>) => void) => {
-        const {onShowCorrugatedAddEdit} = this.props
-        onShowCorrugatedAddEdit?.(id, callbackData)
+        const {onShowAddEdit} = this.props
+        onShowAddEdit?.(id, callbackData)
     }
 
     public render() {
