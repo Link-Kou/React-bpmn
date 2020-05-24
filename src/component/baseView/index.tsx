@@ -4,10 +4,8 @@ import NavMenu from './component/navMenu'
 import NavHead from './component/navHead'
 import NavBody from './component/navBody'
 import NavLogo from './component/navLogo'
-
-import './index.scss'
-
 import BaseTool from '../../application/baseTool'
+import './index.scss'
 
 export default class BaseView extends React.Component {
 

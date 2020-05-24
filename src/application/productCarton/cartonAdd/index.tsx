@@ -19,7 +19,7 @@ export default class Index extends CartonAdd {
         id: undefined,
         formValue: JSON.parse(JSON.stringify(IStateFormValue)),
         costUnifiedData: [],
-        hideLoader: false
+        loader: true
     }
 
     componentDidMount() {
@@ -43,7 +43,7 @@ export default class Index extends CartonAdd {
                 id,
                 formValue: Carton,
                 costUnifiedData: Cardboard,
-                hideLoader: true
+                loader: false
             })
         })
     }
@@ -52,7 +52,7 @@ export default class Index extends CartonAdd {
         this.handlersLoadCardboardProductListCost((data: Array<ICardboardProductCost>) => {
             this.setState({
                 costUnifiedData: data,
-                hideLoader: true
+                loader: false
             })
         })
     }
@@ -88,7 +88,7 @@ export default class Index extends CartonAdd {
     }
 
     public render() {
-        const {formValue, costUnifiedData, hideLoader} = this.state
+        const {formValue, costUnifiedData, loader} = this.state
         return (
             <>
                 <BackColorPanel style={{height: '100%'}}>
@@ -106,7 +106,7 @@ export default class Index extends CartonAdd {
                             </ButtonToolbar>
                         </div>
                     </HeadPanel>
-                    <LoadPanel loadering={hideLoader} outrender={true} queueAnim={false}>
+                    <LoadPanel loadering={loader} outrender={true} queueAnim={false}>
                         <LongPanel>
                             <RefPanel>
                                 {

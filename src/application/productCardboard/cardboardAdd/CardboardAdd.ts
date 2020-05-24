@@ -12,13 +12,21 @@ interface IProps {
     }
 }
 
+interface IState {
+    formValue: IFormValue,
+    id?: string,
+    basePaper: Array<IBasePaper>,
+    corrugated: Array<IBaseCorrugated>,
+    loader: boolean
+}
+
 /**
  *
  * @author lk
  * @date 2020/4/27 15:32
  * @version 1.0
  */
-export default class CardboardAdd extends React.Component<IProps, any> {
+export default class CardboardAdd extends React.Component<IProps, IState> {
 
     /**
      * 加载楞型与原纸

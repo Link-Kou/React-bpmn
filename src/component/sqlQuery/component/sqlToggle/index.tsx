@@ -34,7 +34,7 @@ export default class SqlToggle extends React.Component<IProps> {
                                         this.setState({
                                             link: 'AND'
                                         }, () => {
-                                            context.onToggleLink(id)
+                                            context.onToggleLink(id, 'AND')
                                         })
                                     }}>
                                     <span>AND</span>
@@ -45,7 +45,7 @@ export default class SqlToggle extends React.Component<IProps> {
                                         this.setState({
                                             link: 'OR'
                                         }, () => {
-                                            context.onToggleLink(id)
+                                            context.onToggleLink(id, 'OR')
                                         })
                                     }}>
                                     <span>OR</span>

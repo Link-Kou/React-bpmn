@@ -2,19 +2,21 @@
 
 .header-tabs {
   flex: 1;
-  margin-top: 10px;
+  display: flex;
   margin-left: 5px;
   overflow: hidden;
   min-width: 500px;
 
   .header-tabs-box {
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
     position: relative;
   }
 
   .header-tabs-base {
     flex: 1;
     background-color: #fff;
-    margin-right: $tabsheight + 8px;
     overflow: auto;
     /* 藏滚动条，当IE下溢出，仍然可以滚动*/
     -ms-overflow-style: none;
@@ -37,7 +39,6 @@
 
   .header-tabs-tabitem-select {
     background-color: #f1f1f1 !important;
-    top: 5px !important;
     position: relative;
     height: 40px !important;
 
@@ -68,15 +69,6 @@
     border-radius: 4px 4px 0 0;
     top: 0;
 
-    transition: top .3s;
-    -webkit-transition: top .3s;
-    -moz-transition: top .3s; /* Firefox 4 */
-    -o-transition: top .3s; /* Opera */
-
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Chrome/Safari/Opera */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently not supported by any browser */
     outline: none;
 
@@ -123,15 +115,10 @@
   }
 
   .header-tabs-basetool {
-    position: absolute;
-    height: $tabsheight;
+    display: flex;
     width: 50px;
-    border: 1px solid #e8e8e8;
     border-bottom: none;
     border-radius: 4px 4px 0 0;
-    right: 0px;
-    top: 0;
-    display: flex;
     justify-content: center;
     justify-items: center;
     align-content: center;

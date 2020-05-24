@@ -37,35 +37,6 @@ export default class SqlQueryGrid extends React.Component {
                     value: '2019-03-04'
                 }
             }
-        ],
-        field: [
-            {
-                label: '名称',
-                value: 'name',
-                symbol: [
-                    {
-                        label: '等于',
-                        value: '='
-                    }
-                ],
-                control: (value: any) => <Input placeholder="请输入名称" defaultValue={value}/>
-            },
-            {
-                label: '时间',
-                value: 'time',
-                symbol: [
-                    {
-                        label: '等于',
-                        value: '='
-                    },
-                    {
-                        label: '不等于',
-                        value: '!='
-                    }
-                ],
-                control: (value: any) => <DatePicker style={{width: '100%'}}
-                                                     defaultValue={dayjs(value).toDate()}/>
-            }
         ]
     }
 
@@ -90,7 +61,7 @@ export default class SqlQueryGrid extends React.Component {
                                         expression
                                     })
                                 }}
-                                expression={(props: { data: any, node: any, id: any, onExtend: (id: string, extendNode: (id: string, value: any) => void) => void }) => {
+                                expression={(props: { data: any, node: any, id: any, onExtend: (id: string, extendNode: (id: string, value: any, refresh?: boolean) => void) => void }) => {
                                     return (
                                         <SqllExpression {...props}/>
                                     )
@@ -108,7 +79,7 @@ interface IProps {
     data: any
     node: any
     id: any
-    onExtend: (id: string, extendNode: any) => void
+    onExtend: (id: string, extendNode: any, refresh?: boolean) => void
 }
 
 export class SqllExpression extends React.Component<IProps> {
@@ -125,11 +96,15 @@ export class SqllExpression extends React.Component<IProps> {
                         value: '='
                     }
                 ],
-                control: (value: any, id: string, extendNode: (id: string, value: any) => void) => <Input
-                    placeholder="请输入名称" defaultValue={value}
-                    onChange={(v, event) => {
-                        extendNode?.(id, {value: v})
-                    }}/>
+                control: (props: { value: any, id: string, onExtend: (id: string, value: any) => void }) => (
+                    <Input
+                        placeholder="请输入名称"
+                        //value={props?.value}
+                        defaultValue={props?.value}
+                        onChange={(v, event) => {
+                            props?.onExtend?.(props?.id, {value: v})
+                        }}/>
+                )
             },
             {
                 label: '时间',
@@ -144,12 +119,23 @@ export class SqllExpression extends React.Component<IProps> {
                         value: '!='
                     }
                 ],
-                control: (value: any, id: string, extendNode: (id: string, value: any) => void) => <DatePicker
-                    style={{width: '100%'}}
-                    onChange={(v, event) => {
-                        extendNode?.(id, {value: dayjs(v).format('YYYY-MM-DD')})
-                    }}
-                    defaultValue={dayjs(value).toDate()}/>
+                control: (props: { value: any, id: string, onExtend: (id: string, value: any) => void }) => (
+                    <DatePicker
+                        style={{width: '100%'}}
+                        format={'YYYY-MM-DD HH:mm:ss'}
+                        defaultValue={props?.value ? dayjs(props?.value) : props?.value}
+                        //value={dayjs(props?.value).isValid() ? dayjs(props?.value).toDate() : props?.value}
+                        onChange={(v, event) => {
+                            const day = dayjs(v)
+                            props?.onExtend?.(
+                                props?.id,
+                                {
+                                    value: day.isValid() ? day.format('YYYY-MM-DD HH:mm:ss') : v
+                                }
+                            )
+                        }}
+                    />
+                )
             }
         ]
     }
@@ -161,9 +147,11 @@ export class SqllExpression extends React.Component<IProps> {
             return k.value === node.extend.field
         })
         let Control: any = undefined
-        /*const ControlProps: any = {
-
-        }*/
+        const ControlProps: any = {
+            value: node.extend.value,
+            id,
+            onExtend
+        }
         if (symbolList?.length > 0) {
             Control = symbolList[0].control
         }
@@ -173,7 +161,7 @@ export class SqllExpression extends React.Component<IProps> {
                     <InputPicker data={this.state.field}
                                  defaultValue={node.extend.field}
                                  onSelect={(e: any, item: any) => {
-                                     onExtend(id, {'field': e})
+                                     onExtend(id, {'field': e}, true)
                                  }}/>
                 </div>
                 <div>
@@ -182,14 +170,14 @@ export class SqllExpression extends React.Component<IProps> {
                             <InputPicker
                                 data={symbolList[0].symbol}
                                 defaultValue={node.extend.symbol} onSelect={(e: any) => {
-                                onExtend(id, {'symbol': e})
+                                onExtend(id, {'symbol': e}, true)
                             }}/>
                             : null
                     }
                 </div>
                 <div>
                     {
-                        Control ? <Control/> : null
+                        Control ? <Control {...ControlProps}/> : null
                         //symbolList[0].control(node.extend.value, id, onExtend)
                     }
                 </div>

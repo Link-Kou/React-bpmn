@@ -3,6 +3,7 @@
   display: flex;
   padding: 0 20px 0 10px;
   margin-bottom: 10px;
+  align-items: center;
   /*&:nth-child(2n+1){
     background-color: red;
   }*/
@@ -50,5 +51,3 @@
     display: none; }
   .app-sql-expression:hover .app-sql-expression-tool {
     display: block; }
-
-/*# sourceMappingURL=expression.css.map */

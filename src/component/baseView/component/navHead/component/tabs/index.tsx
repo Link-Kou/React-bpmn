@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
-import {Icon, Popover, Whisper, Dropdown, IconButton} from 'rsuite';
+import {Icon, Popover, Whisper, Dropdown, IconButton, Avatar, Badge} from 'rsuite';
 import {RouterHistory, Routes} from '@router';
 import Listener from '@listener';
 import './tabs.scss'
@@ -227,7 +227,8 @@ export default class HeadTabs extends React.Component<any> {
             return false
         })
         if (index > -1) {
-            this.onWheel(`header-tabs-tabitem${items[index].id}`, items[index].id)
+            RouterHistory.push(items[index].path)
+            //this.onWheel(`header-tabs-tabitem${items[index].id}`, items[index].id)
         }
 
 
@@ -242,62 +243,69 @@ export default class HeadTabs extends React.Component<any> {
                 event.preventDefault()
                 return false
             }}>
-                <div className={'header-tabs-box'} style={{display: 'flex'}}>
-                    <IconButton style={{top: 5}} appearance="subtle" icon={<Icon icon="arrow-left"/>} placement="left"
-                                onClick={() => {
-                                    this.onNextPrev('prev')
-                                }}/>
-                    <DragDropContext onDragEnd={this.onDragEnd.bind(this)}>
-                        <Droppable droppableId="droppable" direction="horizontal">
-                            {(provided, snapshot) => (
-                                <div
-                                    className={`header-tabs-base`}
-                                    ref={ref => {
-                                        provided.innerRef(ref);
-                                        this.wrapperheader = ref
-                                    }}
-                                    style={this.getListStyle(snapshot.isDraggingOver)}
-                                    {...provided.droppableProps}
-                                >
-                                    {items.map((item, index) => (
-                                        <Draggable key={item.id} draggableId={item.id} index={index}>
-                                            {(provideds, snapshots) => (
-                                                <div
-                                                    className={`header-tabs-tabitem header-tabs-tabitem${item.id} ${selectItems === item.id ? 'header-tabs-tabitem-select' : ''}`}
-                                                    role="button"
-                                                    ref={provideds.innerRef}
-                                                    {...provideds.draggableProps}
-                                                    {...provideds.dragHandleProps}
-                                                    style={this.getItemStyle(
-                                                        snapshots.isDragging,
-                                                        provideds.draggableProps.style
-                                                    )}
-                                                >
+                <div className={'header-tabs-box'}>
+                    <div style={{display: 'flex'}}>
+                        <IconButton appearance="subtle" icon={<Icon icon="th-list"/>} placement="left"
+                                    onClick={() => {
+                                        Listener.EmitNavMenuSidenav()
+                                    }}/>
+                        <IconButton appearance="subtle" icon={<Icon icon="arrow-left"/>} placement="left"
+                                    onClick={() => {
+                                        this.onNextPrev('prev')
+                                    }}/>
+                    </div>
+                    <div style={{display: 'flex', width: 'calc(100% - 162px)'}}>
+                        <DragDropContext onDragEnd={this.onDragEnd.bind(this)}>
+                            <Droppable droppableId="droppable" direction="horizontal">
+                                {(provided, snapshot) => (
+                                    <div
+                                        className={`header-tabs-base`}
+                                        ref={ref => {
+                                            provided.innerRef(ref);
+                                            this.wrapperheader = ref
+                                        }}
+                                        style={this.getListStyle(snapshot.isDraggingOver)}
+                                        {...provided.droppableProps}
+                                    >
+                                        {items.map((item, index) => (
+                                            <Draggable key={item.id} draggableId={item.id} index={index}>
+                                                {(provideds, snapshots) => (
                                                     <div
-                                                        className={`header-tabs-tabitem-content header-tabs-tabitem-content${item.id}`}
-                                                        onClick={() => {
-                                                            RouterHistory.push(item.path)
-                                                        }}>{item.content}</div>
-                                                    <Icon className={'app-close'} icon={'warning'}
-                                                          onClick={() => this._close(item.id)}/>
-                                                </div>
-                                            )}
-                                        </Draggable>
-                                    ))}
-                                    {provided.placeholder}
-                                </div>
-                            )}
-                        </Droppable>
-                    </DragDropContext>
-                    <div>
+                                                        className={`header-tabs-tabitem header-tabs-tabitem${item.id} ${selectItems === item.id ? 'header-tabs-tabitem-select' : ''}`}
+                                                        role="button"
+                                                        ref={provideds.innerRef}
+                                                        {...provideds.draggableProps}
+                                                        {...provideds.dragHandleProps}
+                                                        style={this.getItemStyle(
+                                                            snapshots.isDragging,
+                                                            provideds.draggableProps.style
+                                                        )}
+                                                    >
+                                                        <div
+                                                            className={`header-tabs-tabitem-content header-tabs-tabitem-content${item.id}`}
+                                                            onClick={() => {
+                                                                RouterHistory.push(item.path)
+                                                            }}>{item.content}</div>
+                                                        <Icon className={'app-close'} icon={'warning'}
+                                                              onClick={() => this._close(item.id)}/>
+                                                    </div>
+                                                )}
+                                            </Draggable>
+                                        ))}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                        </DragDropContext>
+                    </div>
+                    <div style={{display: 'flex'}}>
                         <IconButton appearance="subtle" icon={<Icon icon="arrow-right"/>}
                                     placement="right"
-                                    style={{top: 5, left: -48}}
                                     onClick={() => {
                                         this.onNextPrev('next')
                                     }}/>
                         <Whisper
-                            trigger="hover"
+                            trigger="active"
                             placement='bottom'
                             speaker={
                                 <Popover title="">
@@ -327,9 +335,11 @@ export default class HeadTabs extends React.Component<any> {
                             }
                         >
                             <div className={'header-tabs-basetool'}>
-                                <div>
-                                    <Icon icon={'gear-circle'}/>
-                                </div>
+                                <Badge content={55} maxCount={99}>
+                                    <Avatar style={{backgroundColor: '#87d068'}} size={'sm'}>
+                                        <Icon icon={'gear-circle'}/>
+                                    </Avatar>
+                                </Badge>
                             </div>
                         </Whisper>
                     </div>

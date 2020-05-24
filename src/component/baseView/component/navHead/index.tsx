@@ -1,8 +1,6 @@
 import * as React from 'react';
-
 import HeadTabs from './component/tabs'
 import HeadTool from './component/tool'
-
 import './head.scss'
 
 

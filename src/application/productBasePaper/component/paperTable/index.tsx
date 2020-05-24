@@ -1,11 +1,13 @@
 import * as React from 'react';
-import {Button, Dropdown, Panel, Table, Tag} from 'rsuite';
+import {Divider, Icon, IconButton, Panel, Table, Tag} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
-import {CellIndex, CellTextSpan} from '@component/table';
+import {CellIndex, CellTextSpan, CommonCellMore} from '@component/table';
 import {PaperAddEditModel} from '../index';
 import {IArrayDatas, IFormValue} from '../../index.types';
 import TextSpan from '@component/textSpan';
-import {HeadPanel} from '@component/panel';
+import HookTableHeadPanel from './compose/hookHeadPanel';
+import HookSqlQuery from './compose/hookSqlQuery';
+import {SqlQueryView} from '@common/sqlQuery';
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
 
@@ -21,6 +23,12 @@ interface IPorps {
     onPaperEditSave?(id: string, data: IFormValue, callbackCloseLoading: () => void, reload: () => void): void
 
     onLoadTableData?(props: {
+        activePage: number,
+        displayLength: number
+    }, callbackdata: (data: Array<IFormValue>, total: number) => void): void
+
+    onLoadSearchTableData?(props: {
+        query: any
         activePage: number,
         displayLength: number
     }, callbackdata: (data: Array<IFormValue>, total: number) => void): void
@@ -46,14 +54,7 @@ export default class BasePaperTable extends React.Component<IPorps> {
         {
             HeaderCell: <HeaderCell>原纸名称</HeaderCell>,
             Cell: <CellTextSpan dataKey="paperName"/>,
-            width: 155,
-            fixed: false,
-            resizable: false
-        },
-        {
-            HeaderCell: <HeaderCell>卷轴幅宽</HeaderCell>,
-            Cell: <Cell dataKey="reelWidth"/>,
-            width: 155,
+            width: 120,
             fixed: false,
             resizable: false
         },
@@ -66,7 +67,7 @@ export default class BasePaperTable extends React.Component<IPorps> {
                     </TextSpan>
                 )}
             </Cell>,
-            width: 155,
+            width: 90,
             fixed: false,
             resizable: false
         },
@@ -79,7 +80,7 @@ export default class BasePaperTable extends React.Component<IPorps> {
                     </TextSpan>
                 )}
             </Cell>,
-            width: 155,
+            width: 90,
             fixed: false,
             resizable: false
         },
@@ -105,7 +106,16 @@ export default class BasePaperTable extends React.Component<IPorps> {
             resizable: false
         },
         {
+            HeaderCell: <HeaderCell>卷轴幅宽</HeaderCell>,
+            HeaderKey: '卷轴幅宽',
+            Cell: <Cell dataKey="reelWidth"/>,
+            width: 155,
+            fixed: false,
+            resizable: false
+        },
+        {
             HeaderCell: <HeaderCell>厚度</HeaderCell>,
+            HeaderKey: '厚度',
             Cell: <Cell dataKey="thickness"/>,
             width: 155,
             fixed: false,
@@ -113,6 +123,7 @@ export default class BasePaperTable extends React.Component<IPorps> {
         },
         {
             HeaderCell: <HeaderCell>紧度</HeaderCell>,
+            HeaderKey: '紧度',
             Cell: <Cell dataKey="density"/>,
             width: 155,
             fixed: false,
@@ -120,6 +131,7 @@ export default class BasePaperTable extends React.Component<IPorps> {
         },
         {
             HeaderCell: <HeaderCell>横向环压强度</HeaderCell>,
+            HeaderKey: '横向环压强度',
             Cell: <Cell dataKey="horizontalPower"/>,
             width: 155,
             fixed: false,
@@ -127,6 +139,7 @@ export default class BasePaperTable extends React.Component<IPorps> {
         },
         {
             HeaderCell: <HeaderCell>纵向裂断长</HeaderCell>,
+            HeaderKey: '纵向裂断长',
             Cell: <Cell dataKey="verticalPower"/>,
             width: 155,
             fixed: false,
@@ -134,6 +147,7 @@ export default class BasePaperTable extends React.Component<IPorps> {
         },
         {
             HeaderCell: <HeaderCell>创建时间</HeaderCell>,
+            HeaderKey: '创建时间',
             Cell: <CellTextSpan dataKey="createtime"/>,
             width: 155,
             fixed: false,
@@ -141,6 +155,7 @@ export default class BasePaperTable extends React.Component<IPorps> {
         },
         {
             HeaderCell: <HeaderCell>修改时间</HeaderCell>,
+            HeaderKey: '修改时间',
             Cell: <CellTextSpan dataKey="updatedtime"/>,
             width: 155,
             fixed: false,
@@ -150,10 +165,20 @@ export default class BasePaperTable extends React.Component<IPorps> {
             HeaderCell: <HeaderCell>管理</HeaderCell>,
             Cell: <Cell dataKey="url">
                 {(rowData: any) => (
-                    <Button appearance="ghost" onClick={() => this._onSetId(rowData.id)}>编辑</Button>
+                    <>
+                        <IconButton appearance="link" icon={<Icon icon="edit2"/>}
+                                    onClick={() => this._onSetId(rowData.id)}/>
+                        <Divider vertical={true}/>
+                        <CommonCellMore Menu={[
+                            <IconButton appearance="subtle" icon={<Icon icon="trash2"/>}>删除产品</IconButton>,
+                            <IconButton appearance="subtle" icon={<Icon icon="repeat"/>}>同步价格</IconButton>
+                        ]}>
+                            <IconButton appearance="link" icon={<Icon icon="more"/>}/>
+                        </CommonCellMore>
+                    </>
                 )}
             </Cell>,
-            width: 155,
+            width: 120,
             fixed: 'right',
             resizable: false
         }
@@ -171,7 +196,11 @@ export default class BasePaperTable extends React.Component<IPorps> {
         pages: {
             activePage: 1,
             displayLength: 10
-        }
+        },
+        /**
+         * 列显示
+         */
+        colShow: ['厚度', '紧度', '横向环压强度', '纵向裂断长']
     }
 
     public componentDidMount(): void {
@@ -232,6 +261,29 @@ export default class BasePaperTable extends React.Component<IPorps> {
         })
     }
 
+
+    private _onLoadSearchTableData = (query: any) => {
+        const {onLoadSearchTableData} = this.props
+        const {pages} = this.state
+        const {activePage, displayLength} = pages
+        this.setState({
+            data: [],
+            loading: true
+        }, () => {
+            onLoadSearchTableData?.({
+                query,
+                activePage,
+                displayLength
+            }, (data, total) => {
+                this.setState({
+                    data,
+                    total,
+                    loading: false
+                })
+            })
+        })
+    }
+
     private _onChangePage = (page: number) => {
         const {pages} = this.state
         this.setState({
@@ -272,10 +324,16 @@ export default class BasePaperTable extends React.Component<IPorps> {
         })
     }
 
+    private _onColShow = (value: Array<string>) => {
+        this.setState({
+            colShow: value
+        })
+    }
 
     public render() {
-        const {showModel, id, loading, data, total, pages} = this.state
+        const {showModel, id, loading, data, total, pages, colShow} = this.state
         const {onShowPaperAddEdit} = this.props
+
         return (
             <>
                 <PaperAddEditModel {...this.props}
@@ -285,21 +343,18 @@ export default class BasePaperTable extends React.Component<IPorps> {
                                    onEdit={this._onPaperEditSave}
                                    onAdd={this._onPaperAddSave}
                                    onClose={this._onModel}/>
+                <SqlQueryView SqllExpression={(props) => <HookSqlQuery {...props}/>}
+                              show={showModel === 'search'}
+                              onClose={this._onModel}
+                              onSearch={this._onLoadSearchTableData}/>
                 <Panel shaded={false} bodyFill={true} bordered={false}>
-                    <HeadPanel hideBorderBottom={true} title={'原纸产品列表'}>
-                        <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
-                            <Dropdown title={'原纸管理'} trigger="click" onSelect={this._onModel}>
-                                <Dropdown.Item eventKey={'add'}>新增原纸</Dropdown.Item>
-                                <Dropdown.Item eventKey={'del'}>删除原纸</Dropdown.Item>
-                            </Dropdown>
-                        </div>
-                    </HeadPanel>
+                    <HookTableHeadPanel onModel={this._onModel} onColShow={this._onColShow}/>
                     <FlexCalcBox Body={(e) => (
                         <>
                             <Table
                                 loading={loading}
                                 height={e - 65}
-                                rowHeight={155}
+                                rowHeight={120}
                                 headerHeight={65}
                                 autoHeight={false}
                                 bordered={true}
@@ -308,11 +363,14 @@ export default class BasePaperTable extends React.Component<IPorps> {
                             >
                                 {
                                     this.Columns.map((k: any, i, a) => (
-                                        <Column width={k.width} align="center" flexGrow={k.flexGrow} colSpan={k.colSpan}
-                                                verticalAlign={'middle'} fixed={k.fixed} resizable={k.resizable}>
-                                            {k.HeaderCell}
-                                            {k.Cell}
-                                        </Column>
+                                        colShow.findIndex(x => x === k.HeaderKey) === -1 ?
+                                            <Column width={k.width} align="center" flexGrow={k.flexGrow}
+                                                    colSpan={k.colSpan}
+                                                    verticalAlign={'middle'} fixed={k.fixed}
+                                                    resizable={k.resizable}>
+                                                {k.HeaderCell}
+                                                {k.Cell}
+                                            </Column> : undefined
                                     ))
                                 }
                             </Table>

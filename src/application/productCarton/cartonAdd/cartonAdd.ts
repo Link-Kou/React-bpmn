@@ -15,7 +15,15 @@ interface IProps {
     }
 }
 
-export default class CartonAdd extends React.Component<IProps> {
+
+interface IState {
+    id?: string,
+    formValue: IFormValue,
+    costUnifiedData: Array<ICardboardProductCost>,
+    loader: boolean
+}
+
+export default class CartonAdd extends React.Component<IProps, IState> {
 
     /**
      * 加载所有纸板的成本信息

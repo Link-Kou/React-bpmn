@@ -106,7 +106,7 @@ export default class BasePaper extends React.Component<any> {
 
 
     /**
-     * 加载表格列表
+     * 加载原纸表格列表
      */
     protected handleILoadPagesPaperProductList = async (props: { activePage: number, displayLength: number }, callbackdata: (data: Array<IFormValue>, total: number) => void) => {
         const {activePage, displayLength} = props
@@ -199,5 +199,28 @@ export default class BasePaper extends React.Component<any> {
             })
     }
 
+    /**
+     * 表达式搜索
+     * @param props
+     * @param callbackdata
+     */
+    protected handlersLoadExpression = async (props: {
+        query: any,
+        activePage: number,
+        displayLength: number
+    }, callbackdata: (data: Array<IFormValue>, total: number) => void) => {
+        ApiPaper.LoadPaperProductExpression({
+            page: props?.activePage,
+            itemsPerPage: props?.displayLength,
+            data: props?.query
+        }, (req) => {
+            if (req.success) {
+                callbackdata?.(req.data.list, req.data.total)
+            } else {
+                //callbackdata?.([], 0)
+                Alert.warning(req.msg)
+            }
+        })
+    }
 
 }

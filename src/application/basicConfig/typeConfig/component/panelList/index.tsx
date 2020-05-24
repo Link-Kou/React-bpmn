@@ -152,7 +152,7 @@ export default class TypeConfigPanelAllList extends React.Component<IProps> {
 
     public render() {
         const {
-            title, id, type, boxStyle, onLoadSortableList, subHeight
+            title, id, type, boxStyle, onLoadSortableList
         } = this.props
         const {showModel, data, loading} = this.state
         const arrayLength = utilsArray.getArrayLength(data);
@@ -192,7 +192,7 @@ export default class TypeConfigPanelAllList extends React.Component<IProps> {
                                    }
                                    return v
                                }}
-                               subHeight={subHeight ? subHeight : 65 + 57}>
+                               subHeight={130}>
                         <_buildPanelLists {...this.props}
                                           data={data}
                                           onDel={this._onDel}

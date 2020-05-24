@@ -3,7 +3,19 @@ import {Alert} from 'rsuite';
 import {ApiMaterial} from '@fetch/api';
 import {IFormValue} from '../index.types';
 
-export default class ProductAllSku extends React.Component<any, any> {
+
+interface IState {
+    formValue: IFormValue
+    loader: boolean
+    id: any
+    cellData: Array<any>
+    /**
+     * 规格多图
+     */
+    specImage: boolean
+}
+
+export default class ProductAllSku extends React.Component<any, IState> {
 
     /**
      * 添加保存

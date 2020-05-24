@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Checkbox, Icon, IconButton, Table} from 'rsuite';
 import TextSpan from '@component/textSpan';
-import {utilsObject} from '@utils/index';
+import {utilsNumber, utilsObject} from '@utils/index';
 
 const {Cell} = Table;
 
@@ -57,8 +57,6 @@ export function ControllerAlashCell(props: IControllerAlashnCell) {
 }
 
 
-
-
 interface IControllerIndexCell extends IProps {
     onSelectChange?: (rowIndex: number, rowData: any) => void
     disPlayNumber?: boolean
@@ -75,6 +73,7 @@ export function ControllerIndexCell(props: IControllerIndexCell) {
     if (dataKey) {
         checked = rowData[dataKey] ?? false
     }
+    const rownumber = utilsNumber.isNumber(rowIndex) ? rowIndex + 1 : undefined
     return (
         <Cell {...props}>
             <Checkbox
@@ -88,7 +87,7 @@ export function ControllerIndexCell(props: IControllerIndexCell) {
                     }
                 }}
             >
-                {disPlayNumber ? rowIndex ?? '' : ''}
+                {disPlayNumber ? rownumber ?? '' : ''}
             </Checkbox>
         </Cell>
     )
@@ -106,6 +105,7 @@ interface IControllerExpandedIndexCell extends IProps {
  */
 export function ControllerExpandedIndexCell(props: IControllerExpandedIndexCell) {
     const {rowIndex, expandedRowKeys, rowData, dataKey, rowKey, onExpanded, rowHeight} = props;
+    const rownumber = utilsNumber.isNumber(rowIndex) ? rowIndex + 1 : undefined
     return (
         <Cell {...props} style={{height: rowHeight ?? props.height}}>
             <IconButton
@@ -128,17 +128,17 @@ export function ControllerExpandedIndexCell(props: IControllerExpandedIndexCell)
                 style={{marginLeft: 0}}
                 inline={true}
             >
-                {rowIndex ?? rowIndex}
+                {rownumber}
             </Checkbox>
         </Cell>
     )
 }
 
 
-
 interface IControllerTextSpanCell extends IProps {
 
 }
+
 /**
  * 常规 文本列表
  * @param props

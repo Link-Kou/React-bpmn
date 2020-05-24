@@ -45,7 +45,7 @@ export default class Index extends React.Component<IProps> {
                     <Row>
                         {
                             hideTitle ? this._hideTitle(children, rightStyle) : <>
-                                <Col xs={24} sm={9} md={9} lg={8}>
+                                <Col xs={24} sm={9} md={9} lg={12}>
                                     <div style={{
                                         color: '#272c36',
                                         fontSize: 18,
@@ -57,7 +57,7 @@ export default class Index extends React.Component<IProps> {
                                         <TextSpan lineClamp={1} title={tooltip}>{title}</TextSpan>
                                     </div>
                                 </Col>
-                                <Col xs={16} sm={15} md={15} lg={16} xsHidden={true}>
+                                <Col xs={16} sm={15} md={15} lg={12} xsHidden={true}>
                                     <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end', ...rightStyle}}>
                                         {children}
                                     </div>

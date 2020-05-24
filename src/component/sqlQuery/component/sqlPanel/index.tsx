@@ -11,9 +11,9 @@ interface IProps {
 
     onDelete(id: string): void
 
-    onToggleLink(id: string): void
+    onToggleLink(id: string, type: 'AND' | 'OR'): void
 
-    onExtend(id: string, extendNode: any): void
+    onExtend(id: string, extendNode: any, refresh?: boolean): void
 }
 
 export default class SqlPanel extends React.Component<IProps> {
@@ -25,14 +25,14 @@ export default class SqlPanel extends React.Component<IProps> {
 
 
     public render() {
-
+        const {data, onAdd, onDelete, onToggleLink, onExtend} = this.props
         return (
             <SqlQueryData.Provider value={{
-                data: this.props.data,
-                onAdd: this.props.onAdd,
-                onDelete: this.props.onDelete,
-                onToggleLink: this.props.onToggleLink,
-                onExtend: this.props.onExtend
+                data: data,
+                onAdd: onAdd,
+                onDelete: onDelete,
+                onToggleLink: onToggleLink,
+                onExtend: onExtend
             }}>
                 <div className='app-sql-panel'>
                     {this.props.children}

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {Button, Dropdown, Panel, Table, Tag} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
-import {CellIndex, CellTextSpan,HeaderCellMulti} from '@component/table';
+import {CellIndex, CellTextSpan, HeaderCellMulti} from '@component/table';
 import TextSpan from '@component/textSpan';
 import BaseCorrugatedAddEdit from '../corrugatedAddEdit';
 import {IFormValue, IArrayDatas, EnumsMakeMode} from '../../index.types';
-import { HeadPanel } from '@component/panel';
+import {HeadPanel} from '@component/panel';
 
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
@@ -125,6 +125,22 @@ export default class BaseCorrugatedTable extends React.Component<IProps> {
             HeaderCell: <HeaderCell>楞数</HeaderCell>,
             Cell: <Cell dataKey="flute"/>,
             width: 85,
+            fixed: false,
+            resizable: false
+        },
+        {
+            HeaderCell: <HeaderCell>创建时间</HeaderCell>,
+            HeaderKey: '创建时间',
+            Cell: <CellTextSpan dataKey="createtime"/>,
+            width: 155,
+            fixed: false,
+            resizable: false
+        },
+        {
+            HeaderCell: <HeaderCell>修改时间</HeaderCell>,
+            HeaderKey: '修改时间',
+            Cell: <CellTextSpan dataKey="updatedtime"/>,
+            width: 155,
             fixed: false,
             resizable: false
         },

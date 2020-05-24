@@ -12,6 +12,7 @@ import Dialog from '@component/dialog';
 import {IntlApi} from '@component/textIntl';
 import {RouterHistory, RouterPath} from '@router';
 
+
 export default class Index extends CardboardAdd {
 
     public state = {
@@ -19,7 +20,7 @@ export default class Index extends CardboardAdd {
         id: undefined,
         basePaper: [],
         corrugated: [],
-        hideLoader: false
+        loader: true
     }
 
     componentDidMount(): void {
@@ -44,13 +45,14 @@ export default class Index extends CardboardAdd {
             this.setState({
                 id,
                 formValue: cardboard,
-                hideLoader: true
+                loader: false
             })
         })
     }
 
     /**
      * 显示加载
+     * {@link handlersLoadPaperAndCorrugated}
      * @private
      */
     private _onShowLoad = () => {
@@ -58,7 +60,7 @@ export default class Index extends CardboardAdd {
             this.setState({
                 basePaper,
                 corrugated,
-                hideLoader: true
+                loader: false
             })
         });
     }
@@ -110,7 +112,7 @@ export default class Index extends CardboardAdd {
 
 
     public render() {
-        const {formValue, basePaper, corrugated, hideLoader} = this.state
+        const {formValue, basePaper, corrugated, loader} = this.state
         return (
             <>
                 <BackColorPanel style={{height: '100%'}}>
@@ -128,7 +130,7 @@ export default class Index extends CardboardAdd {
                             </ButtonToolbar>
                         </div>
                     </HeadPanel>
-                    <LoadPanel loadering={hideLoader} outrender={true} queueAnim={false}>
+                    <LoadPanel loadering={loader} outrender={true} queueAnim={false}>
                         <LongPanel style={{backgroundColor: '#fff'}}>
                             <Container>
                                 <Header/>

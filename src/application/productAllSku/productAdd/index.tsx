@@ -14,22 +14,12 @@ import {utilsUrl} from '@utils/index';
 import Dialog from '@component/dialog';
 import {IntlApi} from '@component/textIntl';
 
-interface IState {
-    formValue: IFormValue
-    loader: boolean
-    id: any
-    cellData: Array<any>
-    /**
-     * 规格多图
-     */
-    specImage: boolean
-}
 
 export default class Index extends ProductAllSku {
 
-    public state: IState = {
+    public state = {
         cellData: [],
-        loader: false,
+        loader: true,
         id: undefined,
         formValue: JSON.parse(JSON.stringify(IStateFormValue)),
         specImage: true
@@ -43,7 +33,7 @@ export default class Index extends ProductAllSku {
             this._onLoadEdit(id)
         } else {
             this.setState({
-                loader: true
+                loader: false
             })
         }
     }
@@ -64,7 +54,7 @@ export default class Index extends ProductAllSku {
                  * {@link ProductSku#componentDidMount} 方法会在初始化执行一次构建
                  */
                 this.setState({
-                    loader: true
+                    loader: false
                 })
             })
         })

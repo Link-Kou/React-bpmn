@@ -97,7 +97,7 @@ export default class TypeConfigPanelItemGroupList extends React.Component<IProps
     public state: IState = {
         showModel: '',
         data: [],
-        loading: false
+        loading: true
     }
 
     public componentDidMount(): void {
@@ -123,13 +123,13 @@ export default class TypeConfigPanelItemGroupList extends React.Component<IProps
     private _onLoad = () => {
         const {onLoad} = this.props
         this.setState({
-            loading: false,
+            loading: true,
             data: []
         }, () => {
             onLoad?.((data) => {
                 this.setState({
                     data,
-                    loading: true
+                    loading: false
                 })
             })
         })
@@ -187,7 +187,7 @@ export default class TypeConfigPanelItemGroupList extends React.Component<IProps
                                    }
                                    return v
                                }}
-                               subHeight={65 + 57}>
+                               subHeight={130}>
                         <div style={{display: 'flex', width: 350 * utilsNumber.toNumberDefault(data?.length, 0)}}>
                             {
                                 data?.map((k, i, a) => {

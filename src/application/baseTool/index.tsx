@@ -1,19 +1,29 @@
 import * as React from 'react';
 
-import {Avatar, Badge, Button, Popover, Whisper} from 'rsuite';
+import {Avatar, Badge, Button, Icon, Popover, Whisper} from 'rsuite';
+import {utilsOther} from '@utils/index';
 
 export default class HeadTool extends React.Component {
 
     public render() {
         return (
             <>
+                <div className="app-head-tool-column" onClick={() => {
+                    utilsOther.FullScreen();
+                }}>
+                    <Avatar style={{backgroundColor: '#fff', color: '#87d068'}} size={'sm'}>
+                        <Icon icon={'arrows-alt'}/>
+                    </Avatar>
+                </div>
                 <div className="app-head-tool-column">
-                    <Badge count={0}>
-                        <Avatar style={{backgroundColor: '#87d068'}} icon="bell"/>
+                    <Badge content={55} maxCount={99}>
+                        <Avatar style={{backgroundColor: '#87d068'}} size={'sm'}>
+                            <Icon icon={'comments'}/>
+                        </Avatar>
                     </Badge>
                 </div>
                 <Whisper
-                    trigger="hover"
+                    trigger="active"
                     placement='bottom'
                     speaker={
                         <Popover title="">
@@ -32,8 +42,8 @@ export default class HeadTool extends React.Component {
                     }
                 >
                     <div className="app-head-tool-column">
-                        <Badge count={1}>
-                            <Avatar style={{backgroundColor: '#87d068'}} icon="user"/>
+                        <Badge content={55} maxCount={99}>
+                            <Avatar style={{background: '#edfae1', color: '#4caf50'}} size={'sm'}>RS</Avatar>
                         </Badge>
                     </div>
                 </Whisper>

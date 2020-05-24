@@ -21,6 +21,7 @@ class index extends BasePaper {
                                         <BasePaperTable valueKey={'id'}
                                                         labelKey={'title'}
                                                         onLoadTableData={this.handleILoadPagesPaperProductList}
+                                                        onLoadSearchTableData={this.handlersLoadExpression}
                                                         onShowPaperAddEdit={this.handlersShowPaperAddEdit}
                                                         onPaperEditSave={this.handlerPaperEditSave}
                                                         onPaperAddSave={this.handlerPaperAddSave}/>

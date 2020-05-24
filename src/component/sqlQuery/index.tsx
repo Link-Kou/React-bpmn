@@ -28,7 +28,7 @@ interface IProps {
      * expression 表达式控件
      * @param props
      */
-    expression(props: { data: any, node: any, id: any, onExtend: (id: string, extendNode: (id: string, value: any) => void) => void }): JSX.Element
+    expression(props: { data: any, node: any, id: any, onExtend: (id: string, extendNode: (id: string, value: any, refresh?: boolean) => void) => void }): JSX.Element
 
     /**
      * 数据改变
@@ -58,14 +58,14 @@ export default class SqlQuery extends React.Component<IProps> {
                     const children = type === 'group' ? [{
                         id: utilsGuid.randomGUID(),
                         type: 'expression',
-                        link: undefined,
+                        link: 'AND',
                         extend: {},
                         children: []
                     }] : []
                     const newdata: any = {
                         id: utilsGuid.randomGUID(),
                         type: type,
-                        link: undefined,
+                        link: 'AND',
                         extend: {},
                         children
                     }
@@ -107,7 +107,7 @@ export default class SqlQuery extends React.Component<IProps> {
      * @param id 编号
      * @private
      */
-    public _onDelete(id: string) {
+    private _onDelete(id: string) {
         const {query} = this.props
         const del = (item: Array<any>) => {
             item.forEach((k, i, a) => {
@@ -145,14 +145,15 @@ export default class SqlQuery extends React.Component<IProps> {
     /**
      * 修改连接关系
      * @param id 编号
+     * @param type
      * @private
      */
-    public _onToggleLink(id: string) {
+    private _onToggleLink(id: string, type: 'AND' | 'OR') {
         const {query} = this.props
         const link = (item: Array<any>) => {
             item.forEach((k, i, a) => {
                 if (k.id === id) {
-                    k.link = (k.link === 'AND' ? 'OR' : 'AND')
+                    k.link = type ?? 'AND'
                 }
                 link(k.children)
             });
@@ -162,12 +163,12 @@ export default class SqlQuery extends React.Component<IProps> {
     }
 
     /**
-     * 修改扩展数据
+     * 修改扩展数据(控件等)
      * @param id 编号
      * @param extendNode 扩展数据
      * @private
      */
-    public _onExtend(id: string, extendNode: any) {
+    private _onExtend(id: string, extendNode: any, refresh?: boolean) {
         const {query} = this.props
         const extend = (item: Array<any>) => {
             item.forEach((k, i, a) => {
@@ -181,7 +182,18 @@ export default class SqlQuery extends React.Component<IProps> {
             });
         }
         extend(query)
-        this._onChange()
+        if (refresh) {
+            this._onChange()
+        }
+        //
+    }
+
+    /**
+     * 获取表达式
+     */
+    public getExpression(): Array<IQuery> {
+        const {query} = this.props
+        return query;
     }
 
     /**
