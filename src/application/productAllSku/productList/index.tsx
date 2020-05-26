@@ -3,7 +3,6 @@ import {Container, Content, Footer, Header} from 'rsuite';
 import OperationGroup from './component/operation'
 import Table from '../productList/component/table'
 import {BackColorPanel} from '@component/panel';
-import {Prompt} from 'react-router';
 import ProductList from './productList';
 import ProductSkuModal from '../productSkuModal';
 
@@ -24,7 +23,6 @@ export default class index extends ProductList {
         const {skuModal, id: fid} = this.state
         return (
             <>
-                <Prompt message="Are you sure you want to leave?"/>
                 <BackColorPanel tableBordered={true}>
                     <Container>
                         <Header>

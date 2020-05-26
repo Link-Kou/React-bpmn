@@ -29,6 +29,10 @@ const HookTableHeadPanel = (props: IHookTableHeadPanel) => {
     return (
         <HeadPanel hideBorderBottom={true} title={'原纸产品列表'}>
             <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
+                <Dropdown title={'原纸管理'} trigger="click" onSelect={onModel} icon={<Icon icon={'setting'}/>}>
+                    <Dropdown.Item eventKey={'add'} icon={<Icon icon={'plus-circle'}/>}>新增原纸</Dropdown.Item>
+                    <Dropdown.Item eventKey={'del'} icon={<Icon icon={'minus-circle'}/>}>删除原纸</Dropdown.Item>
+                </Dropdown>
                 <ButtonGroup>
                     <IconButton icon={<Icon icon={'search'}/>} appearance={'subtle'} onClick={() => {
                         onModel?.('search')
@@ -43,10 +47,6 @@ const HookTableHeadPanel = (props: IHookTableHeadPanel) => {
                         <Dropdown.Item eventKey={'del'}>开始搜索2</Dropdown.Item>*/}
                     </Dropdown>
                 </ButtonGroup>
-                <Dropdown title={'原纸管理'} trigger="click" onSelect={onModel} icon={<Icon icon={'plus-circle'}/>}>
-                    <Dropdown.Item eventKey={'add'}>新增原纸</Dropdown.Item>
-                    <Dropdown.Item eventKey={'del'}>删除原纸</Dropdown.Item>
-                </Dropdown>
                 <Whisper
                     placement="bottomStart"
                     trigger="click"

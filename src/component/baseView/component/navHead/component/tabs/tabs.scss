@@ -40,7 +40,7 @@
   .header-tabs-tabitem-select {
     background-color: #f1f1f1 !important;
     position: relative;
-    height: 40px !important;
+    height: $selctTabsheight !important;
 
     .app-close {
       display: none !important;

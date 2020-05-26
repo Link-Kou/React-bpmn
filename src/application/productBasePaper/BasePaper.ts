@@ -4,6 +4,7 @@ import {Alert} from 'rsuite';
 import Dialog from '@component/dialog';
 import {IntlApi} from '@component/textIntl';
 import {IArrayDatas, IStateFormValue, IFormValue} from './index.types'
+import Notifications from '@common/notification';
 
 
 export default class BasePaper extends React.Component<any> {
@@ -50,6 +51,22 @@ export default class BasePaper extends React.Component<any> {
                         e.close()
                     })
                 }
+            }
+        })
+    }
+
+    /**
+     * 同步原纸价格
+     */
+    protected handlersSynPaperPriceProduct = async (id: string) => {
+        ApiPaper.EditPaperPriceProduct({
+            id
+        }, (req) => {
+            if (req.success) {
+                Notifications.Message('成功提交价格修改');
+                Alert.success('成功提交价格修改')
+            } else {
+                Alert.warning(req.msg)
             }
         })
     }

@@ -23,6 +23,7 @@ class index extends BasePaper {
                                                         onLoadTableData={this.handleILoadPagesPaperProductList}
                                                         onLoadSearchTableData={this.handlersLoadExpression}
                                                         onShowPaperAddEdit={this.handlersShowPaperAddEdit}
+                                                        onPaperSynPriceProduct={this.handlersSynPaperPriceProduct}
                                                         onPaperEditSave={this.handlerPaperEditSave}
                                                         onPaperAddSave={this.handlerPaperAddSave}/>
                                     </BackColorPanel>

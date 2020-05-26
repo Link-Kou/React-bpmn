@@ -2129,6 +2129,10 @@
   dependencies:
     redux-thunk "*"
 
+"@types/sockjs-client@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.npm.taobao.org/@types/sockjs-client/download/@types/sockjs-client-1.1.1.tgz#1ef133b5a79d51447a93ce16164706c0164b5548"
+
 "@types/source-list-map@*":
   version "0.1.2"
   resolved "https://registry.npm.taobao.org/@types/source-list-map/download/@types/source-list-map-0.1.2.tgz?cache=0&sync_timestamp=1567534417883&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fsource-list-map%2Fdownload%2F%40types%2Fsource-list-map-0.1.2.tgz#0078836063ffaf17412349bba364087e0ac02ec9"
@@ -2136,6 +2140,12 @@
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/@types/stack-utils/download/@types/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
+
+"@types/stompjs@^2.3.4":
+  version "2.3.4"
+  resolved "https://registry.npm.taobao.org/@types/stompjs/download/@types/stompjs-2.3.4.tgz#b625a45b9b156c9149afc4d19fd89b3ec338add3"
+  dependencies:
+    "@types/node" "*"
 
 "@types/tapable@*":
   version "1.0.4"
@@ -6875,7 +6885,7 @@ is-symbol@^1.0.2:
   dependencies:
     has-symbols "^1.0.0"
 
-is-typedarray@~1.0.0:
+is-typedarray@^1.0.0, is-typedarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/is-typedarray/download/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
 
@@ -8354,6 +8364,10 @@ mute-stream@0.0.8, mute-stream@~0.0.4:
 nan@^2.12.1, nan@^2.13.2:
   version "2.14.0"
   resolved "https://registry.npm.taobao.org/nan/download/nan-2.14.0.tgz#7818f722027b2459a86f0295d434d1fc2336c52c"
+
+nan@^2.14.0:
+  version "2.14.1"
+  resolved "https://registry.npm.taobao.org/nan/download/nan-2.14.1.tgz#d7be34dfa3105b91494c3147089315eff8874b01"
 
 nanoid@^2.1.6:
   version "2.1.6"
@@ -11693,7 +11707,7 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-sockjs-client@1.4.0:
+sockjs-client@1.4.0, sockjs-client@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npm.taobao.org/sockjs-client/download/sockjs-client-1.4.0.tgz?cache=0&sync_timestamp=1566505930428&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fsockjs-client%2Fdownload%2Fsockjs-client-1.4.0.tgz#c9f2568e19c8fd8173b4997ea3420e0bb306c7d5"
   dependencies:
@@ -11918,6 +11932,12 @@ stdout-stream@^1.4.0:
 stealthy-require@^1.1.1:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/stealthy-require/download/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
+
+stompjs@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.npm.taobao.org/stompjs/download/stompjs-2.3.3.tgz#34178ac7bb8ee294cc5d554ad8b50f7f5459fd8e"
+  optionalDependencies:
+    websocket latest
 
 stream-browserify@^2.0.1:
   version "2.0.2"
@@ -12520,6 +12540,12 @@ typed-styles@^0.0.7:
   version "0.0.7"
   resolved "https://registry.npm.taobao.org/typed-styles/download/typed-styles-0.0.7.tgz#93392a008794c4595119ff62dde6809dbc40a3d9"
 
+typedarray-to-buffer@^3.1.5:
+  version "3.1.5"
+  resolved "https://registry.npm.taobao.org/typedarray-to-buffer/download/typedarray-to-buffer-3.1.5.tgz#a97ee7a9ff42691b9f783ff1bc5112fe3fca9080"
+  dependencies:
+    is-typedarray "^1.0.0"
+
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
@@ -12962,6 +12988,16 @@ websocket-extensions@>=0.1.1:
   version "0.1.3"
   resolved "https://registry.npm.taobao.org/websocket-extensions/download/websocket-extensions-0.1.3.tgz#5d2ff22977003ec687a4b87073dfbbac146ccf29"
 
+websocket@latest:
+  version "1.0.31"
+  resolved "https://registry.npm.taobao.org/websocket/download/websocket-1.0.31.tgz#e5d0f16c3340ed87670e489ecae6144c79358730"
+  dependencies:
+    debug "^2.2.0"
+    es5-ext "^0.10.50"
+    nan "^2.14.0"
+    typedarray-to-buffer "^3.1.5"
+    yaeti "^0.0.6"
+
 whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3, whatwg-encoding@^1.0.5:
   version "1.0.5"
   resolved "https://registry.npm.taobao.org/whatwg-encoding/download/whatwg-encoding-1.0.5.tgz#5abacf777c32166a51d085d6b4f3e7d27113ddb0"
@@ -13257,6 +13293,10 @@ y18n@^3.2.1:
 "y18n@^3.2.1 || ^4.0.0", y18n@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/y18n/download/y18n-4.0.0.tgz#95ef94f85ecc81d007c264e190a120f0a3c8566b"
+
+yaeti@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.npm.taobao.org/yaeti/download/yaeti-0.0.6.tgz#f26f484d72684cf42bedfb76970aa1608fbf9577"
 
 yallist@^2.1.2:
   version "2.1.2"

@@ -2,22 +2,36 @@ import * as React from 'react';
 
 import {Avatar, Badge, Button, Icon, Popover, Whisper} from 'rsuite';
 import {utilsOther} from '@utils/index';
+import Listener from '@listener';
 
 export default class HeadTool extends React.Component {
 
+    public state = {
+        fullScreen: false
+    }
+
+    componentDidMount() {
+        //Listener.ws();
+    }
+
     public render() {
+        const {fullScreen} = this.state
         return (
             <>
                 <div className="app-head-tool-column" onClick={() => {
-                    utilsOther.FullScreen();
+                    this.setState({
+                        fullScreen: utilsOther.FullScreen()
+                    })
                 }}>
-                    <Avatar style={{backgroundColor: '#fff', color: '#87d068'}} size={'sm'}>
-                        <Icon icon={'arrows-alt'}/>
+                    <Avatar style={{backgroundColor: '#fff', color: '#87d068'}} size={'xs'}>
+                        <Icon icon={fullScreen ? 'compress' : 'expand'}/>
                     </Avatar>
                 </div>
-                <div className="app-head-tool-column">
+                <div className="app-head-tool-column" id={'app-tool-comments'} onClick={() => {
+                    Listener.ws();
+                }}>
                     <Badge content={55} maxCount={99}>
-                        <Avatar style={{backgroundColor: '#87d068'}} size={'sm'}>
+                        <Avatar style={{backgroundColor: '#87d068'}} size={'xs'}>
                             <Icon icon={'comments'}/>
                         </Avatar>
                     </Badge>
@@ -43,7 +57,7 @@ export default class HeadTool extends React.Component {
                 >
                     <div className="app-head-tool-column">
                         <Badge content={55} maxCount={99}>
-                            <Avatar style={{background: '#edfae1', color: '#4caf50'}} size={'sm'}>RS</Avatar>
+                            <Avatar style={{background: '#edfae1', color: '#4caf50'}} size={'xs'}>RS</Avatar>
                         </Badge>
                     </div>
                 </Whisper>

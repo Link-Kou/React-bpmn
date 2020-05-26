@@ -11,6 +11,7 @@ import {utilsString, utilsUrl} from '@utils/index';
 import Dialog from '@component/dialog';
 import {IntlApi} from '@component/textIntl';
 import {RouterHistory, RouterPath} from '@router';
+import {Prompt} from 'react-router';
 
 
 export default class Index extends CardboardAdd {
@@ -107,7 +108,6 @@ export default class Index extends CardboardAdd {
         } else {
             Alert.warning('主图过详情图必须有一张')
         }
-
     }
 
 
@@ -115,6 +115,7 @@ export default class Index extends CardboardAdd {
         const {formValue, basePaper, corrugated, loader} = this.state
         return (
             <>
+                <Prompt message="是否离开页面" when={true}/>
                 <BackColorPanel style={{height: '100%'}}>
                     <HeadPanel title={'纸板新增编辑页'}>
                         <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>

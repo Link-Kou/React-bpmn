@@ -22,6 +22,12 @@ interface IPorps {
 
     onPaperEditSave?(id: string, data: IFormValue, callbackCloseLoading: () => void, reload: () => void): void
 
+    /**
+     * 同步产品价格
+     * @param id
+     */
+    onPaperSynPriceProduct?(id: string): void
+
     onLoadTableData?(props: {
         activePage: number,
         displayLength: number
@@ -164,19 +170,23 @@ export default class BasePaperTable extends React.Component<IPorps> {
         {
             HeaderCell: <HeaderCell>管理</HeaderCell>,
             Cell: <Cell dataKey="url">
-                {(rowData: any) => (
-                    <>
-                        <IconButton appearance="link" icon={<Icon icon="edit2"/>}
-                                    onClick={() => this._onSetId(rowData.id)}/>
-                        <Divider vertical={true}/>
-                        <CommonCellMore Menu={[
-                            <IconButton appearance="subtle" icon={<Icon icon="trash2"/>}>删除产品</IconButton>,
-                            <IconButton appearance="subtle" icon={<Icon icon="repeat"/>}>同步价格</IconButton>
-                        ]}>
-                            <IconButton appearance="link" icon={<Icon icon="more"/>}/>
-                        </CommonCellMore>
-                    </>
-                )}
+                {(rowData: any) => {
+                    const {onPaperSynPriceProduct} = this.props
+                    return (
+                        <>
+                            <IconButton appearance="link" icon={<Icon icon="edit2"/>}
+                                        onClick={() => this._onSetId(rowData.id)}/>
+                            <Divider vertical={true}/>
+                            <CommonCellMore Menu={[
+                                <IconButton appearance="subtle" icon={<Icon icon="trash2"/>}>删除产品</IconButton>,
+                                <IconButton appearance="subtle" icon={<Icon icon="repeat"/>}
+                                            onClick={() => onPaperSynPriceProduct?.(rowData.id)}>同步价格</IconButton>
+                            ]}>
+                                <IconButton appearance="link" icon={<Icon icon="more"/>}/>
+                            </CommonCellMore>
+                        </>
+                    )
+                }}
             </Cell>,
             width: 120,
             fixed: 'right',

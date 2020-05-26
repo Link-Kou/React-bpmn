@@ -26,6 +26,7 @@ export interface IRoute {
     key: string,
     exact: boolean
     title?: string
+    closedHideTab?: boolean
     path: string | undefined,
     screen: any
     routes?: Array<IRoute>
@@ -136,6 +137,7 @@ export const routes: Array<IRoute> = [
         key: 'CardboardAdd',
         title: '纸板添加',
         exact: false,
+        closedHideTab: true,
         path: RouterPaths.CardboardAdd,
         screen: CardboardAdd
     },

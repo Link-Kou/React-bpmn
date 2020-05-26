@@ -1,5 +1,6 @@
 @charset "UTF-8";
 /**tab框高度**/
+/**tab框高度**/
 /**logo高度**/
 /**菜单背景颜色*/
 .header-tabs {
@@ -33,7 +34,7 @@
   .header-tabs .header-tabs-tabitem-select {
     background-color: #f1f1f1 !important;
     position: relative;
-    height: 40px !important; }
+    height: 35px !important; }
     .header-tabs .header-tabs-tabitem-select .app-close {
       display: none !important;
       cursor: pointer; }
@@ -46,7 +47,7 @@
     display: flex;
     align-items: center;
     align-content: center;
-    height: 38px;
+    height: 35px;
     padding: 5px;
     margin: 0 5px 0 0;
     border: 1px solid #e8e8e8;

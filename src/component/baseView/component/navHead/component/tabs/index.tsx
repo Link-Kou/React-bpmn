@@ -10,48 +10,76 @@ interface IState {
     activeKey: string
     collapsed: boolean
     /**
-     * 选择的Tab
+     * 选择的Tab key
      */
-    selectItems: string
+    selectItems?: string
+    /**
+     * 离开当前Tab就关闭当前Tab
+     */
+    selectClosedItems?: string
     items: Array<{
         id: string
         path: string
+        /**
+         * 标题
+         */
         content?: string
+        /**
+         * 搜索条件
+         */
+        search?: string
+        /**
+         * 搜索条件
+         */
+        state?: string
+        closedHideTab?: boolean
     }>
 }
 
-export default class HeadTabs extends React.Component<any> {
+export default class HeadTabs extends React.Component<any, IState> {
 
-    public _deviceEventEmitter: any
+    public _deviceNavMenuSidenav: any
+
+    public _deviceEmitNavTabClosed: any
 
     public wrapper: any;
 
     public wrapperheader: any;
 
-    public state: IState = {
-        activeKey: 'asd',
-        collapsed: false,
-        selectItems: '',
-        items: []
+
+    constructor(props: any, context: any, initialization: () => void) {
+        super(props, context);
+        this.state = {
+            activeKey: '',
+            collapsed: false,
+            items: []
+        }
     }
+
 
     private _listen = () => {
         const routerHistory = RouterHistory;
+        //路由跳转监听
         routerHistory.listen((listener) => {
-            const {items} = this.state
+            const {items, selectClosedItems} = this.state
             const route = items.find((k, i, a) => k.path === listener.pathname);
             if (route) {
-                this.onWheel(`header-tabs-tabitem${route.id}`, route.id)
+                this.onWheel(`header-tabs-tabitem${route.id}`, route.id, () => {
+                    //关闭
+                    this._close(selectClosedItems)
+                })
             } else {
                 Routes.every((k, i, a) => {
                     if (listener.pathname === k.path) {
-                        items.push({
+                        const filter = items.filter((ki, ii, ai) => ki.closedHideTab !== true);
+                        filter.push({
                             id: k.key,
                             path: listener.pathname,
-                            content: k.title
+                            content: k.title,
+                            closedHideTab: k.closedHideTab
                         })
-                        this.setState({items, selectItems: k.key}, () => {
-                            utilsStorage.setItem('tabs', JSON.stringify(items))
+                        this.setState({items: filter, selectItems: k.key}, () => {
+                            utilsStorage.setItem('tabs', JSON.stringify(filter))
                         })
                         return false;
                     }
@@ -63,7 +91,6 @@ export default class HeadTabs extends React.Component<any> {
 
     private _initialization = () => {
         const routerHistory = RouterHistory;
-        this._deviceEventEmitter = PubSub.subscribe(Listener.NavMenuSidenav, this._OnCollapsed.bind(this));
         const item = utilsStorage.getItem('tabs');
         const location = routerHistory.location;
         const parse: Array<any> = JSON.parse(item ?? '[]');
@@ -74,7 +101,8 @@ export default class HeadTabs extends React.Component<any> {
                 const newroute = {
                     id: find.key,
                     path: find.path,
-                    content: find.title
+                    content: find.title,
+                    closedHideTab: find.closedHideTab
                 }
                 parse.push(newroute)
                 route = newroute
@@ -91,23 +119,49 @@ export default class HeadTabs extends React.Component<any> {
         })
     }
 
-    private _close = (id: string) => {
+    /**
+     * 关闭标签（适用于非激活标签）
+     * @param id
+     * @private
+     */
+    private _close = (id?: string) => {
         const {items} = this.state
-        const _items = items.filter((k, i, a) => k.id !== id);
+        const _items = items.filter((k, i, a) => k.id !== id)
+            .filter((k, i, a) => k.closedHideTab !== true)
         this.setState({
-            items: _items
+            items: _items,
+            selectClosedItems: undefined
         }, () => {
             utilsStorage.setItem('tabs', JSON.stringify(_items))
         })
     }
 
+    /**
+     * PubSub方式 关闭Tab
+     * @param name
+     * @param props
+     * @private
+     */
+    private _onClosed(name: string, props: any) {
+        const {selectItems} = this.state
+        const {callback} = props
+        this.setState({
+            selectClosedItems: selectItems
+        }, () => {
+            callback?.()
+        })
+    }
+
     componentDidMount(): void {
+        this._deviceEmitNavTabClosed = PubSub.subscribe(Listener.NavTabClosed, this._onClosed.bind(this));
+        this._deviceNavMenuSidenav = PubSub.subscribe(Listener.NavMenuSidenav, this._OnCollapsed.bind(this));
         this._initialization();
         this._listen();
     }
 
     componentWillMount(): void {
-        PubSub.unsubscribe(this._deviceEventEmitter);
+        PubSub.unsubscribe(this._deviceEmitNavTabClosed);
+        PubSub.unsubscribe(this._deviceEmitNavTabClosed);
     }
 
 
@@ -185,7 +239,6 @@ export default class HeadTabs extends React.Component<any> {
      * @param id
      */
     public onWheel(classname: string, id: string, callbackWheelEnd?: () => void) {
-
         const anchorElement: any = document.getElementsByClassName(classname)[0];
         anchorElement.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'});
         this.setState({
@@ -336,7 +389,7 @@ export default class HeadTabs extends React.Component<any> {
                         >
                             <div className={'header-tabs-basetool'}>
                                 <Badge content={55} maxCount={99}>
-                                    <Avatar style={{backgroundColor: '#87d068'}} size={'sm'}>
+                                    <Avatar style={{backgroundColor: '#87d068'}} size={'xs'}>
                                         <Icon icon={'gear-circle'}/>
                                     </Avatar>
                                 </Badge>

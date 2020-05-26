@@ -13,6 +13,7 @@ import {IStateFormValue, IFormValue} from '../index.types';
 import {utilsUrl} from '@utils/index';
 import Dialog from '@component/dialog';
 import {IntlApi} from '@component/textIntl';
+import {Prompt} from 'react-router';
 
 
 export default class Index extends ProductAllSku {
@@ -96,6 +97,7 @@ export default class Index extends ProductAllSku {
         const {formValue, cellData, specImage, loader} = this.state
         return (
             <>
+                <Prompt message="是否离开页面" when={false}/>
                 <BackColorPanel style={{height: '100%'}}>
                     <HeadPanel title={'其他产品新增编辑页'}>
                         <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
