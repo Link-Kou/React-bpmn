@@ -3,8 +3,8 @@ import {Dropdown} from 'rsuite';
 import './index.scss'
 import {TypeConfigAddModel, TypeConfigEditModel} from '../index';
 import {LoadPanel, HeadPanel} from '@component/panel';
-import _delButton from './compose/_delButton';
-import _buildPanelLists from './compose/_panelLists';
+import _delButton from './compose/hookDelButton';
+import _buildPanelLists from './compose/hookPanelLists';
 import {IConstant, IData} from '../../index.types';
 import {utilsArray} from '@utils/index';
 

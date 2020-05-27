@@ -378,7 +378,11 @@
     // error; 禁止变量声明与外层作用域的变量同名
     "no-shadow": "error",
     // error; 禁用特定的全局变量
-    "no-restricted-globals": "error",
+    "no-restricted-globals": [
+      "error",
+      "event",
+      "fdescribe"
+    ],
     // error; js关键字和保留字不能作为函数名或者变量名
     "no-shadow-restricted-names": "error",
     // error; 禁止label名称和var相同

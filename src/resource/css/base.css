@@ -182,6 +182,9 @@ splitter 控件自定义的样式
       height: 4px;
       cursor: row-resize; }
 
+.rs-icon.fill-color use {
+  fill: currentColor; }
+
 /*
    无法得知具体产生的原因，临时解决方案
    InputPicker 在表格中错乱的问题

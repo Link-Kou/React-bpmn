@@ -63,7 +63,7 @@ export default class BasePaper extends React.Component<any> {
             id
         }, (req) => {
             if (req.success) {
-                Notifications.Message('成功提交价格修改');
+                Notifications.MessageElement('成功提交价格修改');
                 Alert.success('成功提交价格修改')
             } else {
                 Alert.warning(req.msg)

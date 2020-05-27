@@ -13,6 +13,9 @@
       "@component/*": [
         "./src/component/*"
       ],
+      "@resource/*": [
+        "./src/resource/*"
+      ],
       "@common/*": [
         "./src/common/*"
       ],

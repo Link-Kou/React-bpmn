@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Alert, Button, Modal} from 'rsuite';
 import './index.scss'
-import HookSortLists from './compose/_HookSortLists';
+import HookSortLists from './compose/hookSortLists';
 import {LoadPanel} from '@component/panel';
 import {utilsArray} from "@utils/index";
 
@@ -31,6 +31,7 @@ interface IProps {
 
 interface IState {
     loading: boolean
+    buttonLoading: boolean
     data?: Array<{
         id: string
         title: string
@@ -42,17 +43,19 @@ export default class TypeConfigEditModel extends React.Component<IProps, IState>
 
     public state: IState = {
         loading: true,
+        buttonLoading: false,
         data: undefined
     }
 
     private _onClose = () => {
-        const {loading} = this.state
+        const {buttonLoading} = this.state
         const {onClose} = this.props
-        if (!loading) {
+        if (!buttonLoading) {
             onClose?.()
             setTimeout(() => {
                 this.setState({
-                    data: undefined
+                    data: undefined,
+                    loading: true
                 })
             }, 500)
         }
@@ -81,18 +84,19 @@ export default class TypeConfigEditModel extends React.Component<IProps, IState>
         preId: string
     }>) => {
         this.setState({
-            data
+            data,
+            loading: false
         })
     }
 
     private _onSave = () => {
         const {onSave, type, alone} = this.props
         this.setState({
-            loading: true
+            buttonLoading: true
         }, () => {
             const callbackCloseLoading = (): void => {
                 this.setState({
-                    loading: false
+                    buttonLoading: false
                 }, () => {
                     this._onClose()
                 })
@@ -105,7 +109,7 @@ export default class TypeConfigEditModel extends React.Component<IProps, IState>
 
     public render() {
         const {show} = this.props
-        const {loading, data} = this.state
+        const {loading, data, buttonLoading} = this.state
         const arrayLength = utilsArray.getArrayLength(data);
         return (
             <Modal show={show}
@@ -136,7 +140,7 @@ export default class TypeConfigEditModel extends React.Component<IProps, IState>
                     </LoadPanel>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button appearance="primary" loading={loading} onClick={this._onSave}>
+                    <Button appearance="primary" loading={buttonLoading} onClick={this._onSave}>
                         保存
                     </Button>
                     <Button appearance="subtle" onClick={this._onClose}>

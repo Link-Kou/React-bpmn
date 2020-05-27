@@ -81,11 +81,11 @@ export default class Index extends React.Component<IProps> {
 
     private outrender(props: IPriProps) {
         const {loadering, title, subHeight, height, queueAnim, hideLoaderComponent} = props
-        const _subHeight = _.isNumber(subHeight) ? subHeight : 58
+        //const _subHeight = _.isNumber(subHeight) ? subHeight : 58
         const _title = _.isString(title) ? title : '页面初始化中,请稍后....'
         return (
             loadering ?
-                <FlexCalcBox height={height} subHeight={_subHeight} overflow={'auto'} Body={(e) => (
+                <FlexCalcBox height={height} subHeight={subHeight} overflow={'auto'} Body={(e) => (
                     <>
                         {this._Loader(_title, hideLoaderComponent)}
                     </>
@@ -97,10 +97,10 @@ export default class Index extends React.Component<IProps> {
 
     private inrender(props: IPriProps) {
         const {loadering, title, subHeight, height, queueAnim, hideLoaderComponent} = props
-        const _subHeight = _.isNumber(subHeight) ? subHeight : 58
+        //const _subHeight = _.isNumber(subHeight) ? subHeight : 58
         const _title = _.isString(title) ? title : '页面初始化中,请稍后....'
         return (
-            <FlexCalcBox height={height} subHeight={_subHeight} overflow={'auto'} Body={(e) => (
+            <FlexCalcBox height={height} subHeight={subHeight} overflow={'auto'} Body={(e) => (
                 loadering ?
                     <>
                         {this._Loader(_title, hideLoaderComponent)}

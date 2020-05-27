@@ -36,9 +36,7 @@
     "recompose": "^0.30.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "rsuite": "^4.7.0",
-    "sockjs-client": "^1.4.0",
-    "stompjs": "^2.3.3"
+    "rsuite": "^4.7.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -89,8 +87,6 @@
     "@types/react-splitter-layout": "^3.0.0",
     "@types/recompose": "^0.30.7",
     "@types/redux-thunk": "^2.1.0",
-    "@types/sockjs-client": "^1.1.1",
-    "@types/stompjs": "^2.3.4",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-rsuite": "^4.0.0",
@@ -111,6 +107,9 @@
     "react-markdown-reader": "^1.2.0",
     "sass-loader": "^8.0.0",
     "source-map-explorer": "^2.4.2",
+    "svg-transform-loader": "^2.0.13",
+    "svgo-loader": "^2.2.1",
+    "svg-sprite-loader": "^5.0.0",
     "typescript": "3.7.5"
   }
 }

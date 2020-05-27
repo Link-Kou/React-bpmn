@@ -1,20 +1,8 @@
-import * as React from 'react';
-import UserTable from './component/userTable';
-import {Col, Grid, Row} from 'rsuite';
+/*
+import ProductCardboard from './cardboardList';
+export default ProductCardboard;
+*/
 
-export default class CartonList extends React.Component {
 
-    public render() {
-        return (
-            <>
-                <Grid fluid={true}>
-                    <Row>
-                        <Col xs={24} sm={24} md={24}>
-                            <UserTable/>
-                        </Col>
-                    </Row>
-                </Grid>
-            </>
-        )
-    }
-}
+export {default as UserAdmin} from './userAdmin';
+export {default as UserCustomer} from './userCustomer';

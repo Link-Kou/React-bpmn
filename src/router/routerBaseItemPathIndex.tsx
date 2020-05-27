@@ -15,7 +15,8 @@ import {CartonList, CartonAdd} from '../application/productCarton'
 import {OnlineMarketingList} from '../application/productOnlineMarketing'
 import ProductCorrugated from '../application/productCorrugated'
 import ProductQuote from '../application/productQuote'
-import UserManager from '../application/userManager'
+import {UserAdmin, UserCustomer} from '../application/userManager'
+import {MenusTree} from '../application/systemSettings'
 import OrderCardboard from '../application/orderCardboard'
 import CodeView from '../application/codeView'
 import {RouterLoadableDelay, RouterLoadableConfigBase} from './routerLoadableDelay';
@@ -81,6 +82,12 @@ export const routes: Array<IRoute> = [
         exact: false,
         path: '/index/longPanel',
         screen: LongPanel
+    }, {
+        key: 'MenusTree',
+        title: '测试-菜单树',
+        exact: false,
+        path: '/index/menusTree',
+        screen: MenusTree
     }, {
         key: 'mosaic',
         title: '测试-mosaic',
@@ -170,11 +177,18 @@ export const routes: Array<IRoute> = [
         screen: ProductQuote
     },
     {
-        key: 'UserManager',
-        title: '会员管理',
+        key: 'UserAdmin',
+        title: '运营人员管理',
         exact: false,
-        path: '/index/userManager',
-        screen: UserManager
+        path: '/index/userAdmin',
+        screen: UserAdmin
+    },
+    {
+        key: 'UserCustomer',
+        title: '商城会员管理',
+        exact: false,
+        path: '/index/userCustomer',
+        screen: UserCustomer
     },
     {
         key: 'OrderCardboard',

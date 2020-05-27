@@ -18,15 +18,6 @@ module.exports = function (app) {
             '^/upload': '/'
         }*/
     }));
-    /*app.use('/sockjs', proxy({
-        target: 'http://localhost:8080',
-        //改变源
-        changeOrigin: true,
-        // 是否验证证书
-        secure: false,
-        // 启用websocket
-        ws: true
-    }));*/
     app.use('/dev', proxy({
         target: 'http://localhost:8080',
         //改变源

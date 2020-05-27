@@ -56,7 +56,10 @@ export default class HeadTabs extends React.Component<any, IState> {
         }
     }
 
-
+    /**
+     * 监听路由变化
+     * @private
+     */
     private _listen = () => {
         const routerHistory = RouterHistory;
         //路由跳转监听
@@ -89,6 +92,10 @@ export default class HeadTabs extends React.Component<any, IState> {
         })
     }
 
+    /**
+     * 初始化标签处理
+     * @private
+     */
     private _initialization = () => {
         const routerHistory = RouterHistory;
         const item = utilsStorage.getItem('tabs');
@@ -281,7 +288,6 @@ export default class HeadTabs extends React.Component<any, IState> {
         })
         if (index > -1) {
             RouterHistory.push(items[index].path)
-            //this.onWheel(`header-tabs-tabitem${items[index].id}`, items[index].id)
         }
 
 

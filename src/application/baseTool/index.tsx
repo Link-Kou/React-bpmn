@@ -3,6 +3,7 @@ import * as React from 'react';
 import {Avatar, Badge, Button, Icon, Popover, Whisper} from 'rsuite';
 import {utilsOther} from '@utils/index';
 import Listener from '@listener';
+import Notifications from '@common/notification';
 
 export default class HeadTool extends React.Component {
 
@@ -42,7 +43,8 @@ export default class HeadTool extends React.Component {
                     speaker={
                         <Popover title="">
                             <Button type="dashed" style={{right: '0px'}} onClick={() => {
-
+                                //Notifications.MessageHtml5('测试');
+                                Notifications.MessageElement('测试测试测试测');
                             }}>
                                 退出登录
                             </Button>

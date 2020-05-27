@@ -1,6 +1,4 @@
 import * as PubSub from 'pubsub-js'
-import SockJS from 'sockjs-client';
-import Stomp from 'stompjs';
 
 export default class Listener {
 
@@ -37,36 +35,22 @@ export default class Listener {
 
 
     public static ws() {
-        const select = false;
-        if (select) {
-            const sock = new WebSocket('ws://localhost:8080/socketServer');
-            sock.onopen = function (e) {
-                sock.send('1234')
-                console.log(e);
-            };
-            sock.onmessage = function (e) {
-                console.log('message', e.data);
-            };
-            sock.onerror = function (e) {
-                console.log(e);
-            };
-            sock.onclose = function (e) {
-                console.log(e);
-            }
-        } else {
-            //判断当前浏览器是否支持WebSocket
-            const socket = new SockJS('http://localhost:8080/sockjs/socketServer');
-            socket.onmessage = function (e) {
-                console.log('message', e.data);
-            }
-            const stompClient = Stomp.over(socket);
-            stompClient.connect({}, function (frame) {
-                console.log('Connected: ' + frame);
-                stompClient.subscribe('/user/topic/greetings', function (greeting) {
-                    //showGreeting(JSON.parse(greeting.body).content);
-                });
-            });
+        //TODO WS URL需要进行配置处理
+        //ws://localhost:8080
+        //`ws://${window.location.host}/socketServer`
+        const sock = new WebSocket('ws://localhost:8080/socketServer');
+        sock.onopen = function (e) {
+            sock.send('1234')
+            console.log(e);
+        };
+        sock.onmessage = function (e) {
+            console.log('message', e.data);
+        };
+        sock.onerror = function (e) {
+            console.log(e);
+        };
+        sock.onclose = function (e) {
+            console.log(e);
         }
-
     }
 }

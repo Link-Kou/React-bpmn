@@ -1,5 +1,6 @@
 const {override, addLessLoader, addWebpackAlias, addWebpackModuleRule} = require('customize-cra');
 const markdownRenderer = require('react-markdown-reader').renderer;
+const path = require('path');
 
 module.exports = override(
     addLessLoader({
@@ -22,11 +23,26 @@ module.exports = override(
             }
         }]
     }),
+    addWebpackModuleRule({
+        test: /\.svg$/,
+        include: path.resolve(__dirname, './src/resource/svg/'),
+        use: [
+            {
+                loader: 'svg-sprite-loader',
+                options: {
+                    symbolId: 'icon-[name]'
+                }
+            },
+            'svg-transform-loader',
+            'svgo-loader'
+        ]
+    }),
     addWebpackAlias({
         '@http': 'src/redux/fetch',
         '@imageManager': 'src/component/imageManager',
         '@utils': 'src/component/utils',
         '@component': 'src/component',
+        '@resource': 'src/resource',
         '@common': 'src/common',
         '@router': 'src/router',
         '@listener': 'src/listener',
