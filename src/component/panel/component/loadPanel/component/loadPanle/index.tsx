@@ -68,6 +68,7 @@ export default class Index extends React.Component<IProps> {
         if (queueAnim) {
             return (
                 <QueueAnim type={['alpha', 'right']}
+                           leaveReverse={true}
                            ease={['easeInOutQuad', 'easeInBack']}>
                     <div key='a'>
                         {this.props.children}

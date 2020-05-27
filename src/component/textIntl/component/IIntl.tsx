@@ -28,7 +28,7 @@ export const OPSFCFetchError: any = (id: string, other?: any) => (
 export const Success: any = OPSFCFetchError('OPS_success')
 export const HttpError: any = OPSFCFetchError('OPS_httpError')
 export const IsDelTitle: any = OPSFCFetchError('OPS_isDelTitle')
-export const SaveDelTitle: any = OPSFCFetchError('OPS_SaveTitle')
+export const SaveTitle: any = OPSFCFetchError('OPS_SaveTitle')
 export const IsDelBody = (name: any) => {
     return OPSFCFetchError('OPS_isDelBody', {name: <b><u>{name}</u></b>})
 }

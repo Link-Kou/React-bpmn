@@ -3,7 +3,7 @@ import {Button, Dropdown, Table} from 'rsuite';
 import {CellExpandedIndex} from '@component/table';
 import {HeadPanel} from '@component/panel';
 import FlexCalcBox from '@component/flexCalcBox';
-import UserAdminRole from '../userAdminRole';
+import UserAdminEditModel from './../userAdminEdit/model';
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
 
@@ -93,7 +93,7 @@ export default class UserAdminTable extends React.Component {
         const {data, pages, total, loading, selectKey} = this.state
         return (
             <>
-                <UserAdminRole show={selectKey === 'role'} data={[]}/>
+                <UserAdminEditModel show={selectKey === 'addUser'}/>
                 <HeadPanel hideBorderBottom={true} title={'运营用户列表'}>
                     <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
                         <Dropdown title={'用户管理'} trigger="click" onSelect={(e) => {
@@ -102,7 +102,6 @@ export default class UserAdminTable extends React.Component {
                             })
                         }}>
                             <Dropdown.Item eventKey={'addUser'}>新增用户</Dropdown.Item>
-                            <Dropdown.Item eventKey={'role'}>角色管理</Dropdown.Item>
                         </Dropdown>
                     </div>
                 </HeadPanel>

@@ -292,6 +292,21 @@ export const MenuConfig: Array<IMenuConfig> = [
         }
     },
     {
+        key: 'RoleManage',
+        type: {
+            type: 'NavItem',
+            /**
+             * 内容
+             */
+            content: 'RoleManage',
+            /**
+             * 图标
+             */
+            ico: 'cube',
+            route: '/index/roleManage'
+        }
+    },
+    {
         key: 'SqlQuery',
         type: {
             type: 'NavItem',

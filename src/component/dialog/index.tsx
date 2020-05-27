@@ -2,6 +2,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import {Button, Modal, Progress} from 'rsuite';
 import {LoaderIcons} from '@component/panel';
+import BigNumber from 'bignumber.js';
 
 const {Line} = Progress;
 
@@ -146,11 +147,14 @@ export default class Dialog {
 
             public percentval: any;
 
+            public timeOut: string = String(process.env.REACT_APP_TimeOut)
+
             public state = {
                 title: this.props.title,
                 show: true,
                 loading: false,
-                percent: 0
+                percent: 0,
+                percentIng: String(process.env.REACT_APP_TimeOut)
             }
 
             public _setClose(CloseCallback?: () => void) {
@@ -180,18 +184,24 @@ export default class Dialog {
                     loading: true,
                     title: '正在请求服务器'
                 }, () => {
+
                     this.percentval = setInterval(() => {
-                        const {percent} = this.state
-                        if (percent > 90) {
+                        const {percentIng} = this.state
+                        const timeOut = new BigNumber(this.timeOut)
+                        const percent = new BigNumber(percentIng).minus(100)
+                        const bf: any = percent.div(timeOut).dp(2, BigNumber.ROUND_DOWN).multipliedBy(100)
+                        const percenting = new BigNumber(100).minus(bf).toNumber();
+                        if (percenting > 99) {
                             clearInterval(this.percentval)
                         } else {
                             this.setState((state: any) => {
                                 return ({
-                                    percent: state.percent += 5
+                                    percent: percenting,
+                                    percentIng: percent.toNumber()
                                 })
                             })
                         }
-                    }, 350)
+                    }, 100)
                     this.props?.callback({
                         success: true,
                         close: this._setClose.bind(this)

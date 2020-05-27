@@ -79,7 +79,7 @@ export default class Index extends ProductAllSku {
     private _onSave = async () => {
         const {formValue, id} = this.state
         await Dialog.SelectLoad({
-            title: IntlApi.SaveDelTitle,
+            title: IntlApi.SaveTitle,
             boby: '',
             callback: (e) => {
                 if (e.success) {

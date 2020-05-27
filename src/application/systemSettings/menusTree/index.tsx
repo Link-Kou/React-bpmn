@@ -2,6 +2,9 @@ import * as React from 'react';
 import {Col, Grid, Icon, IconButton, Panel, Row, Tree} from 'rsuite';
 import {BackColorPanel, HeadPanel, LoadPanel} from '@component/panel';
 import {Svg} from '@resource/svg';
+import MenusTreeAddEditModel from './component/addEditModel';
+import Dialog from '@component/dialog';
+import {IntlApi} from '@component/textIntl';
 
 /**
  *
@@ -12,6 +15,9 @@ import {Svg} from '@resource/svg';
 export default class MenusTree extends React.Component {
 
     public state = {
+        show: false,
+        title: '',
+        key: '',
         treeData: [
             {
                 label: '中国',
@@ -77,24 +83,73 @@ export default class MenusTree extends React.Component {
 
     }
 
+    /**
+     * 模态
+     * @param key
+     * @param title
+     * @private
+     */
+    private _onOpenAddEditModel = (key?: string, title?: string) => {
+        const {show} = this.state
+        this.setState({
+            show: !show,
+            title
+        })
+    }
+
+    /**
+     * 保存
+     * @param name
+     * @param callbackCloseLoading
+     * @param key
+     * @private
+     */
+    private _onSave = (name: string, callbackCloseLoading: () => void, key?: string) => {
+
+    }
+
+    /**
+     * 删除
+     * @private
+     */
+    private _onDel = () => {
+        Dialog.SelectLoad({
+            title: '提示',
+            boby: IntlApi.IsDelBody,
+            callback: (e) => {
+                if (e.success) {
+
+                }
+            }
+        })
+    }
+
     public render() {
-        //const {treeData} = this.state
+        const {show, title, key} = this.state
         return (
             <>
+                <MenusTreeAddEditModel key={key} show={show} title={title} onClose={this._onOpenAddEditModel}
+                                       onSave={this._onSave}/>
                 <Grid fluid={true}>
                     <Row>
-                        <Col xs={6} sm={6} md={6}/>
-                        <Col xs={12} sm={12} md={12}>
+                        <Col xs={5} sm={5} md={5}/>
+                        <Col xs={14} sm={14} md={14}>
                             <BackColorPanel>
                                 <HeadPanel hideBorderBottom={true} title={'系统权限菜单'}>
                                     <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
-                                        <IconButton appearance={'subtle'} icon={Svg.rename}>重命名</IconButton>
                                         <IconButton appearance={'subtle'}
+                                                    onClick={() => this._onOpenAddEditModel('rename', '节点重命名')}
+                                                    icon={Svg.rename}>重命名</IconButton>
+                                        <IconButton appearance={'subtle'}
+                                                    onClick={() => this._onOpenAddEditModel('AddSib', '节点重命名')}
                                                     icon={Svg.ztreePeerAdd}>添加同级</IconButton>
                                         <IconButton appearance={'subtle'}
+                                                    onClick={() => this._onOpenAddEditModel('AddSub', '节点重命名')}
                                                     icon={Svg.ztreeChildAdd}>添加下级</IconButton>
-                                        <IconButton appearance={'subtle'} icon={<Icon icon={'save'}/>}>保存菜单</IconButton>
                                         <IconButton appearance={'subtle'}
+                                                    icon={<Icon icon={'save'}/>}>保存菜单</IconButton>
+                                        <IconButton appearance={'subtle'}
+                                                    onClick={this._onDel}
                                                     icon={<Icon icon={'trash-o'}/>}>删除节点</IconButton>
                                     </div>
                                 </HeadPanel>
@@ -103,7 +158,7 @@ export default class MenusTree extends React.Component {
                                 </LoadPanel>
                             </BackColorPanel>
                         </Col>
-                        <Col xs={6} sm={6} md={6}/>
+                        <Col xs={5} sm={5} md={5}/>
                     </Row>
                 </Grid>
             </>

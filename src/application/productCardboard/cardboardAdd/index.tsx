@@ -92,7 +92,7 @@ export default class Index extends CardboardAdd {
                 formValue.images.details = details
                 formValue.layers = layers
                 await Dialog.SelectLoad({
-                    title: IntlApi.SaveDelTitle,
+                    title: IntlApi.SaveTitle,
                     boby: '',
                     callback: (e) => {
                         if (e.success) {

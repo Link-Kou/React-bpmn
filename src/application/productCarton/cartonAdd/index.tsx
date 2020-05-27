@@ -65,7 +65,7 @@ export default class Index extends CartonAdd {
             formValue.images.main = main
             formValue.images.details = details
             await Dialog.SelectLoad({
-                title: IntlApi.SaveDelTitle,
+                title: IntlApi.SaveTitle,
                 boby: '',
                 callback: (e) => {
                     if (e.success) {

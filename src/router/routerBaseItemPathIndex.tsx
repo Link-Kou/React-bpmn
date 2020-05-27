@@ -16,7 +16,7 @@ import {OnlineMarketingList} from '../application/productOnlineMarketing'
 import ProductCorrugated from '../application/productCorrugated'
 import ProductQuote from '../application/productQuote'
 import {UserAdmin, UserCustomer} from '../application/userManager'
-import {MenusTree} from '../application/systemSettings'
+import {MenusTree, RoleManage} from '../application/systemSettings'
 import OrderCardboard from '../application/orderCardboard'
 import CodeView from '../application/codeView'
 import {RouterLoadableDelay, RouterLoadableConfigBase} from './routerLoadableDelay';
@@ -82,13 +82,22 @@ export const routes: Array<IRoute> = [
         exact: false,
         path: '/index/longPanel',
         screen: LongPanel
-    }, {
+    },
+    {
         key: 'MenusTree',
         title: '测试-菜单树',
         exact: false,
         path: '/index/menusTree',
         screen: MenusTree
-    }, {
+    },
+    {
+        key: 'RoleManage',
+        title: '测试-角色',
+        exact: false,
+        path: '/index/roleManage',
+        screen: RoleManage
+    },
+    {
         key: 'mosaic',
         title: '测试-mosaic',
         exact: false,

@@ -2,7 +2,7 @@ import {Col, Grid, Row} from 'rsuite';
 import * as React from 'react';
 import {BackColorPanel} from '@component/panel';
 import UserAdminTable from './component/userAdminTable';
-import UserAdminEdit from './component/userAdminEdit';
+import UserAdminEditPanel from './component/userAdminEdit/panel';
 
 /**
  * 运营用户管理
@@ -24,7 +24,7 @@ export default class Index extends React.Component {
                         </Col>
                         <Col sm={9} xs={9} md={9} smHidden={true}>
                             <BackColorPanel>
-                                <UserAdminEdit/>
+                                <UserAdminEditPanel/>
                             </BackColorPanel>
                         </Col>
                     </Row>
