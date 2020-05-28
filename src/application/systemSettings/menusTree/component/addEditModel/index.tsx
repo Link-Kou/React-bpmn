@@ -7,9 +7,9 @@ interface IProps {
 
     title?: string
 
-    key?: string
+    id?: string
 
-    onSave?(name: string, callbackCloseLoading: () => void, key?: string): void
+    onSave?(name: string, callbackCloseLoading: () => void, id?: string): void
 
     onClose?(): void
 }
@@ -55,7 +55,7 @@ export default class MenusTreeAddEditModel extends React.Component<IProps> {
     }
 
     private _onSave = (name: string, check: boolean = false) => {
-        const {onSave, key} = this.props
+        const {onSave, id} = this.props
         if (utilsBoolean.toBooleanGetDefault(check, false)) {
             this.setState({
                 loading: true
@@ -65,7 +65,7 @@ export default class MenusTreeAddEditModel extends React.Component<IProps> {
                         loading: false
                     })
                 }
-                onSave?.(name, callbackCloseLoading, key);
+                onSave?.(name, callbackCloseLoading, id);
             })
         }
     }

@@ -1,21 +1,21 @@
-interface INode {
+export interface INode {
     children?: Array<INode>
 
     [x: string]: any
 }
 
-interface IAction {
+export interface IAction {
     success: boolean,
     data: any
 }
 
-export namespace TreeUtils {
+export default class TreeUtils {
     /**
      * 进行动作记录
      * 将受到改变的节点进行查询对比从而进行插入
      * @param props
      */
-    export function insertActionTree(props: { treeData: Array<INode>, insertNode: INode, getNodeKey: (node: INode) => string | number }): IAction {
+    public static insertActionTree(props: { treeData: Array<INode>, insertNode: INode, getNodeKey: (node: INode) => string | number }): IAction {
         const {treeData, insertNode, getNodeKey} = props;
         const newtreeData: Array<INode> = JSON.parse(JSON.stringify(treeData));
         if (newtreeData && newtreeData.length) {
@@ -41,7 +41,7 @@ export namespace TreeUtils {
      * 将受到改变的节点进行查询对比从而进行删除
      * @param props
      */
-    export function deleteActionTree(props: { treeData: Array<INode>, nodeid: string, getNodeKey: (node: INode) => string | number }): IAction {
+    public static deleteActionTree(props: { treeData: Array<INode>, nodeid: string, getNodeKey: (node: INode) => string | number }): IAction {
         const {treeData, nodeid, getNodeKey} = props;
         const newtreeData: Array<INode> = JSON.parse(JSON.stringify(treeData));
         let deleteIndex = -1;
@@ -67,7 +67,7 @@ export namespace TreeUtils {
      * 进行动作记录查询
      * @param props
      */
-    export function findActionTree(props: { treeData: Array<INode>, nodeid: string, getNodeKey: (node: INode) => string | number }) {
+    public static findActionTree(props: { treeData: Array<INode>, nodeid: string, getNodeKey: (node: INode) => string | number }) {
         const {treeData, nodeid, getNodeKey} = props;
         const newtreeData: Array<INode> = JSON.parse(JSON.stringify(treeData));
         let deleteIndex = -1;
@@ -88,10 +88,11 @@ export namespace TreeUtils {
 
     /**
      * 插入子节点
+     * @param props.parentKey 父节点值
      * @param props.treeData 数据
      * @param props.parentKey 父节点
      */
-    export function insertChildNode(props: { treeData?: Array<INode>, parentKey: string | number, insertNode: (peersupid: INode) => INode, getNodeKey: (node: INode) => string | number }): any {
+    public static insertChildNode(props: { treeData?: Array<INode>, parentKey: string | number, insertNode: (peersupid: INode) => INode, getNodeKey: (node: INode) => string | number }): any {
         const {treeData, parentKey, insertNode, getNodeKey} = props;
         const newtreeData = JSON.parse(JSON.stringify(treeData));
         const insertChildNodeItem = ({treeDataItem, parentKeyItem, insertNodeItem, getNodeKeyItem}: { treeDataItem?: Array<INode>, parentKeyItem: string | number, insertNodeItem: (peersupid: INode) => INode, getNodeKeyItem: (node: INode) => string | number }): any => {
@@ -107,7 +108,7 @@ export namespace TreeUtils {
                             ]
                         } else {
                             const iNode = insertNodeItem(k);
-                            k.children = [iNode]
+                            k?.children?.push(iNode)
                         }
                         return true;
                     }
@@ -116,7 +117,7 @@ export namespace TreeUtils {
                             treeDataItem: k.children,
                             parentKeyItem,
                             insertNodeItem: insertNode,
-                            getNodeKeyItem: getNodeKey,
+                            getNodeKeyItem: getNodeKey
                         });
                     }
                     return false;
@@ -129,18 +130,17 @@ export namespace TreeUtils {
             treeDataItem: newtreeData,
             parentKeyItem: parentKey,
             insertNodeItem: insertNode,
-            getNodeKeyItem: getNodeKey,
+            getNodeKeyItem: getNodeKey
         });
 
     }
-
 
     /**
      * 移除子节点
      * @param props.treeData 数据
      * @param props.parentKey 父节点
      */
-    export function removeChildNode(props: { treeData?: Array<INode>, removeNode: string | number, getNodeKey: (node: INode) => string | number }): any {
+    public static removeChildNode(props: { treeData?: Array<INode>, removeNode: string | number, getNodeKey: (node: INode) => string | number }): any {
         const {treeData, removeNode, getNodeKey} = props;
         const newtreeData = JSON.parse(JSON.stringify(treeData));
         const removeChildNodeItem = ({treeDataItem, removeNodeItem, getNodeKeyItem}: { treeDataItem?: Array<INode>, removeNodeItem: string | number, getNodeKeyItem: (node: INode) => (string | number) }): any => {
@@ -150,14 +150,13 @@ export namespace TreeUtils {
                     if (removeNodeItem === getNodeKeyItem(k)) {
                         deleteIndex = i;
                         return true;
-                    } else {
-                        if (k.children && k.children.length) {
-                            removeChildNodeItem({
-                                treeDataItem: k.children,
-                                removeNodeItem: removeNode,
-                                getNodeKeyItem: getNodeKey,
-                            })
-                        }
+                    }
+                    if (k.children && k.children.length) {
+                        removeChildNodeItem({
+                            treeDataItem: k.children,
+                            removeNodeItem: removeNode,
+                            getNodeKeyItem: getNodeKey
+                        })
                     }
                     return false;
                 });
@@ -174,7 +173,7 @@ export namespace TreeUtils {
      * 更新指定节点数据
      * @param props
      */
-    export function updataChildNode(props: { treeData?: Array<INode>, updataNode: string | number, newNode: INode, getNodeKey: (node: INode) => string | number }): any {
+    public static updataChildNode(props: { treeData?: Array<INode>, updataNode: string | number, newNode: INode, getNodeKey: (node: INode) => string | number }): any {
         const {treeData, updataNode, newNode, getNodeKey} = props;
         const newtreeData = JSON.parse(JSON.stringify(treeData));
         const updataChildNodeItem = ({treeDataItem, updataNodeItem, newNodeItem, getNodeKeyItem}: { treeDataItem?: Array<INode>, updataNodeItem: string | number, newNodeItem: INode, getNodeKeyItem: (node: INode) => string | number }): any => {
@@ -183,15 +182,13 @@ export namespace TreeUtils {
                 treeDataItem.forEach((k: any, i, a) => {
                     if (updataNodeItem === getNodeKeyItem(k)) {
                         deleteIndex = i;
-                    } else {
-                        if (k.children && k.children.length) {
-                            updataChildNodeItem({
-                                treeDataItem: k.children,
-                                updataNodeItem: updataNode,
-                                newNodeItem: newNode,
-                                getNodeKeyItem: getNodeKey,
-                            })
-                        }
+                    } else if (k.children && k.children.length) {
+                        updataChildNodeItem({
+                            treeDataItem: k.children,
+                            updataNodeItem: updataNode,
+                            newNodeItem: newNode,
+                            getNodeKeyItem: getNodeKey
+                        })
                     }
                 });
                 if (deleteIndex > -1) {
@@ -207,14 +204,14 @@ export namespace TreeUtils {
             treeDataItem: newtreeData,
             updataNodeItem: updataNode,
             newNodeItem: newNode,
-            getNodeKeyItem: getNodeKey,
+            getNodeKeyItem: getNodeKey
         })
     }
 
     /**
      * 获取到子节点数量
      */
-    export function getChildNodeCount(props: { node?: INode }): number {
+    public static getChildNodeCount(props: { node?: INode }): number {
         const {node} = props;
         if (node) {
             if (node.children && node.children.length) {
@@ -231,7 +228,7 @@ export namespace TreeUtils {
      * @param props.idField 匹配的字段
      * @param props.node 所有节点
      */
-    export function findNode(props: { id: Array<string>, idField: string, node: Array<INode> }) {
+    public static findNode(props: { id: Array<string>, idField: string, node: Array<INode> }) {
         const {id, idField, node} = props
         const findnodes: any = []
         const find = (nodes: Array<INode> | undefined, idval: string) => {
@@ -257,7 +254,7 @@ export namespace TreeUtils {
      * @param props.getParentKey function 父节点id
      * @param props.getSortKey function 返回 1 或 -1
      */
-    export function buildListToTree(props: { treeData: Array<INode>, getNodeKey: (node: INode) => string | number, getParentKey: (node: INode) => string | number, getSortKey: (node: INode, node2: INode) => number }) {
+    public static buildListToTree(props: { treeData: Array<INode>, getNodeKey: (node: INode) => string | number, getParentKey: (node: INode) => string | number, getSortKey: (node: INode, node2: INode) => number }) {
         const {treeData, getNodeKey, getParentKey, getSortKey} = props
         const map = new Map();
         treeData.forEach((k, i, a) => {
@@ -292,7 +289,7 @@ export namespace TreeUtils {
      * @param props.getParentKey function 父节点id
      * @param props.getSortKey function 返回 1 或 -1
      */
-    export function buildListToTreeSort(props: { treeData: Array<INode>, getNodeKey: (node: INode) => string | number, getParentKey: (node: INode) => string | number, getPrevId: string }) {
+    public static buildListToTreeSort(props: { treeData: Array<INode>, getNodeKey: (node: INode) => string | number, getParentKey: (node: INode) => string | number, getPrevId: string }) {
         const {treeData, getNodeKey, getParentKey, getPrevId} = props
         const TreeLinkSort = (id: string, prevId: string, node: Array<INode>): Array<INode> => {
             const map = new Map()
