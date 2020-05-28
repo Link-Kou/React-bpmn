@@ -7,6 +7,7 @@ import Dialog from '@component/dialog';
 import {IntlApi} from '@component/textIntl';
 import WhisperTitle from '@common/whisper';
 import {utilsTree} from '@utils/index';
+import nanoid from 'nanoid';
 
 
 interface IState {
@@ -16,11 +17,20 @@ interface IState {
     treeData: Array<{
         label: string
         value: string
-        id: string
+        /**
+         * 父节点
+         */
+        parentId: any
+        /**
+         * 同级上级节点
+         */
+        preId: any
         children?: Array<any>
     }>
     activeNode: {
-        id: string
+        value: string
+        parentId?: any
+        preId?: any
     }
 }
 
@@ -38,7 +48,7 @@ export default class MenusTree extends React.Component<any, IState> {
         id: '',
         treeData: [],
         activeNode: {
-            id: ''
+            value: ''
         }
     }
 
@@ -52,41 +62,77 @@ export default class MenusTree extends React.Component<any, IState> {
      */
     private _onSave = (name: string, callbackCloseLoading: () => void, key?: string) => {
         const {treeData, show, activeNode} = this.state
-        switch (key) {
-            case 'root':
+        const func = {
+            Root: () => {
                 treeData.push(
                     {
                         label: name,
-                        value: name,
-                        id: '1',
-                        children: []
+                        value: nanoid(),
+                        parentId: '',
+                        preId: ''
                     }
                 )
                 this.setState({
                     treeData,
                     show: !show
                 }, () => callbackCloseLoading?.())
-                break;
-            case 'AddSib':
-                const trnode = utilsTree.insertChildNode(
+            },
+            //同级添加
+            AddSib: () => {
+                const insertChildNode: any = utilsTree.insertPeerNode(
                     {
                         treeData,
-                        parentKey: activeNode.id,
+                        peerKey: activeNode.value,
                         insertNode: (node: any) => ({
                             label: name,
-                            value: name,
-                            id: activeNode.id,
-                            children: []
+                            value: nanoid(),
+                            parentId: node.parentId,
+                            preId: node.value
                         }),
-                        getNodeKey: (node: any) => node.id
+                        getNodeKey: (node: any) => node.value
                     }
                 );
                 this.setState(
                     {
-                        treeData: trnode
+                        treeData: insertChildNode,
+                        show: !show
                     },
                     () => callbackCloseLoading?.()
                 )
+            },
+            //子级添加
+            AddSub: () => {
+                const insertChildNode: any = utilsTree.insertChildNode(
+                    {
+                        treeData,
+                        parentKey: activeNode.value,
+                        insertNode: (node: any) => ({
+                            label: name,
+                            value: nanoid(),
+                            parentId: activeNode.value,
+                            preId: node?.value
+                        }),
+                        getNodeKey: (node: any) => node.value
+                    }
+                );
+                this.setState(
+                    {
+                        treeData: insertChildNode,
+                        show: !show
+                    },
+                    () => callbackCloseLoading?.()
+                )
+            }
+        }
+        switch (key) {
+            case 'Root':
+                func.Root()
+                break;
+            case 'AddSib':
+                func.AddSib()
+                break;
+            case 'AddSub':
+                func.AddSub()
                 break;
             default:
 
@@ -117,7 +163,7 @@ export default class MenusTree extends React.Component<any, IState> {
     private _onAddRoot = () => {
         const {show} = this.state
         this.setState({
-            id: 'root',
+            id: 'Root',
             show: !show,
             title: '添加节点'
         })
@@ -159,6 +205,7 @@ export default class MenusTree extends React.Component<any, IState> {
                             data={treeData}
                             draggable={true}
                             defaultExpandAll={true}
+                            //expandItemValues={''}
                             onSelect={(activeNode, value, event) => {
                                 this.setState({
                                     activeNode

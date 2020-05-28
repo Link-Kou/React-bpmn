@@ -88,31 +88,30 @@ export default class TreeUtils {
 
     /**
      * 插入子节点
-     * @param props.parentKey 父节点值
      * @param props.treeData 数据
      * @param props.parentKey 父节点
+     * @param props.insertNode 插入节点,传递同级上个节点node
      */
     public static insertChildNode(props: { treeData?: Array<INode>, parentKey: string | number, insertNode: (peersupid: INode) => INode, getNodeKey: (node: INode) => string | number }): any {
         const {treeData, parentKey, insertNode, getNodeKey} = props;
         const newtreeData = JSON.parse(JSON.stringify(treeData));
         const insertChildNodeItem = ({treeDataItem, parentKeyItem, insertNodeItem, getNodeKeyItem}: { treeDataItem?: Array<INode>, parentKeyItem: string | number, insertNodeItem: (peersupid: INode) => INode, getNodeKeyItem: (node: INode) => string | number }): any => {
             if (treeDataItem && treeDataItem.length) {
-                treeDataItem.some((k, i, a) => {
+                treeDataItem?.some((k, i, a) => {
+                    //父对象
                     if (parentKeyItem === getNodeKeyItem(k)) {
-                        if (k.children && k.children.length) {
+                        //有子级
+                        if (k?.children && Array.isArray(k.children)) {
                             const length = k.children.length;
                             const iNode: any = insertNodeItem(k.children[length - 1]);
-                            k.children = [
-                                ...k.children,
-                                ...iNode
-                            ]
+                            k.children.push(iNode)
                         } else {
                             const iNode = insertNodeItem(k);
-                            k?.children?.push(iNode)
+                            k.children = [iNode]
                         }
                         return true;
                     }
-                    if (k.children && k.children.length) {
+                    if (k?.children && Array.isArray(k.children)) {
                         insertChildNodeItem({
                             treeDataItem: k.children,
                             parentKeyItem,
@@ -168,6 +167,54 @@ export default class TreeUtils {
         };
         return removeChildNodeItem({treeDataItem: newtreeData, removeNodeItem: removeNode, getNodeKeyItem: getNodeKey});
     }
+
+    /**
+     * 插入同级
+     * @param props.treeData 数据
+     * @param props.peerKey 父节点
+     * @param props.insertNode 插入节点,传递同级上个节点node
+     * @param props.getNodeKey
+     */
+    public static insertPeerNode(props: { treeData?: Array<INode>, peerKey: string | number, insertNode: (peersupid: INode) => INode, getNodeKey: (node: INode) => string | number }): any {
+        const {treeData, peerKey, insertNode, getNodeKey} = props;
+        const newtreeData = JSON.parse(JSON.stringify(treeData));
+        const insertPeerNodeItem = ({treeDataItem, parentNode, peerKeyItem, insertNodeItem, getNodeKeyItem}: { treeDataItem?: Array<INode>, parentNode: INode | undefined, peerKeyItem: string | number, insertNodeItem: (peersupid: INode) => INode, getNodeKeyItem: (node: INode) => string | number }): any => {
+            if (treeDataItem && treeDataItem.length) {
+                treeDataItem?.some((k, i, a) => {
+                    //父对象
+                    if (peerKey === getNodeKeyItem(k)) {
+                        const iNode = insertNodeItem(k);
+                        if (parentNode) {
+                            parentNode?.children?.splice(i, 1, k, iNode)
+                        } else {
+                            treeDataItem.push(iNode)
+                        }
+                        return true;
+                    }
+                    if (k?.children && Array.isArray(k.children)) {
+                        insertPeerNodeItem({
+                            treeDataItem: k.children,
+                            peerKeyItem,
+                            parentNode: k,
+                            insertNodeItem: insertNode,
+                            getNodeKeyItem: getNodeKey
+                        });
+                    }
+                    return false;
+                })
+            }
+            return treeDataItem
+        };
+
+        return insertPeerNodeItem({
+            treeDataItem: newtreeData,
+            peerKeyItem: peerKey,
+            parentNode: undefined,
+            insertNodeItem: insertNode,
+            getNodeKeyItem: getNodeKey
+        });
+    }
+
 
     /**
      * 更新指定节点数据
