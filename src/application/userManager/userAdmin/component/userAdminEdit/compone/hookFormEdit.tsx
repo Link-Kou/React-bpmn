@@ -1,5 +1,9 @@
 import * as React from 'react';
-import {CheckTree, Col, ControlLabel, Form, FormControl, FormGroup, Row, Tag, TagGroup, TagPicker} from 'rsuite';
+import {ControlLabel, Form, FormControl, FormGroup, Tag, TagGroup, TagPicker, Row, Col} from 'rsuite';
+
+interface IProps {
+    hv?: boolean
+}
 
 /**
  *
@@ -7,31 +11,61 @@ import {CheckTree, Col, ControlLabel, Form, FormControl, FormGroup, Row, Tag, Ta
  * @date 2020/5/27 23:50
  * @version 1.0
  */
-export default class HookFormEdit extends React.Component {
+export default class HookFormEdit extends React.Component<IProps> {
 
-    public render() {
+
+    public renderFormGroup(hv: boolean = false) {
+        if (hv) {
+            return (
+                <>
+                    <FormGroup>
+                        <ControlLabel>用户名</ControlLabel>
+                        <FormControl name="name"/>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>手机号码</ControlLabel>
+                        <FormControl name="name"/>
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>电子邮箱</ControlLabel>
+                        <FormControl name="name"/>
+                    </FormGroup>
+                </>
+            )
+        }
         return (
-            <Form fluid={true}>
-                <Row style={{marginBottom: 24}}>
-                    <Col sm={8} xs={8} md={8}>
+            <>
+                <Row style={{marginBottom: 20}}>
+                    <Col md={8} sm={8} lg={8} xs={8}>
                         <FormGroup>
                             <ControlLabel>用户名</ControlLabel>
                             <FormControl name="name"/>
                         </FormGroup>
                     </Col>
-                    <Col sm={8} xs={8} md={8}>
+                    <Col md={8} sm={8} lg={8} xs={8}>
                         <FormGroup>
                             <ControlLabel>手机号码</ControlLabel>
                             <FormControl name="name"/>
                         </FormGroup>
                     </Col>
-                    <Col sm={8} xs={8} md={8}>
+                    <Col md={8} sm={8} lg={8} xs={8}>
                         <FormGroup>
                             <ControlLabel>电子邮箱</ControlLabel>
                             <FormControl name="name"/>
                         </FormGroup>
                     </Col>
                 </Row>
+            </>
+        )
+    }
+
+    public render() {
+        const {hv} = this.props
+        return (
+            <Form fluid={true}>
+                {
+                    this.renderFormGroup(hv)
+                }
                 <FormGroup>
                     <ControlLabel>备注标签</ControlLabel>
                     <TagGroup>
@@ -47,31 +81,6 @@ export default class HookFormEdit extends React.Component {
                     <ControlLabel>关联角色</ControlLabel>
                     <FormControl name="email" style={{width: '100%'}} accepter={TagPicker}
                                  data={[]}/>
-                </FormGroup>
-                <FormGroup>
-                    <ControlLabel>权限菜单</ControlLabel>
-                    <FormControl name="password" accepter={CheckTree} expandAll={true} data={[
-                        {
-                            label: '中国',
-                            value: 1,
-                            children: [
-                                {
-                                    label: '北京市',
-                                    value: 2
-                                },
-                                {
-                                    label: '福建省',
-                                    value: 3,
-                                    children: [
-                                        {
-                                            label: '福州市',
-                                            value: 36
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]}/>
                 </FormGroup>
             </Form>
         )

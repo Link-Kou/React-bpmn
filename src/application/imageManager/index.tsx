@@ -6,9 +6,8 @@ import {
     ImageCardViewUploader,
     ImageViewer
 } from '@imageManager/index';
-import {LoadPanel} from '@component/panel';
+import {LoadPanel, LongPanel} from '@component/panel';
 import {ImageUploaderLibraryGroup, ImageUploaderCard} from '@common/imageUploader';
-import {LongPanel} from '@component/panel';
 import {FormInputPagesPicker} from '@component/formControl';
 
 
@@ -33,7 +32,7 @@ export default class Index extends React.Component {
                 loader: false,
                 baz
             })
-        }, 950000)
+        }, 5000)
     }
 
     public render() {
@@ -44,7 +43,7 @@ export default class Index extends React.Component {
                     <FormInputPagesPicker
                         onSearch={(value, activePage, displayLength, callbackClose) => {
                             setTimeout(() => {
-                               console.log(value)
+                                console.log(value)
                                 callbackClose(10)
                             }, 1500)
                         }}/>

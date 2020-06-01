@@ -7,6 +7,7 @@ import * as ApiFile from './file';
 import * as ApiCardboard from './cardboard';
 import * as ApiCarton from './carton';
 import * as ApiMaterial from './material';
+import * as ApiPermissions from './permissions';
 
 export {
     ApiProduct,
@@ -15,5 +16,6 @@ export {
     ApiFile,
     ApiCardboard,
     ApiCarton,
-    ApiMaterial
+    ApiMaterial,
+    ApiPermissions
 };

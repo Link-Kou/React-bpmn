@@ -1,37 +1,27 @@
 import * as React from 'react';
-import {Button, FlexboxGrid, Icon, IconButton, List, Panel} from 'rsuite';
+import {Icon, IconButton, Panel} from 'rsuite';
 import {BackColorPanel, HeadPanel, LoadPanel} from '@component/panel';
 import RoleManageAddEditModel from '../addEditModel'
-
-const slimText = {
-    fontSize: '0.666em',
-    color: '#000',
-    fontWeight: 'lighter',
-    paddingBottom: 5
-};
-
-const dataStyle = {
-    fontSize: '1.2em',
-    fontWeight: 500
-};
-
-const styleCenter = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '60px'
-};
-
-const titleStyle = {
-    paddingBottom: 15,
-    whiteSpace: 'nowrap',
-    fontWeight: 500
-};
+import {IReturnRole} from '../../index.types';
+import {HookList} from './compone/hookList';
 
 interface IProps {
-    onEdit?(): void
+
+    onEdit?(id: string, name: string, callbackCloseLoading: () => void): void
+
+    onAdd?(name: string, callbackCloseLoading: () => void): void
+
+    onPermit?(id: string): void
+
+    onDisable?(id: string, name: string,type: 'Disable' | 'Start'): void
+
+    onDelete?(id: string, name: string): void
 
     edit?: boolean
+
+    loadering: boolean
+
+    data: Array<IReturnRole>
 }
 
 /**
@@ -43,142 +33,109 @@ interface IProps {
 export default class RoleList extends React.Component<IProps> {
 
     public state = {
-        model: false
+        model: false,
+        modelKey: '',
+        id: '',
+        name: '',
+        loadering: true,
+        data: []
+
     }
 
-
-    private _onShow = () => {
+    private _onClose = () => {
         const {model} = this.state
         this.setState({
             model: !model
         })
     }
 
-    public render() {
-        const {edit, onEdit} = this.props
+    /**
+     * 编辑保存
+     * @private
+     */
+    private _onSave = (name: string, callbackCloseLoading: () => void) => {
+        const {id} = this.state
+        const {onAdd, onEdit} = this.props
+        if (id) {
+            onEdit?.(id, name, () => {
+                this.setState({
+                    model: false
+                }, () => callbackCloseLoading?.())
+            })
+        } else {
+            onAdd?.(name, () => {
+                this.setState({
+                    model: false
+                }, () => callbackCloseLoading?.())
+            })
+        }
+    }
+
+    /**
+     * 添加角色
+     * @private
+     */
+    private _onAdd = () => {
         const {model} = this.state
+        this.setState({
+            model: !model,
+            modelKey: 'Add',
+            id: '',
+            name: ''
+        })
+    }
+
+    /**
+     * 编辑角色
+     * @private
+     */
+    private _onEdit = (id: string, name: string) => {
+        const {model} = this.state
+        this.setState({
+            model: !model,
+            modelKey: 'Edit',
+            id,
+            name
+        })
+    }
+
+
+    public render() {
+        const {edit, onPermit, onDisable, onDelete, data, loadering} = this.props
+        const {model, modelKey, name} = this.state
         return (
             <>
-                <RoleManageAddEditModel show={model} onClose={this._onShow}/>
+                <RoleManageAddEditModel key={modelKey} show={model} value={name} onClose={this._onClose}
+                                        onSave={this._onSave}/>
                 <BackColorPanel>
                     <HeadPanel hideBorderBottom={true} title={'角色管理'}>
                         <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
                             <IconButton appearance={'subtle'}
-                                        onClick={this._onShow}
+                                        onClick={this._onAdd}
                                         icon={<Icon icon={'user-plus'}/>}>新建角色</IconButton>
                         </div>
                     </HeadPanel>
-                    <LoadPanel loadering={false} outrender={false} queueAnim={true}>
+                    <LoadPanel loadering={loadering}
+                               outrender={false}
+                               queueAnim={true}
+                               onLoader={(l, v) => {
+                                   if (!l) {
+                                       if (data.length <= 0) {
+                                           return {
+                                               title: '暂无数据....',
+                                               hide: true,
+                                               hideLoaderIcons: true
+                                           }
+                                       }
+                                   }
+                                   return v
+                               }}
+                    >
                         <Panel>
-                            <List bordered={true} hover={true}>
-                                <List.Item key={1} index={1}>
-                                    <FlexboxGrid>
-                                        <FlexboxGrid.Item
-                                            colspan={6}
-                                            style={{
-                                                flexDirection: 'column',
-                                                alignItems: 'flex-start',
-                                                overflow: 'hidden'
-                                            }}
-                                        >
-                                            <div style={titleStyle as any}>
-                                                <Icon icon="expeditedssl"
-                                                      style={{marginRight: 5, color: 'red'}}/>
-                                                总经理
-                                            </div>
-                                            <div style={{paddingBottom: 5, fontSize: '0.666em'}}>
-                                                <div>2020-12-11 11:00:00</div>
-                                            </div>
-                                        </FlexboxGrid.Item>
-                                        <FlexboxGrid.Item
-                                            colspan={6}
-                                            style={styleCenter as any}
-                                        >
-                                            <div style={{textAlign: 'right'}}>
-                                                <div style={slimText as any}><Icon icon="peoples"
-                                                                                   style={{marginRight: 5}}/>关联人数
-                                                </div>
-                                                <div style={dataStyle as any}>0</div>
-                                            </div>
-                                        </FlexboxGrid.Item>
-                                        <FlexboxGrid.Item
-                                            colspan={6}
-                                            style={styleCenter as any}
-                                        >
-                                            <div style={{textAlign: 'right'}}>
-                                                <div style={slimText as any}><Icon icon="peoples-map"
-                                                                                   style={{marginRight: 5}}/>关联权限
-                                                </div>
-                                                <div style={dataStyle as any}>0</div>
-                                            </div>
-                                        </FlexboxGrid.Item>
-                                        <FlexboxGrid.Item
-                                            colspan={6}
-                                            style={styleCenter as any}
-                                        >
-                                            <Button style={{padding: 5}} appearance={'link'} disabled={edit}
-                                                    onClick={this._onShow}>编辑</Button>
-                                            <span style={{padding: 2}}>|</span>
-                                            <Button style={{padding: 5}} appearance={'link'} disabled={edit}>禁用</Button>
-                                            <span style={{padding: 2}}>|</span>
-                                            <Button style={{padding: 5}} appearance={'link'} disabled={edit}
-                                                    onClick={onEdit}>权限</Button>
-                                        </FlexboxGrid.Item>
-                                    </FlexboxGrid>
-                                </List.Item>
-                                <List.Item key={2} index={2}>
-                                    <FlexboxGrid>
-                                        <FlexboxGrid.Item
-                                            colspan={6}
-                                            style={{
-                                                flexDirection: 'column',
-                                                alignItems: 'flex-start',
-                                                overflow: 'hidden'
-                                            }}
-                                        >
-                                            <div style={titleStyle as any}>
-                                                <Icon icon="expeditedssl"
-                                                      style={{marginRight: 5, color: 'red'}}/>
-                                                总经理
-                                            </div>
-                                            <div style={{paddingBottom: 5, fontSize: '0.666em'}}>
-                                                <div>2020-12-11 11:00:00</div>
-                                            </div>
-                                        </FlexboxGrid.Item>
-                                        <FlexboxGrid.Item
-                                            colspan={6}
-                                            style={styleCenter as any}
-                                        >
-                                            <div style={{textAlign: 'right'}}>
-                                                <div style={slimText as any}><Icon icon="peoples"
-                                                                                   style={{marginRight: 5}}/>关联人数
-                                                </div>
-                                                <div style={dataStyle as any}>0</div>
-                                            </div>
-                                        </FlexboxGrid.Item>
-                                        <FlexboxGrid.Item
-                                            colspan={6}
-                                            style={styleCenter as any}
-                                        >
-                                            <div style={{textAlign: 'right'}}>
-                                                <div style={slimText as any}><Icon icon="peoples-map"
-                                                                                   style={{marginRight: 5}}/>关联权限
-                                                </div>
-                                                <div style={dataStyle as any}>0</div>
-                                            </div>
-                                        </FlexboxGrid.Item>
-                                        <FlexboxGrid.Item
-                                            colspan={6}
-                                            style={styleCenter as any}
-                                        >
-                                            <Button style={{padding: 5}} appearance={'link'} disabled={edit}>启动</Button>
-                                            <span style={{padding: 2}}>|</span>
-                                            <Button style={{padding: 5}} appearance={'link'} disabled={edit}
-                                                    onClick={this._onShow}>删除</Button>
-                                        </FlexboxGrid.Item>
-                                    </FlexboxGrid>
-                                </List.Item>
-                            </List>
+                            <HookList data={data} edit={edit} onEdit={this._onEdit}
+                                      onPermit={onPermit}
+                                      onDisable={onDisable}
+                                      onDelete={onDelete}/>
                         </Panel>
                     </LoadPanel>
                 </BackColorPanel>

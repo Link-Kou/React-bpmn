@@ -97,6 +97,10 @@ enum UrlType {
      * 辅料
      */
     material = '/material',
+    /**
+     * 权限
+     */
+    permissions = '/permissions',
 }
 
 /**
@@ -161,6 +165,14 @@ export class Url {
      */
     public static getMaterial(url: String): string {
         return this.getUrl() + UrlType.material + url
+    }
+
+
+    /**
+     * 权限
+     */
+    public static getPermissions(url: String): string {
+        return this.getUrl() + UrlType.permissions + url
     }
 }
 

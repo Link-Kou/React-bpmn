@@ -34,7 +34,8 @@
   .header-tabs .header-tabs-tabitem-select {
     background-color: #f1f1f1 !important;
     position: relative;
-    height: 35px !important; }
+    height: 35px !important;
+    box-shadow: 0px -1px 3px 0px rgba(39, 39, 39, 0.27); }
     .header-tabs .header-tabs-tabitem-select .app-close {
       display: none !important;
       cursor: pointer; }

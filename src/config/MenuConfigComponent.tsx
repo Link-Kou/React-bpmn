@@ -277,18 +277,18 @@ export const MenuConfig: Array<IMenuConfig> = [
         }
     },
     {
-        key: 'menusTree',
+        key: 'tree',
         type: {
             type: 'NavItem',
             /**
              * 内容
              */
-            content: 'menusTree',
+            content: 'tree',
             /**
              * 图标
              */
             ico: 'cube',
-            route: '/index/menusTree'
+            route: '/index/tree'
         }
     },
     {

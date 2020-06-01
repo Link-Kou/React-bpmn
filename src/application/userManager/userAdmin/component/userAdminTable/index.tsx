@@ -7,6 +7,13 @@ import UserAdminEditModel from './../userAdminEdit/model';
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
 
+interface IProps {
+
+    treeData?: Array<any>
+
+    selectTreeData?: Array<any>
+
+}
 
 /**
  *
@@ -14,7 +21,7 @@ const {Column, HeaderCell, Cell, Pagination} = Table;
  * @date 2020/5/26 16:26
  * @version 1.0
  */
-export default class UserAdminTable extends React.Component {
+export default class UserAdminTable extends React.Component<IProps> {
 
     public Columns = [
         {
@@ -88,19 +95,23 @@ export default class UserAdminTable extends React.Component {
 
     }
 
+    private _onModel = (selectKey?: any) => {
+        this.setState({
+            selectKey
+        })
+    }
+
 
     public render() {
         const {data, pages, total, loading, selectKey} = this.state
+        const {treeData, selectTreeData} = this.props
         return (
             <>
-                <UserAdminEditModel show={selectKey === 'addUser'}/>
+                <UserAdminEditModel treeData={treeData} selectTreeData={selectTreeData} show={selectKey === 'addUser'}
+                                    onClose={this._onModel}/>
                 <HeadPanel hideBorderBottom={true} title={'运营用户列表'}>
                     <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
-                        <Dropdown title={'用户管理'} trigger="click" onSelect={(e) => {
-                            this.setState({
-                                selectKey: e
-                            })
-                        }}>
+                        <Dropdown title={'用户管理'} trigger="click" onSelect={this._onModel}>
                             <Dropdown.Item eventKey={'addUser'}>新增用户</Dropdown.Item>
                         </Dropdown>
                     </div>

@@ -32,4 +32,7 @@ export const SaveTitle: any = OPSFCFetchError('OPS_SaveTitle')
 export const IsDelBody = (name: any) => {
     return OPSFCFetchError('OPS_isDelBody', {name: <b><u>{name}</u></b>})
 }
+export const IsDisableOrStartBody = (name: any, type: string) => {
+    return OPSFCFetchError('OPS_isDisableBody', {name: <b><u>{name}</u></b>, type})
+}
 

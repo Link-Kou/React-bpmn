@@ -2,6 +2,17 @@ import * as React from 'react';
 import {Dropdown, Nav, Panel} from 'rsuite';
 import {HeadPanel, LoadPanel} from '@component/panel';
 import HookFormEdit from './compone/hookFormEdit';
+import HookCheckTree from './compone/hookCheckTree';
+
+
+interface IProps {
+
+    treeData?: Array<any>
+
+    selectTreeData?: Array<any>
+
+}
+
 
 /**
  *
@@ -9,9 +20,10 @@ import HookFormEdit from './compone/hookFormEdit';
  * @date 2020/5/26 16:37
  * @version 1.0
  */
-export default class UserAdminEditPanel extends React.Component {
+export default class UserAdminEditPanel extends React.Component<IProps> {
 
     public render() {
+        const {treeData, selectTreeData} = this.props
         return (
             <>
                 <HeadPanel hideBorderBottom={true} title={'管理面板'}>
@@ -28,6 +40,7 @@ export default class UserAdminEditPanel extends React.Component {
                 <LoadPanel subHeight={170} loadering={false} outrender={false} queueAnim={false}>
                     <Panel bodyFill={false}>
                         <HookFormEdit/>
+                        <HookCheckTree treeData={treeData} selectTreeData={selectTreeData}/>
                     </Panel>
                 </LoadPanel>
                 <Nav justified={true} vertical={false} appearance={'tabs'} activeKey={'home'}

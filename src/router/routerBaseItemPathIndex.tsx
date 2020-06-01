@@ -74,7 +74,11 @@ export const routes: Array<IRoute> = [
         path: '/index/imageManager',
         screen: Loadable({
             loader: () => RouterLoadableDelay(import('../application/imageManager')),
-            ...RouterLoadableConfigBase
+            ...RouterLoadableConfigBase/*,
+            render(loaded, props) {
+                const Component = loaded.default;
+                return <Component {...props}/>
+            }*/
         })
     }, {
         key: 'LongPanel',
@@ -87,7 +91,7 @@ export const routes: Array<IRoute> = [
         key: 'MenusTree',
         title: '测试-菜单树',
         exact: false,
-        path: '/index/menusTree',
+        path: '/index/tree',
         screen: MenusTree
     },
     {

@@ -92,10 +92,14 @@ export default class TreeUtils {
      * @param props.parentKey 父节点
      * @param props.insertNode 插入节点,传递同级上个节点node
      */
-    public static insertChildNode(props: { treeData?: Array<INode>, parentKey: string | number, insertNode: (peersupid: INode) => INode, getNodeKey: (node: INode) => string | number }): any {
+    public static insertChildNode(props: { treeData?: Array<INode>, parentKey: string | number, insertNode: (peersupid?: INode) => INode, getNodeKey: (node: INode) => string | number }): any {
         const {treeData, parentKey, insertNode, getNodeKey} = props;
         const newtreeData = JSON.parse(JSON.stringify(treeData));
-        const insertChildNodeItem = ({treeDataItem, parentKeyItem, insertNodeItem, getNodeKeyItem}: { treeDataItem?: Array<INode>, parentKeyItem: string | number, insertNodeItem: (peersupid: INode) => INode, getNodeKeyItem: (node: INode) => string | number }): any => {
+        const insertChildNodeItem = ({treeDataItem, parentKeyItem, insertNodeItem, getNodeKeyItem}:
+                                         {
+                                             treeDataItem?: Array<INode>, parentKeyItem: string | number, insertNodeItem: (peersupid?: INode) => INode,
+                                             getNodeKeyItem: (node: INode) => string | number
+                                         }): any => {
             if (treeDataItem && treeDataItem.length) {
                 treeDataItem?.some((k, i, a) => {
                     //父对象
@@ -103,7 +107,12 @@ export default class TreeUtils {
                         //有子级
                         if (k?.children && Array.isArray(k.children)) {
                             const length = k.children.length;
-                            const iNode: any = insertNodeItem(k.children[length - 1]);
+                            let iNode: any;
+                            if (length >= 1) {
+                                iNode = insertNodeItem(k.children[length - 1]);
+                            } else {
+                                iNode = insertNodeItem(undefined);
+                            }
                             k.children.push(iNode)
                         } else {
                             const iNode = insertNodeItem(k);
@@ -178,7 +187,11 @@ export default class TreeUtils {
     public static insertPeerNode(props: { treeData?: Array<INode>, peerKey: string | number, insertNode: (peersupid: INode) => INode, getNodeKey: (node: INode) => string | number }): any {
         const {treeData, peerKey, insertNode, getNodeKey} = props;
         const newtreeData = JSON.parse(JSON.stringify(treeData));
-        const insertPeerNodeItem = ({treeDataItem, parentNode, peerKeyItem, insertNodeItem, getNodeKeyItem}: { treeDataItem?: Array<INode>, parentNode: INode | undefined, peerKeyItem: string | number, insertNodeItem: (peersupid: INode) => INode, getNodeKeyItem: (node: INode) => string | number }): any => {
+        const insertPeerNodeItem = ({treeDataItem, parentNode, peerKeyItem, insertNodeItem, getNodeKeyItem}:
+                                        {
+                                            treeDataItem?: Array<INode>, parentNode: INode | undefined, peerKeyItem: string | number,
+                                            insertNodeItem: (peersupid: INode) => INode, getNodeKeyItem: (node: INode) => string | number
+                                        }): any => {
             if (treeDataItem && treeDataItem.length) {
                 treeDataItem?.some((k, i, a) => {
                     //父对象
@@ -220,7 +233,7 @@ export default class TreeUtils {
      * 更新指定节点数据
      * @param props
      */
-    public static updataChildNode(props: { treeData?: Array<INode>, updataNode: string | number, newNode: INode, getNodeKey: (node: INode) => string | number }): any {
+    public static updataNode(props: { treeData?: Array<INode>, updataNode: string | number, newNode: INode, getNodeKey: (node: INode) => string | number }): any {
         const {treeData, updataNode, newNode, getNodeKey} = props;
         const newtreeData = JSON.parse(JSON.stringify(treeData));
         const updataChildNodeItem = ({treeDataItem, updataNodeItem, newNodeItem, getNodeKeyItem}: { treeDataItem?: Array<INode>, updataNodeItem: string | number, newNodeItem: INode, getNodeKeyItem: (node: INode) => string | number }): any => {
@@ -258,8 +271,7 @@ export default class TreeUtils {
     /**
      * 获取到子节点数量
      */
-    public static getChildNodeCount(props: { node?: INode }): number {
-        const {node} = props;
+    public static getChildNodeCount(node?: INode): number {
         if (node) {
             if (node.children && node.children.length) {
                 return node.children.length
@@ -294,40 +306,6 @@ export default class TreeUtils {
         return findnodes
     }
 
-    /**
-     * 构建 列表转换为树型结构
-     * @param props.treeData 节点列表数据
-     * @param props.getNodeKey function 节点自身id
-     * @param props.getParentKey function 父节点id
-     * @param props.getSortKey function 返回 1 或 -1
-     */
-    public static buildListToTree(props: { treeData: Array<INode>, getNodeKey: (node: INode) => string | number, getParentKey: (node: INode) => string | number, getSortKey: (node: INode, node2: INode) => number }) {
-        const {treeData, getNodeKey, getParentKey, getSortKey} = props
-        const map = new Map();
-        treeData.forEach((k, i, a) => {
-            map.set(getNodeKey(k), k);
-        })
-        treeData.every((k: any, i, a) => {
-            const parentKey = getParentKey(k);
-            const newVar = map.get(parentKey);
-            if (newVar) {
-                if (newVar.children && newVar.children.length) {
-                    newVar.children = [
-                        ...newVar.children,
-                        ...k
-                    ]
-                    newVar.children.sort((i1: any, i2: any) => {
-                        return getSortKey(i1, i2)
-                    })
-                } else {
-                    newVar.children = [k]
-                }
-            }
-            return true
-        })
-        return treeData;
-    }
-
 
     /**
      * 构建 列表转换为树型结构
@@ -336,27 +314,26 @@ export default class TreeUtils {
      * @param props.getParentKey function 父节点id
      * @param props.getSortKey function 返回 1 或 -1
      */
-    public static buildListToTreeSort(props: { treeData: Array<INode>, getNodeKey: (node: INode) => string | number, getParentKey: (node: INode) => string | number, getPrevId: string }) {
+    public static async buildListToTreeSort(props: { treeData: Array<INode>, getNodeKey: (node: INode) => string | number, getParentKey: (node: INode) => string | number, getPrevId: string }): Promise<Array<INode>> {
         const {treeData, getNodeKey, getParentKey, getPrevId} = props
         const TreeLinkSort = (id: string, prevId: string, node: Array<INode>): Array<INode> => {
-            const map = new Map()
-            let rootId = undefined
             node.forEach((k, i, a) => {
-                if (k[prevId] === undefined || k[prevId] === '') {
-                    rootId = k[prevId]
+                const kElement = k[prevId];
+                if (kElement) {
+                    node.every((k1, i1, a1) => {
+                        if (getNodeKey(k1) === kElement) {
+                            node.splice(i, 1);
+                            node.splice(i1 + 1, 0, k);
+                            return false
+                        }
+                        return true;
+                    })
+                } else {
+                    node.splice(i, 1);
+                    node.splice(0, 0, k);
                 }
-                map.set(k[prevId], k)
             })
-            const SortArray: Array<INode> = []
-            const Sort = (prevNodeId?: string) => {
-                if (prevNodeId) {
-                    const findnode = map.get(prevNodeId)
-                    SortArray.push(findnode)
-                    Sort(findnode[id])
-                }
-            }
-            Sort(rootId)
-            return SortArray;
+            return node;
         }
         const map = new Map();
         treeData.forEach((k, i, a) => {
@@ -364,15 +341,13 @@ export default class TreeUtils {
         })
         treeData.every((k: any, i, a) => {
             const parentKey = getParentKey(k);
+            //获取到此节点的父对象
             const newVar = map.get(parentKey);
             if (newVar) {
-                if (newVar.children && newVar.children.length) {
-                    newVar.children = [
-                        ...newVar.children,
-                        ...k
-                    ]
+                if (newVar.children && Array.isArray(newVar.children)) {
+                    newVar.children.push(k)
                     if (TreeLinkSort) {
-                        newVar.children = TreeLinkSort(k.fId, k[getPrevId], newVar.children)
+                        newVar.children = TreeLinkSort(k.fId, getPrevId, newVar.children)
                     }
                 } else {
                     newVar.children = [k]

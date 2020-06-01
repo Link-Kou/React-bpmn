@@ -9,6 +9,12 @@
 
   .app-left {
     border-right: 1px solid #f2f2f5;
+    box-shadow: 0 .5rem 1rem rgba(34,41,47,.15)!important;
+    /* box-shadow: 11px 35px 22px 0 rgba(255,255,255,1)!important; */
+    /* box-shadow: 7px 8px 20px 20px rgba(39, 39, 39, 0.1); */
+    /* width: auto; */
+    /* padding-right: 0px; */
+    z-index: 999;
   }
 
   .app-right {

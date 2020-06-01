@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {Button, Modal} from 'rsuite';
+import {Button, Col, Modal, Row} from 'rsuite';
 import HookFormEdit from './compone/hookFormEdit';
+import HookCheckTree from './compone/hookCheckTree';
 
 
 interface IProps {
@@ -13,6 +14,13 @@ interface IProps {
     onSave?(name: string, callbackCloseLoading: () => void, key?: string): void
 
     onClose?(): void
+
+    onLoad?(): {}
+
+    treeData?: Array<any>
+
+    selectTreeData?: Array<any>
+
 }
 
 /**
@@ -50,11 +58,11 @@ export default class UserAdminEditModel extends React.Component<IProps> {
 
     public render() {
         const {loading} = this.state
-        const {show} = this.props
+        const {show, treeData, selectTreeData} = this.props
         return (
             <>
                 <Modal show={show}
-                       size={'md'}
+                       size={'sm'}
                        backdrop={'static'}
                        onShow={this._reset}
                        onHide={this._onHide}>
@@ -62,7 +70,17 @@ export default class UserAdminEditModel extends React.Component<IProps> {
                         <Modal.Title>运营用户管理</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <HookFormEdit/>
+                        <Row>
+                            <Col sm={12} xs={12} md={12}>
+                                <HookFormEdit hv={true}/>
+                            </Col>
+                            <Col sm={12} xs={12} md={12}>
+                                <HookCheckTree treeData={treeData}
+                                               selectTreeData={selectTreeData}
+                                               treeStyle={{maxHeight: 360}}
+                                               style={{marginTop: 0}}/>
+                            </Col>
+                        </Row>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button appearance="primary" loading={loading}>

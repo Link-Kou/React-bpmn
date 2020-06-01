@@ -5,9 +5,11 @@ import {utilsBoolean} from '@utils/index';
 interface IProps {
     show?: boolean
 
-    id?: string
+    key?: string
 
-    onSave?(name: string, callbackCloseLoading: () => void, id?: string): void
+    value?: string
+
+    onSave?(name: string, callbackCloseLoading: () => void): void
 
     onClose?(): void
 }
@@ -28,7 +30,7 @@ export default class RoleManageAddEditModel extends React.Component<IProps> {
     });
 
     public state = {
-        loading: false,
+        buttonloading: false,
         formValue: {
             name: ''
         },
@@ -36,41 +38,42 @@ export default class RoleManageAddEditModel extends React.Component<IProps> {
     }
 
     private _reset = () => {
+        const {value} = this.props
         this.setState({
             formValue: {
-                name: ''
+                name: value ?? ''
             },
             formError: {}
         })
     }
 
     private _onHide = () => {
-        const {loading} = this.state;
+        const {buttonloading} = this.state;
         const {onClose} = this.props;
-        if (!loading) {
+        if (!buttonloading) {
             onClose?.()
         }
     }
 
     private _onSave = (name: string, check: boolean = false) => {
-        const {onSave, id} = this.props
+        const {onSave} = this.props
         if (utilsBoolean.toBooleanGetDefault(check, false)) {
             this.setState({
-                loading: true
+                buttonloading: true
             }, () => {
                 const callbackCloseLoading = (): void => {
                     this.setState({
-                        loading: false
+                        buttonloading: false
                     })
                 }
-                onSave?.(name, callbackCloseLoading, id);
+                onSave?.(name, callbackCloseLoading);
             })
         }
     }
 
 
     public render() {
-        const {formValue, formError, loading} = this.state
+        const {formValue, formError, buttonloading} = this.state
         const {show} = this.props
         return (
             <Modal show={show}
@@ -103,11 +106,11 @@ export default class RoleManageAddEditModel extends React.Component<IProps> {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button appearance="primary" loading={loading}
+                    <Button appearance="primary" loading={buttonloading}
                             onClick={() => this._onSave(formValue.name, this._Forms?.check())}>
                         保存
                     </Button>
-                    <Button appearance="subtle" disabled={loading} onClick={this._onHide}>
+                    <Button appearance="subtle" onClick={this._onHide}>
                         取消
                     </Button>
                 </Modal.Footer>

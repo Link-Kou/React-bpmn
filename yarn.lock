@@ -11495,9 +11495,9 @@ rsuite-table@^3.13.1:
     element-resize-event "^3.0.2"
     lodash "^4.17.5"
 
-rsuite@^4.7.0:
-  version "4.7.0"
-  resolved "https://registry.npm.taobao.org/rsuite/download/rsuite-4.7.0.tgz#3adda942d0dcf4f38b1960fb954261e3589b67e3"
+rsuite@4.7.1:
+  version "4.7.1"
+  resolved "https://registry.npm.taobao.org/rsuite/download/rsuite-4.7.1.tgz#b1d599a57f6aec171a2892538ab34a271cb12f75"
   dependencies:
     "@babel/runtime" "^7.8.4"
     classnames ">=2.0.0"
