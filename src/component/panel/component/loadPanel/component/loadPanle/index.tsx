@@ -21,7 +21,10 @@ interface IProps {
         title: string, hideLoaderIcons: boolean, hide: boolean
     }): { title: string, hideLoaderIcons: boolean, hide: boolean }
 
-
+    /**
+     * 显示子控件
+     */
+    onShow?(): void
 
     subHeight?: number
 
@@ -57,6 +60,7 @@ export default class Index extends React.Component<IProps> {
             <div style={{position: 'relative', textAlign: 'center', top: '50%'}}>
                 {hideLoaderComponent ? undefined : <LoaderIcons/>}
                 <p style={{marginTop: hideLoaderComponent ? 0 : 30, color: '#d6d6d6'}}>
+
                     {title}
                 </p>
             </div>
@@ -65,6 +69,8 @@ export default class Index extends React.Component<IProps> {
 
 
     private _QueueAnim = (queueAnim: boolean = true) => {
+        const {onShow} = this.props
+        onShow?.()
         if (queueAnim) {
             return (
                 <QueueAnim type={['alpha', 'right']}

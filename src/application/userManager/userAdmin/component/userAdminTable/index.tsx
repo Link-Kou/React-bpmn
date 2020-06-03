@@ -1,18 +1,19 @@
 import * as React from 'react';
-import {Button, Dropdown, Table} from 'rsuite';
-import {CellExpandedIndex} from '@component/table';
+import {Button, Dropdown, Table, Tag, TagGroup} from 'rsuite';
+import {CellIndex} from '@component/table';
 import {HeadPanel} from '@component/panel';
 import FlexCalcBox from '@component/flexCalcBox';
-import UserAdminEditModel from './../userAdminEdit/model';
+import {IAdmin} from '../../index.types';
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
 
 interface IProps {
 
-    treeData?: Array<any>
+    onRowClick?(rowData: IAdmin): void
 
-    selectTreeData?: Array<any>
+    onToolSelect?(selectKey?: any): void
 
+    onLoad?(pages?: { page: number, itemsPerPage: number }, callback?: (total: number, list: Array<IAdmin>) => void): void
 }
 
 /**
@@ -26,37 +27,61 @@ export default class UserAdminTable extends React.Component<IProps> {
     public Columns = [
         {
             HeaderCell: <HeaderCell>编号</HeaderCell>,
-            Cell: (props: any) => <CellExpandedIndex {...props}
-                                                     dataKey="id"/>,
+            Cell: <CellIndex dataKey="index" disPlayNumber={true}/>,
             width: 65,
             fixed: 'left',
             resizable: false
         },
         {
             HeaderCell: <HeaderCell>用户名</HeaderCell>,
-            Cell: <Cell dataKey="images"/>,
+            Cell: <Cell dataKey="name"/>,
             width: 120,
             fixed: false,
             resizable: false
         },
         {
             HeaderCell: <HeaderCell>手机号码</HeaderCell>,
-            Cell: <Cell dataKey="createtime"/>,
-            width: 155,
+            Cell: <Cell dataKey="phone"/>,
+            width: 120,
             fixed: false,
             resizable: false
         },
         {
             HeaderCell: <HeaderCell>电子邮箱</HeaderCell>,
-            Cell: <Cell dataKey="createtime"/>,
-            width: 155,
+            Cell: <Cell dataKey="email"/>,
+            width: 120,
             fixed: false,
             resizable: false
         },
         {
-            HeaderCell: <HeaderCell>备注标签</HeaderCell>,
-            Cell: <Cell dataKey="createtime"/>,
-            width: 155,
+            HeaderCell: <HeaderCell>备注</HeaderCell>,
+            Cell: <Cell dataKey="remarks">
+                {(rowData: any) => (
+                    <TagGroup>
+                        {
+                            rowData['remarks']?.map((k: any, i: any, a: any) => <Tag color="blue">{k}</Tag>)
+                        }
+                    </TagGroup>
+                )}
+            </Cell>,
+            width: 200,
+            flexGrow: 1,
+            fixed: false,
+            resizable: false
+        },
+        {
+            HeaderCell: <HeaderCell>角色</HeaderCell>,
+            Cell: <Cell dataKey="roles">
+                {(rowData: any) => (
+                    <TagGroup>
+                        {
+                            rowData['roles']?.map((k: any, i: any, a: any) => <Tag color="cyan">{k}</Tag>)
+                        }
+                    </TagGroup>
+                )}
+            </Cell>,
+            width: 200,
+            flexGrow: 1,
             fixed: false,
             resizable: false
         },
@@ -71,18 +96,18 @@ export default class UserAdminTable extends React.Component<IProps> {
             HeaderCell: <HeaderCell>管理</HeaderCell>,
             Cell: <Cell dataKey="url">
                 {(rowData: any) => (
-                    <Button appearance="ghost">编辑</Button>
+                    <Button appearance="link">详情</Button>
                 )}
             </Cell>,
-            width: 155,
-            fixed: 'right',
+            width: 90,
+            fixed: false,
             resizable: false
         }
     ]
 
     public state = {
-        data: [],
         total: 0,
+        data: [],
         loading: true,
         selectKey: '',
         pages: {
@@ -92,26 +117,37 @@ export default class UserAdminTable extends React.Component<IProps> {
     }
 
     componentDidMount() {
-
+        this._onLoad()
     }
 
-    private _onModel = (selectKey?: any) => {
-        this.setState({
-            selectKey
+    private _onModelSelect = (selectKey?: any) => {
+        const {onToolSelect} = this.props
+        onToolSelect?.(selectKey);
+    }
+
+    /**
+     * 加载列表
+     * @param pages
+     * @private
+     */
+    private _onLoad = (pages?: { page: number, itemsPerPage: number }) => {
+        const {onLoad} = this.props
+        onLoad?.(pages, (total: number, list: Array<IAdmin>) => {
+            this.setState({
+                loading: false,
+                data: list
+            })
         })
     }
 
-
     public render() {
-        const {data, pages, total, loading, selectKey} = this.state
-        const {treeData, selectTreeData} = this.props
+        const {data, pages, total, loading} = this.state
+        const {onRowClick} = this.props
         return (
             <>
-                <UserAdminEditModel treeData={treeData} selectTreeData={selectTreeData} show={selectKey === 'addUser'}
-                                    onClose={this._onModel}/>
                 <HeadPanel hideBorderBottom={true} title={'运营用户列表'}>
                     <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
-                        <Dropdown title={'用户管理'} trigger="click" onSelect={this._onModel}>
+                        <Dropdown title={'用户管理'} trigger="click" onSelect={this._onModelSelect}>
                             <Dropdown.Item eventKey={'addUser'}>新增用户</Dropdown.Item>
                         </Dropdown>
                     </div>
@@ -125,6 +161,7 @@ export default class UserAdminTable extends React.Component<IProps> {
                             headerHeight={85}
                             autoHeight={false}
                             bordered={true}
+                            onRowClick={onRowClick}
                             cellBordered={true}
                             data={data}
                         >

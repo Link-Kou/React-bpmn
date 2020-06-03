@@ -71,14 +71,12 @@ export default class RoleMenusTree extends React.Component<IProps> {
                 const selectTreeData = roleMenus.filter((k, i, a) => k.check === 1)
                     .map((k, i, a) => k.menusId);
 
-                iNodes.then((result) => {
-                    const iNodes1 = result.filter((k, i, a) => k.parentId === '');
-                    this.setState({
-                        treeData: iNodes1 as any,
-                        selectTreeData,
-                        joinTreeData: roleMenus,
-                        loadering: false
-                    })
+                const iNodes1 = iNodes.filter((k, i, a) => k.parentId === '');
+                this.setState({
+                    treeData: iNodes1 as any,
+                    selectTreeData,
+                    joinTreeData: roleMenus,
+                    loadering: false
                 })
             })
         }

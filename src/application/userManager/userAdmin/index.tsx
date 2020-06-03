@@ -2,9 +2,10 @@ import {Col, Grid, Row} from 'rsuite';
 import * as React from 'react';
 import {BackColorPanel} from '@component/panel';
 import UserAdminTable from './component/userAdminTable';
-import UserAdminEditPanel from './component/userAdminEdit/panel';
+import UserAdminEditPanel from './component/userAdminEdit';
 import UserAdmin from './userAdmin';
-import {utilsTree} from '@utils/index';
+import UserAdminAdd from './component/userAdminAdd';
+import {IAdmin, IReturnRole, IReturnRoleMenus, IReturnTreeData} from './index.types';
 
 /**
  * 运营用户管理
@@ -14,65 +15,90 @@ import {utilsTree} from '@utils/index';
  */
 export default class Index extends UserAdmin {
 
+    private _UserAdminEditPanel: UserAdminEditPanel | undefined
+
     public state = {
-        treeData: [],
-        selectTreeData: []
+        rowData: {},
+        toolSelectKey: ''
     }
 
     componentDidMount() {
-        this._loadMenus()
+
     }
 
-    private _loadMenus = () => {
-        this.handlersRoleJionMenusTreesNodeList('', (node, roleMenus) => {
-            const treeData = node.map((k, i, a) => {
-                return ({
-                    label: k.title,
-                    value: k.id,
-                    type: k.type,
-                    keyId: k.keyId,
-                    parentId: k.parentId,
-                    preId: k.preId
-                })
-            });
-            const iNodes = utilsTree.buildListToTreeSort({
-                treeData,
-                getNodeKey: (inode) => inode.value,
-                getParentKey: (inode) => inode.parentId,
-                getPrevId: 'preId'
-            });
-            const selectTreeData: any = roleMenus.filter((k, i, a) => k.check === 1)
-                .map((k, i, a) => k.menusId);
-
-            iNodes.then((result) => {
-                const iNodes1 = result.filter((k, i, a) => k.parentId === '');
-                this.setState({
-                    treeData: iNodes1 as any,
-                    selectTreeData
-                })
-            })
+    /**
+     * 加载管理员列表
+     * @private
+     */
+    private _loadAdminList = (pages?: { page: number, itemsPerPage: number }, callback?: (total: number, list: Array<IAdmin>) => void) => {
+        this.handlersLoadAdminPages(pages, (total, list) => {
+            callback?.(total, list)
         })
     }
 
+    /**
+     * 工具栏选择
+     * @param toolSelectKey
+     * @private
+     */
+    private _onToolSelect = (toolSelectKey?: any) => {
+        this.setState({
+            toolSelectKey
+        })
+    }
+
+    /**
+     * 加载树
+     * @param rolesId
+     * @param callback
+     * @private
+     */
+    private _onLoadTree = (rolesId?: Array<string>, callback?: (node: Array<IReturnTreeData>, roleMenus: Array<Array<IReturnRoleMenus>>, role: Array<IReturnRole>) => void) => {
+        this.handlersRoleJionMenusOrRoleList(rolesId, callback)
+    }
+
+    private _onSave = (value: IAdmin, callback: () => void) => {
+        this.handlersAddAdmin(value, callback)
+    }
+
+    /**
+     * 加载行
+     * @param rowData
+     * @private
+     */
+    private _onRowClick = (rowData: IAdmin) => {
+        this.setState({
+            rowData
+        }, () => this._UserAdminEditPanel?.onLoad())
+    }
 
     public render() {
-        const {treeData, selectTreeData} = this.state
+        const {rowData, toolSelectKey} = this.state
         return (
             <>
+                <UserAdminAdd
+                    show={toolSelectKey === 'addUser'}
+                    onSave={this._onSave}
+                    onClose={this._onToolSelect}
+                    onLoad={this._onLoadTree}
+                />
                 <Grid fluid={true}>
                     <Row>
                         <Col sm={15} xs={15} md={15}>
                             <BackColorPanel tableBordered={true}>
                                 <UserAdminTable
-                                    treeData={treeData}
-                                    selectTreeData={selectTreeData}
+                                    onRowClick={this._onRowClick}
+                                    onLoad={this._loadAdminList}
+                                    onToolSelect={this._onToolSelect}
                                 />
                             </BackColorPanel>
                         </Col>
                         <Col sm={9} xs={9} md={9} smHidden={true}>
                             <BackColorPanel>
-                                <UserAdminEditPanel treeData={treeData}
-                                                    selectTreeData={selectTreeData}/>
+                                <UserAdminEditPanel
+                                    ref={(ref: any) => this._UserAdminEditPanel = ref}
+                                    data={rowData as any}
+                                    onLoad={this._onLoadTree}/>
                             </BackColorPanel>
                         </Col>
                     </Row>

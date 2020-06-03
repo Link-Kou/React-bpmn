@@ -54,12 +54,10 @@ export default class Index extends MenusTree {
                 getParentKey: (inode) => inode.parentId,
                 getPrevId: 'preId'
             });
-            iNodes.then((result) => {
-                const iNodes1 = result.filter((k, i, a) => k.parentId === '');
-                this.setState({
-                    treeData: iNodes1 as any,
-                    loading: false
-                })
+            const iNodes1 = iNodes.filter((k, i, a) => k.parentId === '');
+            this.setState({
+                treeData: iNodes1 as any,
+                loading: false
             })
         });
     }

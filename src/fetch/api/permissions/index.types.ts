@@ -84,3 +84,27 @@ export interface IReturnTreeData {
     createtime: string
     updatedtime: string
 }
+
+
+export interface IAdmin {
+    /**
+     * 名称
+     */
+    name: string
+    /**
+     * 手机
+     */
+    phone: string
+    /**
+     * 邮箱
+     */
+    email: string
+    /**
+     * 备注
+     */
+    remarks: Array<string>
+    /**
+     * 角色
+     */
+    roles: Array<string>
+}

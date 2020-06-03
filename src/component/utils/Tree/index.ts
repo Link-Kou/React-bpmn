@@ -314,7 +314,7 @@ export default class TreeUtils {
      * @param props.getParentKey function 父节点id
      * @param props.getSortKey function 返回 1 或 -1
      */
-    public static async buildListToTreeSort(props: { treeData: Array<INode>, getNodeKey: (node: INode) => string | number, getParentKey: (node: INode) => string | number, getPrevId: string }): Promise<Array<INode>> {
+    public static buildListToTreeSort(props: { treeData: Array<INode>, getNodeKey: (node: INode) => string | number, getParentKey: (node: INode) => string | number, getPrevId: string }): Array<INode> {
         const {treeData, getNodeKey, getParentKey, getPrevId} = props
         const TreeLinkSort = (id: string, prevId: string, node: Array<INode>): Array<INode> => {
             node.forEach((k, i, a) => {

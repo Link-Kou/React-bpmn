@@ -9,6 +9,7 @@ import {
 import {LoadPanel, LongPanel} from '@component/panel';
 import {ImageUploaderLibraryGroup, ImageUploaderCard} from '@common/imageUploader';
 import {FormInputPagesPicker} from '@component/formControl';
+import TagPickerList from '@component/tagPickerList';
 
 
 export default class Index extends React.Component {
@@ -32,13 +33,15 @@ export default class Index extends React.Component {
                 loader: false,
                 baz
             })
-        }, 5000)
+        }, 500)
     }
 
     public render() {
         return (
             <LoadPanel loadering={this.state.loader}>
                 <LongPanel>
+
+                    <TagPickerList/>
 
                     <FormInputPagesPicker
                         onSearch={(value, activePage, displayLength, callbackClose) => {

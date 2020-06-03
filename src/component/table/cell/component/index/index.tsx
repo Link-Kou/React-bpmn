@@ -126,8 +126,7 @@ export function ControllerExpandedIndexCell(props: IControllerExpandedIndexCell)
             />
             <Checkbox
                 style={{marginLeft: 0}}
-                inline={true}
-            >
+                inline={true}>
                 {rownumber}
             </Checkbox>
         </Cell>

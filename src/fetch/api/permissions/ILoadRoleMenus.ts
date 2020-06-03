@@ -3,7 +3,7 @@ import {Fetch, PromiseFetch} from '@fetch/fetchtimeout';
 import {IRoleMenus} from './index.types';
 
 
-export interface IReqLoadRoleMenusTreeNode {
+export interface IReqLoadRoleMenus{
     id: string
 }
 
@@ -18,6 +18,6 @@ export interface IResLoadRoleMenus extends IUrlError {
  * @param callback
  * @constructor
  */
-export function LoadRoleMenus(model: IReqLoadRoleMenusTreeNode, callback: (e: IResLoadRoleMenus) => void) {
+export function LoadRoleMenus(model: IReqLoadRoleMenus, callback: (e: IResLoadRoleMenus) => void) {
     PromiseFetch(callback, Fetch(Url.getPermissions(`/role/menus/${model.id}.do`), {}))
 }
