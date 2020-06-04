@@ -27,12 +27,21 @@ export const OPSFCFetchError: any = (id: string, other?: any) => (
 
 export const Success: any = OPSFCFetchError('OPS_success')
 export const HttpError: any = OPSFCFetchError('OPS_httpError')
-export const IsDelTitle: any = OPSFCFetchError('OPS_isDelTitle')
-export const SaveTitle: any = OPSFCFetchError('OPS_SaveTitle')
+export const TitleDel: any = OPSFCFetchError('OPS_isDelTitle')
+export const TitleSave: any = OPSFCFetchError('OPS_SaveTitle')
+
 export const IsDelBody = (name: any) => {
-    return OPSFCFetchError('OPS_isDelBody', {name: <b><u>{name}</u></b>})
+    return OPSFCFetchError('OPS_isDelBody', {name: <b><i>{name}</i></b>})
 }
-export const IsDisableOrStartBody = (name: any, type: string) => {
-    return OPSFCFetchError('OPS_isDisableBody', {name: <b><u>{name}</u></b>, type})
+
+/**
+ * 信息组合
+ * @param start
+ * @param name
+ * @param end
+ * @constructor
+ */
+export const IsInfo = (start?: any, name?: any, end?: any) => {
+    return OPSFCFetchError('OPS_isInfo', {start, name: <b><i>{name}</i></b>, end})
 }
 

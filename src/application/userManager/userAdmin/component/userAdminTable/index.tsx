@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {Button, Dropdown, Table, Tag, TagGroup} from 'rsuite';
+import {Dropdown, Icon, IconButton, Table} from 'rsuite';
 import {CellIndex} from '@component/table';
 import {HeadPanel} from '@component/panel';
 import FlexCalcBox from '@component/flexCalcBox';
 import {IAdmin} from '../../index.types';
+import WhisperTitle from '@common/whisper';
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
 
@@ -14,6 +15,7 @@ interface IProps {
     onToolSelect?(selectKey?: any): void
 
     onLoad?(pages?: { page: number, itemsPerPage: number }, callback?: (total: number, list: Array<IAdmin>) => void): void
+
 }
 
 /**
@@ -43,44 +45,14 @@ export default class UserAdminTable extends React.Component<IProps> {
             HeaderCell: <HeaderCell>手机号码</HeaderCell>,
             Cell: <Cell dataKey="phone"/>,
             width: 120,
+            flexGrow: 1,
             fixed: false,
             resizable: false
         },
         {
             HeaderCell: <HeaderCell>电子邮箱</HeaderCell>,
             Cell: <Cell dataKey="email"/>,
-            width: 120,
-            fixed: false,
-            resizable: false
-        },
-        {
-            HeaderCell: <HeaderCell>备注</HeaderCell>,
-            Cell: <Cell dataKey="remarks">
-                {(rowData: any) => (
-                    <TagGroup>
-                        {
-                            rowData['remarks']?.map((k: any, i: any, a: any) => <Tag color="blue">{k}</Tag>)
-                        }
-                    </TagGroup>
-                )}
-            </Cell>,
-            width: 200,
-            flexGrow: 1,
-            fixed: false,
-            resizable: false
-        },
-        {
-            HeaderCell: <HeaderCell>角色</HeaderCell>,
-            Cell: <Cell dataKey="roles">
-                {(rowData: any) => (
-                    <TagGroup>
-                        {
-                            rowData['roles']?.map((k: any, i: any, a: any) => <Tag color="cyan">{k}</Tag>)
-                        }
-                    </TagGroup>
-                )}
-            </Cell>,
-            width: 200,
+            width: 180,
             flexGrow: 1,
             fixed: false,
             resizable: false
@@ -93,10 +65,22 @@ export default class UserAdminTable extends React.Component<IProps> {
             resizable: false
         },
         {
+            HeaderCell: <HeaderCell>修改时间</HeaderCell>,
+            Cell: <Cell dataKey="updatedtime"/>,
+            width: 155,
+            fixed: false,
+            resizable: false
+        },
+        {
             HeaderCell: <HeaderCell>管理</HeaderCell>,
             Cell: <Cell dataKey="url">
                 {(rowData: any) => (
-                    <Button appearance="link">详情</Button>
+                    <>
+                        <WhisperTitle title={'详情'}>
+                            <IconButton appearance="link" icon={<Icon icon="ellipsis-h"/>}
+                                        onClick={() => this._onDetails(rowData)}/>
+                        </WhisperTitle>
+                    </>
                 )}
             </Cell>,
             width: 90,
@@ -117,12 +101,28 @@ export default class UserAdminTable extends React.Component<IProps> {
     }
 
     componentDidMount() {
-        this._onLoad()
+        this._onLoad({
+            page: 1,
+            itemsPerPage: 10
+        })
     }
+
+    public onReLoad() {
+        this._onLoad({
+            page: 1,
+            itemsPerPage: 10
+        })
+    }
+
 
     private _onModelSelect = (selectKey?: any) => {
         const {onToolSelect} = this.props
         onToolSelect?.(selectKey);
+    }
+
+    private _onDetails = (rowData: any) => {
+        const {onRowClick} = this.props
+        onRowClick?.(rowData);
     }
 
     /**
@@ -130,19 +130,22 @@ export default class UserAdminTable extends React.Component<IProps> {
      * @param pages
      * @private
      */
-    private _onLoad = (pages?: { page: number, itemsPerPage: number }) => {
+    private _onLoad = (pages: { page: number, itemsPerPage: number }) => {
         const {onLoad} = this.props
-        onLoad?.(pages, (total: number, list: Array<IAdmin>) => {
-            this.setState({
-                loading: false,
-                data: list
+        this.setState({
+            loading: true
+        }, () => {
+            onLoad?.(pages, (total: number, list: Array<IAdmin>) => {
+                this.setState({
+                    loading: false,
+                    data: list
+                })
             })
         })
     }
 
     public render() {
         const {data, pages, total, loading} = this.state
-        const {onRowClick} = this.props
         return (
             <>
                 <HeadPanel hideBorderBottom={true} title={'运营用户列表'}>
@@ -150,18 +153,25 @@ export default class UserAdminTable extends React.Component<IProps> {
                         <Dropdown title={'用户管理'} trigger="click" onSelect={this._onModelSelect}>
                             <Dropdown.Item eventKey={'addUser'}>新增用户</Dropdown.Item>
                         </Dropdown>
+                        <Dropdown
+                            placement="bottomEnd"
+                            renderTitle={() => {
+                                return <IconButton appearance={'subtle'}
+                                                   onClick={this.onReLoad.bind(this)}
+                                                   icon={<Icon icon="refresh"/>}/>;
+                            }}/>
                     </div>
                 </HeadPanel>
                 <FlexCalcBox Body={(h, w) => (
                     <>
                         <Table
                             loading={loading}
+                            wordWrap={false}
                             height={h - 65}
-                            rowHeight={125}
+                            rowHeight={70}
                             headerHeight={85}
                             autoHeight={false}
                             bordered={true}
-                            onRowClick={onRowClick}
                             cellBordered={true}
                             data={data}
                         >

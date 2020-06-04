@@ -16,6 +16,7 @@ export interface IReturnTreeData extends TreeData {
 }
 
 export const IStateAdmin: IAdmin = {
+    id: '',
     /**
      * 名称
      */

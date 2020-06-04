@@ -66,7 +66,7 @@ export default class Index extends RoleManage {
     private _onDisable = (id: string, name: string, type: 'Disable' | 'Start') => {
         Dialog.Select({
             title: type === 'Disable' ? '是否禁用提示' : '是否启用提示',
-            boby: IntlApi.IsDisableOrStartBody(name, type === 'Disable' ? '禁用' : '启用'),
+            boby: IntlApi.IsInfo(name, type === 'Disable' ? '禁用' : '启用'),
             callback: (e) => {
                 if (e) {
                     this.handlersRoleDisable(id, () => {

@@ -34,7 +34,7 @@ export default class BasePaper extends React.Component<any> {
      */
     protected handlersDelConfigItem = async (label: string, value: string, reload: () => void) => {
         await Dialog.SelectLoad({
-            title: IntlApi.IsDelTitle,
+            title: IntlApi.TitleDel,
             //`是否对${label}进行删除`
             boby: IntlApi.IsDelBody(label),
             callback: (e) => {

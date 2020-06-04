@@ -182,7 +182,7 @@ export default class typeConfig extends React.Component {
      */
     protected handlersOnDelTitle = async (label: string, value: string, alone: IConstant.alone, reload: () => void) => {
         Dialog.SelectLoad({
-            title: IntlApi.IsDelTitle,
+            title: IntlApi.TitleDel,
             boby: IntlApi.IsDelBody(label),
             callback: (e) => {
                 if (e.success) {

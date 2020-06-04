@@ -1,10 +1,12 @@
 import * as React from 'react';
-import {Dropdown, Nav, Panel} from 'rsuite';
+import {Dropdown, Icon, IconButton, Nav, Panel} from 'rsuite';
 import {HeadPanel, LoadPanel} from '@component/panel';
 import HookFormEdit from './compone/hookFormEdit';
 import HookCheckTree from './compone/hookCheckTree';
 import {IAdmin, IReturnRole, IReturnRoleMenus, IReturnTreeData} from '../../index.types';
 import {utilsTree} from '@utils/index';
+import Dialog from '@component/dialog';
+import {IntlApi} from '@component/textIntl';
 
 
 interface IProps {
@@ -12,6 +14,10 @@ interface IProps {
     data?: IAdmin
 
     onLoad?(rolesId?: Array<string>, callback?: (node: Array<IReturnTreeData>, roleMenus: Array<Array<IReturnRoleMenus>>, role: Array<IReturnRole>) => void): void
+
+    onEdit?(formValue: IAdmin, callback: () => void): void
+
+    onSave?(id: string, value: IAdmin, callback: () => void): void
 }
 
 
@@ -27,16 +33,34 @@ export default class UserAdminEdit extends React.Component<IProps> {
         treeData: [],
         selectTreeData: [],
         roles: [],
-        loadering: true
+        loadering: true,
+        loading: true,
+        edit: false
     }
 
     componentDidMount() {
 
     }
 
+    componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<{}>, snapshot?: any) {
+        const {data} = this.props
+        const {data: preData} = prevProps
+        if (preData?.roles !== data?.roles) {
+            this.onLoad()
+        }
+    }
+
     public onLoad() {
         const {data} = this.props
-        this._onLoad(data?.roles)
+        const {edit} = this.state
+        if (!edit) {
+            this.setState({
+                loading: false,
+                loadering: true
+            }, () => {
+                this._onLoad(data?.roles)
+            })
+        }
     }
 
 
@@ -82,36 +106,104 @@ export default class UserAdminEdit extends React.Component<IProps> {
         });
     }
 
+    /**
+     * 表单改变
+     * @param formValue
+     * @private
+     */
+    private _onChangeHookFormEdit = (formValue: any) => {
+        const {onEdit} = this.props
+        onEdit?.(formValue, () => {
+            this._onLoad(formValue?.roles)
+        })
+
+    }
+
+    private _onSelect = (eventKey: any) => {
+        const {edit} = this.state
+        switch (eventKey) {
+            case 'editInformation':
+                this.setState({
+                    edit: !edit
+                })
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 保存数据
+     * @private
+     */
+    private _onSave = () => {
+        const {data, onSave} = this.props
+        if (data) {
+            Dialog.SelectLoad({
+                title: IntlApi.TitleSave,
+                boby: IntlApi.IsInfo('用户名', data.name, '的信息进行保存'),
+                callback: (e) => {
+                    if (e.success) {
+                        onSave?.(data.id, data, () => {
+                            e.close(() => {
+                                this.setState({
+                                    edit: false
+                                }, () => {
+                                    this.onLoad()
+                                })
+                            })
+                        })
+                    }
+                }
+            })
+        }
+    }
+
 
     public render() {
         const {data} = this.props
-        const {treeData, selectTreeData, roles, loadering} = this.state
+        const {treeData, selectTreeData, roles, loadering, loading, edit} = this.state
         return (
             <>
                 <HeadPanel hideBorderBottom={true} title={'管理面板'}>
                     <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
-                        <Dropdown title={'管理'} trigger="click" onSelect={(e) => {
-
-                        }}>
-                            <Dropdown.Item>修改信息</Dropdown.Item>
-                            <Dropdown.Item>重置密码</Dropdown.Item>
-                            <Dropdown.Item>删除用户</Dropdown.Item>
+                        {
+                            edit ? <IconButton appearance={'subtle'}
+                                               disabled={loadering}
+                                               onClick={this._onSave}
+                                               icon={<Icon icon={'save'}/>}>保存</IconButton> : undefined
+                        }
+                        <Dropdown title={'管理'} disabled={loadering} trigger="click" onSelect={this._onSelect}>
+                            <Dropdown.Item eventKey={'editInformation'}>{
+                                edit ? '取消编辑' : '编辑信息'
+                            }</Dropdown.Item>
+                            <Dropdown.Item eventKey={'resetPassword'}>重置密码</Dropdown.Item>
+                            <Dropdown.Item eventKey={'deleteUsers'}>删除用户</Dropdown.Item>
                         </Dropdown>
                     </div>
                 </HeadPanel>
                 <LoadPanel subHeight={170}
                            loadering={loadering}
                            onLoader={((l, v) => {
+                               if (loading) {
+                                   return {
+                                       title: '暂无数据....',
+                                       hide: true,
+                                       hideLoaderIcons: true
+                                   }
+                               }
                                return {
-                                   title: '暂无数据....',
-                                   hide: l,
-                                   hideLoaderIcons: true
+                                   ...v,
+                                   hideLoaderIcons: false
                                }
                            })}
                            outrender={false}
                            queueAnim={false}>
                     <Panel bodyFill={false}>
-                        <HookFormEdit formValue={data} roles={roles}/>
+                        <HookFormEdit edit={!edit}
+                                      formValue={data}
+                                      roles={roles}
+                                      onChange={this._onChangeHookFormEdit}/>
                         <HookCheckTree treeData={treeData} selectTreeData={selectTreeData}/>
                     </Panel>
                 </LoadPanel>

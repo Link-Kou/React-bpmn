@@ -15,7 +15,7 @@ import {IAdmin, IReturnRole, IReturnRoleMenus, IReturnTreeData} from './index.ty
  */
 export default class Index extends UserAdmin {
 
-    private _UserAdminEditPanel: UserAdminEditPanel | undefined
+    private _UserAdminTable: UserAdminTable | undefined
 
     public state = {
         rowData: {},
@@ -30,7 +30,7 @@ export default class Index extends UserAdmin {
      * 加载管理员列表
      * @private
      */
-    private _loadAdminList = (pages?: { page: number, itemsPerPage: number }, callback?: (total: number, list: Array<IAdmin>) => void) => {
+    private _loadAdminList = (pages: { page: number, itemsPerPage: number }, callback?: (total: number, list: Array<IAdmin>) => void) => {
         this.handlersLoadAdminPages(pages, (total, list) => {
             callback?.(total, list)
         })
@@ -57,8 +57,25 @@ export default class Index extends UserAdmin {
         this.handlersRoleJionMenusOrRoleList(rolesId, callback)
     }
 
-    private _onSave = (value: IAdmin, callback: () => void) => {
-        this.handlersAddAdmin(value, callback)
+    /**
+     * 保存信息
+     * @param id
+     * @param value
+     * @param callback
+     * @private
+     */
+    private _onSave = (id: string, value: IAdmin, callback: () => void) => {
+        if (id) {
+            this.handlersEditAdmin(id, value, () => {
+                callback?.()
+                this._UserAdminTable?.onReLoad();
+            });
+        } else {
+            this.handlersAddAdmin(value, () => {
+                callback?.()
+                this._UserAdminTable?.onReLoad();
+            })
+        }
     }
 
     /**
@@ -69,7 +86,19 @@ export default class Index extends UserAdmin {
     private _onRowClick = (rowData: IAdmin) => {
         this.setState({
             rowData
-        }, () => this._UserAdminEditPanel?.onLoad())
+        })
+    }
+
+    /**
+     * 编辑
+     * @param rowData
+     * @param callback
+     * @private
+     */
+    private _onEdit = (rowData: IAdmin, callback: () => void) => {
+        this.setState({
+            rowData
+        }, () => callback?.())
     }
 
     public render() {
@@ -87,6 +116,7 @@ export default class Index extends UserAdmin {
                         <Col sm={15} xs={15} md={15}>
                             <BackColorPanel tableBordered={true}>
                                 <UserAdminTable
+                                    ref={(ref: any) => this._UserAdminTable = ref}
                                     onRowClick={this._onRowClick}
                                     onLoad={this._loadAdminList}
                                     onToolSelect={this._onToolSelect}
@@ -96,8 +126,9 @@ export default class Index extends UserAdmin {
                         <Col sm={9} xs={9} md={9} smHidden={true}>
                             <BackColorPanel>
                                 <UserAdminEditPanel
-                                    ref={(ref: any) => this._UserAdminEditPanel = ref}
                                     data={rowData as any}
+                                    onSave={this._onSave}
+                                    onEdit={this._onEdit}
                                     onLoad={this._onLoadTree}/>
                             </BackColorPanel>
                         </Col>

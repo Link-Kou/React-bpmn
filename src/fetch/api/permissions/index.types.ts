@@ -87,6 +87,7 @@ export interface IReturnTreeData {
 
 
 export interface IAdmin {
+    id: string
     /**
      * 名称
      */

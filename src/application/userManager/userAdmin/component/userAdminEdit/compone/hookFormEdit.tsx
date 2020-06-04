@@ -6,7 +6,11 @@ import TagPickerList from '@component/tagPickerList';
 interface IProps {
     roles?: Array<any>
 
+    edit?: boolean
+
     formValue?: IAdmin
+
+    onChange?(formValue: any): void
 }
 
 /**
@@ -17,37 +21,46 @@ interface IProps {
  */
 export default class HookFormEdit extends React.Component<IProps> {
 
+    private _onFormValueChange = (formValue: any) => {
+        const {onChange} = this.props
+        onChange?.(formValue)
+    }
+
     public render() {
-        const {roles, formValue} = this.props
+        const {roles, formValue, edit} = this.props
         return (
-            <Form fluid={true} readOnly={true} formValue={formValue}>
+            <Form fluid={true}
+                  readOnly={edit}
+                  formValue={formValue}
+                  onChange={this._onFormValueChange}>
                 <Row style={{marginBottom: 20}}>
                     <Col md={8} sm={8} lg={8} xs={8}>
                         <FormGroup>
                             <ControlLabel>用户名</ControlLabel>
-                            <FormControl name="name" autocomplete="off"/>
+                            <FormControl disabled={edit} name="name" autocomplete="off"/>
                         </FormGroup>
                     </Col>
                     <Col md={8} sm={8} lg={8} xs={8}>
                         <FormGroup>
                             <ControlLabel>手机号码</ControlLabel>
-                            <FormControl name="phone" autocomplete="off"/>
+                            <FormControl disabled={edit} name="phone" autocomplete="off"/>
                         </FormGroup>
                     </Col>
                     <Col md={8} sm={8} lg={8} xs={8}>
                         <FormGroup>
                             <ControlLabel>电子邮箱</ControlLabel>
-                            <FormControl name="email" autocomplete="off"/>
+                            <FormControl disabled={edit} name="email" autocomplete="off"/>
                         </FormGroup>
                     </Col>
                 </Row>
                 <FormGroup>
                     <ControlLabel>备注标签</ControlLabel>
-                    <FormControl name="remarks" autocomplete="off" accepter={TagPickerList}/>
+                    <FormControl name="remarks" autocomplete="off" creatable={!edit} accepter={TagPickerList}/>
                 </FormGroup>
                 <FormGroup>
                     <ControlLabel>关联角色</ControlLabel>
                     <FormControl name="roles"
+                                 disabled={edit}
                                  style={{width: '100%'}}
                                  accepter={TagPicker}
                                  data={roles as any}/>

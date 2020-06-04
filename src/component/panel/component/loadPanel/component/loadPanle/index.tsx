@@ -4,6 +4,7 @@ import _ from 'lodash';
 import {utilsBoolean} from '@utils/index';
 import QueueAnim from 'rc-queue-anim';
 import {LoaderIcons} from '@component/panel';
+import {Svg} from '@resource/svg';
 
 interface IProps {
 
@@ -60,7 +61,7 @@ export default class Index extends React.Component<IProps> {
             <div style={{position: 'relative', textAlign: 'center', top: '50%'}}>
                 {hideLoaderComponent ? undefined : <LoaderIcons/>}
                 <p style={{marginTop: hideLoaderComponent ? 0 : 30, color: '#d6d6d6'}}>
-
+                    {hideLoaderComponent ? <><Svg.RedataCompon size={'2x'}/><br/></> : undefined}
                     {title}
                 </p>
             </div>

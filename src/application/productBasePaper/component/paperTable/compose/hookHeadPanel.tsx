@@ -43,8 +43,6 @@ const HookTableHeadPanel = (props: IHookTableHeadPanel) => {
                             return <IconButton appearance={'subtle'}
                                                icon={<Icon icon="refresh"/>}/>;
                         }}>
-                        {/*<Dropdown.Item eventKey={'add'}>开始搜索1</Dropdown.Item>
-                        <Dropdown.Item eventKey={'del'}>开始搜索2</Dropdown.Item>*/}
                     </Dropdown>
                 </ButtonGroup>
                 <Whisper

@@ -53,7 +53,7 @@ export default class BaseCorrugated extends React.Component<any> {
      */
     protected handlersDelItem = async (label: string, value: string, reload: () => void) => {
         await Dialog.SelectLoad({
-            title: IntlApi.IsDelTitle,
+            title: IntlApi.TitleDel,
             boby: IntlApi.IsDelBody(label),
             callback: (e) => {
                 if (e.success) {

@@ -1,0 +1,13 @@
+.app-tag-picker-list {
+  display: flex;
+  align-items: center;
+
+  .rs-tag-group {
+    margin: 0;
+
+    > .rs-tag {
+      margin-top: 2px;
+      margin-bottom: 2px;
+    }
+  }
+}

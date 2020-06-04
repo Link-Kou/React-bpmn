@@ -129,15 +129,32 @@ export default class UserAdmin extends React.Component<any> {
     }
 
     /**
+     * 添加管理员
+     * @param id
+     * @param admin
+     * @param callback
+     */
+    protected handlersEditAdmin = (id: string, admin: IAdmin, callback: () => void) => {
+        ApiPermissions.EditAdmin({
+            ...admin,
+            id
+        }, (res) => {
+            if (res.success) {
+                Alert.success('更新成功')
+                callback?.();
+            } else {
+                Alert.warning(res.msg)
+            }
+        })
+    }
+
+    /**
      * 分页加载
      * @param pages
      * @param callback
      */
-    protected handlersLoadAdminPages = (pages: any, callback: (total: number, list: Array<IAdmin>) => void) => {
-        ApiPermissions.LoadAdminPages({
-            page: 1,
-            itemsPerPage: 10
-        }, (res) => {
+    protected handlersLoadAdminPages = (pages: { page: number, itemsPerPage: number }, callback: (total: number, list: Array<IAdmin>) => void) => {
+        ApiPermissions.LoadAdminPages(pages, (res) => {
             if (res.success) {
                 Alert.success('加载成功')
                 callback?.(res.data.total, res.data.list)
