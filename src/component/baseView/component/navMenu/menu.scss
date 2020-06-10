@@ -38,5 +38,24 @@
     }
   }
 
+  /**文本形式**/
+  .app-dropdown-Item-text {
+    & > a {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      & > div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+      }
+    }
+  }
+
 }
 

@@ -109,9 +109,10 @@ export default class Index extends React.Component {
                     case 'DropdownItem':
                         return this.menuAuth(
                             k.key,
-                            <Dropdown.Item eventKey={k.route} icon={icons(k.ico)} onClick={() => {
-                                RouterHistory.push(k.route)
-                            }}>
+                            <Dropdown.Item className={'app-dropdown-Item-text'} eventKey={k.route} icon={icons(k.ico)}
+                                           onClick={() => {
+                                               RouterHistory.push(k.route)
+                                           }}>
                                 <span>{k.content}</span>
                             </Dropdown.Item>
                         )
@@ -151,9 +152,10 @@ export default class Index extends React.Component {
                 case 'NavItem':
                     return this.menuAuth(
                         k.key,
-                        <Nav.Item eventKey={route} icon={icons(ico)} onClick={() => {
-                            RouterHistory.push(route)
-                        }}>
+                        <Nav.Item className={'app-dropdown-Item-text'} eventKey={route} icon={icons(ico)}
+                                  onClick={() => {
+                                      RouterHistory.push(route)
+                                  }}>
                             <span>{content}</span>
                         </Nav.Item>
                     )
