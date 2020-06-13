@@ -113,7 +113,7 @@ export default class Index extends UserAdmin {
                 />
                 <Grid fluid={true}>
                     <Row>
-                        <Col sm={15} xs={15} md={15}>
+                        <Col sm={17} xs={17} md={17}>
                             <BackColorPanel tableBordered={true}>
                                 <UserAdminTable
                                     ref={(ref: any) => this._UserAdminTable = ref}
@@ -123,7 +123,7 @@ export default class Index extends UserAdmin {
                                 />
                             </BackColorPanel>
                         </Col>
-                        <Col sm={9} xs={9} md={9} smHidden={true}>
+                        <Col sm={7} xs={7} md={7} smHidden={true}>
                             <BackColorPanel>
                                 <UserAdminEditPanel
                                     data={rowData as any}

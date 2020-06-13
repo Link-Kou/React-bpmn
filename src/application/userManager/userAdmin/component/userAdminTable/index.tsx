@@ -15,7 +15,6 @@ interface IProps {
     onToolSelect?(selectKey?: any): void
 
     onLoad?(pages?: { page: number, itemsPerPage: number }, callback?: (total: number, list: Array<IAdmin>) => void): void
-
 }
 
 /**

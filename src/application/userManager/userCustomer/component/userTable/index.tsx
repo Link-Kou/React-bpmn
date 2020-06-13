@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {Button, Col, ControlLabel, Form, FormControl, FormGroup, Grid, Input, InputPicker, Row, Table} from 'rsuite';
+import {Button, Dropdown, Icon, IconButton, Table} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
-import {CellIndex,HeaderCellSort} from '@component/table';
+import {CellIndex, HeaderCellSort} from '@component/table';
 import TextSpan from '@component/textSpan';
-import { HeadPanel } from '@component/panel';
+import {HeadPanel} from '@component/panel';
 
 const {Column, HeaderCell, Cell, Pagination} = Table;
 
@@ -30,7 +30,7 @@ export default class UserTable extends React.Component {
                     </TextSpan>
                 )}
             </Cell>,
-            width: 300,
+            width: 120,
             fixed: false,
             resizable: false
         },
@@ -43,7 +43,7 @@ export default class UserTable extends React.Component {
                     </TextSpan>
                 )}
             </Cell>,
-            width: 300,
+            width: 120,
             fixed: false,
             resizable: false
         },
@@ -52,11 +52,11 @@ export default class UserTable extends React.Component {
             Cell: <Cell dataKey="describe">
                 {(rowData: any) => (
                     <TextSpan>
-                        限时优惠大礼相送,及时XXXXXX
+                        XXXXXX
                     </TextSpan>
                 )}
             </Cell>,
-            width: 300,
+            width: 120,
             fixed: false,
             resizable: false
         },
@@ -85,8 +85,22 @@ export default class UserTable extends React.Component {
             width: 155,
             fixed: false,
             resizable: false
-        }, {
+        },
+        {
             HeaderCell: <HeaderCell><HeaderCellSort>创建时间</HeaderCellSort></HeaderCell>,
+            Cell: <Cell dataKey="describe">
+                {(rowData: any) => (
+                    <TextSpan>
+                        2019-19-19
+                    </TextSpan>
+                )}
+            </Cell>,
+            width: 155,
+            fixed: false,
+            resizable: false
+        },
+        {
+            HeaderCell: <HeaderCell><HeaderCellSort>修改时间</HeaderCellSort></HeaderCell>,
             Cell: <Cell dataKey="describe">
                 {(rowData: any) => (
                     <TextSpan>
@@ -105,8 +119,9 @@ export default class UserTable extends React.Component {
                     <Button appearance="ghost">详情</Button>
                 )}
             </Cell>,
-            flexGrow: true,
-            fixed: false,
+            width: 85,
+            flexGrow: false,
+            fixed: 'right',
             resizable: false
         }
     ]
@@ -115,89 +130,64 @@ export default class UserTable extends React.Component {
     public render() {
         return (
             <>
-                <HeadPanel hideBorderBottom={true} title={'用户列表'}>
-                    <Form fluid={true}
-                          layout="inline"
-                          onChange={(formValue) => {
-
-                          }}>
-                        <Grid fluid={true} className={'app-grid-inline-from'}>
-                            <Row>
-                                <Col xs={7} sm={7} md={7}/>
-                                <Col xs={5} sm={5} md={5}>
-                                    <FormGroup>
-                                        <ControlLabel><span style={{color: 'red'}}>*</span>手机号码</ControlLabel>
-                                        <FormControl name="productName" data={[]} placeholder="限30字，必填" type="text"
-                                                     accepter={Input}/>
-                                    </FormGroup>
-                                </Col>
-                                <Col xs={5} sm={5} md={5}>
-                                    <FormGroup>
-                                        <ControlLabel><span style={{color: 'red'}}>*</span>用户名</ControlLabel>
-                                        <FormControl name="productName" data={[]} placeholder="限30字，必填" type="text"
-                                                     accepter={Input}/>
-                                    </FormGroup>
-                                </Col>
-                                <Col xs={5} sm={5} md={5}>
-                                    <FormGroup>
-                                        <ControlLabel><span style={{color: 'red'}}>*</span>认证类型</ControlLabel>
-                                        <FormControl style={{width: 155}} name="productName" data={[]}
-                                                     placeholder="限30字，必填" type="text"
-                                                     accepter={InputPicker}/>
-                                    </FormGroup>
-                                </Col>
-                                <Col xs={2} sm={2} md={2}>
-                                    <FormGroup>
-                                        <Button onClick={() => {
-                                        }}>搜索</Button>
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                        </Grid>
-                    </Form>
+                <HeadPanel hideBorderBottom={true} title={'商城会员管理'}>
+                    <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
+                        <Dropdown title={'用户管理'} trigger="click">
+                            <Dropdown.Item eventKey={'addUser'}>新增用户</Dropdown.Item>
+                        </Dropdown>
+                        <Dropdown
+                            placement="bottomEnd"
+                            renderTitle={() => {
+                                return <IconButton appearance={'subtle'}
+                                                   icon={<Icon icon="refresh"/>}/>;
+                            }}/>
+                    </div>
                 </HeadPanel>
-                <FlexCalcBox subHeight={185} Body={(e) => (
-                    <Table
-                        loading={false}
-                        height={e}
-                        rowHeight={155}
-                        headerHeight={65}
-                        autoHeight={false}
-                        bordered={true}
-                        cellBordered={true}
-                        data={[
+                <FlexCalcBox Body={(h, w) => (
+                    <>
+                        <Table
+                            loading={false}
+                            height={h - 65}
+                            rowHeight={70}
+                            headerHeight={85}
+                            autoHeight={false}
+                            bordered={true}
+                            cellBordered={true}
+                            data={[
+                                {
+                                    index: '1'
+                                }, {
+                                    index: '2'
+                                }
+                            ]}
+                        >
                             {
-                                index: '1'
-                            }, {
-                                index: '2'
+                                this.Columns.map((k: any, i, a) => (
+                                    <Column width={k.width} align="center" flexGrow={k.flexGrow} colSpan={k.colSpan}
+                                            verticalAlign={'middle'} fixed={k.fixed} resizable={k.resizable}>
+                                        {k.HeaderCell}
+                                        {k.Cell}
+                                    </Column>
+                                ))
                             }
-                        ]}
-                    >
-                        {
-                            this.Columns.map((k: any, i, a) => (
-                                <Column width={k.width} align="center" flexGrow={k.flexGrow} colSpan={k.colSpan}
-                                        verticalAlign={'middle'} fixed={k.fixed} resizable={k.resizable}>
-                                    {k.HeaderCell}
-                                    {k.Cell}
-                                </Column>
-                            ))
-                        }
-                    </Table>
+                        </Table>
+                        <Pagination
+                            lengthMenu={[
+                                {
+                                    value: 10,
+                                    label: 10
+                                },
+                                {
+                                    value: 20,
+                                    label: 20
+                                }
+                            ]}
+                            activePage={1}
+                            displayLength={10}
+                            total={20}/>
+                    </>
                 )}/>
-                <Pagination
-                    lengthMenu={[
-                        {
-                            value: 10,
-                            label: 10
-                        },
-                        {
-                            value: 20,
-                            label: 20
-                        }
-                    ]}
-                    activePage={1}
-                    displayLength={10}
-                    total={20}/>
+
             </>
         )
     }

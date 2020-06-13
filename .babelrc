@@ -12,6 +12,7 @@
   "plugins": [
     "react-loadable/babel",
     "syntax-dynamic-import",
+    "dynamic-import-node",
     [
       "lodash",
       {

@@ -24,6 +24,7 @@ export const RouterHistorys: IHistory = createHashHistory({
     }
 })
 
+//redux结合,项目中不使用,单纯予以结合
 const store = createStore(
     combineReducers({
         router: connectRouter(RouterHistorys)

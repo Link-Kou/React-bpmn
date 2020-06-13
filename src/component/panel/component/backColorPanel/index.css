@@ -4,6 +4,8 @@
   border: 1px solid #e5e5ea;
   overflow: hidden;
   box-shadow: 0 1px 15px 1px rgba(39, 39, 39, 0.1); }
+  .app-backcolor-panel .app-backcolor-panel {
+    margin-bottom: 5px; }
 
 .app-backcolor-panel-table .rs-table-bordered {
   border-left: none !important;

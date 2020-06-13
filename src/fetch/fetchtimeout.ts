@@ -14,6 +14,9 @@ export const REACT_APP_TimeOut: number = _.toInteger(String(process.env.REACT_AP
 // eslint-disable-next-line camelcase
 export const REACT_APP_TimePrepare: number = _.toInteger(String(process.env.REACT_APP_TimePrepare))
 
+
+//export const REACT_APP_NODE_ENV: string = _.toString(String(process.env.NODE_ENV))
+
 /**
  * 统一数据格式
  * @param msg
