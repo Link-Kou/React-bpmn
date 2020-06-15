@@ -33,6 +33,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-splitter-layout": "^4.0.0",
+    "react-text-mask": "^5.4.3",
     "recompose": "^0.30.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
@@ -85,6 +86,7 @@
     "@types/react-router": "^5.1.1",
     "@types/react-router-dom": "^5.1.0",
     "@types/react-splitter-layout": "^3.0.0",
+    "@types/react-text-mask": "^5.4.6",
     "@types/recompose": "^0.30.7",
     "@types/redux-thunk": "^2.1.0",
     "babel-plugin-lodash": "^3.3.4",
@@ -107,9 +109,9 @@
     "react-markdown-reader": "^1.2.0",
     "sass-loader": "^8.0.0",
     "source-map-explorer": "^2.4.2",
+    "svg-sprite-loader": "^5.0.0",
     "svg-transform-loader": "^2.0.13",
     "svgo-loader": "^2.2.1",
-    "svg-sprite-loader": "^5.0.0",
     "typescript": "3.7.5"
   }
 }

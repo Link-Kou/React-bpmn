@@ -12,7 +12,7 @@ import TypeConfig from '../application/basicConfig/typeConfig'
 import {ProductAllSkuAdd, PoductList} from '../application/productAllSku'
 import {CardboardList, CardboardAdd} from '../application/productCardboard'
 import {CartonList, CartonAdd} from '../application/productCarton'
-import {OnlineMarketingList} from '../application/productOnlineMarketing'
+import {MarketPrice,MarketBuyRest,MarketTimeLimit,MarketQuantityLimit,MarketCoupon} from '../application/productOnlineMarketing'
 import ProductCorrugated from '../application/productCorrugated'
 import ProductQuote from '../application/productQuote'
 import {UserAdmin, UserCustomer} from '../application/userManager'
@@ -176,11 +176,46 @@ export const routes: Array<IRoute> = [
         screen: CartonAdd
     },
     {
-        key: 'ProductOnlineMarketing',
-        title: '产品营销',
+        key: 'ProductMarketPrice',
+        title: '价格营销',
         exact: false,
-        path: '/index/productOnlineMarketing',
-        screen: OnlineMarketingList
+        path: '/index/marketPrice',
+        screen: MarketPrice
+    },
+    {
+        key: 'ProductMarketPrice',
+        title: '价格营销',
+        exact: false,
+        path: '/index/marketPrice',
+        screen: MarketPrice
+    },
+    {
+        key: 'ProductMarketBuyRest',
+        title: '营业时间',
+        exact: false,
+        path: '/index/marketBuyRest',
+        screen: MarketBuyRest
+    },
+    {
+        key: 'ProductMarketTimeLimit',
+        title: '限时营销',
+        exact: false,
+        path: '/index/marketTimeLimit',
+        screen: MarketTimeLimit
+    },
+    {
+        key: 'ProductMarketQuantityLimit',
+        title: '限量营销',
+        exact: false,
+        path: '/index/marketQuantityLimit',
+        screen: MarketQuantityLimit
+    },
+    {
+        key: 'ProductMarketCoupon',
+        title: '红包营销',
+        exact: false,
+        path: '/index/marketCoupon',
+        screen: MarketCoupon
     },
     {
         key: 'ProductQuote',

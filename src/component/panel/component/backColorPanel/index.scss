@@ -20,3 +20,9 @@
     border-width: 0 !important;
   }
 }
+
+.app-backcolor-panel-head {
+  & .rs-panel-heading {
+    padding: 0;
+  }
+}

@@ -135,52 +135,6 @@ export const MenuConfig: Array<IMenuConfig> = [
                     content: '辅料订单管理',
                     ico: 'order-form',
                     route: '/index/orderdistribute'
-                }
-            ]
-        }
-    },
-    {
-        key: '销售管理',
-        type: {
-            type: 'Dropdown',
-            ico: 'cube',
-            title: () => (<span>销售管理</span>),
-            items: [
-                {
-                    key: '纸箱纸板营销',
-                    type: 'DropdownMenu',
-                    title: () => (<span className={'asdasda'}>纸箱纸板营销</span>),
-                    ico: 'order-form',
-                    items: [
-                        {
-                            key: '价格方案',
-                            type: 'DropdownItem',
-                            content: '价格方案',
-                            ico: 'order-form',
-                            route: '/index/productOnlineMarketing'
-                        },
-                        {
-                            key: '限时方案',
-                            type: 'DropdownItem',
-                            content: '限时方案',
-                            ico: 'order-form',
-                            route: '/index/productOnlineMarketing'
-                        },
-                        {
-                            key: '2-1',
-                            type: 'DropdownItem',
-                            content: '限量方案',
-                            ico: 'order-form',
-                            route: '/index/productOnlineMarketing'
-                        }
-                    ]
-                },
-                {
-                    key: '价格营销方案',
-                    type: 'DropdownItem',
-                    content: '价格营销方案',
-                    ico: 'order-form',
-                    route: '/index/productQuote'
                 },
                 {
                     key: '报价单管理',
@@ -188,6 +142,125 @@ export const MenuConfig: Array<IMenuConfig> = [
                     content: '报价单管理',
                     ico: 'order-form',
                     route: '/index/productQuote'
+                }
+            ]
+        }
+    },
+    {
+        key: '营销管理',
+        type: {
+            type: 'Dropdown',
+            ico: 'cube',
+            title: () => (<span>营销管理</span>),
+            items: [
+                /*{
+                     key: '纸箱纸板营销',
+                     type: 'DropdownMenu',
+                     title: () => (<span className={'asdasda'}>纸箱纸板营销</span>),
+                     ico: 'order-form',
+                     items: [
+                         {
+                             key: '价格方案',
+                             type: 'DropdownItem',
+                             content: '价格方案',
+                             ico: 'order-form',
+                             route: '/index/productOnlineMarketing'
+                         },
+                         {
+                             key: '限时方案',
+                             type: 'DropdownItem',
+                             content: '限时方案',
+                             ico: 'order-form',
+                             route: '/index/productOnlineMarketing'
+                         },
+                         {
+                             key: '2-1',
+                             type: 'DropdownItem',
+                             content: '限量方案',
+                             ico: 'order-form',
+                             route: '/index/productOnlineMarketing'
+                         }
+                     ]
+                 },*/
+                {
+                    key: '团购管理',
+                    type: 'DropdownItem',
+                    content: '团购管理',
+                    ico: 'order-form',
+                    route: '/index/marketPrice'
+                },
+                {
+                    key: '价格营销方案',
+                    type: 'DropdownItem',
+                    content: '价格营销方案',
+                    ico: 'order-form',
+                    route: '/index/marketPrice'
+                },
+                {
+                    key: '优惠券营销方案',
+                    type: 'DropdownItem',
+                    content: '优惠券营销方案',
+                    ico: 'order-form',
+                    route: '/index/marketCoupon'
+                },
+                {
+                    key: '限时营销方案',
+                    type: 'DropdownItem',
+                    content: '限时营销方案',
+                    ico: 'order-form',
+                    route: '/index/marketTimeLimit'
+                },
+                {
+                    key: '限量营销方案',
+                    type: 'DropdownItem',
+                    content: '限量营销方案',
+                    ico: 'order-form',
+                    route: '/index/marketQuantityLimit'
+                },
+                {
+                    key: '会员等级优惠',
+                    type: 'DropdownItem',
+                    content: '会员等级优惠',
+                    ico: 'order-form',
+                    route: '/index/marketQuantityLimit'
+                },
+                {
+                    key: '营业时间方案',
+                    type: 'DropdownItem',
+                    content: '营业时间方案',
+                    ico: 'order-form',
+                    route: '/index/marketBuyRest'
+                }
+            ]
+        }
+    },
+    {
+        key: '促销管理',
+        type: {
+            type: 'Dropdown',
+            ico: 'cube',
+            title: () => (<span>促销管理</span>),
+            items: [
+                {
+                    key: '充值送管理',
+                    type: 'DropdownItem',
+                    content: '充值送管理',
+                    ico: 'order-form',
+                    route: '/index/marketPrice'
+                },
+                {
+                    key: '新用户促销管理',
+                    type: 'DropdownItem',
+                    content: '新用户促销管理',
+                    ico: 'order-form',
+                    route: '/index/marketPrice'
+                },
+                {
+                    key: '运费管理',
+                    type: 'DropdownItem',
+                    content: '运费管理方案',
+                    ico: 'order-form',
+                    route: '/index/marketQuantityLimit'
                 }
             ]
         }

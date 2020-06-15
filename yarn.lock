@@ -2110,6 +2110,12 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-text-mask@^5.4.6":
+  version "5.4.6"
+  resolved "https://registry.npm.taobao.org/@types/react-text-mask/download/@types/react-text-mask-5.4.6.tgz#3a81e9de472beb939038e78cb16d737ae94ba14a"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@16.9.5":
   version "16.9.5"
   resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.5.tgz#079dabd918b19b32118c25fd00a786bb6d0d5e51"
@@ -10394,7 +10400,7 @@ promzard@^0.3.0:
   dependencies:
     read "1"
 
-prop-types@^15.5.0, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.0, prop-types@^15.5.6, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.npm.taobao.org/prop-types/download/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   dependencies:
@@ -10917,6 +10923,12 @@ react-scripts@3.4.1:
 react-splitter-layout@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/react-splitter-layout/download/react-splitter-layout-4.0.0.tgz#70b43ca6a78c056f5e5fbf29c67b597f040fbf2e"
+
+react-text-mask@^5.4.3:
+  version "5.4.3"
+  resolved "https://registry.npm.taobao.org/react-text-mask/download/react-text-mask-5.4.3.tgz#991efb4299e30c2e6c2c46d13f617169463e0d2d"
+  dependencies:
+    prop-types "^15.5.6"
 
 react-transition-group@^2.9.0:
   version "2.9.0"

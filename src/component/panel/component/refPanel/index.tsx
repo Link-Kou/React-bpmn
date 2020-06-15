@@ -8,7 +8,7 @@ import * as React from 'react';
 export const IndexRefPanel = ({children}: { children: React.ReactChildren | any }) => {
     const containerRef: any = React.createRef<HTMLDivElement>();
     return (
-        <div ref={containerRef} style={{position: 'relative'}}>
+        <div className={'app-index-RefPanel'} ref={containerRef} style={{position: 'relative'}}>
             {
                 (children as any)(() => containerRef.current)
             }

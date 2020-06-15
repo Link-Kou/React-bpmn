@@ -12,3 +12,6 @@
   border-right: none !important; }
 .app-backcolor-panel-table .rs-table-cell-last {
   border-width: 0 !important; }
+
+.app-backcolor-panel-head .rs-panel-heading {
+  padding: 0; }

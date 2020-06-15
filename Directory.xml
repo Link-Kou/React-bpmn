@@ -20,7 +20,9 @@
             <tree path="/productCardboard" title="纸板产品管理"/>
             <tree path="/productCarton" title="纸箱产品管理"/>
             <tree path="/productCorrugated" title="瓦楞管理"/>
-            <tree path="/productOnlineMarketing" title="产品营销方案管理"/>
+            <tree path="/productOnlineMarketing" title="产品营销方案管理">
+                <tree path="/marketPrice" title="价格方案"/>
+            </tree>
             <tree path="/productQuote" title="产品报价管理"/>
         </tree>
     </model>

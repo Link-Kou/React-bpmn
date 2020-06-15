@@ -2,6 +2,10 @@
  * {@link}
  */
 #app-headPanel {
+  & + .rs-panel-heading {
+    padding: 0;
+  }
+
   .app-grid-inline-from {
     margin: 0;
 
