@@ -40,6 +40,7 @@ interface IProps {
      * 是否进行动画关闭
      */
     queueAnim?: boolean
+
 }
 
 

@@ -187,7 +187,7 @@ export const MenuConfig: Array<IMenuConfig> = [
                     type: 'DropdownItem',
                     content: '团购管理',
                     ico: 'order-form',
-                    route: '/index/marketPrice'
+                    route: '/index/marketPrice2'
                 },
                 {
                     key: '价格营销方案',
@@ -195,13 +195,6 @@ export const MenuConfig: Array<IMenuConfig> = [
                     content: '价格营销方案',
                     ico: 'order-form',
                     route: '/index/marketPrice'
-                },
-                {
-                    key: '优惠券营销方案',
-                    type: 'DropdownItem',
-                    content: '优惠券营销方案',
-                    ico: 'order-form',
-                    route: '/index/marketCoupon'
                 },
                 {
                     key: '限时营销方案',
@@ -242,18 +235,25 @@ export const MenuConfig: Array<IMenuConfig> = [
             title: () => (<span>促销管理</span>),
             items: [
                 {
-                    key: '充值送管理',
+                    key: '余额充值送管理',
                     type: 'DropdownItem',
-                    content: '充值送管理',
+                    content: '余额充值送管理',
                     ico: 'order-form',
-                    route: '/index/marketPrice'
+                    route: '/index/marketPrice2'
+                },
+                {
+                    key: '优惠券营销方案',
+                    type: 'DropdownItem',
+                    content: '优惠券营销方案',
+                    ico: 'order-form',
+                    route: '/index/marketCoupon'
                 },
                 {
                     key: '新用户促销管理',
                     type: 'DropdownItem',
                     content: '新用户促销管理',
                     ico: 'order-form',
-                    route: '/index/marketPrice'
+                    route: '/index/marketPrice2'
                 },
                 {
                     key: '运费管理',

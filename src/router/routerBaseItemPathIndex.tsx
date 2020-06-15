@@ -183,13 +183,6 @@ export const routes: Array<IRoute> = [
         screen: MarketPrice
     },
     {
-        key: 'ProductMarketPrice',
-        title: '价格营销',
-        exact: false,
-        path: '/index/marketPrice',
-        screen: MarketPrice
-    },
-    {
         key: 'ProductMarketBuyRest',
         title: '营业时间',
         exact: false,

@@ -1,2 +1,16 @@
 .rs-icon.fill-color use {
   fill: currentColor; }
+
+.app-rs-icon-7 > svg {
+  stroke-width: 86px;
+  height: 7px;
+  fill: #8E8E93;
+  stroke: #8E8E93;
+  stroke-linecap: square; }
+
+.app-rs-icon-5 > svg {
+  stroke-width: 86px;
+  height: 5px;
+  fill: #8E8E93;
+  stroke: #8E8E93;
+  stroke-linecap: square; }

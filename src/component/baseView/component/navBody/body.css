@@ -8,8 +8,6 @@
   flex: 1 !important;
   overflow: auto;
   background-color: #F0F4F8; }
-  .app-body .rs-panel-heading {
-    padding-bottom: 0px; }
   .app-body .app-nav-Body {
     flex-direction: column;
     overflow: hidden;

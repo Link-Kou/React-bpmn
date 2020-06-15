@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {Alert, Dropdown, Tree} from 'rsuite';
-import FlexCalcBox from '@component/flexCalcBox';
-import {HeadPanel} from '@component/panel';
+import {Alert, Dropdown, Panel, Tree} from 'rsuite';
+import {HeadPanel, LoadPanel} from '@component/panel';
 import El from './compone/el';
+import Info from './compone/info';
 
 export default class QuoteListTable extends React.Component {
 
@@ -63,35 +63,38 @@ export default class QuoteListTable extends React.Component {
                         </Dropdown>
                     </div>
                 </HeadPanel>
-                <FlexCalcBox subHeight={125} Body={(e) => (
-                    <Tree
-                        style={{maxHeight: 'none'}}
-                        defaultExpandAll={true}
-                        //draggable={true}
-                        renderTreeNode={(nodeData: any) => <El treedata={datas} nodeData={nodeData}
-                                                               onChange={(value) => {
-                                                                   this.setState({
-                                                                       datas: value
-                                                                   })
-                                                               }}/>}
-                        onDragStart={(DropDataType: any, event: any) => {
-                            if (DropDataType?.refKey?.split('-')?.length === 3) {
-                                event.preventDefault();
-                                //event.stopPropagation();
-                            }
-                        }}
-                        onDrop={(DropDataType: any, event: any) => {
-                            if (DropDataType?.dragNode?.layer > 0) {
-                                Alert.warning('节点不允许拖动')
-                            } else {
-                                const updateDataFunction = DropDataType.createUpdateDataFunction(datas);
-                                this.setState({
-                                    datas: updateDataFunction
-                                })
-                            }
-                        }}
-                        data={datas}/>
-                )}/>
+                <LoadPanel subHeight={125} loadering={false}>
+                    <Info/>
+                    <Panel header={'条件'} bodyFill={false}>
+                        <Tree
+                            style={{maxHeight: 'none'}}
+                            defaultExpandAll={true}
+                            //draggable={true}
+                            renderTreeNode={(nodeData: any) => <El treedata={datas} nodeData={nodeData}
+                                                                   onChange={(value) => {
+                                                                       this.setState({
+                                                                           datas: value
+                                                                       })
+                                                                   }}/>}
+                            onDragStart={(DropDataType: any, event: any) => {
+                                if (DropDataType?.refKey?.split('-')?.length === 3) {
+                                    event.preventDefault();
+                                    //event.stopPropagation();
+                                }
+                            }}
+                            onDrop={(DropDataType: any, event: any) => {
+                                if (DropDataType?.dragNode?.layer > 0) {
+                                    Alert.warning('节点不允许拖动')
+                                } else {
+                                    const updateDataFunction = DropDataType.createUpdateDataFunction(datas);
+                                    this.setState({
+                                        datas: updateDataFunction
+                                    })
+                                }
+                            }}
+                            data={datas}/>
+                    </Panel>
+                </LoadPanel>
             </>
         )
     }

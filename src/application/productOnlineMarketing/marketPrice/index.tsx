@@ -23,7 +23,7 @@ export default class MarketPrice extends React.Component {
                             </BackColorPanel>
                         </Col>
                         <Col xs={10} sm={10} md={10}>
-                            <BackColorPanel tableBordered={true}>
+                            <BackColorPanel panelBodyPadding={true} tableBordered={true}>
                                 <PriceElTree/>
                             </BackColorPanel>
                         </Col>

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {Col, Grid, Input, InputGroup, InputNumber, InputPicker, Row} from 'rsuite';
+import {Col, Grid, Input, InputNumber, InputPicker, Row} from 'rsuite';
 import TreeUtils from '@utils/Tree';
+import {DroolRange} from '@component/elDrools';
 
 interface IProps {
     nodeData?: any
@@ -9,71 +10,6 @@ interface IProps {
 
     onChange?(value: any): void
 }
-
-
-/*
-const RenderRange = () => {
-    const [show, setShow] = React.useState(false);
-    return (
-        <Whisper
-            style={{width: '100%'}}
-            placement={'bottomEnd'}
-            trigger="active"
-            open={show}
-            speaker={
-                <Popover title="表达式">
-                    <InputGroup style={{width: 350}}>
-                        <Grid fluid={true}>
-                            <Row>
-                                <Col xs={13} style={{padding: 0}}>
-                                    <InputPicker menuStyle={{zIndex: 9999}} style={{border: 'none'}} data={[
-                                        {
-                                            value: '>',
-                                            label: '>'
-                                        },
-                                        {
-                                            value: '>=',
-                                            label: '>='
-                                        }
-                                    ]}/>
-                                </Col>
-                                <Col xs={11} style={{padding: 0}}>
-                                    <InputNumber/>
-                                </Col>
-                            </Row>
-                        </Grid>
-                        <InputGroup.Addon>~</InputGroup.Addon>
-                        <Grid fluid={true}>
-                            <Row>
-                                <Col xs={11} style={{padding: 0}}>
-                                    <InputNumber/>
-                                </Col>
-                                <Col xs={13} style={{padding: 0}}>
-                                    <InputPicker menuStyle={{zIndex: 9999}} style={{border: 'none'}} data={[
-                                        {
-                                            value: '<',
-                                            label: '<'
-                                        },
-                                        {
-                                            value: '<=',
-                                            label: '<='
-                                        }
-                                    ]}/>
-                                </Col>
-                            </Row>
-                        </Grid>
-                    </InputGroup>
-                </Popover>
-            }
-        >
-            <Button style={{width: '100%'}} appearance="subtle" onClick={() => {
-                setShow(!show)
-            }}>添加区间表达式</Button>
-        </Whisper>
-
-    )
-}
-*/
 
 /**
  *
@@ -84,7 +20,7 @@ const RenderRange = () => {
 export default class El extends React.Component<IProps> {
 
 
-    private renderRange() {
+   /* private renderRange() {
         return (
             <InputGroup>
                 <Grid fluid={true}>
@@ -129,7 +65,7 @@ export default class El extends React.Component<IProps> {
             </InputGroup>
         )
     }
-
+*/
     public render() {
         const {nodeData, treedata, onChange} = this.props
         if (nodeData?.refKey?.split('-')?.length === 3) {
@@ -257,9 +193,9 @@ export default class El extends React.Component<IProps> {
                                              onChange?.(updataNode)
                                          }}/>
                         </Col>
-                        <Col xs={nodeData?.expression === '范围' ? 13 : 9}>
+                        <Col xs={13}>
                             <p>值</p>
-                            {nodeData?.expression === '范围' ? this.renderRange() : <InputNumber style={{width: '100%'}}/>}
+                            {nodeData?.expression === '范围' ? <DroolRange/> : <InputNumber style={{width: '100%'}}/>}
                         </Col>
                     </Row>
                 </Grid>

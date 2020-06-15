@@ -5,7 +5,10 @@ import classNames from 'classnames';
 interface IProps {
     style?: React.CSSProperties;
     tableBordered?: boolean
+
     panelHeadPadding?: boolean
+
+    panelBodyPadding?: boolean
 }
 
 /**
@@ -17,11 +20,12 @@ interface IProps {
 export default class Index extends React.Component<IProps> {
 
     public render() {
-        const {style, tableBordered, panelHeadPadding} = this.props
+        const {style, tableBordered, panelHeadPadding, panelBodyPadding} = this.props
         const className = classNames({
             'app-backcolor-panel': true,
             'app-backcolor-panel-table': tableBordered,
-            'app-backcolor-panel-head': panelHeadPadding
+            'app-backcolor-panel-head': panelHeadPadding,
+            'app-backcolor-panel-body': panelBodyPadding
         });
         return (
             <div className={className} style={style}>

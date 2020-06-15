@@ -15,3 +15,6 @@
 
 .app-backcolor-panel-head .rs-panel-heading {
   padding: 0; }
+
+.app-backcolor-panel-body .rs-panel-body {
+  padding-bottom: 0; }
