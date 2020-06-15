@@ -3,7 +3,27 @@
 }
 
 
+.app-rs-icon-8 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > svg {
+    stroke-width: 86px;
+    height: 8px;
+    fill: #8E8E93;
+    stroke: #8E8E93;
+    stroke-linecap: square;
+  }
+
+}
+
+
 .app-rs-icon-7 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   > svg {
     stroke-width: 86px;
     height: 7px;
@@ -14,7 +34,12 @@
 
 }
 
+
 .app-rs-icon-5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   > svg {
     stroke-width: 86px;
     height: 5px;

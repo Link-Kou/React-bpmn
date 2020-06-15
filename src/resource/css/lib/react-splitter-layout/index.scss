@@ -21,13 +21,13 @@ splitter 控件自定义的样式
   > .layout-splitter {
     flex: 0 0 auto;
     //border-radius: 25px;
-    width: 5px;
+    width: 3px;
     height: auto;
     cursor: col-resize;
-    background: #f8f8f9;
+    /*background: rgba(255, 255, 255, 0.6);*/
 
     flex-direction: column;
-    box-shadow: inset 1px 0 0 0 #d5d5d5, 1px 0 0 0 #d5d5d5;
+    /*box-shadow: inset 1px 0 0 0 #d5d5d5, 1px 0 0 0 #d5d5d5;*/
     z-index: 1;
     justify-content: center;
     display: flex;
@@ -41,7 +41,7 @@ splitter 控件自定义的样式
       display: block;
       height: 3px;
       width: 100%;
-      box-shadow: inset 0 1px 0 0 #d5d5d5, 0 1px 0 0 #d5d5d5;
+      box-shadow: inset 0 1px 0 0 #b3b2b2, 0 1px 0 0 #b3b2b2;
     }
 
     &::before {
@@ -53,7 +53,7 @@ splitter 控件自定义的样式
     }
 
     &:hover {
-      //background-color: #f00036;
+      background-color: #4895D1;
     }
 
     /*
@@ -71,7 +71,7 @@ splitter 控件自定义的样式
       无法拖动
      */
     > .layout-splitter {
-      background-color: #DCDDDD;
+      background-color: #4895D1;
     }
   }
 

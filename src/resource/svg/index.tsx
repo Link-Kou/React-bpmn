@@ -29,13 +29,13 @@ export class Svg {
     public static menuGroup = <Icon className='fill-color' icon={menuGroup}/>;
     public static menu = <Icon className='fill-color' icon={menu}/>;
     public static redata = <Icon className='fill-color' icon={redata}/>;
-    public static GreaterThanSign = (props: any) => <Icon className='app-rs-icon-7' icon={greaterThanSign}/>;
-    public static GreaterThanOrEqualToSign = (props: any) => <Icon className='app-rs-icon-7'
+    public static GreaterThanSign = (props: any) => <Icon className='app-rs-icon-8' icon={greaterThanSign}/>;
+    public static GreaterThanOrEqualToSign = (props: any) => <Icon className='app-rs-icon-8'
                                                                    icon={greaterThanOrEqualToSign}/>;
-    public static LessThanSign = (props: any) => <Icon className='app-rs-icon-7'
+    public static LessThanSign = (props: any) => <Icon className='app-rs-icon-8'
                                                        {...props}
                                                        icon={lessThanSign}/>;
-    public static LessThanOrEqualToSign = (props: any) => <Icon className='app-rs-icon-7'
+    public static LessThanOrEqualToSign = (props: any) => <Icon className='app-rs-icon-8'
                                                                 {...props}
                                                                 icon={lessThanOrEqualToSign}/>;
     public static RedataCompon = (props: any) => <Icon className='fill-color' {...props} icon={redata}/>;
