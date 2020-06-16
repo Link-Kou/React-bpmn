@@ -32,6 +32,11 @@ interface IProps {
      */
     overflow?: 'auto' | 'clip' | 'hidden' | 'scroll' | 'visible' | string
 
+    /**
+     * 延迟渲染
+     */
+    delay?: number
+
 }
 
 /**
@@ -48,7 +53,8 @@ export default class FlexCalcBox extends React.Component<IProps> {
         style: this.props.style,
         boxheight: this.props.height,
         subHeight: this.props.subHeight,
-        overflow: typeof this.props.overflow === 'undefined' ? 'hidden' : this.props.overflow
+        overflow: typeof this.props.overflow === 'undefined' ? 'hidden' : this.props.overflow,
+        components: ''
     }
 
     public componentDidMount() {
@@ -97,20 +103,35 @@ export default class FlexCalcBox extends React.Component<IProps> {
         return '100vh'
     }
 
+    /**
+     * 延迟渲染
+     * @private
+     */
+    private async _settime() {
+        const {delay} = this.props
+        setTimeout(() => {
+            this.setState({
+                components: this.props.Body(this.state.height, this.state.width)
+            })
+        }, delay ?? 0)
+    }
+
     public render() {
-        const {boxheight, subHeight} = this.state
-        const overflowstring = typeof this.props.overflow === 'undefined' ? 'hidden' : this.props.overflow
+        const {boxheight, subHeight, components, style} = this.state
+        const {overflow} = this.props
+        const overflowstring = typeof overflow === 'undefined' ? 'hidden' : overflow
+        this._settime()
         return (
             <div style={{
                 height: this.getHeightStyle(boxheight, subHeight),
                 overflow: overflowstring,
-                ...this.state.style
+                ...style
             }}
                  ref={ref => {
                      this._wrapper = ref;
                  }}
             >
-                {this.props.Body(this.state.height, this.state.width)}
+                {components}
             </div>
         )
     }

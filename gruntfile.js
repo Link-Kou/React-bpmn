@@ -13,16 +13,16 @@ module.exports = function (grunt) {
                     remove: '[group="appended"]',
                     append: [
                         {
-                            selector: 'head',
-                            html: '<link class="loading" href="./loading.css" rel="stylesheet">'
+                            selector: 'body',
+                            html: '<script class="loading" group="appended" type="text/javascript" src="./indexAnimationLoading.js"></script>'
                         },
                         {
                             selector: 'body',
-                            html: '<script class="loading" group="appended" type="text/javascript" src="./loading.js"></script>'
+                            html: '<script class="loading" group="appended" type="text/javascript" src="./indexAsynloading.js"></script>'
                         },
                         {
                             selector: 'body',
-                            html: '<script class="loadScript" group="appended" type="text/javascript" ></script>'
+                            html: '<script class="loadScript" group="appended" type="text/javascript"></script>'
                         }
                     ],
                     callback: function ($, file) {
@@ -37,18 +37,8 @@ module.exports = function (grunt) {
                             .remove();
                         $('.loadScript')
                             .html(`
-                               setTimeout(() => {
-                                       $script(${JSON.stringify(src)}, function() {
-                                        var loadingdoms = document.querySelectorAll('.loading');
-                                        for (loadingdom in loadingdoms) {
-                                            var node = loadingdoms[loadingdom];
-                                            if (node.parentNode) {
-                                                node.parentNode.removeChild && node.parentNode.removeChild(node);
-                                            }
-                                        }
-                                    })
-                                }, 3500);
-                           `);
+                            window.onload = AnimationLoading(${JSON.stringify(src)})
+                            `);
 
                     }
                 },
@@ -74,6 +64,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-dom-munger');
 
     grunt.registerTask('default', [
-        'dom_munger'
+        'dom_munger',
+        'copy'
     ]);
 };

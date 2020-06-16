@@ -3,7 +3,7 @@ import {Button, Dropdown, Table} from 'rsuite';
 import FlexCalcBox from '@component/flexCalcBox';
 import {CellIndex} from '@component/table';
 import TextSpan from '@component/textSpan';
-import { HeadPanel } from '@component/panel';
+import {HeadPanel} from '@component/panel';
 
 const {Column, HeaderCell, Cell} = Table;
 
@@ -45,7 +45,21 @@ export default class QuoteListTable extends React.Component {
         }
     ]
 
+
+    public state = {
+        loading: true
+    }
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({
+                loading: false
+            })
+        }, 1500)
+    }
+
     public render() {
+        const {loading} = this.state
         return (
             <>
                 <HeadPanel hideBorderBottom={true} title={'价格营销列表'}>
@@ -63,7 +77,7 @@ export default class QuoteListTable extends React.Component {
                 </HeadPanel>
                 <FlexCalcBox subHeight={132} Body={(e) => (
                     <Table
-                        loading={false}
+                        loading={loading}
                         height={e}
                         rowHeight={155}
                         headerHeight={65}

@@ -20,7 +20,10 @@ export default class MarketPrice extends React.Component {
                                 percentage={true}
                                 primaryMinSize={50}
                                 secondaryMinSize={42}
-                                secondaryInitialSize={42}>
+                                secondaryInitialSize={42}
+                                onSecondaryPaneSizeChange={(v) => {
+                                    console.log(v)
+                                }}>
                     <div style={{paddingRight: 5}}>
                         <BackColorPanel tableBordered={true}>
                             <PriceListTable/>
