@@ -1,11 +1,8 @@
 /* eslint-disable */
-
 var cavealoading = {
     css: false,
     js: false
 };
-
-
 var iCount = setInterval(function () {
     var root = document.getElementById('root');
     if (root.style.display !== 'none') {
@@ -24,7 +21,6 @@ var iCount = setInterval(function () {
         }, 5500);
     }
 });
-
 function LoadingScript(script) {
     loadjs(script, 'foobar', {
         success: function () {
@@ -35,7 +31,6 @@ function LoadingScript(script) {
         }
     });
 }
-
 function LoadingSheet(script) {
     var load = [];
     for (var i = 0; i < script.length; i++) {
