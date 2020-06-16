@@ -22,11 +22,11 @@ module.exports = function (grunt) {
                         },
                         {
                             selector: 'body',
-                            html: '<script class="loadScript" group="appended" type="text/javascript"></script>'
+                            html: '<script class="loadScriptStyle" group="appended" type="text/javascript"></script>'
                         }
                     ],
                     callback: function ($, file) {
-                        //do anything you want here
+                        //获取编译后的脚本，改为惰性加载
                         const src = [];
                         $('body')
                             .find('script[group!="appended"]')
@@ -35,11 +35,23 @@ module.exports = function (grunt) {
                                     .attr('src'));
                             })
                             .remove();
-                        $('.loadScript')
-                            .html(`
-                            window.onload = AnimationLoading(${JSON.stringify(src)})
-                            `);
+                        //获取编译后的样式，改变为惰性加载
+                        const sheet = [];
+                        $('head')
+                            .find('link[rel="stylesheet"]')
+                            .each(function () {
+                                sheet.push($(this)
+                                    .attr('href'));
+                            })
+                            .remove();
 
+                        $('.loadScriptStyle')
+                            .html(`
+                                window.onload = function(){
+                                        LoadingScript(${JSON.stringify(src)})
+                                        LoadingSheet(${JSON.stringify(sheet)})
+                                }
+                            `);
                     }
                 },
                 src: './build/index.html' //could be an array of files

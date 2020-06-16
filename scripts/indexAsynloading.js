@@ -7,7 +7,7 @@ var cavealoading = {
 
 //asyncLoad('link', '/static/css/main.d5c8be1b.css');
 //asyncLoad('script', script);
-function asyncLoad(V_tag, V_src) {
+/*function asyncLoad(V_tag, V_src) {
     if (V_tag == 'script') {
         var s = document.createElement('script');
         s.type = 'text/javascript';
@@ -29,25 +29,51 @@ function asyncLoad(V_tag, V_src) {
             cavealoading.css = true;
         };
     }
-}
+}*/
 
-function AnimationLoading(script) {
-    var iCount = setInterval(function () {
-        if (cavealoading.js) {
-            var deleteN = document.getElementsByTagName('body');
-            deleteN[0].removeChild(document.getElementsByTagName('canvas')[0]);
-            animationsetup = null;
-            animationresize = null;
-            draw = null;
-            clearInterval(iCount);
-        }
-    }, 3500);
+var iCount = setInterval(function () {
+    if (cavealoading.js && cavealoading.css) {
+        var deleteN = document.getElementsByTagName('body');
+        deleteN[0].removeChild(document.getElementsByTagName('canvas')[0]);
+        animationsetup = null;
+        animationresize = null;
+        draw = null;
+        clearInterval(iCount);
+    }
+}, 3500);
+
+function LoadingScript(script) {
     loadjs(script, 'foobar', {
         success: function () {
             cavealoading.js = true;
         },
         error: function (pathsNotFound) {
-            alert('网络异常');
+            alert('脚本加载失败！网络异常');
         }
     });
+}
+
+function LoadingSheet(script) {
+    var load = [];
+    for (var i = 0; i < script.length; i++) {
+        var loading = loadCSS(script[i]);
+        onloadCSS(loading, function () {
+            load.push(true);
+        });
+    }
+    var alltrue = true;
+    if (load.length === script.length) {
+        for (var i = 0; i < load.length; i++) {
+            if (!load[i]) {
+                alltrue = false;
+            }
+        }
+    } else {
+        alltrue = false;
+    }
+    if (alltrue) {
+        cavealoading.js = true;
+    } else {
+        alert('样式加载失败！网络异常');
+    }
 }
