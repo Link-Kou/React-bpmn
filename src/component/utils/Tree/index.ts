@@ -235,7 +235,7 @@ export default class TreeUtils {
      */
     public static updataNode(props: { treeData?: Array<INode>, updataNode: string | number, newNode: INode, getNodeKey: (node: INode) => string | number }): any {
         const {treeData, updataNode, newNode, getNodeKey} = props;
-        const newtreeData = JSON.parse(JSON.stringify(treeData));
+        const newtreeData = treeData;
         const updataChildNodeItem = ({treeDataItem, updataNodeItem, newNodeItem, getNodeKeyItem}: { treeDataItem?: Array<INode>, updataNodeItem: string | number, newNodeItem: INode, getNodeKeyItem: (node: INode) => string | number }): any => {
             if (treeDataItem && treeDataItem.length) {
                 let deleteIndex = -1;
@@ -278,6 +278,23 @@ export default class TreeUtils {
             }
         }
         return 0
+    }
+
+    /**
+     * 获取到所有节点id
+     */
+    public static getAllNodeId(props: { treeData?: Array<INode>, getNodeKey: (node: INode) => string | number }): number {
+        const {treeData, getNodeKey} = props
+        const findnodes: any = []
+        const find = (nodes?: Array<INode>) => {
+            nodes?.forEach((k, i, a) => {
+                const nodeKey = getNodeKey?.(k);
+                findnodes.push(nodeKey)
+                find(k?.children)
+            })
+        }
+        find(treeData)
+        return findnodes
     }
 
     /**

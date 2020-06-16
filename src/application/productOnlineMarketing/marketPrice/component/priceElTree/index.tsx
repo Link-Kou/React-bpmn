@@ -1,8 +1,12 @@
 import * as React from 'react';
-import {Alert, Dropdown, Panel, Tree} from 'rsuite';
+import {Button, Dropdown, Panel, Tree} from 'rsuite';
 import {HeadPanel, LoadPanel} from '@component/panel';
 import El from './compone/el';
+import Elnode1 from './compone/elnode1';
+import Elnode2 from './compone/elnode2';
+import Elnode3 from './compone/elnode3';
 import Info from './compone/info';
+import TreeUtils from '@utils/Tree';
 
 export default class QuoteListTable extends React.Component {
 
@@ -11,14 +15,17 @@ export default class QuoteListTable extends React.Component {
             {
                 value: '1',
                 label: '1',
+                control: (props: any) => <Elnode1 {...props}/>,
                 children: [
                     {
                         value: '1-1',
                         label: '1-1',
+                        control: (props: any) => <Elnode2 {...props}/>,
                         children: [
                             {
                                 value: '1-1-1',
-                                label: '1-1-2'
+                                label: '1-1-2',
+                                control: (props: any) => <Elnode3 {...props}/>
                             }
                         ]
                     }
@@ -28,14 +35,17 @@ export default class QuoteListTable extends React.Component {
                 value: '2',
                 label: '2',
                 expression: '范围',
+                control: (props: any) => <Elnode1 {...props}/>,
                 children: [
                     {
                         value: '2-1',
                         label: '2-1',
+                        control: (props: any) => <Elnode2 {...props}/>,
                         children: [
                             {
                                 value: '2-1-1',
-                                label: '2-1-2'
+                                label: '2-1-2',
+                                control: (props: any) => <Elnode3 {...props}/>
                             }
                         ]
                     }
@@ -63,36 +73,40 @@ export default class QuoteListTable extends React.Component {
                         </Dropdown>
                     </div>
                 </HeadPanel>
-                <LoadPanel subHeight={125} loadering={false}>
+                <LoadPanel subHeight={132} loadering={false}>
                     <Info/>
-                    <Panel header={'条件'} bodyFill={false}>
+                    <Panel header={<div style={{display: 'flex'}}>
+                        <div style={{display: 'flex', flex: 1, justifyContent: 'flex-start'}}>条件</div>
+                        <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
+                            <Button onClick={() => {
+                                this.setState({
+                                    datas: this.state.datas
+                                })
+                            }}>添加节点</Button>
+                        </div>
+                    </div>} bodyFill={false}>
                         <Tree
                             style={{maxHeight: 'none'}}
                             defaultExpandAll={true}
-                            //draggable={true}
-                            renderTreeNode={(nodeData: any) => <El treedata={datas} nodeData={nodeData}
-                                                                   onChange={(value) => {
-                                                                       this.setState({
-                                                                           datas: value
-                                                                       })
-                                                                   }}/>}
-                            onDragStart={(DropDataType: any, event: any) => {
-                                if (DropDataType?.refKey?.split('-')?.length === 3) {
-                                    event.preventDefault();
-                                    //event.stopPropagation();
-                                }
-                            }}
-                            onDrop={(DropDataType: any, event: any) => {
-                                if (DropDataType?.dragNode?.layer > 0) {
-                                    Alert.warning('节点不允许拖动')
-                                } else {
-                                    const updateDataFunction = DropDataType.createUpdateDataFunction(datas);
-                                    this.setState({
-                                        datas: updateDataFunction
-                                    })
-                                }
-                            }}
-                            data={datas}/>
+                            expandAll={true}
+                            expandItemValues={
+                                TreeUtils.getAllNodeId({
+                                    treeData: datas,
+                                    getNodeKey: (node) => node.value
+                                })}
+                            data={datas}
+                            renderTreeNode={(nodeData: any) => {
+                                return (
+                                    <El treedata={datas}
+                                        nodeData={nodeData}
+                                        onChange={(value) => {
+                                            const concat = value.concat();
+                                            this.setState({
+                                                datas: concat
+                                            })
+                                        }}/>
+                                )
+                            }}/>
                     </Panel>
                 </LoadPanel>
             </>

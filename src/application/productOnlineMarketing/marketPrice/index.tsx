@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Col, Grid, Row} from 'rsuite';
 import {BackColorPanel} from '@component/panel';
 import PriceListTable from './component/priceListTable';
 import PriceElTree from './component/priceElTree';
@@ -33,20 +32,6 @@ export default class MarketPrice extends React.Component {
                         </BackColorPanel>
                     </div>
                 </SplitterLayout>
-                <Grid fluid={true} style={{display: 'none'}}>
-                    <Row>
-                        <Col xs={14} sm={14} md={14} smHidden={true}>
-                            <BackColorPanel tableBordered={true}>
-                                <PriceListTable/>
-                            </BackColorPanel>
-                        </Col>
-                        <Col xs={10} sm={10} md={10}>
-                            <BackColorPanel panelBodyPadding={true} tableBordered={true}>
-                                <PriceElTree/>
-                            </BackColorPanel>
-                        </Col>
-                    </Row>
-                </Grid>
             </>
         )
     }

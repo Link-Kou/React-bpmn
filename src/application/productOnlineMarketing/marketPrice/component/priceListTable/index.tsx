@@ -61,7 +61,7 @@ export default class QuoteListTable extends React.Component {
                         </Dropdown>
                     </div>
                 </HeadPanel>
-                <FlexCalcBox subHeight={125} Body={(e) => (
+                <FlexCalcBox subHeight={132} Body={(e) => (
                     <Table
                         loading={false}
                         height={e}
