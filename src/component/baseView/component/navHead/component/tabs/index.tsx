@@ -374,7 +374,7 @@ export default class HeadTabs extends React.Component<any, IState> {
                                         }}
                                     >
                                         <Dropdown.Item panel={true} style={{padding: 10, width: 160}}>
-                                            <p>Signed in as</p>
+                                            <p>Tab as</p>
                                             <strong>foobar</strong>
                                         </Dropdown.Item>
                                         {
@@ -388,7 +388,6 @@ export default class HeadTabs extends React.Component<any, IState> {
                                         <Dropdown.Item divider={true}/>
                                         <Dropdown.Item>Help</Dropdown.Item>
                                         <Dropdown.Item>Settings</Dropdown.Item>
-                                        <Dropdown.Item>Sign out</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Popover>
                             }

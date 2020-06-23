@@ -8,7 +8,6 @@ import {routerMiddleware, ConnectedRouter, connectRouter} from 'connected-react-
 
 import Unknown from '../component/unknownView/404';
 import BaseView from '../component/baseView';
-//import LoadableScreen from './routerLoadable';
 
 //创建路由方式
 export const RouterHistorys: IHistory = createHashHistory({
@@ -42,6 +41,13 @@ interface IRoute {
 }
 
 const routes: Array<IRoute> = [
+    {
+        key: 'home',
+        exact: true,
+        path: '/',
+        /*演示多路由*/
+        screen: BaseView
+    },
     {
         key: 'base',
         exact: true,

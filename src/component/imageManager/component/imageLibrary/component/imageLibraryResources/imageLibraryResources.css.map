@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,kCAAmC;EACjC,UAAU,EAAE,KAAK;EACjB,QAAQ,EAAE,IAAI;EACd,OAAO,EAAE,IAAI;EACb,SAAS,EAAE,IAAI;EACf,cAAc,EAAE,GAAG;EAEnB,uEAAqC;IACnC,UAAU,EAAE,GAAG",
-"sources": ["imageLibraryResources.scss"],
-"names": [],
-"file": "imageLibraryResources.css"
-}

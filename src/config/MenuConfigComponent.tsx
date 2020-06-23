@@ -92,18 +92,18 @@ export const MenuConfig: Array<IMenuConfig> = [
             title: () => (<span>用户管理</span>),
             items: [
                 {
-                    key: '商城会员管理',
+                    key: 'DropdownItem-1',
                     type: 'DropdownItem',
-                    content: '商城会员管理',
+                    content: '菜单1',
                     ico: 'order-form',
-                    route: '/index/userCustomer'
+                    route: '/404'
                 },
                 {
-                    key: '运营人员管理',
+                    key: 'DropdownItem-2',
                     type: 'DropdownItem',
-                    content: '运营人员管理',
+                    content: '菜单2',
                     ico: 'order-form',
-                    route: '/index/userAdmin'
+                    route: '/404'
                 }
             ]
         }
@@ -116,32 +116,25 @@ export const MenuConfig: Array<IMenuConfig> = [
             title: () => (<span>订单管理</span>),
             items: [
                 {
-                    key: '纸板订单管理',
+                    key: 'DropdownItem-3',
                     type: 'DropdownItem',
-                    content: '纸板订单管理',
+                    content: '菜单1',
                     ico: 'order-form',
-                    route: '/index/orderCardboard'
+                    route: '/404'
                 },
                 {
-                    key: '纸板订单管理',
+                    key: 'DropdownItem-4',
                     type: 'DropdownItem',
-                    content: '纸板订单管理',
+                    content: '菜单2',
                     ico: 'order-form',
-                    route: '/index/orderdistribute'
+                    route: '/404'
                 },
                 {
-                    key: '辅料订单管理',
+                    key: 'DropdownItem-5',
                     type: 'DropdownItem',
-                    content: '辅料订单管理',
+                    content: '菜单4',
                     ico: 'order-form',
-                    route: '/index/orderdistribute'
-                },
-                {
-                    key: '报价单管理',
-                    type: 'DropdownItem',
-                    content: '报价单管理',
-                    ico: 'order-form',
-                    route: '/index/productQuote'
+                    route: '/404'
                 }
             ]
         }
@@ -154,331 +147,87 @@ export const MenuConfig: Array<IMenuConfig> = [
             title: () => (<span>营销管理</span>),
             items: [
                 {
-                     key: '纸箱纸板营销',
-                     type: 'DropdownMenu',
-                     title: () => (<span className={'asdasda'}>纸箱纸板营销</span>),
-                     ico: 'order-form',
-                     items: [
-                         {
-                             key: '价格方案',
-                             type: 'DropdownItem',
-                             content: '价格方案',
-                             ico: 'order-form',
-                             route: '/index/productOnlineMarketing'
-                         },
-                         {
-                             key: '限时方案',
-                             type: 'DropdownItem',
-                             content: '限时方案',
-                             ico: 'order-form',
-                             route: '/index/productOnlineMarketing'
-                         },
-                         {
-                             key: '纸箱纸板营销',
-                             type: 'DropdownMenu',
-                             title: () => (<span className={'asdasda'}>纸箱纸板营销</span>),
-                             ico: 'order-form',
-                             items: [
-                                 {
-                                     key: '价格方案',
-                                     type: 'DropdownItem',
-                                     content: '价格方案',
-                                     ico: 'order-form',
-                                     route: '/index/productOnlineMarketing'
-                                 },
-                                 {
-                                     key: '限时方案',
-                                     type: 'DropdownItem',
-                                     content: '限时方案',
-                                     ico: 'order-form',
-                                     route: '/index/productOnlineMarketing'
-                                 },
-                                 {
-                                     key: '2-1',
-                                     type: 'DropdownItem',
-                                     content: '限量方案',
-                                     ico: 'order-form',
-                                     route: '/index/productOnlineMarketing'
-                                 }
-                             ]
-                         }
-                     ]
-                 },
-                {
-                    key: '返利营销方案',
-                    type: 'DropdownItem',
-                    content: '返利营销方案',
+                    key: 'XXX营销',
+                    type: 'DropdownMenu',
+                    title: () => (<span className={'asdasda'}>XXX营销</span>),
                     ico: 'order-form',
-                    route: '/index/marketPrice2'
+                    items: [
+                        {
+                            key: 'DropdownItem-6',
+                            type: 'DropdownItem',
+                            content: '菜单1',
+                            ico: 'order-form',
+                            route: '/404'
+                        },
+                        {
+                            key: 'DropdownItem-7',
+                            type: 'DropdownItem',
+                            content: '菜单2',
+                            ico: 'order-form',
+                            route: '/404'
+                        },
+                        {
+                            key: 'DropdownItem-8',
+                            type: 'DropdownMenu',
+                            title: () => (<span className={'asdasda'}>菜单3</span>),
+                            ico: 'order-form',
+                            items: [
+                                {
+                                    key: 'DropdownItem-8-1',
+                                    type: 'DropdownItem',
+                                    content: '菜单1',
+                                    ico: 'order-form',
+                                    route: '/404'
+                                },
+                                {
+                                    key: 'DropdownItem-8-2',
+                                    type: 'DropdownItem',
+                                    content: '菜单2',
+                                    ico: 'order-form',
+                                    route: '/404'
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
-                    key: '价格营销方案',
+                    key: 'DropdownItem-9',
                     type: 'DropdownItem',
-                    content: '价格营销方案',
+                    content: '菜单4',
                     ico: 'order-form',
-                    route: '/index/marketPrice'
-                },
-                {
-                    key: '限时营销方案',
-                    type: 'DropdownItem',
-                    content: '限时营销方案',
-                    ico: 'order-form',
-                    route: '/index/marketTimeLimit'
-                },
-                {
-                    key: '限量营销方案',
-                    type: 'DropdownItem',
-                    content: '限量营销方案',
-                    ico: 'order-form',
-                    route: '/index/marketQuantityLimit'
-                },
-                {
-                    key: '会员等级优惠',
-                    type: 'DropdownItem',
-                    content: '会员等级优惠',
-                    ico: 'order-form',
-                    route: '/index/marketQuantityLimit'
-                },
-                {
-                    key: '余额充值送管理',
-                    type: 'DropdownItem',
-                    content: '余额充值送管理',
-                    ico: 'order-form',
-                    route: '/index/marketPrice2'
-                },
-                {
-                    key: '优惠券营销方案',
-                    type: 'DropdownItem',
-                    content: '优惠券营销方案',
-                    ico: 'order-form',
-                    route: '/index/marketCoupon'
-                },
-                {
-                    key: '新用户促销管理',
-                    type: 'DropdownItem',
-                    content: '新用户促销管理',
-                    ico: 'order-form',
-                    route: '/index/marketPrice2'
-                },
-                {
-                    key: '运费管理',
-                    type: 'DropdownItem',
-                    content: '运费管理方案',
-                    ico: 'order-form',
-                    route: '/index/marketQuantityLimit'
-                },
-                {
-                    key: '营业时间方案',
-                    type: 'DropdownItem',
-                    content: '营业时间方案',
-                    ico: 'order-form',
-                    route: '/index/marketBuyRest'
+                    route: '/404'
                 }
             ]
         }
     },
     {
-        key: '产品管理',
-        type: {
-            type: 'Dropdown',
-            ico: 'cube',
-            title: () => (<span>产品管理</span>),
-            items: [
-                {
-                    key: '原纸管理',
-                    type: 'DropdownItem',
-                    content: '原纸管理',
-                    ico: 'order-form',
-                    route: '/index/productBasePaper'
-                },
-                {
-                    key: '瓦楞管理',
-                    type: 'DropdownItem',
-                    content: '瓦楞管理',
-                    ico: 'order-form',
-                    route: '/index/productCorrugated'
-                },
-                {
-                    key: '纸板产品管理',
-                    type: 'DropdownItem',
-                    content: '纸板产品管理',
-                    ico: 'order-form',
-                    route: '/index/cardboardList'
-                },
-                {
-                    key: '纸箱产品管理',
-                    type: 'DropdownItem',
-                    content: '纸箱产品管理',
-                    ico: 'order-form',
-                    route: '/index/cartonList'
-                },
-                {
-                    key: '辅料产品管理',
-                    type: 'DropdownItem',
-                    content: '辅料产品管理',
-                    ico: 'order-form',
-                    route: '/index/product'
-                }
-            ]
-        }
-    },
-    {
-        key: '门户管理',
-        type: {
-            type: 'Dropdown',
-            ico: 'cube',
-            title: () => (<span>门户管理</span>),
-            items: [
-                {
-                    key: '产品筛选管理',
-                    type: 'DropdownItem',
-                    content: '产品筛选管理',
-                    ico: 'order-form',
-                    route: '/index/typeConfig'
-                },
-                {
-                    key: '轮播图管理',
-                    type: 'DropdownItem',
-                    content: '轮播图管理',
-                    ico: 'order-form',
-                    route: '/index/bannerConfig'
-                }
-            ]
-        }
-    },
-    {
-        key: 'reactSplitGrid',
+        key: '代码示列',
         type: {
             type: 'NavItem',
             /**
              * 内容
              */
-            content: 'reactSplitGrid',
-            /**
-             * 图标
-             */
-            ico: 'cube',
-            route: '/index/reactSplitGrid'
-        }
-    },
-    {
-        key: 'tree',
-        type: {
-            type: 'NavItem',
-            /**
-             * 内容
-             */
-            content: 'tree',
-            /**
-             * 图标
-             */
-            ico: 'cube',
-            route: '/index/tree'
-        }
-    },
-    {
-        key: 'RoleManage',
-        type: {
-            type: 'NavItem',
-            /**
-             * 内容
-             */
-            content: 'RoleManage',
-            /**
-             * 图标
-             */
-            ico: 'cube',
-            route: '/index/roleManage'
-        }
-    },
-    {
-        key: 'SqlQuery',
-        type: {
-            type: 'NavItem',
-            /**
-             * 内容
-             */
-            content: 'SqlQuery',
-            /**
-             * 图标
-             */
-            ico: 'cube',
-            route: '/index/sqlQuery'
-        }
-    },
-    {
-        key: 'Mosaic',
-        type: {
-            type: 'NavItem',
-            /**
-             * 内容
-             */
-            content: 'Mosaic',
-            /**
-             * 图标
-             */
-            ico: 'cube',
-            route: '/index/mosaic'
-        }
-    },
-    {
-        key: 'ImageManager',
-        type: {
-            type: 'NavItem',
-            /**
-             * 内容
-             */
-            content: 'ImageManager',
+            content: '代码示列',
             /**
              * 图标
              */
             ico: Svg.ztree,
-            route: '/index/imageManager'
-        }
-    },
-    {
-        key: 'LongPanel',
-        type: {
-            type: 'NavItem',
-            /**
-             * 内容
-             */
-            content: 'LongPanel',
-            /**
-             * 图标
-             */
-            ico: 'cube',
-            route: '/index/longPanel'
-        }
-    },
-    {
-        key: 'TreeDnd',
-        type: {
-            type: 'NavItem',
-            /**
-             * 内容
-             */
-            content: 'TreeDnd',
-            /**
-             * 图标
-             */
-            ico: 'cube',
-            route: '/index/treeDnd'
-        }
-    },
-    {
-        key: 'CodeView',
-        type: {
-            type: 'NavItem',
-            /**
-             * 内容
-             */
-            content: 'CodeView',
-            /**
-             * 图标
-             */
-            ico: 'cube',
             route: '/index/codeView'
+        }
+    },
+    {
+        key: 'NavItem-2',
+        type: {
+            type: 'NavItem',
+            /**
+             * 内容
+             */
+            content: '菜单2',
+            /**
+             * 图标
+             */
+            ico: 'cube',
+            route: '/404'
         }
     }
 ]
@@ -486,4 +235,4 @@ export const MenuConfig: Array<IMenuConfig> = [
 /**
  * 默认打开
  */
-export const MenuOpenKeysConfig = ['用户管理', '订单管理', '销售管理', '产品管理', '门户管理']
+export const MenuOpenKeysConfig = ['用户管理', '订单管理', '营销管理', 'XXX营销', '菜单3', '销售管理', '产品管理', '门户管理']

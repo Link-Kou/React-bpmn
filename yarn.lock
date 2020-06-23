@@ -1463,29 +1463,6 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@blueprintjs/core@^3.22.3":
-  version "3.22.3"
-  resolved "https://registry.npm.taobao.org/@blueprintjs/core/download/@blueprintjs/core-3.22.3.tgz#57dc2c072a17db0e52cc5679d8bbc016082b27e7"
-  dependencies:
-    "@blueprintjs/icons" "^3.12.0"
-    "@types/dom4" "^2.0.1"
-    classnames "^2.2"
-    dom4 "^2.1.5"
-    normalize.css "^8.0.1"
-    popper.js "^1.15.0"
-    react-lifecycles-compat "^3.0.4"
-    react-popper "^1.3.7"
-    react-transition-group "^2.9.0"
-    resize-observer-polyfill "^1.5.1"
-    tslib "~1.9.0"
-
-"@blueprintjs/icons@^3.12.0", "@blueprintjs/icons@^3.13.0":
-  version "3.13.0"
-  resolved "https://registry.npm.taobao.org/@blueprintjs/icons/download/@blueprintjs/icons-3.13.0.tgz#bff93a9ea5ced03afd2b3a65ddf4bb90bda485e4"
-  dependencies:
-    classnames "^2.2"
-    tslib "~1.9.0"
-
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.npm.taobao.org/@cnakazawa/watch/download/@cnakazawa/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"
@@ -1947,10 +1924,6 @@
   version "3.1.45"
   resolved "https://registry.npm.taobao.org/@types/crypto-js/download/@types/crypto-js-3.1.45.tgz#d2ccd23ae926ff05e3a99b11945e0435185cc1f1"
 
-"@types/dom4@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.npm.taobao.org/@types/dom4/download/@types/dom4-2.0.1.tgz#506d5781b9bcab81bd9a878b198aec7dee2a6033"
-
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/@types/eslint-visitor-keys/download/@types/eslint-visitor-keys-1.0.0.tgz?cache=0&sync_timestamp=1567532318283&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Feslint-visitor-keys%2Fdownload%2F%40types%2Feslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
@@ -2104,30 +2077,12 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react-splitter-layout@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.npm.taobao.org/@types/react-splitter-layout/download/@types/react-splitter-layout-3.0.0.tgz#36f551fa8c7729ecd00c5a6a6e514e59f0190919"
-  dependencies:
-    "@types/react" "*"
-
-"@types/react-text-mask@^5.4.6":
-  version "5.4.6"
-  resolved "https://registry.npm.taobao.org/@types/react-text-mask/download/@types/react-text-mask-5.4.6.tgz#3a81e9de472beb939038e78cb16d737ae94ba14a"
-  dependencies:
-    "@types/react" "*"
-
 "@types/react@*", "@types/react@16.9.5":
   version "16.9.5"
   resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.5.tgz#079dabd918b19b32118c25fd00a786bb6d0d5e51"
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
-
-"@types/recompose@^0.30.7":
-  version "0.30.7"
-  resolved "https://registry.npm.taobao.org/@types/recompose/download/@types/recompose-0.30.7.tgz#0d47f3da3bdf889a4f36d4ca7531fac1eee1c6bd"
-  dependencies:
-    "@types/react" "*"
 
 "@types/redux-thunk@^2.1.0":
   version "2.1.0"
@@ -3539,7 +3494,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@>=2.0.0, classnames@^2.2, classnames@^2.2.3, classnames@^2.2.5, classnames@^2.2.6:
+classnames@>=2.0.0, classnames@^2.2.3, classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.npm.taobao.org/classnames/download/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
 
@@ -4013,13 +3968,6 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-context@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.npm.taobao.org/create-react-context/download/create-react-context-0.3.0.tgz#546dede9dc422def0d3fc2fe03afe0bc0f4f7d8c"
-  dependencies:
-    gud "^1.0.0"
-    warning "^4.0.3"
-
 cross-env@^6.0.3:
   version "6.0.3"
   resolved "https://registry.npm.taobao.org/cross-env/download/cross-env-6.0.3.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcross-env%2Fdownload%2Fcross-env-6.0.3.tgz#4256b71e49b3a40637a0ce70768a6ef5c72ae941"
@@ -4394,17 +4342,6 @@ deep-equal@^1.0.1:
     object-keys "^1.1.1"
     regexp.prototype.flags "^1.2.0"
 
-deep-equal@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npm.taobao.org/deep-equal/download/deep-equal-1.1.1.tgz#b5c98c942ceffaf7cb051e24e1434a25a2e6076a"
-  dependencies:
-    is-arguments "^1.0.4"
-    is-date-object "^1.0.1"
-    is-regex "^1.0.4"
-    object-is "^1.0.1"
-    object-keys "^1.1.1"
-    regexp.prototype.flags "^1.2.0"
-
 deep-extend@^0.6.0:
   version "0.6.0"
   resolved "https://registry.npm.taobao.org/deep-extend/download/deep-extend-0.6.0.tgz#c4fa7c95404a17a9c3e8ca7e1537312b736330ac"
@@ -4601,12 +4538,6 @@ dom-converter@^0.2:
   dependencies:
     utila "~0.4"
 
-dom-helpers@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.npm.taobao.org/dom-helpers/download/dom-helpers-3.4.0.tgz#e9b369700f959f62ecde5a6babde4bccd9169af8"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-
 dom-helpers@^5.0.0:
   version "5.1.4"
   resolved "https://registry.npm.taobao.org/dom-helpers/download/dom-helpers-5.1.4.tgz#4609680ab5c79a45f2531441f1949b79d6587f4b"
@@ -4624,10 +4555,6 @@ dom-serializer@0:
   dependencies:
     domelementtype "^2.0.1"
     entities "^2.0.0"
-
-dom4@^2.1.5:
-  version "2.1.5"
-  resolved "https://registry.npm.taobao.org/dom4/download/dom4-2.1.5.tgz#f98a94eb67b340f0fa5b42b0ee9c38cda035428e"
 
 domain-browser@^1.1.1:
   version "1.2.0"
@@ -8732,10 +8659,6 @@ normalize-url@^3.0.0:
   version "3.3.0"
   resolved "https://registry.npm.taobao.org/normalize-url/download/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
 
-normalize.css@^8.0.1:
-  version "8.0.1"
-  resolved "https://registry.npm.taobao.org/normalize.css/download/normalize.css-8.0.1.tgz#9b98a208738b9cc2634caacbc42d131c97487bf3"
-
 npm-audit-report@^1.3.2:
   version "1.3.2"
   resolved "https://registry.npm.taobao.org/npm-audit-report/download/npm-audit-report-1.3.2.tgz#303bc78cd9e4c226415076a4f7e528c89fc77018"
@@ -9598,10 +9521,6 @@ pnp-webpack-plugin@1.6.4:
   dependencies:
     ts-pnp "^1.1.6"
 
-popper.js@^1.14.4, popper.js@^1.15.0:
-  version "1.16.0"
-  resolved "https://registry.npm.taobao.org/popper.js/download/popper.js-1.16.0.tgz#2e1816bcbbaa518ea6c2e15a466f4cb9c6e2fbb3"
-
 portfinder@^1.0.25:
   version "1.0.25"
   resolved "https://registry.npm.taobao.org/portfinder/download/portfinder-1.0.25.tgz#254fd337ffba869f4b9d37edc298059cb4d35eca"
@@ -10400,7 +10319,7 @@ promzard@^0.3.0:
   dependencies:
     read "1"
 
-prop-types@^15.5.0, prop-types@^15.5.6, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.0, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.npm.taobao.org/prop-types/download/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   dependencies:
@@ -10811,18 +10730,6 @@ react-mosaic-component@^3.2.0:
     react-dnd-touch-backend "^0.8.3"
     uuid "^3.3.2"
 
-react-popper@^1.3.7:
-  version "1.3.7"
-  resolved "https://registry.npm.taobao.org/react-popper/download/react-popper-1.3.7.tgz#f6a3471362ef1f0d10a4963673789de1baca2324"
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    create-react-context "^0.3.0"
-    deep-equal "^1.1.1"
-    popper.js "^1.14.4"
-    prop-types "^15.6.1"
-    typed-styles "^0.0.7"
-    warning "^4.0.2"
-
 react-redux@^7.0.3, react-redux@^7.1.1:
   version "7.1.1"
   resolved "https://registry.npm.taobao.org/react-redux/download/react-redux-7.1.1.tgz#ce6eee1b734a7a76e0788b3309bf78ff6b34fa0a"
@@ -10919,25 +10826,6 @@ react-scripts@3.4.1:
     workbox-webpack-plugin "4.3.1"
   optionalDependencies:
     fsevents "2.1.2"
-
-react-splitter-layout@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npm.taobao.org/react-splitter-layout/download/react-splitter-layout-4.0.0.tgz#70b43ca6a78c056f5e5fbf29c67b597f040fbf2e"
-
-react-text-mask@^5.4.3:
-  version "5.4.3"
-  resolved "https://registry.npm.taobao.org/react-text-mask/download/react-text-mask-5.4.3.tgz#991efb4299e30c2e6c2c46d13f617169463e0d2d"
-  dependencies:
-    prop-types "^15.5.6"
-
-react-transition-group@^2.9.0:
-  version "2.9.0"
-  resolved "https://registry.npm.taobao.org/react-transition-group/download/react-transition-group-2.9.0.tgz?cache=0&sync_timestamp=1570624821693&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-transition-group%2Fdownload%2Freact-transition-group-2.9.0.tgz#df9cdb025796211151a436c69a8f3b97b5b07c8d"
-  dependencies:
-    dom-helpers "^3.4.0"
-    loose-envify "^1.4.0"
-    prop-types "^15.6.2"
-    react-lifecycles-compat "^3.0.4"
 
 react-virtualized@^9.21.0:
   version "9.21.2"
@@ -11376,10 +11264,6 @@ require-package-name@^2.0.1:
 requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/requires-port/download/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
-
-resize-observer-polyfill@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.npm.taobao.org/resize-observer-polyfill/download/resize-observer-polyfill-1.5.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fresize-observer-polyfill%2Fdownload%2Fresize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
 
 resolve-cwd@^2.0.0:
   version "2.0.0"
@@ -12780,10 +12664,6 @@ tslib@^1.8.1, tslib@^1.9.0:
   version "1.10.0"
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
 
-tslib@~1.9.0:
-  version "1.9.3"
-  resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
-
 tsutils@^3.17.1:
   version "3.17.1"
   resolved "https://registry.npm.taobao.org/tsutils/download/tsutils-3.17.1.tgz?cache=0&sync_timestamp=1565180136064&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftsutils%2Fdownload%2Ftsutils-3.17.1.tgz#ed719917f11ca0dee586272b2ac49e015a2dd759"
@@ -12832,10 +12712,6 @@ type-is@~1.6.17, type-is@~1.6.18:
 type@^1.0.1:
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/type/download/type-1.2.0.tgz?cache=0&sync_timestamp=1570722894467&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftype%2Fdownload%2Ftype-1.2.0.tgz#848dd7698dafa3e54a6c479e759c4bc3f18847a0"
-
-typed-styles@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.npm.taobao.org/typed-styles/download/typed-styles-0.0.7.tgz#93392a008794c4595119ff62dde6809dbc40a3d9"
 
 typedarray@^0.0.6:
   version "0.0.6"
@@ -13151,12 +13027,6 @@ walker@^1.0.7, walker@~1.0.5:
   resolved "https://registry.npm.taobao.org/walker/download/walker-1.0.7.tgz#2f7f9b8fd10d677262b18a884e28d19618e028fb"
   dependencies:
     makeerror "1.0.x"
-
-warning@^4.0.2, warning@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.npm.taobao.org/warning/download/warning-4.0.3.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fwarning%2Fdownload%2Fwarning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
-  dependencies:
-    loose-envify "^1.0.0"
 
 watchpack@^1.6.0:
   version "1.6.0"

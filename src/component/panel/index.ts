@@ -1,5 +1,0 @@
-export {default as BackColorPanel} from './component/backColorPanel'
-export {default as LongPanel} from './component/longPanel'
-export {IndexRefPanel as RefPanel} from './component/refPanel'
-export {default as HeadPanel} from './component/headPanel'
-export * from './component/loadPanel'

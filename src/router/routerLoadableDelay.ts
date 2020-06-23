@@ -1,5 +1,5 @@
 import * as NProgress from 'nprogress';
-import { LoadLoable } from '@component/panel';
+import {LoadLoableProps} from '@component/loadLoable';
 
 /**
  * 顶部进度条显示
@@ -12,7 +12,7 @@ const ConfigBaseThen = (e: any) => {
 }
 
 export const RouterLoadableConfigBase = {
-    loading: LoadLoable,
+    loading: LoadLoableProps,
     delay: 200,
     timeout: 5000
 }

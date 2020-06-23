@@ -6,7 +6,6 @@ const CN = {
     OPS_isDisableBody: '是否对{name}进行{type}!',
     OPS_isInfo: '是否对{start}{name}进行{end}!',
     OPS_SaveTitle: '请确认是否进行保存!',
-
     OPS_FetchError: '客户端网络异常,请检查网络状态!',
     OPS_ClientError: '客户端请求未知异常!请进行Debug排查。',
     OPS_ServerError: '服务器繁忙!请稍后重试',

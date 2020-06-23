@@ -5,7 +5,7 @@ import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Intl} from './Intl';
+import Intl from './Intl';
 
 /**
  * 基础css
@@ -23,7 +23,7 @@ import * as serviceWorker from './serviceWorker';
 
 
 ReactDOM.render(
-    <Intl nors={false}>
+    <Intl>
         <RouterBase/>
     </Intl>,
     document.getElementById('root') as HTMLElement

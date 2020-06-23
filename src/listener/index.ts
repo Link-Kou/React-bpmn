@@ -32,25 +32,4 @@ export default class Listener {
             callback
         })
     }
-
-
-    public static ws() {
-        //TODO WS URL需要进行配置处理
-        //ws://localhost:8080
-        //`ws://${window.location.host}/socketServer`
-        const sock = new WebSocket('ws://localhost:8080/socketServer');
-        sock.onopen = function (e) {
-            sock.send('1234')
-            console.log(e);
-        };
-        sock.onmessage = function (e) {
-            console.log('message', e.data);
-        };
-        sock.onerror = function (e) {
-            console.log(e);
-        };
-        sock.onclose = function (e) {
-            console.log(e);
-        }
-    }
 }
