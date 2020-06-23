@@ -5,10 +5,6 @@
 </p>
 
 <p align="center">
- <img src="https://raw.githubusercontent.com/Link-Kou/React-Base-Admin/master/image/2020-06-23_19-59-10.gif" alt="React Suite logo">
-</p>
-
-<p align="center">
   <a href="https://rsuitejs.com" target="_blank" rel="noopener noreferrer">
    <img src="https://user-images.githubusercontent.com/1203827/65102389-7be3f100-d9fd-11e9-859e-ae9617ed2f91.png" alt="React Suite logo">
   </a>
