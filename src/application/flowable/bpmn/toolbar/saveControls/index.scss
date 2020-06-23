@@ -1,0 +1,37 @@
+.app-react-bpmn-SaveControls {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 35px;
+  background-color: #fff;
+  border-radius: 23px;
+  z-index: 9;
+  box-shadow: rgba(0, 0, 0, 0.1) -1px 1px 5px 0px;
+
+  & > ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+
+    li {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 55px;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    li:hover {
+      fill: rgb(255, 116, 0);
+    }
+
+    .select {
+      fill: rgb(255, 116, 0);
+    }
+  }
+}

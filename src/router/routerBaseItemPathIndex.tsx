@@ -27,11 +27,11 @@ export const routes: Array<IRoute> = [
     },
     {
         key: 'CodeView',
-        title: '代码视图',
+        title: 'flowable',
         exact: false,
-        path: '/index/codeView',
+        path: '/index/flowable',
         screen: Loadable({
-            loader: () => RouterLoadableDelay(import('../application/codeView')),
+            loader: () => RouterLoadableDelay(import('../application/flowable')),
             ...RouterLoadableConfigBase
         })
     },

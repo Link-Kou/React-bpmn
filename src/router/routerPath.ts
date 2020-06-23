@@ -5,7 +5,7 @@ export const RouterPaths = {
     /**
      * 主页
      */
-    Main: '/index/main'
+    Main: '/'
 }
 
 /**

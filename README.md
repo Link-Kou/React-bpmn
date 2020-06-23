@@ -1,7 +1,7 @@
-### 基于 React Suite 的后端管理应用示列。React Suite 是一套 React 组件库，为后台产品而生。同时也是一个具有贴心设计以及对开发者友好的 UI 框架。
+### 基于 React Suite 与 Bpmn.js 结合。React Suite 是一套 React 组件库，为后台产品而生。同时也是一个具有贴心设计以及对开发者友好的 UI 框架。
 
 <p align="center">
- <img src="https://raw.githubusercontent.com/Link-Kou/React-Base-Admin/master/image/2020-06-23_19-54-46.png" alt="React Suite logo">
+ <img src="https://raw.githubusercontent.com/Link-Kou/React-bpmn/master/image/2020-06-23_23-01-07.jpg" alt="React Suite logo">
 </p>
 
 <p align="center">

@@ -30,12 +30,12 @@ module.exports = override(
     }),
     addWebpackModuleRule({
         test: /\.svg$/,
-        include: path.resolve(__dirname, './src/resource/svg/'),
+        include: path.resolve(__dirname, './src/'),
         use: [
             {
                 loader: 'svg-sprite-loader',
                 options: {
-                    symbolId: 'icon-[name]'
+                    symbolId: 'icon-[name]-[hash]'
                 }
             },
             'svg-transform-loader',

@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bpmn-js": "^7.2.0",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.5.2",
     "crypto-js": "^4.0.0",
     "dayjs": "^1.8.27",
+    "diagram-js": "^6.6.1",
+    "diagram-js-minimap": "^2.0.3",
     "history": "^4.10.1",
     "lodash": "^4.17.15",
     "nanoid": "^2.1.6",

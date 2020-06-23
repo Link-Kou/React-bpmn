@@ -1,0 +1,29 @@
+.app-react-bpmn-ZoomControls {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 35px;
+  height: 220px;
+  background-color: #fff;
+  border-radius: 23px;
+  z-index: 9;
+  box-shadow: rgba(0, 0, 0, 0.1) -1px 1px 5px 0px; }
+  .app-react-bpmn-ZoomControls > ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    height: 100%;
+    padding: 0;
+    margin: 0; }
+    .app-react-bpmn-ZoomControls > ul li {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      cursor: pointer; }
+    .app-react-bpmn-ZoomControls > ul li:hover {
+      fill: #ff7400; }
+    .app-react-bpmn-ZoomControls > ul .select {
+      fill: #ff7400; }

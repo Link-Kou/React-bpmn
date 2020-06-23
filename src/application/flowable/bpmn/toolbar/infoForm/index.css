@@ -1,0 +1,50 @@
+.app-react-bpmn-InfoForm {
+  display: flex;
+  height: 100%;
+  width: 0;
+  position: absolute;
+  right: 0;
+  z-index: 9; }
+  .app-react-bpmn-InfoForm .app-react-bpmn-InfoForm-drag {
+    width: 2px;
+    z-index: 99;
+    background-color: transparent;
+    height: inherit; }
+    .app-react-bpmn-InfoForm .app-react-bpmn-InfoForm-drag:hover {
+      background-color: #82e2f5;
+      cursor: col-resize; }
+  .app-react-bpmn-InfoForm .app-react-bpmn-InfoForm-form {
+    width: inherit;
+    background-color: #fff;
+    border: 1px solid #DEDEDE;
+    box-shadow: rgba(0, 0, 0, 0.1) -1px 1px 5px 0px; }
+    .app-react-bpmn-InfoForm .app-react-bpmn-InfoForm-form .app-react-bpmn-InfoForm-title {
+      height: 40px;
+      border-bottom: 1px solid #DEDEDE; }
+      .app-react-bpmn-InfoForm .app-react-bpmn-InfoForm-form .app-react-bpmn-InfoForm-title h3 {
+        padding: 8px 10px;
+        margin: 0;
+        font-size: 14px;
+        line-height: normal; }
+    .app-react-bpmn-InfoForm .app-react-bpmn-InfoForm-form .app-react-bpmn-InfoForm-body {
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 10px; }
+  .app-react-bpmn-InfoForm .app-react-bpmn-InfoForm-toggle {
+    writing-mode: tb-rl;
+    text-align: center;
+    position: absolute;
+    top: calc(50% - 120px / 2);
+    left: -32px;
+    width: 34px;
+    height: 120px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 2px;
+    background-color: #f7f7f7;
+    cursor: pointer;
+    border: 1px solid #DEDEDE;
+    border-right: none; }
+    .app-react-bpmn-InfoForm .app-react-bpmn-InfoForm-toggle > span {
+      vertical-align: sub; }
+    .app-react-bpmn-InfoForm .app-react-bpmn-InfoForm-toggle:hover {
+      background-color: #f0f0f0; }
