@@ -94,7 +94,7 @@ export default class TreeUtils {
      */
     public static insertChildNode(props: { treeData?: Array<INode>, parentKey: string | number, insertNode: (peersupid?: INode) => INode, getNodeKey: (node: INode) => string | number }): any {
         const {treeData, parentKey, insertNode, getNodeKey} = props;
-        const newtreeData = JSON.parse(JSON.stringify(treeData));
+        const newtreeData = treeData?.concat();
         const insertChildNodeItem = ({treeDataItem, parentKeyItem, insertNodeItem, getNodeKeyItem}:
                                          {
                                              treeDataItem?: Array<INode>, parentKeyItem: string | number, insertNodeItem: (peersupid?: INode) => INode,
@@ -150,7 +150,7 @@ export default class TreeUtils {
      */
     public static removeChildNode(props: { treeData?: Array<INode>, removeNode: string | number, getNodeKey: (node: INode) => string | number }): any {
         const {treeData, removeNode, getNodeKey} = props;
-        const newtreeData = JSON.parse(JSON.stringify(treeData));
+        const newtreeData = treeData?.concat();
         const removeChildNodeItem = ({treeDataItem, removeNodeItem, getNodeKeyItem}: { treeDataItem?: Array<INode>, removeNodeItem: string | number, getNodeKeyItem: (node: INode) => (string | number) }): any => {
             let deleteIndex = -1;
             if (treeDataItem && treeDataItem.length) {

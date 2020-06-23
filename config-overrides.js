@@ -9,7 +9,11 @@ module.exports = override(
             '@icon-font-path': './fonts',
             '@input-color-disabled': '#404040',
             '@table-head-font-color': '#5c5c5c',
-            '@base-color': '#2962A5'
+            '@base-color': '#2962A5',
+            /*菜单背景色*/
+            '@sidenav-inverse-bg': '#113756',
+            '@sidenav-inverse-active-bg': '#0f4c7d',
+            '@sidenav-inverse-hover-bg': '#0f4c7d'
             /*'@btn-disabled-opacity': 0.8*/
         }
     }),

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Col, Grid, Input, InputNumber, InputPicker, Row} from 'rsuite';
+import {Col, Grid, InputNumber, InputPicker, Row} from 'rsuite';
 
 interface IProps {
     nodeData?: any
@@ -19,9 +19,9 @@ const elnode2 = (props: IProps) => {
     return (
         <div style={{maxWidth: 600}}>
             <Grid fluid={true}>
-                <Row>
-                    <Col xs={6}>
-                        <p>条件满足</p>
+                <Row style={{display: 'flex', alignItems: 'center'}}>
+                    <Col xs={8}>
+                        <p>条件满足:</p>
                         <InputPicker data={
                             [
                                 {value: '继续', label: '继续'},
@@ -29,12 +29,8 @@ const elnode2 = (props: IProps) => {
                             ]
                         }/>
                     </Col>
-                    <Col xs={9}>
-                        <p>提示</p>
-                        <Input postfix="%"/>
-                    </Col>
-                    <Col xs={4}>
-                        <p>优先级</p>
+                    <Col xs={6}>
+                        <p>优先级:</p>
                         <InputNumber/>
                     </Col>
                 </Row>

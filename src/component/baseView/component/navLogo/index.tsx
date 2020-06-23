@@ -33,7 +33,7 @@ class HeadUser extends React.Component {
         const {collapsed} = this.state
         return (
             <div className="app-head-user-info">
-                {collapsed ? <img src={'https://via.placeholder.com/56x57.png/1A3753/808080?text=LOGO'}/> : <img src={'https://via.placeholder.com/225x57.png/1A3753/808080?text=LOGO'}/>}
+                {collapsed ? <img src={'https://via.placeholder.com/56x57.png/1A3753/808080?text=LOGO'}/> : <img src={'https://via.placeholder.com/256x57.png/1A3753/808080?text=LOGO'}/>}
             </div>
         )
     }

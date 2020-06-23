@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Col, ControlLabel, DateRangePicker, Form, FormControl, FormGroup, Grid, Input, Panel, Row} from 'rsuite';
+import {Col, ControlLabel, Form, FormControl, FormGroup, Grid, Input, InputNumber, Panel, Row} from 'rsuite';
 import {FormTextArea} from '@component/formControl';
 
 /**
@@ -29,18 +29,18 @@ export default class Info extends React.Component {
                       }}>
                     <Grid fluid={true} className={'app-grid-from'}>
                         <Row>
-                            <Col xs={5} sm={5} md={5}>
+                            <Col xs={6} sm={6} md={6}>
                                 <FormGroup>
                                     <ControlLabel>名称</ControlLabel>
                                     <FormControl name="productName" autocomplete="off" accepter={Input}/>
                                 </FormGroup>
                             </Col>
-                            <Col xs={11} sm={11} md={11}>
+                            <Col xs={6} sm={6} md={6}>
                                 <FormGroup>
-                                    <ControlLabel>有效期限</ControlLabel>
+                                    <ControlLabel>每人参与次数</ControlLabel>
                                     <FormControl name="effectiveDate"
                                                  placement="autoHorizontalStart"
-                                                 accepter={DateRangePicker}/>
+                                                 accepter={InputNumber}/>
                                 </FormGroup>
                             </Col>
                         </Row>

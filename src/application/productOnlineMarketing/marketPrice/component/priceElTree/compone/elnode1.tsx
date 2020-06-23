@@ -1,7 +1,8 @@
 import * as React from 'react';
-import {Col, Grid, InputNumber, InputPicker, Row} from 'rsuite';
+import {Col, Grid, Icon, IconButton, InputNumber, InputPicker, Row} from 'rsuite';
 import TreeUtils from '@utils/Tree';
 import {DroolRange} from '@component/elDrools';
+import {utilsTree} from '@utils/index';
 
 
 interface IProps {
@@ -11,6 +12,7 @@ interface IProps {
 
     onChange?(value: any): void
 }
+
 
 /**
  *
@@ -23,7 +25,7 @@ const elnode1 = (props: IProps) => {
     return (
         <div style={{maxWidth: 600}}>
             <Grid fluid={true}>
-                <Row>
+                <Row style={{display: 'flex', alignItems: 'flex-end'}}>
                     <Col xs={6}>
                         <p>类目</p>
                         <InputPicker style={{width: '100%'}} data={
@@ -60,9 +62,19 @@ const elnode1 = (props: IProps) => {
                                          onChange?.(updataNode)
                                      }}/>
                     </Col>
-                    <Col xs={13}>
+                    <Col xs={10}>
                         <p>值</p>
                         {nodeData?.expression === '范围' ? <DroolRange/> : <InputNumber style={{width: '100%'}}/>}
+                    </Col>
+                    <Col xs={3}>
+                        <IconButton icon={<Icon icon={'warning'}/>} onClick={() => {
+                            const removeChildNode = utilsTree.removeChildNode({
+                                treeData: treedata,
+                                removeNode: nodeData.value,
+                                getNodeKey: (node: any) => node.value
+                            });
+                            onChange?.(removeChildNode)
+                        }}/>
                     </Col>
                 </Row>
             </Grid>

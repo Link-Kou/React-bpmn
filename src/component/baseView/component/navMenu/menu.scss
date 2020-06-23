@@ -13,29 +13,10 @@
   -moz-transition: width 100ms; /* Firefox 4 */
   -webkit-transition: width 100ms; /* Safari and Chrome */
   -o-transition: width 100ms; /* Opera */
-  /*菜单样式修改,菜单背景色*/
-  .rs-dropdown-menu .rs-dropdown-menu-collapse-in {
-    background-color: $dropdownMenucolor !important;
-  }
 
   /**隐藏滚动条并不影响滚动效果**/
-  .app-sidebar::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
-  }
-
-  .app-Sidenav {
-    display: flex;
-    flex-direction: column;
-    background-color: $dropdownMenucolor
-  }
-
-  /**缩放子菜单**/
-  .rs-dropdown-menu {
-    background-color: $dropdownMenucolor;
-
-    .rs-dropdown-item-content {
-      color: #ffffff;
-    }
   }
 
   /**文本形式**/

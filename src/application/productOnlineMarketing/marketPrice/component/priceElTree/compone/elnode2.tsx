@@ -26,7 +26,7 @@ const elnode3 = (props: IProps) => {
                         <InputPicker style={{width: '100%'}} data={
                             [
                                 {value: '付款金额', label: '付款金额'},
-                                {value: '单价', label: '单价'}
+                                {value: '商品单价', label: '商品单价'}
                             ]
                         }/>
                     </Col>

@@ -7,6 +7,7 @@ import Elnode2 from './compone/elnode2';
 import Elnode3 from './compone/elnode3';
 import Info from './compone/info';
 import TreeUtils from '@utils/Tree';
+import nanoid from 'nanoid';
 
 export default class QuoteListTable extends React.Component {
 
@@ -79,8 +80,28 @@ export default class QuoteListTable extends React.Component {
                         <div style={{display: 'flex', flex: 1, justifyContent: 'flex-start'}}>条件</div>
                         <div style={{display: 'flex', flex: 1, justifyContent: 'flex-end'}}>
                             <Button onClick={() => {
+                                datas.push({
+                                    value: nanoid(),
+                                    label: nanoid(),
+                                    control: (props: any) => <Elnode1 {...props}/>,
+                                    children: [
+                                        {
+                                            value: nanoid(),
+                                            label: nanoid(),
+                                            control: (props: any) => <Elnode2 {...props}/>,
+                                            children: [
+                                                {
+                                                    value: nanoid(),
+                                                    label: nanoid(),
+                                                    control: (props: any) => <Elnode3 {...props}/>
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                });
+                                const newdatas: Array<any> = datas
                                 this.setState({
-                                    datas: this.state.datas
+                                    datas: newdatas.concat()
                                 })
                             }}>添加节点</Button>
                         </div>
@@ -95,6 +116,7 @@ export default class QuoteListTable extends React.Component {
                                     getNodeKey: (node) => node.value
                                 })}
                             data={datas}
+                            renderTreeIcon={() => undefined}
                             renderTreeNode={(nodeData: any) => {
                                 return (
                                     <El treedata={datas}

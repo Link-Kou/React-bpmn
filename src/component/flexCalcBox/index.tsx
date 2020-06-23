@@ -59,7 +59,7 @@ export default class FlexCalcBox extends React.Component<IProps> {
 
     public componentDidMount() {
         window.addEventListener('resize', this.handleResize.bind(this))
-        if (this._wrapper !== undefined && this._wrapper !== null) {
+        if (this._wrapper) {
             this.setState({
                 height: _.getHeight(this._wrapper),
                 width: _.getWidth(this._wrapper)
@@ -81,7 +81,7 @@ export default class FlexCalcBox extends React.Component<IProps> {
     }
 
     public handleResize = (e: any) => {
-        if (this._wrapper !== undefined && this._wrapper !== null) {
+        if (this._wrapper) {
             this.setState({
                 height: _.getHeight(this._wrapper),
                 width: _.getWidth(this._wrapper)

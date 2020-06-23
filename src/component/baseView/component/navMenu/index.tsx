@@ -11,7 +11,9 @@ import Listener from '@listener';
 /**
  * 菜单收缩展开尺寸
  */
-const marginLeft: string = '225px'
+const expansionWidth: string = '256px'
+
+const shrinkWidth: string = '56px'
 
 /**
  * 菜单栏目
@@ -25,7 +27,7 @@ export default class Index extends React.Component {
         selectMenuKey: '',
         selectOpenKeys: MenuOpenKeysConfig,
         Menu: MenuConfig,
-        collapsedOverflow: 'auto',
+        collapsedOverflow: 'inherit',
         componentUpdate: ''
     }
 
@@ -173,8 +175,8 @@ export default class Index extends React.Component {
                  style={
                      !collapsed ? {
                          overflow: 'auto',
-                         width: marginLeft
-                     } : {overflow: collapsedOverflow, width: 56}
+                         width: expansionWidth
+                     } : {overflow: collapsedOverflow, width: shrinkWidth}
                  }
             >
                 <Sidenav className={'app-Sidenav'}
