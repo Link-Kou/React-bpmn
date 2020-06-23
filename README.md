@@ -13,10 +13,6 @@
 
 React Suite 是一套 React 组件库，为后台产品而生。同时也是一个具有贴心设计以及对开发者友好的 UI 框架。
 
-### UI Design
-
-React Suite 设计原型与规范， [点击查看][rsuite-design]。
-
 ## 支持的平台
 
 ### 浏览器
