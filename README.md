@@ -1,5 +1,5 @@
 <p align="center">
- <img src="https://raw.githubusercontent.com/Link-Kou/React-Base-Admin/master/image/2020-06-23_19-45-43.png" alt="React Suite logo">
+ <img src="https://raw.githubusercontent.com/Link-Kou/React-Base-Admin/master/image/2020-06-23_19-45-46.png" alt="React Suite logo">
 </p>
 
 ### 基于 React Suite 的后端管理应用示列
