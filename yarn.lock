@@ -2639,7 +2639,7 @@ arrify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/arrify/download/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
 
-asap@^2.0.0, asap@^2.0.6, asap@~2.0.3, asap@~2.0.6:
+asap@^2.0.0, asap@~2.0.3, asap@~2.0.6:
   version "2.0.6"
   resolved "https://registry.npm.taobao.org/asap/download/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
 
@@ -2943,10 +2943,6 @@ big.js@^3.1.3:
 big.js@^5.2.2:
   version "5.2.2"
   resolved "https://registry.npm.taobao.org/big.js/download/big.js-5.2.2.tgz#65f0af382f578bcdc742bd9c281e9cb2d7768328"
-
-bignumber.js@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.npm.taobao.org/bignumber.js/download/bignumber.js-9.0.0.tgz#805880f84a329b5eac6e7cb6f8274b6d82bdf075"
 
 bin-links@^1.1.2, bin-links@^1.1.3:
   version "1.1.3"
@@ -3494,7 +3490,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@>=2.0.0, classnames@^2.2.3, classnames@^2.2.5, classnames@^2.2.6:
+classnames@>=2.0.0, classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.npm.taobao.org/classnames/download/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
 
@@ -4483,18 +4479,6 @@ dir-glob@2.0.0:
   dependencies:
     arrify "^1.0.1"
     path-type "^3.0.0"
-
-dnd-core@^7.4.4, dnd-core@^7.7.0:
-  version "7.7.0"
-  resolved "https://registry.npm.taobao.org/dnd-core/download/dnd-core-7.7.0.tgz#3166aefc8c5b85ca4ade4ae836712a3108975fab"
-  dependencies:
-    asap "^2.0.6"
-    invariant "^2.2.4"
-    redux "^4.0.1"
-
-dnd-multi-backend@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.npm.taobao.org/dnd-multi-backend/download/dnd-multi-backend-3.2.1.tgz#528c7624b831d1c23512cbed191b34fb506dcf93"
 
 dns-equal@^1.0.0:
   version "1.0.0"
@@ -6363,12 +6347,6 @@ immer@1.10.0:
   version "1.10.0"
   resolved "https://registry.npm.taobao.org/immer/download/immer-1.10.0.tgz#bad67605ba9c810275d91e1c2a47d4582e98286d"
 
-immutability-helper@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.npm.taobao.org/immutability-helper/download/immutability-helper-3.0.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fimmutability-helper%2Fdownload%2Fimmutability-helper-3.0.1.tgz#4f609c5afbf8d78cb297970e8af2fba8b0eda1d6"
-  dependencies:
-    invariant "^2.2.4"
-
 immutable@^3.8.1:
   version "3.8.2"
   resolved "https://registry.npm.taobao.org/immutable/download/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
@@ -6547,7 +6525,7 @@ intl-messageformat@^8.3.6:
     intl-format-cache "^4.2.24"
     intl-messageformat-parser "^4.1.4"
 
-invariant@^2.1.0, invariant@^2.2.2, invariant@^2.2.4:
+invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.npm.taobao.org/invariant/download/invariant-2.2.4.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Finvariant%2Fdownload%2Finvariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   dependencies:
@@ -7819,10 +7797,6 @@ loader-utils@^1.0.3, loader-utils@^1.4.0:
     emojis-list "^3.0.0"
     json5 "^1.0.1"
 
-loaders.css@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.npm.taobao.org/loaders.css/download/loaders.css-0.1.2.tgz#3a9fb43726c73334a38142af9d0629019b658743"
-
 locate-path@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/locate-path/download/locate-path-2.0.0.tgz#2b568b265eec944c6d9c0de9c3dbbbca0354cd8e"
@@ -8897,10 +8871,6 @@ num2fraction@^1.2.2:
 number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/number-is-nan/download/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
-
-numeral@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.npm.taobao.org/numeral/download/numeral-2.0.6.tgz#4ad080936d443c2561aed9f2197efffe25f4e506"
 
 nwsapi@^2.0.7, nwsapi@^2.1.3:
   version "2.1.4"
@@ -10622,43 +10592,6 @@ react-dev-utils@^10.2.1:
     strip-ansi "6.0.0"
     text-table "0.2.0"
 
-react-dnd-html5-backend@7.7.0:
-  version "7.7.0"
-  resolved "https://registry.npm.taobao.org/react-dnd-html5-backend/download/react-dnd-html5-backend-7.7.0.tgz#e2b8ea61a1bc34ba743b89cafcda6213b006c06a"
-  dependencies:
-    dnd-core "^7.7.0"
-
-react-dnd-multi-backend@^3.2.1:
-  version "3.2.2"
-  resolved "https://registry.npm.taobao.org/react-dnd-multi-backend/download/react-dnd-multi-backend-3.2.2.tgz#4ecb20ccdfc753fa8a1e457a4df04606251d8f8f"
-  dependencies:
-    dnd-multi-backend "^3.2.1"
-    prop-types "^15.6.2"
-    react-dnd-preview "^3.2.2"
-
-react-dnd-preview@^3.2.2:
-  version "3.2.2"
-  resolved "https://registry.npm.taobao.org/react-dnd-preview/download/react-dnd-preview-3.2.2.tgz#194d620f7bebaec9bd2cd38672abc7b24fa1474a"
-  dependencies:
-    prop-types "^15.6.2"
-
-react-dnd-touch-backend@^0.8.3:
-  version "0.8.3"
-  resolved "https://registry.npm.taobao.org/react-dnd-touch-backend/download/react-dnd-touch-backend-0.8.3.tgz#85d961ec8578dc9efa5b78000ea904d37e01e60f"
-  dependencies:
-    dnd-core "^7.4.4"
-    invariant "^2.2.4"
-
-react-dnd@7.7.0:
-  version "7.7.0"
-  resolved "https://registry.npm.taobao.org/react-dnd/download/react-dnd-7.7.0.tgz#9d983331ecf87ba33d058d861e6ca9adb8253a2e"
-  dependencies:
-    "@types/hoist-non-react-statics" "^3.3.1"
-    dnd-core "^7.7.0"
-    hoist-non-react-statics "^3.3.0"
-    invariant "^2.1.0"
-    shallowequal "^1.1.0"
-
 react-dom@^16.10.2:
   version "16.10.2"
   resolved "https://registry.npm.taobao.org/react-dom/download/react-dom-16.10.2.tgz?cache=0&sync_timestamp=1570138169163&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-dom%2Fdownload%2Freact-dom-16.10.2.tgz#4840bce5409176bc3a1f2bd8cb10b92db452fda6"
@@ -10703,32 +10636,12 @@ react-loadable@^5.5.0:
   dependencies:
     prop-types "^15.5.0"
 
-react-loaders@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.npm.taobao.org/react-loaders/download/react-loaders-3.0.1.tgz#963ad7adefe530b24b1ed13faf4645134cf09a0e"
-  dependencies:
-    classnames "^2.2.3"
-
 react-markdown-reader@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/react-markdown-reader/download/react-markdown-reader-1.2.0.tgz#76a72220ba2cd0c7ca567251afb46413394dbb3c"
   dependencies:
     highlight.js "^9.4.0"
     marked "^0.6.2"
-
-react-mosaic-component@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.npm.taobao.org/react-mosaic-component/download/react-mosaic-component-3.2.0.tgz#b06d10d28e5d4e24a5aa8218aca73e964d8edbea"
-  dependencies:
-    classnames "^2.2.6"
-    immutability-helper "^3.0.1"
-    lodash "^4.17.11"
-    prop-types "^15.7.2"
-    react-dnd "7.7.0"
-    react-dnd-html5-backend "7.7.0"
-    react-dnd-multi-backend "^3.2.1"
-    react-dnd-touch-backend "^0.8.3"
-    uuid "^3.3.2"
 
 react-redux@^7.0.3, react-redux@^7.1.1:
   version "7.1.1"
@@ -11697,10 +11610,6 @@ shallow-clone@^3.0.0:
 shallow-equal@^1.2.1:
   version "1.2.1"
   resolved "https://registry.npm.taobao.org/shallow-equal/download/shallow-equal-1.2.1.tgz?cache=0&sync_timestamp=1575626600353&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fshallow-equal%2Fdownload%2Fshallow-equal-1.2.1.tgz#4c16abfa56043aa20d050324efa68940b0da79da"
-
-shallowequal@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.npm.taobao.org/shallowequal/download/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
 
 shebang-command@^1.2.0:
   version "1.2.0"

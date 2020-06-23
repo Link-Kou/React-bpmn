@@ -247,7 +247,7 @@ export default class HeadTabs extends React.Component<any, IState> {
      */
     public onWheel(classname: string, id: string, callbackWheelEnd?: () => void) {
         const anchorElement: any = document.getElementsByClassName(classname)[0];
-        anchorElement.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'});
+        anchorElement?.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'});
         this.setState({
             selectItems: id
         }, () => {
