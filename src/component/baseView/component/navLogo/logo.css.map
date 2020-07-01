@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": ";AAAA,YAAY;AAEZ,YAAY;ACAZ,mBAAoB;EAClB,MAAM,EDAK,IAAI",
-"sources": ["../../../../config/CssConfig.scss","logo.scss"],
-"names": [],
-"file": "logo.css"
-}

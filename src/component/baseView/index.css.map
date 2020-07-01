@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": ";AAAA,YAAY;AAEZ,YAAY;ACCZ,SAAU;EACR,OAAO,EAAE,IAAI;EACb,MAAM,EAAE,IAAI;EACZ,cAAc,EAAE,GAAG;EACnB,QAAQ,EAAE,IAAI;EAEd,mBAAU;IACR,YAAY,EAAE,iBAAiB;EAGjC,oBAAW;IACT,OAAO,EAAE,IAAI;IACb,cAAc,EAAE,MAAM;IACtB,IAAI,EAAE,CAAC;IACP,QAAQ,EAAE,MAAM",
-"sources": ["../../config/CssConfig.scss","index.scss"],
-"names": [],
-"file": "index.css"
-}
