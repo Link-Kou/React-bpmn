@@ -1,4 +1,7 @@
-### 基于 React Suite 与 Bpmn.js 结合
+### 基于 React +  React Suite + Bpmn.js 结合
+
+### 在线预览 https://link-kou.github.io/React-bpmn
+
 
 <p align="center">
  <img src="https://raw.githubusercontent.com/Link-Kou/React-bpmn/master/image/2020-06-23_23-01-07.jpg" alt="React Suite logo">
@@ -14,8 +17,6 @@
 ## 支持的平台
 
 ### 浏览器
-
-React Suite 支持最新的，稳定版的全部主流浏览器和平台
 
 | IE   | Edge | Firefox | Chrome | Safari |
 | ---- | ---- | ------- | ------ | ------ |

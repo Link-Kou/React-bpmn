@@ -6,7 +6,7 @@ module.exports = override(
     addLessLoader({
         javascriptEnabled: true,
         modifyVars: {
-            '@icon-font-path': './fonts',
+            //'@icon-font-path': './fonts',
             '@input-color-disabled': '#404040',
             '@table-head-font-color': '#5c5c5c',
             '@base-color': '#2962A5',
