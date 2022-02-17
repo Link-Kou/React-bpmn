@@ -8427,8 +8427,8 @@ mimic-fn@^2.0.0, mimic-fn@^2.1.0:
   resolved "https://registry.npm.taobao.org/mimic-fn/download/mimic-fn-2.1.0.tgz#7ed2c2ccccaf84d3ffcb7a69b57711fc2083401b"
 
 min-dash@^3.0.0, min-dash@^3.5.0, min-dash@^3.5.1, min-dash@^3.5.2:
-  version "3.5.2"
-  resolved "https://registry.npm.taobao.org/min-dash/download/min-dash-3.5.2.tgz#23786fa289116ba3656038e16511577413d27200"
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/min-dash/-/min-dash-3.8.1.tgz#09a8bd8a041d65eec4732042cde9cb24a6e84b0d"
 
 min-dom@^3.0.0, min-dom@^3.1.1, min-dom@^3.1.2:
   version "3.1.3"
