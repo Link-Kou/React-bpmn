@@ -12,7 +12,7 @@
     "diagram-js": "^6.6.1",
     "diagram-js-minimap": "^2.0.3",
     "history": "^4.10.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "nanoid": "^3.1.31",
     "node-fetch": "^2.6.0",
     "nprogress": "^0.2.0",
